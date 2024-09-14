@@ -1,0 +1,891 @@
+# Data Wrangling {#sec-wrangle}
+
+## Intended Learning Outcomes {#sec-ilo-wrangle .unnumbered}
+
+* Be able to select and filter data for relevance
+* Be able to create new columns and edit existing ones
+* Be able to handle missing data
+
+## Walkthrough video {#sec-walkthrough-wrangle .unnumbered}
+
+There is a walkthrough video of this chapter available via [Echo360.](https://echo360.org.uk/media/dc1e2869-a6c2-45d8-ab40-cb85cdb67f43/public) Please note that there may have been minor edits to the book since the video was recorded. Where there are differences, the book should always take precedence.
+
+## Set-up {#sec-setup-wrangle}
+
+First, create a new project for the work we'll do in this chapter named `r path("09-wrangle")`. Second, open and save and new R Markdown document named `wrangle.Rmd`, delete the welcome text and load the required packages for this chapter.
+
+```{r setup-wrangle, message=FALSE, filename="Chapter packages"}
+library(tidyverse)   # data wrangling functions
+```
+
+You'll need to make a folder called "data" and download a data file into it: 
+<a href="https://healthteachr.github.io/ads-v2/data/velocity.csv" download>velocity.csv</a>.
+
+Download the [Data transformation cheat sheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-transformation.pdf).
+
+## Wrangling functions
+
+Data wrangling refers to the process of cleaning, transforming, and restructuring your data to get it into the format you need for analysis and it's something you will spend an awful lot of time doing. Most `r glossary("data wrangling")` involves the reshaping functions you learned in @sec-tidy and six functions from the <pkg>dplyr</pkg> package that is loaded as part of the <pkg>tidyverse</pkg>: `select`, `filter`, `arrange`, `mutate`, `summarise`, and `group_by`. You'll remember the last two from @sec-summary, so we'll only cover them briefly.
+
+It's worth highlighting that in this chapter we're going to cover these common functions and common uses of said functions. However, <pkg>dplyr</pkg> (and packages beyond it) has a huge number of additional wrangling functions and each function has many different arguments. Essentially, if you think you should be able to wrangle your data in a particular way that we haven't explicitly shown you, you almost certainly can, it might just take a bit of Googling to find out how. 
+
+```{r, echo = FALSE, eval = FALSE}
+set.seed(8675309)
+velocity <- faux::sim_design(
+  between = list(
+    position = c("bunched", "medium", "elongated"),
+    angle = c("<50 degrees", ">50 degrees")
+  ),
+  within = list(
+    kinematics = c("velocity"),
+    year = 2022:2023
+  ),
+  n = 1,
+  mu = rep(c(3.1,3.4), each = 3, times = 2),
+  sd = 0.1,
+  plot = FALSE
+) %>%
+  mutate_if(is.numeric, round,2) %>%
+  select(-id) %>%
+  mutate(satisfaction_2022 = c("low", "very low", "very high", "high", "neutral", "high"),
+         satisfaction_2023 = c("very low", "very high", "very high", "low", "high", "neutral"))
+velocity$position<-as.character(velocity$position)
+velocity$angle<-as.character(velocity$angle)
+
+write_csv(velocity, "data/velocity.csv")
+```
+
+We'll use a small example table with a sprinter's velocity out of the blocks (m/s) and performance satisfaction for two years from three starting block positions (bunched: <30 cm spacing between blocks; medium: 30-35 cm spacing between blocks; elongated: >35 cm spacing between blocks) over two block angles. After you load the data, use `glimpse(velocity)` or `View(velocity)` to get familiar with the data.
+
+```{r}
+velocity <- read_csv("data/velocity.csv", show_col_types = FALSE)
+```
+
+```{r, echo = FALSE}
+velocity
+```
+
+
+### Select
+
+You can select a subset of the columns (variables) in a table to make it easier to view or to prepare a table for display. You can also select columns in a new order.
+
+#### By name or index
+
+You can select columns by name or number (which is sometimes referred to as the column index). Selecting by number can be useful when the column names are long or complicated.
+
+```{r}
+# select single column by name
+block_angle_dat <- velocity %>% select(angle) 
+
+# select single column by number
+block_angle_dat <- velocity %>% select(2) 
+```
+
+You can select each column individually, separated by commas (e.g., `position, velocity_2022`) but you can also select all columns from one to another by separating them with a colon (e.g., `velocity_2022:satisfaction_2023`).
+
+The colon notation can be much faster because you don't need to type out each individual variable name, but make sure that you know what order your columns are in and always check the output to make sure you have selected what you intended.
+
+```{r select-name}
+# select columns individually
+velocity2022 <- velocity %>% select(position, angle, velocity_2022)
+
+# select columns with colon
+velocity2022 <- velocity %>% select(position:velocity_2022)
+```
+
+You can rename columns at the same time as selecting them by setting `new_name = old_col`. 
+
+```{r select-number}
+positions <- velocity %>% select(`Space between blocks` = 1, 3:6)
+
+head(positions, 2)
+```
+
+#### Un-selecting columns
+
+You can select columns either by telling R which ones you want to keep as in the previous examples, or by specifying which ones you want to exclude by using a minus symbol to un-select columns. You can also use the colon notation to de-select columns, but to do so you need to put parentheses around the span first, e.g., `-(velocity_2022:velocity_2023)`, not `-velocity_2022:velocity_2023`.
+
+```{r select-unselect}
+# de-select individual columns
+satisfaction <- velocity %>% select(-velocity_2022, -velocity_2023)
+
+# de-select a range of columns
+satisfaction <- velocity %>% select(-(velocity_2022:velocity_2023))
+```
+
+#### Select helpers
+
+Finally, you can select columns based on criteria about the column names.
+
+| function | definition |
+|----------|------------|
+| `starts_with()` | select columns that start with a character string|
+| `ends_with()` | select columns that end with a character string |
+| `contains()` | select columns that contain a character string |
+| `num_range()` | select columns with a name that matches the pattern `prefix` |
+
+```{r select-helpers, echo = FALSE}
+x1 <- velocity %>% select(starts_with("velocity"))
+x2 <- velocity %>% select(ends_with("2023"))
+x3 <- velocity %>% select(contains("_"))
+x4 <- velocity %>% select(num_range("velocity_", 2022:2023))
+
+a <- list(names(x1), names(x2), names(x3), names(x4)) %>%
+  sapply(paste, collapse = ", ")
+
+a1 <- setNames(a, c("answer", "x", "x", "x")) %>% longmcq()
+a2 <- setNames(a, c("x", "answer", "x", "x")) %>% longmcq()
+a3 <- setNames(a, c("x", "x", "answer", "x")) %>% longmcq()
+a4 <- setNames(a, c("x", "x", "x", "answer")) %>% longmcq()
+```
+
+
+::: {.callout-note .try}
+What are the resulting columns for these four examples?
+
+* `velocity %>% select(contains("_"))`
+    `r a3`
+* `velocity %>% select(num_range("velocity_", 2022:2023))`
+    `r a4`
+* `velocity %>% select(starts_with("velocity"))`
+    `r a1` 
+* `velocity %>% select(ends_with("2023"))`
+    `r a2`
+:::
+
+
+### Filter
+
+Whilst `select()` chooses the columns you want to retain, `filter()` chooses the rows to retain by matching row or column criteria.
+
+You can filter by a single criterion. This criterion can be rows where a certain column's value matches a character value (e.g., "elongated") or a number (e.g., 3.51). It can also be the result of a logical equation (e.g., keep all rows with a specific column value larger than a certain value). The criterion is checked for each row, and if the result is FALSE, the row is removed. You can reverse equations by specifying `!=` where `!` means "not".
+
+```{r filter, eval = FALSE}
+# select all rows where position equals elongated
+velocity %>% filter(position == "elongated")
+
+# select all rows where velocity_2023 was exactly equal to 3.51
+velocity %>% filter(velocity_2023 == 3.51)
+
+# select all rows where velocity_2022 was more than 3.1
+velocity %>% filter(velocity_2022 > 3.1)
+
+# everything but the elongated starting block position
+velocity %>% filter(position != "elongated")
+```
+
+::: {.callout-warning}
+Remember to use `==` and not `=` to check if two things are equivalent. A single `=` assigns the right-hand value to the left-hand variable (much like the `<-` operator).
+:::
+
+
+```{r filter-mcq, echo = FALSE}
+class <- tibble(id = 1:4, 
+               grade = c("A", "A", "C", "B"),
+               score = c(95, 91, 76, 84)
+               )
+x1 <- which(class$grade == "A")
+x2 <- which(class$score == 91)
+x3 <- which(class$score < 80)
+x4 <- which(class$grade != "A")
+
+a <- list(x1, x2, x3, x4) %>%
+  sapply(paste, collapse = ", ")
+
+a1 <- setNames(a, c("answer", "x", "x", "x")) %>% mcq()
+a2 <- setNames(a, c("x", "answer", "x", "x")) %>% mcq()
+a3 <- setNames(a, c("x", "x", "answer", "x")) %>% mcq()
+a4 <- setNames(a, c("x", "x", "x", "answer")) %>% mcq()
+```
+
+
+::: {.callout-note .try}
+Which IDs are kept from the table below?
+
+```{r, echo = FALSE}
+class
+```
+
+* `demo %>% filter(score < 80)`
+    `r a3`
+* `demo %>% filter(grade == "A")`
+    `r a1`
+* `demo %>% filter(grade != "A")`
+    `r a4`
+* `demo %>% filter(score == 91)`
+    `r a2`
+    
+
+:::
+
+You can also select on multiple criteria by separating them by commas (rows will be kept if they match *all* criteria). Additionally, you can use `&` ("and") and `|` ("or") to create complex criteria.
+
+```{r filter-symbols}
+# positions and angles with improvement in velocity from 2022 to 2023 and with "very high" satisfaction in 2023
+improvement_and_satisfaction <- velocity %>% 
+  filter(
+    velocity_2023 > velocity_2022,
+    satisfaction_2023=="very high"
+  )
+
+# the same as above, using & instead of a comma
+improvement_and_satisfaction <- velocity %>% 
+  filter(
+    velocity_2023 > velocity_2022 &
+    satisfaction_2023=="very high"
+  )
+
+# positions and angles with improvement in velocity from 2022 to 2023 or with "very high" satisfaction in 2023
+improvement_or_satisfaction <- velocity %>% 
+  filter(
+    velocity_2023 > velocity_2022 |
+    satisfaction_2023=="very high"
+  )
+
+# Improvement in velocity between 2022 and 2023 greater than 0.2 m/s
+big_improvement <- velocity %>%
+  filter(velocity_2023 - velocity_2022 > 0.2)
+
+```
+
+If you want the filter to retain multiple specific values in the same variable, the `r glossary("match operator")` (`%in%`) should be used rather than `|` (or). The `!` can also be used in combination here, but it is placed before the variable name.
+
+```{r match-operator, eval = FALSE}
+# retain any rows where position is bunched or medium, and where angle equals <50 degrees
+velocity %>%
+  filter(position %in% c("bunched", "medium"),
+         angle == "<50 degrees")
+
+# retain any rows where the position is not elongated, and where the angle does not equal <50 degrees
+velocity %>%
+  filter(!position %in% "elongated",
+         angle != "<50 degrees")
+```
+
+`r glossary("Operator")`	|Name   |is TRUE if and only if
+-----------|----------------------|---------------------------------
+`A < B`    |less than 	          |A is less than B
+`A <= B`   |less than or equal    |A is less than or equal to B
+`A > B`    |greater than 	        |A is greater than B
+`A >= B`   |greater than or equal |A is greater than or equal to B
+`A == B`   |equivalence 	        |A exactly equals B
+`A != B`   |not equal 	          |A does not exactly equal B
+`A %in% B` |in 	                  |A is an element of vector B
+
+Finally, you can also pass many other functions to filter. For example, the package <pkg>stringr</pkg> that is loaded as part of the <pkg>tidyverse</pkg> contains many different functions for working with `r glossary("string", "strings")` (character data). For example, you you use `str_detect()` to only retain rows where the performance satisfaction rating includes the word "high".
+
+```{r eval = TRUE}
+velocity %>%
+  filter(str_detect(satisfaction_2022, "high"))
+```
+
+Note that `str_detect()` is case sensitive so it would not return values of "High" or "HIGH". You can use the function `tolower()` or `toupper()` to convert a string to lowercase or uppercase before you search for substring if you need case-insensitive matching.
+
+::: {.callout-warning}
+`filter()` is incredibly powerful and can allow you to select very specific subsets of data. But, it is also quite dangerous because when you start combining multiple criteria and operators, it's very easy to accidentally specify something slightly different than what you intended. **Always check your output**. If you have a small dataset, then you can eyeball it to see if it looks right. With a larger dataset, you may wish to compute summary statistics or count the number of groups/observations in each variable to verify your filter is correct. There is no level of expertise in coding that can substitute knowing and checking your data. 
+:::
+
+### Arrange
+
+You can sort your dataset using `arrange()`. You will find yourself needing to sort data in R much less than you do in Excel, since you don't need to have rows next to each other in order to, for example, calculate group means. But `arrange()` can be useful when preparing data for display in tables. `arrange()` works on character data where it will sort alphabetically, as well as numeric data where the default is ascending order (smallest to largest). Reverse the order using `desc()`.
+
+```{r arrange}
+# arranging the table 
+# first by angle in alphabetical order
+# then by "position" in reverse alphabetical order
+velocity %>%
+  arrange(angle, desc(position))
+```
+
+
+::: {.callout-note .try}
+If you want to sort character data/categories in a specific order, turn the column into a `r glossary("factor")` and set the `levels` in the desired order.
+
+```{r}
+velocity %>%
+  mutate(position = factor(position, levels = c("bunched", "medium", "elongated"))) %>%
+  filter(angle == ">50 degrees") %>%
+  arrange(position)
+```
+
+:::
+
+### Mutate
+
+The function `mutate()` allows you to add new columns or change existing ones by overwriting them by using the syntax `new_column = operation`.  You can add more than one column in the same mutate function by separating the columns with a comma. Once you make a new column, you can use it in further column definitions. For example, the creation of `improvement_percent` below uses the column `improvement_raw`, which is created above it.
+
+```{r mutate}
+velocity2 <- velocity %>%
+  mutate(
+    improvement_raw = velocity_2023 - velocity_2022,
+    improvement_percent = (improvement_raw / velocity_2022) * 100,
+    position = paste(position, "start")
+  )
+```
+
+`mutate()` can also be used in conjunction with other functions and Boolean operators. For example, we can add another column to `velocity2` that states whether there was an improvement in velocity out of the blocks that year or overwrite our `angle` variable as a factor. Just like when we used `r glossary("boolean expression", "Boolean expressions")` with filter, it will evaluate the equation and return TRUE or FALSE depending on whether the observation meets the criteria.
+
+```{r}
+velocity2 <- velocity2 %>%
+  mutate(improvement_category = improvement_raw > 0,
+         angle = as.factor(angle))
+```
+
+::: {.callout-warning}
+You can overwrite a column by giving a new column the same name as the old column (see `position` or `angle`) above. Make sure that you mean to do this and that you aren't trying to use the old column value after you redefine it.
+:::
+
+You can also use `case_when()` to specify what values to return, rather than defaulting to TRUE or FALSE:
+
+```{r}
+velocity3 <- velocity2 %>%
+  mutate(improvement_category = case_when(improvement_raw > 0 ~ "IMPROVEMENT",
+                                     improvement_raw < 0 ~ "NO IMPROVEMENT"))
+```
+
+Use it to recode values:
+
+```{r}
+# create a column where coaches get a bonus if the sprinter's performance satisfaction was overall high or very high
+
+bonus <- velocity3 %>%
+  mutate(bonus_2022 = case_when(satisfaction_2022 %in% c("very low", "low", "neutral") ~ "no bonus",
+                                satisfaction_2022 %in% c("high", "very high") ~ "bonus"))
+```
+
+And combine different criteria:
+
+```{r}
+
+# new club management takes over - coaches only get a bonus if performance satisfaction was overall high or very high AND there was an improvement in performance
+
+bonus2 <- velocity3 %>%
+  mutate(bonus_2023 = case_when(satisfaction_2023 == "high" & 
+                                  improvement_category == "IMPROVEMENT" ~ "bonus",
+                                satisfaction_2023 == "very high" & 
+                                  improvement_category == "IMPROVEMENT" ~ "bonus",
+                                TRUE ~ "No bonus")) # set all other values to "no bonus"
+```
+
+Just like `filter()`, `mutate()` is incredibly powerful and the scope of what you can create is far beyond what we can cover in this book. 
+
+### Summarise {#sec-dplyr-summarise}
+
+You were introduced to the `summarise()` function in @sec-summary-summarise. This applies summary functions to an entire table (or groups, as you'll see in the next section).
+
+Let's say we want to determine the mean velocity, plus the minimum and maximum velocity, for any starting block position, block angle, and year. First, we need to reshape the data like we learned in @sec-tidy, so that there is a column for year and one column for velocity, instead of separate columns for each year. We'll also drop the satisfaction data as we don't need it for this analysis. 
+
+```{r}
+velocity4 <- velocity %>%
+  select(-satisfaction_2022, -satisfaction_2023) %>%
+  pivot_longer(cols = velocity_2022:velocity_2023,
+               names_to = c("velocity", "year"),
+               names_sep = "_",
+               values_to = "value") %>%
+  pivot_wider(names_from = velocity,
+              values_from = value)
+
+head(velocity4) # check the format
+```
+
+Now we can create summary statistics for the table.
+
+```{r}
+velocity4 %>%
+  summarise(
+    mean_velocity = mean(velocity),
+    min_velocity = min(velocity),
+    max_velocity = max(velocity)
+  )
+```
+
+### Group By {#sec-dplyr-groupby}
+
+You were introduced to the `group_by()` function in @sec-grouping. For example, you can break down the summary statistics above by year and block angle.
+
+```{r}
+year_angle <- velocity4 %>%
+  group_by(year, angle) %>%
+  summarise(
+    mean_velocity = mean(velocity),
+    min_velocity = min(velocity),
+    max_velocity = max(velocity)
+  ) %>%
+  ungroup()
+
+year_angle
+```
+
+
+Note that you can use the other wrangling functions on the summary table, for example: 
+
+```{r eval = FALSE}
+# arrange by maximum velocity
+year_angle %>%
+  arrange(desc(max_velocity))
+
+# filter out block angles of >50 degrees
+year_angle %>%
+  filter(angle != ">50 degrees")
+
+```
+
+
+::: {.callout-note .try}
+How would you find out the maximum velocity for each starting block position?
+
+```{r, results='asis', echo = FALSE}
+c(answer = "<pre>velocity3 %>%\n  group_by(position) %>%\n  summarise(max_velocity = max(velocity)</pre>",
+  x = "<pre>velocity3 %>%\n  group_by(position) %>%\n  summarise(max_velocity = max(position)</pre>",
+  x = "<pre>velocity3 %>%\n  group_by(velocity) %>%\n  summarise(max_velocity = max(velocity)</pre>",
+  x = "<pre>velocity3 %>%\n  group_by(velocity) %>%\n  summarise(max_velocity = max(position)</pre>") %>%
+  sample() %>% webexercises::longmcq() %>% cat()
+```
+
+:::
+
+You can also use `group_by()` in combination with other functions. For example, `slice_max()` returns the top N rows, ordered by a specific variable.
+
+```{r}
+# return top 3 velocities
+velocity4 %>%
+  slice_max(n = 3, order_by = velocity)
+```
+
+But this can be combined with `group_by()` to return the top velocity for each starting block position:
+
+```{r}
+# return top velocity for each position
+velocity4 %>%
+  group_by(position) %>%
+  slice_max(n = 1, order_by = velocity)
+```
+
+## Complications
+
+### Rounding
+
+Let's say we want to round all the values to zero decimal places. The pattern below uses the `across()` function to apply the `round()` function to the columns from `mean_velocity` to `max_velocity`.
+
+```{r}
+year_angle %>%
+  mutate(across(.cols = mean_velocity:max_velocity, 
+                .fns = round))
+```
+
+Please note that R rounds .5 to the nearest even number, rather than always up, like you were probably taught in school. This prevents overestimation biases, since x.5 is *exactly* halfway between x and x+1, so there is no reason it should always round up.
+
+```{r}
+round(0.5)
+round(1.5)
+```
+
+However, this might throw a monkey wrench into your own systems. For example, a school policy might be to round up for course marks at x.5. The solution is to define your own version of `round()` (modified from [Andrew Landgraf's blog](http://andrewlandgraf.com/2012/06/15/rounding-in-r/){target="_blank"}). Put it in a hidden code block at the top of your script, with a clear warning that this is changing the way `round()` normally works. You don't need to understand how this function works, just how to use it.
+
+when you run this code, a new section will appear in the environment pane labelled "Functions". In addition to using functions from packages, you can also make your own. It's not something we are going to go into detail on in this course, but it's useful to know the functionality exists.
+
+```{r}
+#!!!!!! redefining round so 5s round up !!!!!! 
+round <- function(x, digits = 0) {
+  posneg = sign(x)
+  z = abs(x)*10^digits
+  z = z + 0.5 + sqrt(.Machine$double.eps)
+  z = trunc(z)
+  z = z/10^digits
+  z*posneg
+}
+```
+
+Now `round()` should work as you'd expect.
+
+```{r}
+round(0.5)
+round(1.5)
+```
+
+Just remove your version if you want R to go back to the original method. Remember that you have to define the new round method in any script that uses it, and run the definition code before you use it interactively. You can check your Environment pane to see whether `round` is listed under "Functions".
+
+```{r}
+# remove new round() method
+rm(round)
+```
+
+### Missing values {#sec-missing-values}
+
+If you have control over your data, it is always best to keep missing values as empty cells rather than denoting missingness with a word or implausible number. If you used "missing" rather than leaving the cell empty, the entire variable would be read as character data, which means you wouldn't be able to perform mathematical operations like calculating the mean. If you use an implausible number (0 or 999 are common), then you risk these values being included in any calculations as real numbers.
+
+However, we often don't have control over how the data come to us, so let's run through how to fix this.
+
+#### Bad missing values
+
+What if the coach hadn't returned the data on the sprinter's bunched starting block position velocity (entered as 0), and hadn't yet timed the sprinter's medium starting block position velocity for 2023, so someone entered it as "missing"? We're going to show you two functions that you can use to recode or change values, `ifelse()` and `case_when()`. `ifelse()` is from Base R and can be slightly more intuitive to use initially. `case_when()` is from the <pkg>dplyr</pkg> and allows you to specify multiple criteria, although is slightly more difficult to use so it's good to be aware of both.
+
+First, we're going to recode the data to add in the missing values
+
+For the bunched starting block position data, we can use `ifelse()` to set the value of velocity to 0 if the year is 2023 and position is "bunched", otherwise use the value from the velocity column (i.e., don't change).
+
+```{r}
+missing_bad <- velocity4 %>%
+  mutate(velocity = ifelse(
+    test = year == 2023 & position == "bunched", 
+    yes = 0, # value if above conditions are met
+    no = velocity # value if above conditions are not met
+  ))
+```
+
+Alternatively, we can use `case_when()` to convert the velocities for 2023 to `0`. The last line of `TRUE ~ velocity` means that the default value is retrieved from the velocity column, if none of the previous criteria applied.
+
+```{r}
+missing_bad <- velocity4 %>%
+  mutate(velocity = case_when(
+    # set to 0 when year is 2023 and position is bunched
+    year == 2023 & position == "bunched" ~ 0, 
+    # otherwise, set to the value in the velocity column
+    TRUE ~ velocity   
+  ))
+```
+
+`r hide("Using case_when() for multiple criteria")`
+
+The `case_when()` function allows allows you to set multiple criteria, although we're only using one non-default criterion here. It can be very useful, but takes a little practice.
+
+The example below creates a label for each row. Notice how the label for the first row is "x < 2", even though this row also fits the second criterion "y < 4". This is because `case_when()` applies the first match to each row, even if other criteria in the function also match that row.
+
+```{r}
+data <- tibble(
+  x = 1:5,
+  y = 1:5
+)
+
+data %>%
+  mutate(label = case_when(
+    x < 2           ~ "x < 2",
+    y < 4           ~ "y < 4",
+    x == 5 & y == 5 ~ "both 5",
+    TRUE            ~ "default"
+  ))
+```
+
+`r unhide()`
+
+
+For the medium starting block position, we need to recode these values as "missing". Since this is character data, and velocities are numeric data, the result will be `r glossary("coercion", "coerced")` to a character.
+
+```{r}
+# set velocity values to "missing" for medium starting block position 2023 rows
+missing_bad <- missing_bad %>%
+  mutate(velocity = ifelse(year == 2023 & position == "medium", 
+                        "missing", 
+                        velocity))
+
+# check structure of data, velocity now character
+str(missing_bad)
+```
+
+If we're using `case_when()`, first we need to convert the velocity column to a character, as this function is a little pickier and won't let you combine `r glossary("data type", "data types")`, since this almost always means that you're making a mistake.
+
+```{r}
+# set velocity values to "missing" for medium starting block position 2023 rows
+missing_bad <- missing_bad %>%
+  mutate(velocity = as.character(velocity),
+         velocity = case_when(year == 2023 & position == "medium" ~ "missing", 
+                           TRUE ~ velocity))
+```
+
+Now, if you try to compute the mean velocity, you will get an error message and the result will be `NA`.
+
+```{r eval = TRUE, error=TRUE}
+# try to compute mean velocity
+missing_bad %>%
+  summarise(mean_velocity = mean(velocity))
+```
+
+#### Convert missing values to NA
+
+To set the missing values to NA, you could use either `ifelse()` or `case_when()`. Because the `velocity` column was converted to character, we also need to transform this back to numeric.
+
+```{r}
+missing_data <- missing_bad %>%
+  mutate(
+    # set "0" values to NA using ifelse
+    velocity = ifelse(velocity == 0, NA, velocity),
+    # set "missing" values to NA using case_when
+    velocity = case_when(velocity == "missing" ~ NA_character_,
+                      TRUE ~ velocity),
+    # convert to numeric
+    velocity = as.numeric(velocity)
+  )
+```
+
+Because `case_when()` is so picky about character types, you need to specify which type of NA you're using (there is a specific NA for each data type). 
+
+Technically, `NA` has a `r glossary("logical")` data type, so functions that aren't as picky about combining data types will `r glossary("coercion", "coerce")` this to the NA version for the most compatible data type.
+
+Now, if we try to calculate the mean velocity, we get missing values for any summary value that used one of the bunched or medium starting block position 2023 velocity values.
+
+```{r error=TRUE}
+missing_data %>%
+  group_by(position) %>%
+  summarise(
+    mean_velocity = mean(velocity),
+    min_velocity = min(velocity),
+    max_velocity = max(velocity),
+    .groups = "drop")
+```
+
+#### Ignore missing values
+
+This is because `NA` basically means "I don't know", and the sum of 100 and "I don't know" is "I don't know", not 100. However, when you're calculating means, you often want to just ignore missing values. Set `na.rm = TRUE` in the summary function to remove missing values before calculating.
+
+```{r}
+missing_data %>%
+  group_by(position) %>%
+  summarise(
+    mean_velocity = mean(velocity, na.rm = TRUE),
+    min_velocity = min(velocity, na.rm = TRUE),
+    max_velocity = max(velocity, na.rm = TRUE),
+    .groups = "drop"
+  )
+```
+
+#### Count missing values
+
+If you want to find out how many missing or non-missing values there are in a column, use the `is.na()` function to get a `r glossary("logical")` vector of whether or not each value is missing, and use `sum()` to count how many values are TRUE or `mean()` to calculate the proportion of TRUE values.
+
+```{r}
+missing_data %>%
+  group_by(year, angle) %>%
+  summarise(
+    n_valid = sum(!is.na(velocity)),
+    n_missing = sum(is.na(velocity)),
+    prop_missing = mean(is.na(velocity)),
+    .groups = "drop"
+  )
+```
+
+#### Omit missing values
+
+You may also want to remove rows that have missing values and only work from complete datasets. `drop_na()` will remove any row that has a missing observation. You can use `drop_na()` on the entire dataset which will remove any row that has *any* missing value, or you can specify to only remove rows that are missing a specific value.
+
+```{r}
+# remove any rows with any missing values
+complete_data <- missing_data %>%
+  drop_na()
+
+# remove any rows that are missing a value for velocity
+complete_velocity <- missing_data %>%
+  drop_na(velocity)
+
+```
+
+Missing data can be quite difficult to deal with depending on how it is represented. As always, no amount of coding expertise can make up for not understanding the structure and idiosyncrasies of your data. 
+
+## Exercises {#sec-together-wrangle}
+
+Let's try some exercises using a dataset you already encountered in @sec-viz so that you can see how much more you're able to do with the data now.
+
+* Save your current Markdown, close it, and open a new Rmd named "function_data_mad_skillz".
+* In the set-up code chunk, load the tidyverse, then load the dataset from https://healthteachr.github.io/ads-v2/data/Function_and_PA_data into an object named `function_data`.
+* Use your method of choice to review the dataset and familiarise yourself with its structure.
+
+```{r webex.hide = TRUE}
+library(tidyverse)
+function_data <- read_csv("https://healthteachr.github.io/ads-v2/data/Function_and_PA_data.csv")
+
+```
+
+### Creating new categories
+
+Participants with musculoskeletal conditions affecting the joints, bones, or muscles were hospitalised in the last year and participants with no musculoskeletal conditions were not hospitalised in the last year. 
+
+* Create a new column named `hospitalised` that lists whether the participant was admitted to hospital in the last year.
+* Then, calculate the average quality-of-life (CASP19) scores for participants who had and had not been hospitalised in the last year, and visualise the quality-of-life scores for each group in whatever way you think best.
+
+` r hide("Hint")`
+To add the hospitalised column you can either use `case_when()` and specify multiple criteria (e.g., if the participant's condition affects the joints, bones, or muscles, hospitalised, if the participant's condition type is "None", not hospitalised), or you could use `ifelse()` and set the `test` to participants who were hospitalised and return `not hospitalised` for all others.
+` r unhide()`
+
+```{r webex.hide = TRUE}
+# case_when() method
+function_data <- function_data %>%
+  mutate(hospitalised = case_when(condition_type %in% c("Joints", "Bones", "Muscles") ~ "hospitalised",
+                             condition_type == "None" ~ "not hospitalised"))
+
+# ifelse() method
+
+function_data <- function_data %>%
+  mutate(hospitalised = ifelse(test = condition_type %in% c("Joints", "Bones", "Muscles"),
+                           yes = "hospitalised",
+                           no = "not hospitalised"))
+
+# mean quality-of-life scores
+function_data %>%
+  group_by(hospitalised) %>%
+  summarise(mean_QoL = mean(CASP19))
+
+# possible visualisation 
+
+ggplot(function_data, aes(x = CASP19, fill = hospitalised)) +
+  geom_histogram(binwidth = 1, show.legend = FALSE, colour = "black") +
+  facet_wrap(~hospitalised) +
+  labs(title = "Quality-of-life scores by hospital admission")
+```
+
+### Filter by calculated score
+
+First, calculate the average gait speed in m/s and store this in an object named `mean_speed`. This should be a single value rather than a table.
+
+`r hide("Hint")`
+There are multiple ways to achieve this. You could create the table and then pull out the single value, or just calculate the single value.
+`r unhide()`
+
+```{r webex.hide = TRUE}
+
+# method 1 - tidyverse
+mean_speed <- function_data %>%
+  summarise(mean_speed = mean(gaitspeed)) %>%
+  pull(mean_speed)
+
+# method 2 - base R
+mean_speed <- mean(function_data$gaitspeed)
+
+```
+
+Now create a dataset named `fast_speed` that just contains data from participants whose gait speed was above the sample's average.
+
+```{r webex.hide = TRUE}
+fast_speed <- function_data %>%
+  filter(gaitspeed > mean_speed)
+```
+
+Create a visualisation that shows how many participants had a gait speed above the sample average for each condition type.
+
+```{r webex.hide = TRUE}
+fast_speed %>%
+  ggplot(aes(x = condition_type)) +
+  geom_bar()
+```
+
+### Multiple critera
+
+Now, add a column to `function_data` named `follow_up` that flags whether a participant should be followed up with a health check. The hospital is short-staffed so only participants that meet all three of the following criteria should be followed-up:
+
+* Their gait speed should be below the average **for all participants**
+* Their step count should be below the average **for their musculoskeletal disease**
+* Their quality-of-life score should be less than 30. 
+
+This is quite complicated and there are multiple ways to achieve the desired outcome. Some approaches may need other functions that were covered in previous chapters and you may need to create intermediate objects.
+
+Call the final object `follow_data` and keep only the participant ID, condition type, hospital admission, and follow up columns. 
+
+```{r webex.hide = TRUE}
+
+# this is one possible solution, there are many other valid approaches 
+
+# calculate mean gait speed across all participants
+mean_speed <- mean(function_data$gaitspeed)
+
+# calculate mean steps for each type of musculoskeletal disease
+follow_data <- function_data %>%
+  group_by(musculoskeletal) %>%
+  summarise(mean_steps = mean(steps)) %>%
+#then join it to the function data  
+  left_join(function_data, by = "musculoskeletal") %>%
+# then add on the column
+  mutate(follow_up = case_when(gaitspeed < mean_speed & 
+                               steps < mean_steps & 
+                               CASP19 < 30 ~ "yes",
+                               TRUE ~ "no")) %>%
+  select(id, condition_type, hospitalised, follow_up)
+```
+
+For all of the above, write code that stores the answer as a single value, so that you could easily use it in inline coding.
+
+How many participants need to be followed up:
+
+* In total? `r fitb("17")`
+* From participants with a condition affecting the bones? `r fitb("4")`
+* From participants who were hospitalised in the last year `r fitb("15")`
+* From participants who were not hospitalised in the last year `r fitb("2")`
+
+`r hide("Hint")`
+`group_by %>% count() %>% filter() %>% pull()
+`r unhide()`
+
+Which condition type has the largest number of participants needing follow-up health checks? `r fitb("Joints")`
+
+`r hide("Hint")`
+As above but add in an `ungroup()` and `slice_max()` along the way. 
+`r unhide()`
+
+```{r webex.hide = TRUE}
+# in total
+follow_data %>%
+  group_by(follow_up) %>%
+  count()%>%
+  filter(follow_up == "yes") %>%
+  pull(n)
+
+# with a condition affecting the bones
+follow_data %>%
+  group_by(follow_up, condition_type) %>%
+  count() %>%
+  filter(condition_type == "Bones",
+         follow_up == "yes") %>%
+  pull(n)
+
+# who were hospitalised in the last year
+follow_data %>%
+  group_by(follow_up, hospitalised) %>%
+  count() %>%
+  filter(hospitalised == "hospitalised",
+         follow_up == "yes") %>%
+  pull(n)
+
+# who were not hospitalised in the last year
+follow_data %>%
+  group_by(follow_up, hospitalised) %>%
+  count() %>%
+  filter(hospitalised == "not hospitalised",
+         follow_up == "yes") %>%
+  pull(n)
+
+# most follow-ups needed
+follow_data %>%
+  group_by(follow_up, condition_type) %>%
+  count() %>%
+  ungroup() %>%
+  filter(follow_up == "yes") %>%
+  slice_max(n = 1, order_by = n) %>%
+  pull(condition_type)
+
+```
+
+### Original insight
+
+In preparation for the final summative assessment, explore the data to provide one original insight of your own.
+
+### Report
+
+Compile all the above into a visually appealing reproducible report that could be used to target participants for extra care. Use inline coding to report any numbers in the text. Once you're finished, post your Rmd and knitted html document on teams so that other learners can see your approach.
+
+
+## Glossary {#sec-glossary-wrangle}
+
+```{r, echo = FALSE, results='asis'}
+glossary_table(as_kable = FALSE) |> 
+  kableExtra::kable(row.names = FALSE, escape = FALSE) |>
+  unclass() |> cat()
+```
+
+## Further resources {#sec-resources-wrangle}
+
+* [Data transformation cheat sheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-transformation.pdf)
+* [Chapter 5: Data Transformation ](http://r4ds.had.co.nz/transform.html) in *R for Data Science*
+* [Chapter 19: Functions](https://r4ds.had.co.nz/functions.html) in *R for Data Science*
+* [Introduction to stringr](https://stringr.tidyverse.org/articles/stringr.html)
+
+
+
+

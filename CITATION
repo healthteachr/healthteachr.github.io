@@ -1,0 +1,16 @@
+message: "If you use this book, please cite it as below."
+
+authors:
+- family-names: "Malkowski"
+  given-names: "Olivia"
+  orcid: "https://orcid.org/0000-0002-8395-3565"
+- family-names: "Williams"
+  given-names: "Sean"
+  orcid: "https://orcid.org/0000-0003-1460-0085"
+- family-names: "Fern"
+  given-names: "James"
+  orcid: "https://orcid.org/0009-0007-8708-3265"
+title: "Applied Data Skills"
+version: 2.0
+date-released: 2024-06-12
+url: "https://github.com/healthteachr/ads-v2/"

@@ -1,0 +1,68 @@
+Package: ads-v2
+Title: Applied Data Skills
+Version: 2.0
+Authors@R: 
+ c(
+     person(
+        given = "Olivia", 
+        family = "Malkowski", 
+        role = c("aut"), 
+        email = "osm25@bath.ac.uk", 
+        comment = c(ORCID = "0000-0002-8395-3565")
+    ),
+    person(
+        given = "Sean", 
+        family = "Williams", 
+        role = c("aut"), 
+        email = "S.Williams@bath.ac.uk", 
+        comment = c(ORCID = "0000-0003-1460-0085")
+    ),
+    person(
+        given = "James", 
+        family = "Fern", 
+        role = c("aut"), 
+        email = "J.Fern@bath.ac.uk", 
+        comment = c(ORCID = "0009-0007-8708-3265"))
+Description: Applied Data Skills.
+License: CC BY 4.0 + LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports:
+    bookdown,
+    knitr,
+    downlit,
+    renv,
+    xfun,
+    faux,
+    tinytex,
+    installr,
+    webexercises,
+    glossary (>= 0.0.0.9001),
+    esquisse,
+    rio,
+    kableExtra,
+    patchwork,
+    grDevices,
+    ggthemes,
+    plotly,
+    ggwordcloud,
+    tidytext,
+    treemap,
+    sf,
+    rnaturalearth,
+    rnaturalearthdata, 
+    rnaturalearthhires,
+    glue,
+    flexdashboard,
+    rtweet,
+    ggbump,
+    waffle,
+    DT,
+    showtext,
+    spotifyr
+Remotes: 
+    healthteachr/glossary,
+    ropensci/rnaturalearthhires
+    hrbrmstr/waffle
+Depends: 
+    tidyverse

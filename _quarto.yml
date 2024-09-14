@@ -1,0 +1,101 @@
+project:
+  type: book
+  output-dir: docs
+  resources: data
+  preview:
+    port: 4200
+
+execute:
+  freeze: auto
+
+book:
+  title: 'Applied Data Skills'
+  subtitle: "Processing & Presenting Data"
+  author: "Emily Nordmann and Lisa DeBruine"
+  cover-image: images/logos/logo.png
+  image: images/logos/logo.png
+  favicon: images/logos/favicon.ico
+  #cookie-consent: true
+  google-analytics: "G-6NP3MF25W3"
+  page-navigation: true
+  search: true
+  # comments:
+  #   hypothesis:
+  #     theme: clean
+  #     openSidebar: false
+  repo-url: https://github.com/healthteachr/ads-v2/
+  repo-branch: master
+  repo-actions: [edit, issue, source]
+#  downloads: [pdf, epub]
+  sharing: [twitter, facebook, linkedin]
+  # sidebar:
+  #   style: docked
+  #   background: light
+  page-footer:
+    left: "CC-BY 2022, healthTeachR"
+    right:
+      - icon: github
+        href: https://github.com/healthteachr/ads-v2
+  chapters:
+  - index.qmd
+  - 01-intro.qmd
+  - 02-reports.qmd
+  - 03-viz.qmd
+  - 04-data.qmd
+  - 05-summary.qmd
+  - 06-formative.qmd
+  - 07-joins.qmd
+  - 08-tidy.qmd
+  - 09-wrangle.qmd
+  - 10-custom.qmd
+  - 11-refs.qmd
+  - 12-license.qmd
+  appendices:
+  - app-installing-r.qmd
+  - app-updating-r.qmd
+  - app-symbols.qmd
+  - app-conventions.qmd
+  - app-teams.qmd
+  - app-debugging.qmd
+  - app-datatypes.qmd
+  - app-dates.qmd
+  - app-styling.qmd
+#  - app-hashtags.qmd
+#  - app-twitter.qmd
+  - app-spotify.qmd
+  - app-webpage.qmd
+
+
+bibliography:
+  - include/book.bib
+  - include/packages.bib
+csl: include/apa.csl
+
+format:
+  html:
+    theme:
+      light:
+      - flatly
+      - include/light.scss
+      dark:
+      - darkly
+      - include/dark.scss
+    css:
+    - include/healthteachr.css
+    - include/webex.css
+    - include/style.css
+    number-depth: 3
+    code-link: true
+    code-fold: false
+    df-print: kable
+    # cap-location: margin
+    # reference-location: margin
+    # citation-location: margin
+    code-line-numbers: true
+    code-overflow: wrap
+    code-copy: hover
+    # code-block-border-left: "#4864DB"
+    highlight-style: a11y
+    # monofont: Fira Code
+    # mainfont: Open Sans
+    include-after-body: [include/webex.js, include/script.js]

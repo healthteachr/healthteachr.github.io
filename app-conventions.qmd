@@ -1,0 +1,93 @@
+# Conventions
+
+This book will use the following conventions:
+
+* Generic code: `list(number = 1, letter = "A")`
+* Highlighted code: `r hl(list(number = 1, letter = "A"))`
+* File paths: `r path("data/sales.csv")`
+* Menu/interface options: <if>Tools > Global Options... > Pane Layout</if>
+* R Packages: <pkg>tidyverse</pkg>
+* Functions: `r hl(paste())`
+* Strings: `r hl("Lisa")`, `r hl("Emily")`
+* Numbers: `r hl(100)`, `r hl(3.14)`
+* Logical values: `r hl(TRUE)`, `r hl(FALSE)`
+* Glossary items: `r glossary("ordinal")`
+* Citations: @R-tidyverse
+* Internal links: @sec-viz
+* External links: [Mastering Shiny](https://mastering-shiny.org/){target="_blank"}
+* Mac-specific: <mac>Cmd-Shift-F10</mac> 
+* Windows-specific: <pc>Ctl-Shift-F10</pc>
+
+A list of mac and windows [keyboard shortcuts](https://support.posit.co/hc/en-us/articles/200711853-Keyboard-Shortcuts-in-the-RStudio-IDE).
+
+
+## Test Yourself
+
+I am going to learn a lot: `r torf(TRUE)`
+
+```{r, echo=FALSE, results='asis'}
+opts <- c(
+   "the probability that the null hypothesis is true",
+   answer = "the probability of the observed, or more extreme, data, under the assumption that the null-hypothesis is true",
+   "the probability of making an error in your conclusion"
+)
+
+cat("* What is a p-value?", longmcq(opts))
+```
+
+
+```{block, webex.hide="Hidden Solutions"}
+You found it!
+```
+
+## Callout boxes
+
+[See the [quarto reference](https://quarto.org/docs/authoring/callouts.html) for more options.]{.aside}
+
+::: {.callout-note}
+Informational asides.
+:::
+
+::: {.callout-tip}
+Tips
+:::
+
+::: {.callout-warning}
+Notes to warn you about something.
+:::
+
+::: {.callout-caution}
+Notes about things that could cause serious errors.
+:::
+
+::: {.callout-important}
+Notes about things that are important.
+:::
+
+::: {.callout-note .try collapse="true"}
+## Try (click to expand)
+Try it yourself.
+:::
+
+## Code and Output
+
+```{r}
+# code chunks
+paste("Code", "Output", 1, sep = " ")
+```
+
+```{r, eval = FALSE, verbatim="r, fig.width = 2, fig.height = 2"}
+# code chunks with headers
+hist(rnorm(100000))
+```
+
+```{verbatim, lang = "md"}
+## Markdown Example
+
+* Inline code: `r nrow(iris)`
+* *Italics*
+* **Bold**
+```
+
+
+
