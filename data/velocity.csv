@@ -1,0 +1,7 @@
+position,angle,velocity_2022,velocity_2023,satisfaction_2022,satisfaction_2023
+bunched,<50 degrees,3.03,3,low,very low
+bunched,>50 degrees,2.9,3.34,very low,very high
+medium,<50 degrees,3.3,3.51,very high,very high
+medium,>50 degrees,3.03,3.1,high,low
+elongated,<50 degrees,3.01,3.46,neutral,high
+elongated,>50 degrees,3.3,3.25,high,neutral

@@ -1,0 +1,369 @@
+Date ,Player ID,Position,Position ID,Game Number ,Phase of Season,Season Day Number,Days Between Games,Opposition ,League Rank (League Position),League Rank (Group),Match Location,Match Outcome,Goal Deficit,Appearance,Minutes,Total Distance (m),Work Rate (m/min),High Speed Distance (5.5-7m/s),Number of High Speed Runs (5.5-7m/s),Sprint Distance (m),Number of Sprints
+09/08/2014,1,Wide Midfielders,3,1,1,1,,Charlton,12,2,Home,Draw,0,Full,97,11633,119.9278351,1030,75,228,22
+16/08/2014,1,Wide Midfielders,3,3,1,8,7,Bournemouth ,1,1,Away,Loss,-1,Full,95,12112,127.4947368,1844,113,258,23
+19/08/2014,1,Wide Midfielders,3,4,1,11,3,Blackpool,24,3,Away,Win,1,Full,90,12550,139.4444444,1219,53,290,13
+23/08/2014,1,Wide Midfielders,3,5,1,15,4,Birmingham,10,2,Home,Draw,0,Full,,,,,,,
+30/08/2014,1,Wide Midfielders,3,7,1,22,7,Rotherham,21,3,Away,Win,2,Full,100,12520,125.2,2227,176,187,19
+13/09/2014,1,Wide Midfielders,3,8,1,36,14,Brighton,20,3,Home,Win,1,Full,96,12031,125.3229167,1180,118,248,29
+16/09/2014,1,Wide Midfielders,3,9,1,39,3,Norwich,3,1,Home,Loss,-3,Full,96,12987,135.28125,1767,127,375,35
+20/09/2014,1,Wide Midfielders,3,10,1,43,4,Middlesbrough,4,1,Away,Loss,-4,Full,94,12365,131.5425532,1225,85,243,21
+27/09/2014,1,Wide Midfielders,3,11,1,50,7,Leeds,15,2,Home,Win,2,Full,95,12888,135.6631579,2138,118,256,26
+30/09/2014,1,Wide Midfielders,3,12,1,53,3,Watford,2,1,Away,Loss,-1,Full,95,12507,131.6526316,1444,92,216,17
+04/10/2014,1,Wide Midfielders,3,13,1,57,4,Reading,19,3,Home,Win,2,Full,97,11943,123.1237113,1556,156,137,16
+18/10/2014,1,Wide Midfielders,3,14,2,71,14,Wigan,23,3,Away,Draw,0,Full,95,11343,119.4,1157,90,229,20
+25/10/2014,1,Wide Midfielders,3,16,2,78,7,Bolton,18,3,Away,Loss,-2,Full,91,11198,123.0549451,1338,61,355,32
+01/11/2014,1,Wide Midfielders,3,17,2,85,7,Derby,8,1,Home,Win,1,Full,98,11437,116.7040816,1161,94,342,30
+05/11/2014,1,Wide Midfielders,3,18,2,89,4,Nottingham,14,2,Away,Win,2,Full,100,12025,120.25,1517,112,272,24
+08/11/2014,1,Wide Midfielders,3,19,2,92,3,Millwall,22,3,Away,Win,1,Full,85,11867,139.6117647,1073,91,204,18
+21/11/2014,1,Wide Midfielders,3,20,2,105,13,Fulham,17,3,Home,Win,1,Full,96,11835,123.28125,1779,103,129,10
+29/11/2014,1,Wide Midfielders,3,21,2,113,8,Wolves,7,1,Home,Win,4,Full,95,11796,124.1684211,1718,96,252,24
+06/12/2014,1,Wide Midfielders,3,22,2,120,7,Huddersfield,16,2,Away,Loss,-1,Full,,,,,,,
+20/12/2014,1,Wide Midfielders,3,24,2,134,14,Cardiff,11,2,Away,Win,1,Full,98,12369,126.2142857,1523,89,248,15
+28/12/2014,1,Wide Midfielders,3,26,2,142,8,Wolves,7,1,Away,Loss,-1,Full,,,,,,,
+06/04/2015,1,Wide Midfielders,3,44,4,241,,Nottingham,14,2,Home,Draw,0,Full,98,12333,125.8469388,1758,129,198,17
+11/04/2015,1,Wide Midfielders,3,45,4,246,5,Derby,8,1,Away,Draw,0,Full,,,,,,,
+14/04/2015,1,Wide Midfielders,3,46,4,249,3,Sheffield,13,2,Away,Loss,-1,Full,96,10851,113.03125,1507,118,156,12
+25/04/2015,1,Wide Midfielders,3,48,4,260,11,Reading,19,3,Away,Win,2,Full,96,11725,122.1354167,1219,80,221,14
+02/05/2015,1,Wide Midfielders,3,49,4,267,7,Wigan,23,3,Home,Win,3,Full,94,12290,130.7446809,1771,109,316,19
+15/05/2015,1,Wide Midfielders,3,51,4,280,13,Middlesbrough,4,1,Away,Loss,-3,Full,95,10749,113.1473684,1430,101,70,4
+09/08/2014,2,Wide Defenders,1,1,1,1,,Charlton,12,2,Home,Draw,0,Full,97,10214,105.2989691,844,77,217,20
+16/08/2014,2,Wide Defenders,1,3,1,8,7,Bournemouth ,1,1,Away,Loss,-1,Full,95,10990,115.6842105,1441,129,216,22
+19/08/2014,2,Wide Defenders,1,4,1,11,3,Blackpool,24,3,Away,Win,1,Full,90,11161,124.0111111,742,42,299,14
+30/08/2014,2,Wide Defenders,1,7,1,22,11,Rotherham,21,3,Away,Win,2,Full,100,11162,111.62,890,79,130,15
+13/09/2014,2,Wide Defenders,1,8,1,36,14,Brighton,20,3,Home,Win,1,Full,96,10889,113.4270833,674,62,199,20
+16/09/2014,2,Wide Defenders,1,9,1,39,3,Norwich,3,1,Home,Loss,-3,Full,96,11969,124.6770833,1310,94,343,35
+20/09/2014,2,Wide Defenders,1,10,1,43,4,Middlesbrough,4,1,Away,Loss,-4,Full,94,11131,118.4148936,1403,94,291,28
+27/09/2014,2,Wide Defenders,1,11,1,50,7,Leeds,15,2,Home,Win,2,Full,95,10852,114.2315789,1018,81,243,27
+30/09/2014,2,Wide Defenders,1,12,1,53,3,Watford,2,1,Away,Loss,-1,Full,95,10151,106.8526316,1171,88,203,23
+04/10/2014,2,Wide Defenders,1,13,1,57,4,Reading,19,3,Home,Win,2,Full,97,11477,118.3195876,821,67,138,13
+18/10/2014,2,Wide Defenders,1,14,2,71,14,Wigan,23,3,Away,Draw,0,Full,95,9507,100.0736842,675,59,121,11
+21/10/2014,2,Wide Defenders,1,15,2,74,3,Sheffield ,13,2,Home,Draw,0,Full,96,10932,113.875,1016,75,256,21
+16/08/2014,3,Central Midfielders,4,3,1,8,,Bournemouth ,1,1,Away,Loss,-1,Full,95,10898,114.7157895,1203,87,279,20
+19/08/2014,3,Central Midfielders,4,4,1,11,3,Blackpool,24,3,Away,Win,1,Full,90,11830,131.4444444,981,53,91,5
+23/08/2014,3,Central Midfielders,4,5,1,15,4,Birmingham,10,2,Home,Draw,0,Full,,,,,,,
+30/08/2014,3,Central Midfielders,4,7,1,22,7,Rotherham,21,3,Away,Win,2,Full,100,11810,118.1,1170,101,230,21
+16/09/2014,3,Central Midfielders,4,9,1,39,,Norwich,3,1,Home,Loss,-3,Full,96,11094,115.5625,1419,109,352,41
+18/10/2014,3,Central Midfielders,4,14,2,71,,Wigan,23,3,Away,Draw,0,Full,95,10863,114.3473684,982,89,174,17
+21/10/2014,3,Central Midfielders,4,15,2,74,3,Sheffield ,13,2,Home,Draw,0,Full,96,11454,119.3125,981,64,301,26
+05/11/2014,3,Central Midfielders,4,18,2,89,,Nottingham,14,2,Away,Win,2,Full,100,12105,121.05,988,71,213,18
+21/11/2014,3,Central Midfielders,4,20,2,105,,Fulham,17,3,Home,Win,1,Full,96,10970,114.2708333,695,50,252,18
+06/12/2014,3,Central Midfielders,4,22,2,120,,Huddersfield,16,2,Away,Loss,-1,Full,,,,,,,
+13/12/2014,3,Central Midfielders,4,23,2,127,7,Blackburn,9,2,Home,Win,2,Full,,,,,,,
+20/12/2014,3,Central Midfielders,4,24,2,134,7,Cardiff,11,2,Away,Win,1,Full,98,11660,118.9795918,860,70,234,19
+26/12/2014,3,Central Midfielders,4,25,2,140,6,Ipswich,6,1,Home,Loss,-2,Full,96,10045,104.6354167,608,52,127,10
+10/01/2015,3,Central Midfielders,4,28,3,155,,Rotherham,21,3,Home,Win,1,Full,97,12593,129.8247423,1405,118,137,11
+17/01/2015,3,Central Midfielders,4,29,3,162,7,Brighton,20,3,Away,Win,1,Full,,,,,,,
+24/01/2015,3,Central Midfielders,4,30,3,169,7,Norwich,3,1,Away,Win,1,Full,98,10909,111.3163265,772,65,75,4
+31/01/2015,3,Central Midfielders,4,31,3,176,7,Middlesbrough,4,1,Home,Loss,-1,Full,98,10961,111.8469388,853,77,84,8
+14/02/2015,3,Central Midfielders,4,34,3,190,14,Charlton,12,2,Away,Loss,-3,Full,100,10532,105.32,847,85,61,4
+21/02/2015,3,Central Midfielders,4,35,3,197,7,Bournemouth,1,1,Home,Win,2,Full,98,11756,119.9591837,1175,86,47,4
+24/02/2015,3,Central Midfielders,4,36,3,200,3,Blackpool,24,3,Home,Win,4,Full,,,,,,,
+28/02/2015,3,Central Midfielders,4,37,3,204,4,Birmingham,10,2,Away,Loss,-1,Full,96,10612,110.5416667,936,66,159,9
+03/03/2015,3,Central Midfielders,4,38,3,207,3,Huddersfield,16,2,Home,Win,3,Full,94,11669,124.1382979,1231,101,83,8
+07/03/2015,3,Central Midfielders,4,39,3,211,4,Ipswich,6,1,Away,Draw,0,Full,95,10101,106.3263158,835,71,37,2
+14/03/2015,3,Central Midfielders,4,40,4,218,7,Cardiff,11,2,Home,Loss,-1,Full,,,,,,,
+21/03/2015,3,Central Midfielders,4,42,4,225,7,Millwall,22,3,Home,Draw,0,Full,98,11687,119.255102,1249,81,209,15
+06/04/2015,3,Central Midfielders,4,44,4,241,,Nottingham,14,2,Home,Draw,0,Full,98,10363,105.744898,946,92,45,5
+11/04/2015,3,Central Midfielders,4,45,4,246,5,Derby,8,1,Away,Draw,0,Full,,,,,,,
+08/05/2015,3,Central Midfielders,4,50,4,273,,Middlesbrough,4,1,Home,Loss,-1,Full,99,9830,99.29292929,823,78,46,3
+15/05/2015,3,Central Midfielders,4,51,4,280,7,Middlesbrough,4,1,Away,Loss,-3,Full,95,10046,105.7473684,908,69,209,14
+23/08/2014,4,Forwards,5,5,1,15,,Birmingham,10,2,Home,Draw,0,Full,,,,,,,
+20/09/2014,4,Forwards,5,10,1,43,,Middlesbrough,4,1,Away,Loss,-4,Full,94,9638,102.5319149,869,67,371,28
+30/09/2014,4,Forwards,5,12,1,53,10,Watford,2,1,Away,Loss,-1,Full,95,9794,103.0947368,1058,94,222,27
+08/11/2014,4,Forwards,5,19,2,92,,Millwall,22,3,Away,Win,1,Full,85,9980,117.4117647,632,32,335,19
+13/12/2014,4,Forwards,5,23,2,127,,Blackburn,9,2,Home,Win,2,Full,,,,,,,
+28/12/2014,4,Forwards,5,26,2,142,,Wolves,7,1,Away,Loss,-1,Full,,,,,,,
+03/01/2015,4,Forwards,5,27,2,148,6,Brighton,20,3,Home,Loss,-2,Full,97,8974,92.51546392,439,42,129,10
+17/01/2015,4,Forwards,5,29,3,162,14,Brighton,20,3,Away,Win,1,Full,,,,,,,
+10/02/2015,4,Forwards,5,33,3,186,,Watford,2,1,Home,Loss,-1,Full,,,,,,,
+14/02/2015,4,Forwards,5,34,3,190,4,Charlton,12,2,Away,Loss,-3,Full,100,8492,84.92,282,26,108,8
+28/02/2015,4,Forwards,5,37,3,204,14,Birmingham,10,2,Away,Loss,-1,Full,96,8997,93.71875,390,36,206,13
+14/03/2015,4,Forwards,5,40,4,218,14,Cardiff,11,2,Home,Loss,-1,Full,,,,,,,
+21/03/2015,4,Forwards,5,42,4,225,7,Millwall,22,3,Home,Draw,0,Full,98,9487,96.80612245,659,60,125,8
+06/04/2015,4,Forwards,5,44,4,241,,Nottingham,14,2,Home,Draw,0,Full,98,9063,92.47959184,516,48,106,6
+11/04/2015,4,Forwards,5,45,4,246,5,Derby,8,1,Away,Draw,0,Full,,,,,,,
+14/04/2015,4,Forwards,5,46,4,249,3,Sheffield,13,2,Away,Loss,-1,Full,96,8338,86.85416667,542,49,124,7
+08/05/2015,4,Forwards,5,50,4,273,,Middlesbrough,4,1,Home,Loss,-1,Full,99,7883,79.62626263,382,35,21,1
+15/05/2015,4,Forwards,5,51,4,280,7,Middlesbrough,4,1,Away,Loss,-3,Full,95,8239,86.72631579,455,41,175,7
+12/08/2014,7,Central Defenders,2,2,1,4,,Dagenham,25,3,Away,Win,2,Full,90,,,,,,
+26/08/2014,7,Central Defenders,2,6,1,18,14,Fulham ,17,3,Home,Loss,-1,Full,96,10774,112.2291667,665,30,165,6
+30/08/2014,7,Central Defenders,2,7,1,22,4,Rotherham,21,3,Away,Win,2,Full,100,11072,110.72,653,57,105,8
+13/09/2014,7,Central Defenders,2,8,1,36,14,Brighton,20,3,Home,Win,1,Full,96,10221,106.46875,786,101,133,17
+16/09/2014,7,Central Defenders,2,9,1,39,3,Norwich,3,1,Home,Loss,-3,Full,96,10441,108.7604167,1097,104,151,17
+20/09/2014,7,Central Defenders,2,10,1,43,4,Middlesbrough,4,1,Away,Loss,-4,Full,94,10624,113.0212766,724,69,177,15
+21/10/2014,7,Central Defenders,2,15,2,74,,Sheffield ,13,2,Home,Draw,0,Full,96,10143,105.65625,570,48,99,5
+25/10/2014,7,Central Defenders,2,16,2,78,4,Bolton,18,3,Away,Loss,-2,Full,91,9936,109.1868132,835,58,132,12
+01/11/2014,7,Central Defenders,2,17,2,85,7,Derby,8,1,Home,Win,1,Full,98,9852,100.5306122,693,73,110,13
+05/11/2014,7,Central Defenders,2,18,2,89,4,Nottingham,14,2,Away,Win,2,Full,100,10789,107.89,674,64,52,5
+08/11/2014,7,Central Defenders,2,19,2,92,3,Millwall,22,3,Away,Win,1,Full,85,10869,127.8705882,789,59,149,12
+21/11/2014,7,Central Defenders,2,20,2,105,13,Fulham,17,3,Home,Win,1,Full,96,10533,109.71875,897,72,120,7
+29/11/2014,7,Central Defenders,2,21,2,113,8,Wolves,7,1,Home,Win,4,Full,95,11652,122.6526316,210,109,200,12
+06/12/2014,7,Central Defenders,2,22,2,120,7,Huddersfield,16,2,Away,Loss,-1,Full,,,,,,,
+13/12/2014,7,Central Defenders,2,23,2,127,7,Blackburn,9,2,Home,Win,2,Full,,,,,,,
+20/12/2014,7,Central Defenders,2,24,2,134,7,Cardiff,11,2,Away,Win,1,Full,98,10165,103.7244898,398,28,152,11
+26/12/2014,7,Central Defenders,2,25,2,140,6,Ipswich,6,1,Home,Loss,-2,Full,96,11151,116.15625,654,61,134,11
+03/01/2015,7,Central Defenders,2,27,2,148,8,Brighton,20,3,Home,Loss,-2,Full,97,10417,107.3917526,616,48,150,14
+10/01/2015,7,Central Defenders,2,28,3,155,7,Rotherham,21,3,Home,Win,1,Full,97,10488,108.1237113,995,91,82,5
+17/01/2015,7,Central Defenders,2,29,3,162,7,Brighton,20,3,Away,Win,1,Full,,,,,,,
+24/01/2015,7,Central Defenders,2,30,3,169,7,Norwich,3,1,Away,Win,1,Full,98,9462,96.55102041,904,78,139,6
+07/02/2015,7,Central Defenders,2,32,3,183,14,Leeds,15,2,Away,Win,1,Full,97,10220,105.3608247,665,48,97,8
+10/02/2015,7,Central Defenders,2,33,3,186,3,Watford,2,1,Home,Loss,-1,Full,,,,,,,
+14/02/2015,7,Central Defenders,2,34,3,190,4,Charlton,12,2,Away,Loss,-3,Full,100,9834,98.34,742,49,82,6
+24/02/2015,7,Central Defenders,2,36,3,200,10,Blackpool,24,3,Home,Win,4,Full,,,,,,,
+14/03/2015,7,Central Defenders,2,40,4,218,,Cardiff,11,2,Home,Loss,-1,Full,,,,,,,
+17/03/2015,7,Central Defenders,2,41,4,221,3,Blackburn,9,2,Away,Win,1,Full,98,10582,107.9795918,716,76,16,1
+03/04/2015,7,Central Defenders,2,43,4,238,,Fulham,17,3,Away,Win,3,Full,97,10542,108.6804124,917,73,127,12
+11/04/2015,7,Central Defenders,2,45,4,246,8,Derby,8,1,Away,Draw,0,Full,,,,,,,
+14/04/2015,7,Central Defenders,2,46,4,249,3,Sheffield,13,2,Away,Loss,-1,Full,96,10186,106.1041667,911,73,46,3
+18/04/2015,7,Central Defenders,2,47,4,253,4,Bolton,18,3,Home,Draw,0,Full,100,10594,105.94,1075,82,61,4
+25/04/2015,7,Central Defenders,2,48,4,260,7,Reading,19,3,Away,Win,2,Full,96,10178,106.0208333,562,58,85,4
+02/05/2015,7,Central Defenders,2,49,4,267,7,Wigan,23,3,Home,Win,3,Full,94,10769,114.5638298,1068,87,121,6
+08/05/2015,7,Central Defenders,2,50,4,273,6,Middlesbrough,4,1,Home,Loss,-1,Full,99,9207,93,560,55,53,4
+15/05/2015,7,Central Defenders,2,51,4,280,7,Middlesbrough,4,1,Away,Loss,-3,Full,95,9878,103.9789474,1038,70,45,3
+09/08/2014,8,Wide Defenders,1,1,1,1,,Charlton,12,2,Home,Draw,0,Full,97,11392,117.443299,1234,103,200,17
+12/08/2014,8,Wide Defenders,2,2,1,4,3,Dagenham,25,3,Away,Win,2,Full,90,,,,,,
+16/08/2014,8,Wide Defenders,1,3,1,8,4,Bournemouth ,1,1,Away,Loss,-1,Full,95,11499,121.0421053,1028,92,235,18
+19/08/2014,8,Wide Defenders,1,4,1,11,3,Blackpool,24,3,Away,Win,1,Full,90,11489,127.6555556,647,36,104,5
+23/08/2014,8,Wide Defenders,1,5,1,15,4,Birmingham,10,2,Home,Draw,0,Full,,,,,,,
+26/08/2014,8,Wide Defenders,1,6,1,18,3,Fulham ,17,3,Home,Loss,-1,Full,96,11812,123.0416667,795,37,270,15
+30/08/2014,8,Wide Defenders,1,7,1,22,4,Rotherham,21,3,Away,Win,2,Full,100,11746,117.46,1132,97,273,25
+13/09/2014,8,Wide Defenders,1,8,1,36,14,Brighton,20,3,Home,Win,1,Full,96,11527,120.0729167,603,61,175,19
+16/09/2014,8,Wide Defenders,1,9,1,39,3,Norwich,3,1,Home,Loss,-3,Full,96,11823,123.15625,1135,94,186,22
+20/09/2014,8,Wide Defenders,1,10,1,43,4,Middlesbrough,4,1,Away,Loss,-4,Full,94,11028,117.3191489,979,66,376,33
+27/09/2014,8,Wide Defenders,1,11,1,50,7,Leeds,15,2,Home,Win,2,Full,95,11281,118.7473684,1171,87,288,31
+30/09/2014,8,Wide Defenders,1,12,1,53,3,Watford,2,1,Away,Loss,-1,Full,95,11885,125.1052632,1174,91,185,19
+04/10/2014,8,Wide Defenders,1,13,1,57,4,Reading,19,3,Home,Win,2,Full,97,10639,109.6804124,919,86,218,23
+18/10/2014,8,Wide Defenders,1,14,2,71,14,Wigan,23,3,Away,Draw,0,Full,95,9677,101.8631579,617,50,187,18
+21/10/2014,8,Wide Defenders,1,15,2,74,3,Sheffield ,13,2,Home,Draw,0,Full,96,12136,126.4166667,1274,94,200,16
+25/10/2014,8,Wide Defenders,1,16,2,78,4,Bolton,18,3,Away,Loss,-2,Full,91,11000,120.8791209,950,60,145,10
+01/11/2014,8,Wide Defenders,1,17,2,85,7,Derby,8,1,Home,Win,1,Full,98,11409,116.4183673,796,90,197,21
+05/11/2014,8,Wide Defenders,1,18,2,89,4,Nottingham,14,2,Away,Win,2,Full,100,11169,111.69,1164,80,214,17
+08/11/2014,8,Wide Defenders,1,19,2,92,3,Millwall,22,3,Away,Win,1,Full,85,10261,120.7176471,723,56,218,16
+21/11/2014,8,Wide Defenders,1,20,2,105,13,Fulham,17,3,Home,Win,1,Full,96,10877,113.3020833,1018,71,188,17
+29/11/2014,8,Wide Defenders,1,21,2,113,8,Wolves,7,1,Home,Win,4,Full,95,10493,110.4526316,954,75,236,24
+06/12/2014,8,Wide Defenders,1,22,2,120,7,Huddersfield,16,2,Away,Loss,-1,Full,,,,,,,
+13/12/2014,8,Wide Defenders,1,23,2,127,7,Blackburn,9,2,Home,Win,2,Full,,,,,,,
+20/12/2014,8,Wide Defenders,1,24,2,134,7,Cardiff,11,2,Away,Win,1,Full,98,11336,115.6734694,633,49,234,10
+26/12/2014,8,Wide Defenders,1,25,2,140,6,Ipswich,6,1,Home,Loss,-2,Full,96,11808,123,923,85,176,13
+28/12/2014,8,Wide Defenders,1,26,2,142,2,Wolves,7,1,Away,Loss,-1,Full,,,,,,,
+03/01/2015,8,Wide Defenders,1,27,2,148,6,Brighton,20,3,Home,Loss,-2,Full,97,11581,119.3917526,1054,78,279,20
+10/01/2015,8,Wide Defenders,1,28,3,155,7,Rotherham,21,3,Home,Win,1,Full,97,11654,120.1443299,1353,111,181,11
+17/01/2015,8,Wide Defenders,1,29,3,162,7,Brighton,20,3,Away,Win,1,Full,,,,,,,
+24/01/2015,8,Wide Defenders,1,30,3,169,7,Norwich,3,1,Away,Win,1,Full,98,9953,101.5612245,605,43,173,9
+31/01/2015,8,Wide Defenders,1,31,3,176,7,Middlesbrough,4,1,Home,Loss,-1,Full,98,11327,115.5816327,793,42,388,22
+07/02/2015,8,Wide Defenders,1,32,3,183,7,Leeds,15,2,Away,Win,1,Full,97,10186,105.0103093,824,53,186,7
+03/03/2015,8,Wide Defenders,1,38,3,207,,Huddersfield,16,2,Home,Win,3,Full,94,10754,114.4042553,859,71,99,8
+07/03/2015,8,Wide Defenders,1,39,3,211,4,Ipswich,6,1,Away,Draw,0,Full,95,11309,119.0421053,1108,89,92,4
+14/03/2015,8,Wide Defenders,1,40,4,218,7,Cardiff,11,2,Home,Loss,-1,Full,,,,,,,
+17/03/2015,8,Wide Defenders,1,41,4,221,3,Blackburn,9,2,Away,Win,1,Full,98,11087,113.1326531,829,71,73,6
+21/03/2015,8,Wide Defenders,1,42,4,225,4,Millwall,22,3,Home,Draw,0,Full,98,10719,109.377551,1029,78,113,6
+03/04/2015,8,Wide Defenders,1,43,4,238,13,Fulham,17,3,Away,Win,3,Full,97,11691,120.5257732,1026,68,105,7
+06/04/2015,8,Wide Defenders,1,44,4,241,3,Nottingham,14,2,Home,Draw,0,Full,98,11046,112.7142857,1101,99,74,3
+11/04/2015,8,Wide Defenders,1,45,4,246,5,Derby,8,1,Away,Draw,0,Full,,,,,,,
+18/04/2015,8,Wide Defenders,1,47,4,253,7,Bolton,18,3,Home,Draw,0,Full,100,12056,120.56,1272,95,273,15
+25/04/2015,8,Wide Defenders,1,48,4,260,7,Reading,19,3,Away,Win,2,Full,96,11253,117.21875,781,58,126,9
+02/05/2015,8,Wide Defenders,1,49,4,267,7,Wigan,23,3,Home,Win,3,Full,94,11429,121.5851064,1118,93,100,5
+08/05/2015,8,Wide Defenders,1,50,4,273,6,Middlesbrough,4,1,Home,Loss,-1,Full,99,9829,99.28282828,782,67,52,4
+09/08/2014,9,Central Defenders,2,1,1,1,,Charlton,12,2,Home,Draw,0,Full,97,10721,110.5257732,950,76,95,10
+16/08/2014,9,Central Defenders,2,3,1,8,7,Bournemouth ,1,1,Away,Loss,-1,Full,95,11211,118.0105263,1236,116,67,6
+19/08/2014,9,Central Defenders,2,4,1,11,3,Blackpool,24,3,Away,Win,1,Full,90,10650,118.3333333,540,34,102,7
+23/08/2014,9,Central Defenders,2,5,1,15,4,Birmingham,10,2,Home,Draw,0,Full,,,,,,,
+26/08/2014,9,Central Defenders,2,6,1,18,3,Fulham ,17,3,Home,Loss,-1,Full,96,10651,110.9479167,709,40,133,8
+30/08/2014,9,Central Defenders,2,7,1,22,4,Rotherham,21,3,Away,Win,2,Full,100,11573,115.73,976,85,201,16
+13/09/2014,9,Central Defenders,2,8,1,36,14,Brighton,20,3,Home,Win,1,Full,96,10670,111.1458333,683,84,182,23
+16/09/2014,9,Central Defenders,2,9,1,39,3,Norwich,3,1,Home,Loss,-3,Full,96,10778,112.2708333,1303,102,164,21
+20/09/2014,9,Central Defenders,2,10,1,43,4,Middlesbrough,4,1,Away,Loss,-4,Full,94,10067,107.0957447,880,79,184,21
+27/09/2014,9,Central Defenders,2,11,1,50,7,Leeds,15,2,Home,Win,2,Full,95,10159,106.9368421,945,102,123,15
+30/09/2014,9,Central Defenders,2,12,1,53,3,Watford,2,1,Away,Loss,-1,Full,95,10519,110.7263158,912,71,157,17
+04/10/2014,9,Central Defenders,2,13,1,57,4,Reading,19,3,Home,Win,2,Full,97,11210,115.5670103,629,64,90,12
+18/10/2014,9,Central Defenders,2,14,2,71,14,Wigan,23,3,Away,Draw,0,Full,95,9142,96.23157895,588,52,53,7
+28/12/2014,9,Central Defenders,2,26,2,142,,Wolves,7,1,Away,Loss,-1,Full,,,,,,,
+03/01/2015,9,Central Defenders,2,27,2,148,6,Brighton,20,3,Home,Loss,-2,Full,97,9940,102.4742268,760,50,151,12
+10/01/2015,9,Central Defenders,2,28,3,155,7,Rotherham,21,3,Home,Win,1,Full,97,10096,104.0824742,592,49,98,9
+17/01/2015,9,Central Defenders,2,29,3,162,7,Brighton,20,3,Away,Win,1,Full,,,,,,,
+24/01/2015,9,Central Defenders,2,30,3,169,7,Norwich,3,1,Away,Win,1,Full,98,9351,95.41836735,757,56,183,10
+31/01/2015,9,Central Defenders,2,31,3,176,7,Middlesbrough,4,1,Home,Loss,-1,Full,98,10291,105.0102041,929,75,83,6
+07/02/2015,9,Central Defenders,2,32,3,183,7,Leeds,15,2,Away,Win,1,Full,97,9453,97.45360825,628,44,110,11
+21/02/2015,9,Central Defenders,2,35,3,197,14,Bournemouth,1,1,Home,Win,2,Full,98,11114,113.4081633,804,74,126,8
+24/02/2015,9,Central Defenders,2,36,3,200,3,Blackpool,24,3,Home,Win,4,Full,,,,,,,
+28/02/2015,9,Central Defenders,2,37,3,204,4,Birmingham,10,2,Away,Loss,-1,Full,96,10804,112.5416667,808,58,108,6
+03/03/2015,9,Central Defenders,2,38,3,207,3,Huddersfield,16,2,Home,Win,3,Full,94,9900,105.3191489,565,56,56,3
+07/03/2015,9,Central Defenders,2,39,3,211,4,Ipswich,6,1,Away,Draw,0,Full,95,9620,101.2631579,318,30,69,4
+14/03/2015,9,Central Defenders,2,40,4,218,7,Cardiff,11,2,Home,Loss,-1,Full,,,,,,,
+17/03/2015,9,Central Defenders,2,41,4,221,3,Blackburn,9,2,Away,Win,1,Full,98,10703,109.2142857,801,57,44,4
+21/03/2015,9,Central Defenders,2,42,4,225,4,Millwall,22,3,Home,Draw,0,Full,98,10446,106.5918367,823,74,159,10
+03/04/2015,9,Central Defenders,2,43,4,238,13,Fulham,17,3,Away,Win,3,Full,97,10669,109.9896907,908,60,62,6
+06/04/2015,9,Central Defenders,2,44,4,241,3,Nottingham,14,2,Home,Draw,0,Full,98,9411,96.03061224,855,63,105,6
+11/04/2015,9,Central Defenders,2,45,4,246,5,Derby,8,1,Away,Draw,0,Full,,,,,,,
+14/04/2015,9,Central Defenders,2,46,4,249,3,Sheffield,13,2,Away,Loss,-1,Full,96,9771,101.78125,586,44,89,6
+18/04/2015,9,Central Defenders,2,47,4,253,4,Bolton,18,3,Home,Draw,0,Full,100,10354,103.54,934,77,98,8
+25/04/2015,9,Central Defenders,2,48,4,260,7,Reading,19,3,Away,Win,2,Full,96,10517,109.5520833,551,51,76,6
+02/05/2015,9,Central Defenders,2,49,4,267,7,Wigan,23,3,Home,Win,3,Full,94,10071,107.1382979,941,48,75,6
+08/05/2015,9,Central Defenders,2,50,4,273,6,Middlesbrough,4,1,Home,Loss,-1,Full,99,10015,101.1616162,842,89,52,5
+15/05/2015,9,Central Defenders,2,51,4,280,7,Middlesbrough,4,1,Away,Loss,-3,Full,95,9413,99.08421053,817,57,164,9
+24/02/2015,10,Central Midfielders,4,36,3,200,,Blackpool,24,3,Home,Win,4,Full,,,,,,,
+28/02/2015,10,Central Midfielders,4,37,3,204,4,Birmingham,10,2,Away,Loss,-1,Full,96,10771,112.1979167,735,58,102,8
+09/08/2014,11,Central Midfielders,4,1,1,1,,Charlton,12,2,Home,Draw,0,Full,97,11553,119.1030928,1021,80,242,21
+16/08/2014,11,Central Midfielders,4,3,1,8,7,Bournemouth ,1,1,Away,Loss,-1,Full,95,11670,122.8421053,1502,104,275,26
+19/08/2014,11,Central Midfielders,4,4,1,11,3,Blackpool,24,3,Away,Win,1,Full,90,11775,130.8333333,597,39,88,3
+23/08/2014,11,Central Midfielders,4,5,1,15,4,Birmingham,10,2,Home,Draw,0,Full,,,,,,,
+30/08/2014,11,Central Midfielders,4,7,1,22,7,Rotherham,21,3,Away,Win,2,Full,100,12168,121.68,1156,98,186,15
+13/09/2014,11,Central Midfielders,4,8,1,36,14,Brighton,20,3,Home,Win,1,Full,96,12249,127.59375,980,103,262,32
+16/09/2014,11,Central Midfielders,4,9,1,39,3,Norwich,3,1,Home,Loss,-3,Full,96,12215,127.2395833,1501,107,262,18
+20/09/2014,11,Central Midfielders,4,10,1,43,4,Middlesbrough,4,1,Away,Loss,-4,Full,94,12198,129.7659574,1549,111,187,19
+27/09/2014,11,Central Midfielders,4,11,1,50,7,Leeds,15,2,Home,Win,2,Full,95,12007,126.3894737,1391,125,170,17
+30/09/2014,11,Central Midfielders,4,12,1,53,3,Watford,2,1,Away,Loss,-1,Full,95,11674,122.8842105,1296,88,238,25
+04/10/2014,11,Central Midfielders,4,13,1,57,4,Reading,19,3,Home,Win,2,Full,97,11950,123.1958763,979,92,239,25
+18/10/2014,11,Central Midfielders,4,14,2,71,14,Wigan,23,3,Away,Draw,0,Full,95,10638,111.9789474,1119,94,129,12
+21/10/2014,11,Central Midfielders,4,15,2,74,3,Sheffield ,13,2,Home,Draw,0,Full,96,12133,126.3854167,1266,89,210,18
+25/10/2014,11,Central Midfielders,4,16,2,78,4,Bolton,18,3,Away,Loss,-2,Full,91,11187,122.9340659,1300,96,242,20
+01/11/2014,11,Central Midfielders,4,17,2,85,7,Derby,8,1,Home,Win,1,Full,98,11074,113,865,79,311,33
+05/11/2014,11,Central Midfielders,4,18,2,89,4,Nottingham,14,2,Away,Win,2,Full,100,11665,116.65,1085,86,231,19
+21/11/2014,11,Central Midfielders,4,20,2,105,,Fulham,17,3,Home,Win,1,Full,96,11946,124.4375,1750,115,132,13
+29/11/2014,11,Central Midfielders,4,21,2,113,8,Wolves,7,1,Home,Win,4,Full,95,10865,114.3684211,1365,98,365,25
+06/12/2014,11,Central Midfielders,4,22,2,120,7,Huddersfield,16,2,Away,Loss,-1,Full,,,,,,,
+13/12/2014,11,Central Midfielders,4,23,2,127,7,Blackburn,9,2,Home,Win,2,Full,,,,,,,
+28/12/2014,11,Central Midfielders,4,26,2,142,,Wolves,7,1,Away,Loss,-1,Full,,,,,,,
+10/01/2015,11,Central Midfielders,4,28,3,155,13,Rotherham,21,3,Home,Win,1,Full,97,12396,127.7938144,1377,102,378,25
+17/01/2015,11,Central Midfielders,4,29,3,162,7,Brighton,20,3,Away,Win,1,Full,,,,,,,
+24/01/2015,11,Central Midfielders,4,30,3,169,7,Norwich,3,1,Away,Win,1,Full,98,10772,109.9183673,1075,82,204,13
+31/01/2015,11,Central Midfielders,4,31,3,176,7,Middlesbrough,4,1,Home,Loss,-1,Full,98,12025,122.7040816,1184,90,289,17
+07/02/2015,11,Central Midfielders,4,32,3,183,7,Leeds,15,2,Away,Win,1,Full,97,10982,113.2164948,1318,93,165,11
+10/02/2015,11,Central Midfielders,4,33,3,186,3,Watford,2,1,Home,Loss,-1,Full,,,,,,,
+14/02/2015,11,Central Midfielders,4,34,3,190,4,Charlton,12,2,Away,Loss,-3,Full,100,11102,111.02,1300,103,44,3
+21/02/2015,11,Central Midfielders,4,35,3,197,7,Bournemouth,1,1,Home,Win,2,Full,98,11819,120.6020408,1149,94,46,1
+28/02/2015,11,Central Midfielders,4,37,3,204,7,Birmingham,10,2,Away,Loss,-1,Full,96,11655,121.40625,1237,78,378,23
+03/03/2015,11,Central Midfielders,4,38,3,207,3,Huddersfield,16,2,Home,Win,3,Full,94,11031,117.3510638,1266,86,15,1
+07/03/2015,11,Central Midfielders,4,39,3,211,4,Ipswich,6,1,Away,Draw,0,Full,95,11112,116.9684211,914,62,88,6
+14/03/2015,11,Central Midfielders,4,40,4,218,7,Cardiff,11,2,Home,Loss,-1,Full,,,,,,,
+17/03/2015,11,Central Midfielders,4,41,4,221,3,Blackburn,9,2,Away,Win,1,Full,98,12071,123.1734694,880,73,44,5
+21/03/2015,11,Central Midfielders,4,42,4,225,4,Millwall,22,3,Home,Draw,0,Full,98,11434,116.6734694,1140,68,176,12
+03/04/2015,11,Central Midfielders,4,43,4,238,13,Fulham,17,3,Away,Win,3,Full,97,11874,122.4123711,1437,104,91,4
+11/04/2015,11,Central Midfielders,4,45,4,246,8,Derby,8,1,Away,Draw,0,Full,,,,,,,
+14/04/2015,11,Central Midfielders,4,46,4,249,3,Sheffield,13,2,Away,Loss,-1,Full,96,9942,103.5625,850,65,60,4
+18/04/2015,11,Central Midfielders,4,47,4,253,4,Bolton,18,3,Home,Draw,0,Full,100,12030,120.3,1451,94,194,12
+25/04/2015,11,Central Midfielders,4,48,4,260,7,Reading,19,3,Away,Win,2,Full,96,11088,115.5,1067,84,73,4
+02/05/2015,11,Central Midfielders,4,49,4,267,7,Wigan,23,3,Home,Win,3,Full,94,11574,123.1276596,1598,115,201,10
+08/05/2015,11,Central Midfielders,4,50,4,273,6,Middlesbrough,4,1,Home,Loss,-1,Full,99,10430,105.3535354,1201,100,90,6
+15/05/2015,11,Central Midfielders,4,51,4,280,7,Middlesbrough,4,1,Away,Loss,-3,Full,95,10962,115.3894737,1560,103,120,9
+18/10/2014,12,Central Midfielders,4,14,2,71,,Wigan,23,3,Away,Draw,0,Full,95,10997,115.7578947,1441,140,181,16
+26/12/2014,12,Central Midfielders,4,25,2,140,,Ipswich,6,1,Home,Loss,-2,Full,96,13029,135.71875,1261,96,197,15
+03/01/2015,12,Central Midfielders,4,27,2,148,8,Brighton,20,3,Home,Loss,-2,Full,97,11553,119.1030928,1015,80,198,22
+31/01/2015,12,Central Midfielders,4,31,3,176,,Middlesbrough,4,1,Home,Loss,-1,Full,98,12008,122.5306122,1108,68,225,19
+21/02/2015,12,Central Midfielders,4,35,3,197,,Bournemouth,1,1,Home,Win,2,Full,98,11177,114.0510204,970,74,101,9
+03/03/2015,12,Central Midfielders,4,38,3,207,10,Huddersfield,16,2,Home,Win,3,Full,94,10361,110.2234043,893,69,167,14
+14/03/2015,12,Central Midfielders,4,40,4,218,11,Cardiff,11,2,Home,Loss,-1,Full,,,,,,,
+17/03/2015,12,Central Midfielders,4,41,4,221,3,Blackburn,9,2,Away,Win,1,Full,98,11302,115.3265306,1188,86,244,15
+21/03/2015,12,Central Midfielders,4,42,4,225,4,Millwall,22,3,Home,Draw,0,Full,98,11122,113.4897959,1341,94,134,9
+03/04/2015,12,Central Midfielders,4,43,4,238,13,Fulham,17,3,Away,Win,3,Full,97,11557,119.1443299,1268,100,302,19
+06/04/2015,12,Central Midfielders,4,44,4,241,3,Nottingham,14,2,Home,Draw,0,Full,98,10407,106.1938776,628,67,52,3
+14/04/2015,12,Central Midfielders,4,46,4,249,8,Sheffield,13,2,Away,Loss,-1,Full,96,10304,107.3333333,936,64,135,8
+18/04/2015,12,Central Midfielders,4,47,4,253,4,Bolton,18,3,Home,Draw,0,Full,100,11951,119.51,1256,94,196,13
+02/05/2015,12,Central Midfielders,4,49,4,267,14,Wigan,23,3,Home,Win,3,Full,94,11168,118.8085106,1527,90,161,13
+28/02/2015,13,Central Defenders,2,37,3,204,,Birmingham,10,2,Away,Loss,-1,Full,96,10361,107.9270833,842,60,112,9
+03/03/2015,13,Central Defenders,2,38,3,207,3,Huddersfield,16,2,Home,Win,3,Full,94,9810,104.3617021,769,65,59,6
+26/08/2014,14,Central Midfielders,4,6,1,18,,Fulham ,17,3,Home,Loss,-1,Full,96,12611,131.3645833,921,46,208,10
+26/08/2014,15,Wide Midfielders,3,6,1,18,,Fulham ,17,3,Home,Loss,-1,Full,96,10576,110.1666667,1080,45,146,6
+13/09/2014,15,Wide Midfielders,3,8,1,36,,Brighton,20,3,Home,Win,1,Full,96,11340,118.125,775,66,328,29
+16/09/2014,15,Wide Midfielders,3,9,1,39,3,Norwich,3,1,Home,Loss,-3,Full,96,10333,107.6354167,1068,87,91,10
+27/09/2014,15,Wide Midfielders,3,11,1,50,11,Leeds,15,2,Home,Win,2,Full,95,11299,118.9368421,1414,116,370,34
+30/09/2014,15,Wide Midfielders,3,12,1,53,3,Watford,2,1,Away,Loss,-1,Full,95,10997,115.7578947,1161,59,303,23
+04/10/2014,15,Wide Midfielders,3,13,1,57,4,Reading,19,3,Home,Win,2,Full,97,10462,107.8556701,923,78,175,21
+21/10/2014,15,Wide Midfielders,3,15,2,74,,Sheffield ,13,2,Home,Draw,0,Full,96,11045,115.0520833,1122,84,320,23
+25/10/2014,15,Wide Midfielders,3,16,2,78,4,Bolton,18,3,Away,Loss,-2,Full,91,10323,113.4395604,1020,56,371,30
+01/11/2014,15,Wide Midfielders,3,17,2,85,7,Derby,8,1,Home,Win,1,Full,98,11252,114.8163265,718,52,316,26
+08/11/2014,15,Wide Midfielders,3,19,2,92,7,Millwall,22,3,Away,Win,1,Full,85,10723,126.1529412,994,60,337,25
+21/11/2014,15,Wide Midfielders,3,20,2,105,13,Fulham,17,3,Home,Win,1,Full,96,10681,111.2604167,1034,60,363,28
+29/11/2014,15,Wide Midfielders,3,21,2,113,8,Wolves,7,1,Home,Win,4,Full,95,10803,113.7157895,1001,71,247,18
+06/12/2014,15,Wide Midfielders,3,22,2,120,7,Huddersfield,16,2,Away,Loss,-1,Full,,,,,,,
+13/12/2014,15,Wide Midfielders,3,23,2,127,7,Blackburn,9,2,Home,Win,2,Full,,,,,,,
+20/12/2014,15,Wide Midfielders,3,24,2,134,7,Cardiff,11,2,Away,Win,1,Full,98,10638,108.5510204,890,70,179,14
+26/12/2014,15,Wide Midfielders,3,25,2,140,6,Ipswich,6,1,Home,Loss,-2,Full,96,11933,124.3020833,1018,84,282,20
+28/12/2014,15,Wide Midfielders,3,26,2,142,2,Wolves,7,1,Away,Loss,-1,Full,,,,,,,
+03/01/2015,15,Wide Midfielders,3,27,2,148,6,Brighton,20,3,Home,Loss,-2,Full,97,11611,119.7010309,1234,79,300,25
+10/01/2015,15,Wide Midfielders,3,28,3,155,7,Rotherham,21,3,Home,Win,1,Full,97,11979,123.4948454,1217,76,378,25
+17/01/2015,15,Wide Midfielders,3,29,3,162,7,Brighton,20,3,Away,Win,1,Full,,,,,,,
+24/01/2015,15,Wide Midfielders,3,30,3,169,7,Norwich,3,1,Away,Win,1,Full,98,10486,107,919,47,274,20
+31/01/2015,15,Wide Midfielders,3,31,3,176,7,Middlesbrough,4,1,Home,Loss,-1,Full,98,11332,115.6326531,1119,75,201,10
+07/02/2015,15,Wide Midfielders,3,32,3,183,7,Leeds,15,2,Away,Win,1,Full,97,10804,111.3814433,957,61,290,22
+10/02/2015,15,Wide Midfielders,3,33,3,186,3,Watford,2,1,Home,Loss,-1,Full,,,,,,,
+14/02/2015,15,Wide Midfielders,3,34,3,190,4,Charlton,12,2,Away,Loss,-3,Full,100,10842,108.42,996,51,229,13
+21/02/2015,15,Wide Midfielders,3,35,3,197,7,Bournemouth,1,1,Home,Win,2,Full,98,12129,123.7653061,1390,131,242,20
+24/02/2015,15,Wide Midfielders,3,36,3,200,3,Blackpool,24,3,Home,Win,4,Full,,,,,,,
+03/03/2015,15,Wide Midfielders,3,38,3,207,7,Huddersfield,16,2,Home,Win,3,Full,94,11381,121.0744681,857,58,426,23
+07/03/2015,15,Wide Midfielders,3,39,3,211,4,Ipswich,6,1,Away,Draw,0,Full,95,11223,118.1368421,747,56,248,19
+14/03/2015,15,Wide Midfielders,3,40,4,218,7,Cardiff,11,2,Home,Loss,-1,Full,,,,,,,
+17/03/2015,15,Wide Midfielders,3,41,4,221,3,Blackburn,9,2,Away,Win,1,Full,98,11293,115.2346939,1000,68,207,14
+21/03/2015,15,Wide Midfielders,3,42,4,225,4,Millwall,22,3,Home,Draw,0,Full,98,10905,111.2755102,1051,82,162,16
+03/04/2015,15,Wide Midfielders,3,43,4,238,13,Fulham,17,3,Away,Win,3,Full,97,11503,118.5876289,1217,85,336,18
+06/04/2015,15,Wide Midfielders,3,44,4,241,3,Nottingham,14,2,Home,Draw,0,Full,98,10867,110.8877551,926,63,270,21
+11/04/2015,15,Wide Midfielders,3,45,4,246,5,Derby,8,1,Away,Draw,0,Full,,,,,,,
+14/04/2015,15,Wide Midfielders,3,46,4,249,3,Sheffield,13,2,Away,Loss,-1,Full,96,10163,105.8645833,1258,87,93,7
+18/04/2015,15,Wide Midfielders,3,47,4,253,4,Bolton,18,3,Home,Draw,0,Full,100,11789,117.89,1354,87,297,28
+25/04/2015,15,Wide Midfielders,3,48,4,260,7,Reading,19,3,Away,Win,2,Full,96,11741,122.3020833,937,63,263,17
+02/05/2015,15,Wide Midfielders,3,49,4,267,7,Wigan,23,3,Home,Win,3,Full,94,10864,115.5744681,993,73,120,5
+08/05/2015,15,Wide Midfielders,3,50,4,273,6,Middlesbrough,4,1,Home,Loss,-1,Full,99,10432,105.3737374,887,71,123,7
+15/05/2015,15,Wide Midfielders,3,51,4,280,7,Middlesbrough,4,1,Away,Loss,-3,Full,95,10640,112,1252,82,181,9
+14/02/2015,17,Wide Defenders,1,34,3,190,,Charlton,12,2,Away,Loss,-3,Full,100,10772,107.72,925,58,244,21
+09/08/2014,20,Wide Midfielders,3,1,1,1,,Charlton,12,2,Home,Draw,0,Full,97,11689,120.5051546,1471,107,268,29
+12/08/2014,20,Wide Midfielders,3,2,1,4,3,Dagenham,25,3,Away,Win,2,Full,90,,,,,,
+19/08/2014,20,Wide Midfielders,3,4,1,11,7,Blackpool,24,3,Away,Win,1,Full,90,11557,128.4111111,1161,55,394,18
+26/08/2014,20,Wide Midfielders,3,6,1,18,7,Fulham ,17,3,Home,Loss,-1,Full,96,11097,115.59375,700,36,184,10
+30/08/2014,20,Wide Midfielders,3,7,1,22,4,Rotherham,21,3,Away,Win,2,Full,100,12073,120.73,1197,85,271,22
+10/01/2015,20,Wide Midfielders,3,28,3,155,,Rotherham,21,3,Home,Win,1,Full,97,11553,119.1030928,1026,70,246,16
+31/01/2015,20,Wide Midfielders,3,31,3,176,,Middlesbrough,4,1,Home,Loss,-1,Full,98,10979,112.0306122,958,61,147,9
+07/02/2015,20,Wide Midfielders,3,32,3,183,7,Leeds,15,2,Away,Win,1,Full,97,10768,111.0103093,1117,72,147,8
+10/02/2015,20,Wide Midfielders,3,33,3,186,3,Watford,2,1,Home,Loss,-1,Full,,,,,,,
+21/02/2015,20,Wide Midfielders,3,35,3,197,11,Bournemouth,1,1,Home,Win,2,Full,98,11318,115.4897959,730,69,132,11
+24/02/2015,20,Wide Midfielders,3,36,3,200,3,Blackpool,24,3,Home,Win,4,Full,,,,,,,
+28/02/2015,20,Wide Midfielders,3,37,3,204,4,Birmingham,10,2,Away,Loss,-1,Full,96,10638,110.8125,1075,78,246,13
+07/03/2015,20,Wide Midfielders,3,39,3,211,7,Ipswich,6,1,Away,Draw,0,Full,95,9744,102.5684211,812,60,60,3
+17/03/2015,20,Wide Midfielders,3,41,4,221,10,Blackburn,9,2,Away,Win,1,Full,98,11124,113.5102041,942,71,158,8
+12/08/2014,21,Forwards,5,2,1,4,,Dagenham,25,3,Away,Win,2,Full,90,,,,,,
+26/08/2014,21,Forwards,5,6,1,18,14,Fulham ,17,3,Home,Loss,-1,Full,96,11443,119.1979167,667,31,201,10
+09/08/2014,22,Central Defenders,2,1,1,1,,Charlton,12,2,Home,Draw,0,Full,97,11541,118.9793814,1135,106,226,18
+12/08/2014,22,Central Defenders,2,2,1,4,3,Dagenham,25,3,Away,Win,2,Full,90,,,,,,
+16/08/2014,22,Central Defenders,2,3,1,8,4,Bournemouth ,1,1,Away,Loss,-1,Full,95,10335,108.7894737,890,93,59,7
+19/08/2014,22,Central Defenders,2,4,1,11,3,Blackpool,24,3,Away,Win,1,Full,90,10323,114.7,382,26,59,4
+23/08/2014,22,Central Defenders,2,5,1,15,4,Birmingham,10,2,Home,Draw,0,Full,,,,,,,
+27/09/2014,22,Central Defenders,2,11,1,50,,Leeds,15,2,Home,Win,2,Full,95,10551,111.0631579,698,68,116,11
+30/09/2014,22,Central Defenders,2,12,1,53,3,Watford,2,1,Away,Loss,-1,Full,95,11011,115.9052632,978,75,168,19
+04/10/2014,22,Central Defenders,2,13,1,57,4,Reading,19,3,Home,Win,2,Full,97,10422,107.443299,525,58,120,11
+18/10/2014,22,Central Defenders,2,14,2,71,14,Wigan,23,3,Away,Draw,0,Full,95,9000,94.73684211,652,64,85,10
+21/10/2014,22,Central Defenders,2,15,2,74,3,Sheffield ,13,2,Home,Draw,0,Full,96,10742,111.8958333,567,62,159,12
+25/10/2014,22,Central Defenders,2,16,2,78,4,Bolton,18,3,Away,Loss,-2,Full,91,9919,109,465,23,186,14
+01/11/2014,22,Central Defenders,2,17,2,85,7,Derby,8,1,Home,Win,1,Full,98,10690,109.0816327,581,42,165,15
+05/11/2014,22,Central Defenders,2,18,2,89,4,Nottingham,14,2,Away,Win,2,Full,100,10842,108.42,674,64,159,13
+08/11/2014,22,Central Defenders,2,19,2,92,3,Millwall,22,3,Away,Win,1,Full,85,10525,123.8235294,691,61,102,9
+21/11/2014,22,Central Defenders,2,20,2,105,13,Fulham,17,3,Home,Win,1,Full,96,11542,120.2291667,1247,97,130,11
+29/11/2014,22,Central Defenders,2,21,2,113,8,Wolves,7,1,Home,Win,4,Full,95,9759,102.7263158,514,43,112,9
+06/12/2014,22,Central Defenders,2,22,2,120,7,Huddersfield,16,2,Away,Loss,-1,Full,,,,,,,
+13/12/2014,22,Central Defenders,2,23,2,127,7,Blackburn,9,2,Home,Win,2,Full,,,,,,,
+20/12/2014,22,Central Defenders,2,24,2,134,7,Cardiff,11,2,Away,Win,1,Full,98,10949,111.7244898,676,61,109,8
+26/12/2014,22,Central Defenders,2,25,2,140,6,Ipswich,6,1,Home,Loss,-2,Full,96,10786,112.3541667,635,65,175,13
+28/12/2014,22,Central Defenders,2,26,2,142,2,Wolves,7,1,Away,Loss,-1,Full,,,,,,,
+14/02/2015,22,Central Defenders,2,34,3,190,,Charlton,12,2,Away,Loss,-3,Full,100,10338,103.38,577,47,186,13
+21/02/2015,22,Central Defenders,2,35,3,197,7,Bournemouth,1,1,Home,Win,2,Full,98,10775,109.9489796,679,59,29,2
+12/08/2014,23,Central Midfielders,4,2,1,4,,Dagenham,25,3,Away,Win,2,Full,90,,,,,,
+01/11/2014,23,Central Midfielders,4,17,2,85,,Derby,8,1,Home,Win,1,Full,98,11422,116.5510204,792,69,207,24
+05/11/2014,23,Central Midfielders,4,18,2,89,4,Nottingham,14,2,Away,Win,2,Full,100,11801,118.01,1113,82,37,4
+08/11/2014,23,Central Midfielders,4,19,2,92,3,Millwall,22,3,Away,Win,1,Full,85,12018,141.3882353,930,67,43,5
+29/11/2014,23,Central Midfielders,4,21,2,113,,Wolves,7,1,Home,Win,4,Full,95,10922,114.9684211,1002,82,181,16
+13/12/2014,23,Central Midfielders,4,23,2,127,14,Blackburn,9,2,Home,Win,2,Full,,,,,,,
+20/12/2014,23,Central Midfielders,4,24,2,134,7,Cardiff,11,2,Away,Win,1,Full,98,11211,114.3979592,625,50,119,10
+26/12/2014,23,Central Midfielders,4,25,2,140,6,Ipswich,6,1,Home,Loss,-2,Full,96,12115,126.1979167,624,55,139,10
+03/01/2015,23,Central Midfielders,4,27,2,148,8,Brighton,20,3,Home,Loss,-2,Full,97,11842,122.0824742,838,61,207,18
+10/01/2015,23,Central Midfielders,4,28,3,155,7,Rotherham,21,3,Home,Win,1,Full,97,11578,119.3608247,1356,118,187,10
+17/01/2015,23,Central Midfielders,4,29,3,162,7,Brighton,20,3,Away,Win,1,Full,,,,,,,
+24/01/2015,23,Central Midfielders,4,30,3,169,7,Norwich,3,1,Away,Win,1,Full,98,10509,107.2346939,747,73,107,3
+07/02/2015,23,Central Midfielders,4,32,3,183,14,Leeds,15,2,Away,Win,1,Full,97,10874,112.1030928,860,54,68,7
+10/02/2015,23,Central Midfielders,4,33,3,186,3,Watford,2,1,Home,Loss,-1,Full,,,,,,,
+24/02/2015,23,Central Midfielders,4,36,3,200,14,Blackpool,24,3,Home,Win,4,Full,,,,,,,
+07/03/2015,23,Central Midfielders,4,39,3,211,11,Ipswich,6,1,Away,Draw,0,Full,95,11195,117.8421053,834,73,73,5
+14/03/2015,23,Central Midfielders,4,40,4,218,7,Cardiff,11,2,Home,Loss,-1,Full,,,,,,,
+03/04/2015,23,Central Midfielders,4,43,4,238,,Fulham,17,3,Away,Win,3,Full,97,11784,121.4845361,898,70,36,3
+06/04/2015,23,Central Midfielders,4,44,4,241,3,Nottingham,14,2,Home,Draw,0,Full,98,10580,107.9591837,805,64,90,6
+11/04/2015,23,Central Midfielders,4,45,4,246,5,Derby,8,1,Away,Draw,0,Full,,,,,,,
+18/04/2015,23,Central Midfielders,4,47,4,253,7,Bolton,18,3,Home,Draw,0,Full,100,11288,112.88,1056,99,138,9
+25/04/2015,23,Central Midfielders,4,48,4,260,7,Reading,19,3,Away,Win,2,Full,96,10843,112.9479167,481,36,67,5
+08/05/2015,23,Central Midfielders,4,50,4,273,13,Middlesbrough,4,1,Home,Loss,-1,Full,99,10704,108.1212121,791,65,77,6
