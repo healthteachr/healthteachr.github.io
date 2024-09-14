@@ -1,0 +1,134 @@
+/* (edit style.css for your own book styles) */
+
+mac, pc {
+  display: inline;
+  border: 1px solid;
+  border-radius: 0.25rem;
+  padding: 0.125rem 0.25rem 0;
+  font-family: monospace;
+  font-size: 90%;
+  white-space: nowrap;
+}
+
+mac { border-color: #a3aaae; }
+pc { border-color: #46A7E2; }
+
+mac::before, pc::before {
+  margin-right: 0.25rem;
+  font-family:"bootstrap-icons";
+}
+mac::before {
+  color: #a3aaae;
+  content:"\F65B";
+}
+
+pc::before {
+  color: #46A7E2;
+  content:"\F65E";
+}
+
+.join {
+  height: 150px;
+  width: 200px;
+  float: right;
+  clear: right;
+}
+
+.join img {
+  width: 100%;
+}
+
+div.sourceCode {
+  clear: both;
+}
+
+div.sourceCode + pre:not(.sourceCode) {
+  background-color: #FBFBFB;
+  background-image: none;
+  border: 0.5px solid #BBB;
+}
+
+/* references with hanging indent */
+.csl-entry {
+  padding-left: 2em ;
+  text-indent: -2em ;
+}
+
+.package {
+  font-weight: 600;
+  background-color: transparent;
+}
+.package::before { content: "{"; }
+.package::after { content: "}"; }
+
+pre {
+    white-space: pre-wrap;       /* Since CSS 2.1 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
+.incomplete-chapter {
+  padding: 1em;
+  background-color: #517AA8;
+  text-align: center;
+}
+
+.incomplete-chapter::before {
+  content: "This chapter is in draft form and will be revised soon.";
+}
+
+.webex-radiogroup label pre {
+  margin: 0;
+  border: 0;
+  padding: 0;
+  text-indent: 0;
+  display: inline-block;
+  background-color: transparent;
+  background-image: none;
+}
+
+
+img { max-width: 100%; }
+
+/* fix code wrap with line numbers */
+pre > code.sourceCode > span {
+  text-indent: -4em;
+  padding-left: 4em;
+}
+
+.inline-figure { border: none; }
+
+@media screen and (max-width: 767.98px) {
+  #TOC, #quarto-sidebar .sidebar-menu-container ul.mt-1 {
+    width: 49%;
+    padding:0;
+    float: left;
+    display: inline-block;
+    vertical-align: text-top;
+  }
+}
+
+.cell-output code {
+  white-space: pre-wrap;
+  border: 1px solid grey;
+  padding: 1em;
+}
+
+.terminal {
+  background-color: #88888811;
+  border: 5px solid #D6DADC;
+  padding: 0.5em 1em 0 1em;
+  margin-bottom: 0.5em;
+}
+
+if {
+  display: inline;
+  font-weight: 900;
+  font-size: 90%;
+  background-color: #00FF0011;
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+}
+
