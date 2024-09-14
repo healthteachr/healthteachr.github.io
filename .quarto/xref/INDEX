@@ -1,0 +1,74 @@
+{
+  "index.qmd": {
+    "index.html": "82d95c82"
+  },
+  "01-intro.qmd": {
+    "01-intro.html": "2c04a871"
+  },
+  "02-reports.qmd": {
+    "02-reports.html": "850427c7"
+  },
+  "03-viz.qmd": {
+    "03-viz.html": "cdb976e6"
+  },
+  "04-data.qmd": {
+    "04-data.html": "894e4cc5"
+  },
+  "05-summary.qmd": {
+    "05-summary.html": "17ba1ad7"
+  },
+  "06-formative.qmd": {
+    "06-formative.html": "689b8daa"
+  },
+  "07-joins.qmd": {
+    "07-joins.html": "396e7844"
+  },
+  "08-tidy.qmd": {
+    "08-tidy.html": "96f4897d"
+  },
+  "09-wrangle.qmd": {
+    "09-wrangle.html": "a5c0543e"
+  },
+  "10-custom.qmd": {
+    "10-custom.html": "414fd992"
+  },
+  "11-refs.qmd": {
+    "11-refs.html": "27da13d2"
+  },
+  "12-license.qmd": {
+    "12-license.html": "4f3b852f"
+  },
+  "app-installing-r.qmd": {
+    "app-installing-r.html": "3372d921"
+  },
+  "app-updating-r.qmd": {
+    "app-updating-r.html": "2e85ff0e"
+  },
+  "app-symbols.qmd": {
+    "app-symbols.html": "8492b952"
+  },
+  "app-conventions.qmd": {
+    "app-conventions.html": "0aed4691"
+  },
+  "app-teams.qmd": {
+    "app-teams.html": "eeb20d32"
+  },
+  "app-debugging.qmd": {
+    "app-debugging.html": "88662ab3"
+  },
+  "app-datatypes.qmd": {
+    "app-datatypes.html": "32767dfe"
+  },
+  "app-dates.qmd": {
+    "app-dates.html": "6ebdb059"
+  },
+  "app-styling.qmd": {
+    "app-styling.html": "93dbbe72"
+  },
+  "app-spotify.qmd": {
+    "app-spotify.html": "868aec50"
+  },
+  "app-webpage.qmd": {
+    "app-webpage.html": "94ad929d"
+  }
+}
