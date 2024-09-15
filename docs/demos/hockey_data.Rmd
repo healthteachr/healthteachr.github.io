@@ -1,0 +1,115 @@
+---
+title: "Important Information"
+author: "Olivia Malkowski"
+date: "2024-01-21"
+output:
+  html_document:
+    df_print: paged
+    theme: 
+      version: 4
+      bootswatch: yeti
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+    toc_depth: 3
+    number_sections: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo       = FALSE, # whether to show code chunks
+  message    = FALSE, # whether to show messages from your code
+  warning    = FALSE, # whether to show warnings from your code
+  fig.width  = 8,     # figure width in inches (at 96 dpi)
+  fig.height = 5,     # figure height in inches (at 96 dpi)
+  out.width = "50%"   # figures/images span 50% of the page width
+)
+
+library(tidyverse)
+library(kableExtra) # for table formatting
+```
+
+
+```{r, message=FALSE}
+# Data from https://www.kaggle.com/datasets/mattop/nhl-draft-hockey-player-data-1963-2022
+hockey_online <- read_csv("https://healthteachr.github.io/ads-v2/data/nhldraft.csv")
+```
+
+```{r hockey_counts}
+# keep only the data from the first overall picks where Left Wings, Centres, or Defensemen were drafted
+hockey_pos <- filter(hockey_online, overall_pick==1 &
+         position %in% c("LW", "C", "D"))
+
+# replace the abbreviated player position values with the full player position values
+hockey_pos$position[hockey_pos$position == 'LW'] <- 'Left Wing'
+hockey_pos$position[hockey_pos$position == 'C'] <- 'Centre'
+hockey_pos$position[hockey_pos$position == 'D'] <- 'Defenseman'
+
+# count the number of overall first picks for each position
+hockey_counts <-count(hockey_pos, position)
+```
+
+
+## Hockey report
+
+This report summarises the first overall pick data for different types of player position between 1963 and 2022. This data is from [Kaggle](https://www.kaggle.com/datasets/mattop/nhl-draft-hockey-player-data-1963-2022).
+
+### First overall picks by position
+
+The *total* number of **Left Wings** drafted first was `r hockey_counts$n[3]`
+
+The *total* number of **Centres** drafted first was `r hockey_counts$n[1]`.
+
+The *total* number of **Defensemen** drafted first was `r hockey_counts$n[2]`.
+
+```{r}
+# important numbers
+
+n <- nrow(hockey_online) # the total number of players (number of rows)
+first <- min(hockey_online$year) # the first (minimum) year
+last <- max(hockey_online$year) # the last (maximum) year
+```
+
+```{r fig-hockey-drafts}
+ggplot(data = hockey_counts, 
+       mapping = aes(x = position, 
+                     y = n, 
+                     fill = position)) +
+  geom_col(show.legend = FALSE) +
+  labs(x = "Player position",
+       y = "Number of overall first picks",
+       title = "Overall first picks in the NHL Draft by player position",
+       subtitle = "1963 - 2022")
+```
+
+
+```{r fig-example}
+knitr::include_graphics("https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Wayne_Gretzky_New_York_Rangers_%28252547547%29.jpg/440px-Wayne_Gretzky_New_York_Rangers_%28252547547%29.jpg")
+```
+
+
+## Data in Table Form
+
+```{r}
+hockey_counts
+```
+
+```{r}
+k <- kable(hockey_counts, 
+      col.names = c("Player position", "First overall picks"),
+      caption = "Overall first picks in the NHL Draft by player position.", 
+      align = "c")
+k_style <- kable_classic(k, full_width = FALSE) 
+k_highlighted <- row_spec(k_style, row = 0, bold = TRUE, color = "red") 
+
+k_highlighted
+```
+
+
+
+
+
+
+
+
