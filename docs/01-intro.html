@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.335">
+<meta name="generator" content="quarto-1.2.475">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>Applied Data Skills - 1&nbsp; Intro to R and RStudio</title>
 <style>
@@ -395,7 +395,7 @@ Book version
 <div class="cell" data-layout-align="center">
 
 </div>
-<p>This book was created using R version 4.1.0 (2021-05-18) (Camp Pontanezen) and RStudio version 2022.12.0.353 (Elsbeth Geranium). Most of the content of this book will work fine in versions of R above 4.0 and earlier versions of RStudio, although there may be some small differences in the interface.</p>
+<p>This book was created using R version 4.3.0 (2023-04-21 ucrt) (Already Tomorrow) and RStudio version 2022.12.0.353 (Elsbeth Geranium). Most of the content of this book will work fine in versions of R above 4.0 and earlier versions of RStudio, although there may be some small differences in the interface.</p>
 </div>
 </div>
 <!-- TODO: render the book in earlier versions to find out the limits here -->
@@ -414,7 +414,7 @@ Book version
 </div>
 </div>
 <p>By default, the upper left pane is the <strong>source pane</strong>, where you view, write, and edit code from files and view data tables in a spreadsheet format. When you first open RStudio, this pane won’t display until we open a document or load in some data – don’t worry, we’ll get to that soon.</p>
-<p>The lower left pane is the <strong>console pane</strong>, where you can type in commands and view output messages. You can write code in the console to test it out. The code will run and can create objects in the environment, but the code itself won’t be saved. You need to write your code into a script in the source pane to save it, which we’ll cover in <span class="quarto-unresolved-ref">?sec-reports</span>.</p>
+<p>The lower left pane is the <strong>console pane</strong>, where you can type in commands and view output messages. You can write code in the console to test it out. The code will run and can create objects in the environment, but the code itself won’t be saved. You need to write your code into a script in the source pane to save it, which we’ll cover in <a href="02-reports.html"><span>Chapter&nbsp;2</span></a>.</p>
 <p>The right panes have several different tabs that show you information about your code. The most used tabs in the upper right pane are the <strong>Environment</strong> tab and the <strong>Help</strong> tab. The Environment tab lists some information about the <a class="glossary">objects<span class="def"></span></a> that you have defined in your code. We’ll learn more about the Help tab in <a href="#sec-function-help"><span>Section&nbsp;1.3.5</span></a>.</p>
 <p>In the lower right pane, the most used tabs are the <strong>Files</strong> tab for directory structure, the <strong>Plots</strong> tab for plots made in a script, the <strong>Packages</strong> tab for managing add-on packages (see <a href="#sec-packages"><span>Section&nbsp;1.3</span></a>), and the <strong>Viewer</strong> tab to display reports created by your scripts. You can change the location of panes and what tabs are shown under <if>Tools &gt; Global Options… &gt; Pane Layout</if>.</p>
 </section><section id="sec-intro-reproducibility" class="level3" data-number="1.1.2"><h3 data-number="1.1.2" class="anchored" data-anchor-id="sec-intro-reproducibility">
@@ -528,7 +528,7 @@ Install packages from the console only
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">library</span>(beepr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'beepr' was built under R version 4.1.3</code></pre>
+<pre><code>Warning: package 'beepr' was built under R version 4.3.3</code></pre>
 </div>
 </div>
 <p>You might get some red text when you load a package, this is normal. It is usually warning you that this package has functions that have the same name as other packages you’ve already loaded.</p>
@@ -565,21 +565,21 @@ Note
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">beep</span>(<span class="at">sound =</span> <span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-<p>If you type a function into the console pane, it will run as soon as you hit enter. If you put the function in a <a class="glossary">script<span class="def"></span></a> or <a class="glossary">R Markdown<span class="def"></span></a> document in the <a class="glossary">source pane<span class="def"></span></a>, it won’t run until you run the script, <a class="glossary">knit<span class="def"></span></a> the R Markdown file, or run a code <a class="glossary">chunk<span class="def"></span></a>. You’ll learn more about this in <span class="quarto-unresolved-ref">?sec-reports</span>.</p>
+<p>If you type a function into the console pane, it will run as soon as you hit enter. If you put the function in a <a class="glossary">script<span class="def"></span></a> or <a class="glossary">R Markdown<span class="def"></span></a> document in the <a class="glossary">source pane<span class="def"></span></a>, it won’t run until you run the script, <a class="glossary">knit<span class="def"></span></a> the R Markdown file, or run a code <a class="glossary">chunk<span class="def"></span></a>. You’ll learn more about this in <a href="02-reports.html"><span>Chapter&nbsp;2</span></a>.</p>
 </section><section id="sec-tidyverse" class="level3" data-number="1.3.4"><h3 data-number="1.3.4" class="anchored" data-anchor-id="sec-tidyverse">
 <span class="header-section-number">1.3.4</span> Tidyverse</h3>
 <p><pkg>tidyverse</pkg> is a meta-package that loads several packages we’ll be using in almost every chapter in this book:</p>
 <ul>
 <li>
-<pkg>ggplot2</pkg>, for data visualisation (<span class="quarto-unresolved-ref">?sec-viz</span>)</li>
+<pkg>ggplot2</pkg>, for data visualisation (<a href="03-viz.html"><span>Chapter&nbsp;3</span></a>)</li>
 <li>
-<pkg>readr</pkg>, for data import (<span class="quarto-unresolved-ref">?sec-data</span>)</li>
+<pkg>readr</pkg>, for data import (<a href="04-data.html"><span>Chapter&nbsp;4</span></a>)</li>
 <li>
-<pkg>tibble</pkg>, for tables (<span class="quarto-unresolved-ref">?sec-data</span>)</li>
+<pkg>tibble</pkg>, for tables (<a href="04-data.html"><span>Chapter&nbsp;4</span></a>)</li>
 <li>
-<pkg>tidyr</pkg>, for data tidying (<span class="quarto-unresolved-ref">?sec-tidy</span>)</li>
+<pkg>tidyr</pkg>, for data tidying (<a href="08-tidy.html"><span>Chapter&nbsp;8</span></a>)</li>
 <li>
-<pkg>dplyr</pkg>, for data manipulation (<span class="quarto-unresolved-ref">?sec-wrangle</span>)</li>
+<pkg>dplyr</pkg>, for data manipulation (<a href="09-wrangle.html"><span>Chapter&nbsp;9</span></a>)</li>
 <li>
 <pkg>stringr</pkg>, for <a class="glossary">strings<span class="def"></span></a>
 </li>

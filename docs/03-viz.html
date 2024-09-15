@@ -409,7 +409,7 @@ gtag('config', 'G-6NP3MF25W3', { 'anonymize_ip': true});
 </li>
 <li>Save it inside your ADS directory (<strong>not</strong> inside another project)</li>
 </ul>
-<p>Then, create and save a new <a class="glossary">R Markdown<span class="def"></span></a> document named <code>plots.Rmd</code>, get rid of the default template text, and load the packages in the set-up code <a class="glossary">chunk<span class="def"></span></a>. You should have all of these packages installed already, but if you get the message <code>Error in library(x) : there is no package called ‘x’</code>, please refer to <a href="#sec-install-package"><span class="quarto-unresolved-ref">sec-install-package</span></a>.</p>
+<p>Then, create and save a new <a class="glossary">R Markdown<span class="def"></span></a> document named <code>plots.Rmd</code>, get rid of the default template text, and load the packages in the set-up code <a class="glossary">chunk<span class="def"></span></a>. You should have all of these packages installed already, but if you get the message <code>Error in library(x) : there is no package called ‘x’</code>, please refer to <a href="01-intro.html#sec-install-package"><span>Section&nbsp;1.3.1</span></a>.</p>
 <div class="cell" data-layout-align="center" data-verbatim="r setup, include=FALSE">
 <div class="verbatim">
 <pre class="sourceCode r code-with-copy"><code class="sourceCode R">```{r setup, include=FALSE}</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre>
@@ -430,7 +430,7 @@ gtag('config', 'G-6NP3MF25W3', { 'anonymize_ip': true});
 <p>Download the <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-visualization.pdf">ggplot2 cheat sheet</a>.</p>
 </section><section id="variable-types" class="level2" data-number="3.2"><h2 data-number="3.2" class="anchored" data-anchor-id="variable-types">
 <span class="header-section-number">3.2</span> Variable types</h2>
-<p>If a spreadsheet is in a <a class="glossary">tidy data<span class="def"></span></a> format, each row is an <a class="glossary">observation<span class="def"></span></a>, each column is a <a class="glossary">variable<span class="def"></span></a>, and the information in each cell is a single <a class="glossary">value<span class="def"></span></a>. We’ll learn more about how to get our data into this format in <a href="#sec-tidy"><span class="quarto-unresolved-ref">sec-tidy</span></a>, but to get started we’ll use datasets with the right format.</p>
+<p>If a spreadsheet is in a <a class="glossary">tidy data<span class="def"></span></a> format, each row is an <a class="glossary">observation<span class="def"></span></a>, each column is a <a class="glossary">variable<span class="def"></span></a>, and the information in each cell is a single <a class="glossary">value<span class="def"></span></a>. We’ll learn more about how to get our data into this format in <a href="08-tidy.html"><span>Chapter&nbsp;8</span></a>, but to get started we’ll use datasets with the right format.</p>
 <p>For example, the table below lists patients who have recently participated in a rehabilitation programme. Each row is an observation of one patient. There are 6 variables for each patient, their <code>surname</code>, <code>firstname</code>, <code>sex</code>, <code>birthdate</code>, <code>weight</code> (in kg), and <code>generalhealth</code> rating (on a 5-point scale from “very poor” to “very good”).</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -482,7 +482,7 @@ gtag('config', 'G-6NP3MF25W3', { 'anonymize_ip': true});
 </div>
 </div>
 </div>
-<p>Variables can be classified as <a class="glossary">continuous<span class="def"></span></a> (numbers) or <a class="glossary">categorical<span class="def"></span></a> (labels). When you’re plotting data, it’s important to know what kind of variables you have, which can help you decide what types of plots are most appropriate. Each variable also has a <a class="glossary">data type<span class="def"></span></a>, such as <a class="glossary">numeric<span class="def"></span></a> (numbers), <a class="glossary">character<span class="def"></span></a> (text), or <a class="glossary">logical<span class="def"></span></a> (TRUE/FALSE values). Some plots can only work on some data types. Make sure you have watched the mini-lecture on types of data from last week before you work through this chapter. Additionally, <a href="#sec-data-types"><span class="quarto-unresolved-ref">sec-data-types</span></a> has more details, as this concept will be relevant repeatedly.</p>
+<p>Variables can be classified as <a class="glossary">continuous<span class="def"></span></a> (numbers) or <a class="glossary">categorical<span class="def"></span></a> (labels). When you’re plotting data, it’s important to know what kind of variables you have, which can help you decide what types of plots are most appropriate. Each variable also has a <a class="glossary">data type<span class="def"></span></a>, such as <a class="glossary">numeric<span class="def"></span></a> (numbers), <a class="glossary">character<span class="def"></span></a> (text), or <a class="glossary">logical<span class="def"></span></a> (TRUE/FALSE values). Some plots can only work on some data types. Make sure you have watched the mini-lecture on types of data from last week before you work through this chapter. Additionally, <span class="quarto-unresolved-ref">?sec-data-types</span> has more details, as this concept will be relevant repeatedly.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -538,7 +538,7 @@ Do not factor numbers
 </div>
 </div>
 </div>
-<p>Sometimes people represent categorical variables with numbers that correspond to names, like 0 = “no” and 1 = “yes”, but values in between don’t have a clear interpretation. If you have control over how the data are recorded, it’s better to use the character names for clarity. You’ll learn how to recode columns in <a href="#sec-wrangle"><span class="quarto-unresolved-ref">sec-wrangle</span></a>.</p>
+<p>Sometimes people represent categorical variables with numbers that correspond to names, like 0 = “no” and 1 = “yes”, but values in between don’t have a clear interpretation. If you have control over how the data are recorded, it’s better to use the character names for clarity. You’ll learn how to recode columns in <a href="09-wrangle.html"><span>Chapter&nbsp;9</span></a>.</p>
 </section><section id="dates-and-times" class="level3" data-number="3.2.3"><h3 data-number="3.2.3" class="anchored" data-anchor-id="dates-and-times">
 <span class="header-section-number">3.2.3</span> Dates and times</h3>
 <p>Dates and times are a special case of variable. They can act like categorical or continuous variables, and there are special ways to plot them. Dates and times can be hard to work with, but the [<pkg>lubridate</pkg>(https://lubridate.tidyverse.org/) package provides functions to help you with this.</p>
@@ -553,7 +553,7 @@ Do not factor numbers
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># the current date and time in the GMT timezone</span></span>
 <span id="cb12-2"><a href="#cb12-2"></a>lubridate<span class="sc">::</span><span class="fu">now</span>(<span class="at">tzone =</span> <span class="st">"GMT"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "2024-09-15 14:17:10 GMT"</code></pre>
+<pre><code>[1] "2024-09-15 18:51:28 GMT"</code></pre>
 </div>
 </div>
 <div class="callout-note try callout callout-style-default callout-captioned">
@@ -677,7 +677,7 @@ $ generalhealth &lt;fct&gt; poor, very good, fair, very good</code></pre>
 </section></section><section id="building-plots" class="level2" data-number="3.3"><h2 data-number="3.3" class="anchored" data-anchor-id="building-plots">
 <span class="header-section-number">3.3</span> Building plots</h2>
 <p>There are multiple approaches to data visualisation in R; in this course we will use the popular package <pkg>ggplot2</pkg>, which is part of the larger <code>tidyverse</code> collection of packages. A grammar of graphics (the “gg” in “ggplot”) is a standardised way to describe the components of a graphic. <pkg>ggplot2</pkg> uses a layered grammar of graphics, in which plots are built up in a series of layers. It may be helpful to think about any picture as having multiple elements that sit semi-transparently over each other. A good analogy is old Disney movies where artists would create a background and then add moveable elements on top of the background via transparencies.</p>
-<p><a href="#fig-layers">Figure&nbsp;<span class="quarto-unresolved-ref">fig-layers</span></a> displays the evolution of a simple scatterplot using this layered approach. First, the plot space is built (layer 1); the variables are specified (layer 2); the type of visualisation (known as a <code>geom</code>) that is desired for these variables is specified (layer 3) - in this case <code>geom_point()</code> is called to visualise individual data points; a second geom is added to include a line of best fit (layer 4), the axis labels are edited for readability (layer 5), and finally, a theme is applied to change the overall appearance of the plot (layer 6).</p>
+<p><a href="#fig-layers">Figure&nbsp;<span>3.1</span></a> displays the evolution of a simple scatterplot using this layered approach. First, the plot space is built (layer 1); the variables are specified (layer 2); the type of visualisation (known as a <code>geom</code>) that is desired for these variables is specified (layer 3) - in this case <code>geom_point()</code> is called to visualise individual data points; a second geom is added to include a line of best fit (layer 4), the axis labels are edited for readability (layer 5), and finally, a theme is applied to change the overall appearance of the plot (layer 6).</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div id="fig-layers" class="quarto-figure quarto-figure-center anchored">
@@ -687,7 +687,7 @@ $ generalhealth &lt;fct&gt; poor, very good, fair, very good</code></pre>
 </div>
 </div>
 </div>
-<p>Importantly, each layer is independent and independently customisable. For example, the size, colour and position of each component can be adjusted, or one could, for example, remove the first geom (the data points) to only visualise the line of best fit, simply by removing the layer that draws the data points (<a href="#fig-remove-layer">Figure&nbsp;<span class="quarto-unresolved-ref">fig-remove-layer</span></a>). The use of layers makes it easy to build up complex plots step-by-step, and to adapt or extend plots from existing code.</p>
+<p>Importantly, each layer is independent and independently customisable. For example, the size, colour and position of each component can be adjusted, or one could, for example, remove the first geom (the data points) to only visualise the line of best fit, simply by removing the layer that draws the data points (<a href="#fig-remove-layer">Figure&nbsp;<span>3.2</span></a>). The use of layers makes it easy to build up complex plots step-by-step, and to adapt or extend plots from existing code.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div id="fig-remove-layer" class="quarto-figure quarto-figure-center anchored">
@@ -699,7 +699,7 @@ $ generalhealth &lt;fct&gt; poor, very good, fair, very good</code></pre>
 </div>
 <section id="sec-plots-loading-data" class="level3" data-number="3.3.1"><h3 data-number="3.3.1" class="anchored" data-anchor-id="sec-plots-loading-data">
 <span class="header-section-number">3.3.1</span> Plot Data</h3>
-<p>Let’s build up the plot above, layer by layer. First we need to get the data. We’ll learn how to load data from different sources in <a href="#sec-data"><span class="quarto-unresolved-ref">sec-data</span></a>, but this time we’ll use the same method as we did in <a href="#sec-loading-online"><span class="quarto-unresolved-ref">sec-loading-online</span></a> and load it from an online source.</p>
+<p>Let’s build up the plot above, layer by layer. First we need to get the data. We’ll learn how to load data from different sources in <a href="04-data.html"><span>Chapter&nbsp;4</span></a>, but this time we’ll use the same method as we did in <a href="02-reports.html#sec-loading-online"><span>Section&nbsp;2.4.1</span></a> and load it from an online source.</p>
 <p>When you load the data, <code>read_csv()</code> will produce a message that gives you information about the data it has imported and what assumptions it has made. The “column specification” tells you what each column is named and what type of data R has categorised each variable as. The abbreviation “chr” is for <a class="glossary">character<span class="def"></span></a> columns, “dbl” is for <a class="glossary">double<span class="def"></span></a> columns, and “dttm” is a date/time column.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>function_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://healthteachr.github.io/data/Function_and_PA_data.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -791,7 +791,7 @@ Define objects before you use them
 </section><section id="plot-setup" class="level3" data-number="3.3.2"><h3 data-number="3.3.2" class="anchored" data-anchor-id="plot-setup">
 <span class="header-section-number">3.3.2</span> Plot setup</h3>
 <section id="default-theme" class="level4"><h4 class="anchored" data-anchor-id="default-theme">Default theme</h4>
-<p>Plots in this book use the black-and-white theme, not the default grey theme, so set your default theme to the same so your plots will look like the examples below. At the top of your script, in the setup chunk after you’ve loaded the tidyverse package, add the following code and run it. You’ll learn more ways to customise your theme in <a href="#sec-themes"><span class="quarto-unresolved-ref">sec-themes</span></a> and <a href="#sec-themes-appendix"><span class="quarto-unresolved-ref">sec-themes-appendix</span></a>.</p>
+<p>Plots in this book use the black-and-white theme, not the default grey theme, so set your default theme to the same so your plots will look like the examples below. At the top of your script, in the setup chunk after you’ve loaded the tidyverse package, add the following code and run it. You’ll learn more ways to customise your theme in <a href="#sec-themes"><span>Section&nbsp;3.3.3.4</span></a> and <span class="quarto-unresolved-ref">?sec-themes-appendix</span>.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_bw</span>()) <span class="co"># set the default theme</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -954,7 +954,7 @@ Try changing nrow to 2
 <span class="header-section-number">3.3.3</span> Customising plots</h3>
 <p>There are nearly endless ways to customise ggplots. We’ll cover a few of the basic customisations here.</p>
 <section id="styling-geoms" class="level4"><h4 class="anchored" data-anchor-id="styling-geoms">Styling geoms</h4>
-<p>We should definitely put the line in front of the points, but the points are still a bit dark. If you want to change the overall style of a geom, you can set the arguments <code>colour</code>, <code>alpha</code>, <code>shape</code>, <code>size</code> and <code>linetype</code> inside the geom function. There are many different values that you can set these to; <a href="#sec-plotstyle"><span class="quarto-unresolved-ref">sec-plotstyle</span></a>) gives details of these. Play around with different values below and figure out what the <a class="glossary">default values<span class="def"></span></a> are for <code>shape</code> and <code>size</code>.</p>
+<p>We should definitely put the line in front of the points, but the points are still a bit dark. If you want to change the overall style of a geom, you can set the arguments <code>colour</code>, <code>alpha</code>, <code>shape</code>, <code>size</code> and <code>linetype</code> inside the geom function. There are many different values that you can set these to; <span class="quarto-unresolved-ref">?sec-plotstyle</span>) gives details of these. Play around with different values below and figure out what the <a class="glossary">default values<span class="def"></span></a> are for <code>shape</code> and <code>size</code>.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> gaitspeed, <span class="at">y =</span> steps)) <span class="sc">+</span></span>
 <span id="cb33-2"><a href="#cb33-2"></a>  <span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">"dodgerblue"</span>, </span>
@@ -984,7 +984,7 @@ Setting aesthetics overall versus by category
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This method is only for changing the style of <em>all</em> the shapes made with that geom. If you want, for example, points to have different colours depending on the type of musculoskeletal disease, you set the argument <code>colour = musculoskeletal</code> inside the <code>aes()</code> function for the mapping. You can customise the colours used with <code>scale_</code> functions, which you will learn about below and in <a href="#sec-plotstyle"><span class="quarto-unresolved-ref">sec-plotstyle</span></a>).</p>
+<p>This method is only for changing the style of <em>all</em> the shapes made with that geom. If you want, for example, points to have different colours depending on the type of musculoskeletal disease, you set the argument <code>colour = musculoskeletal</code> inside the <code>aes()</code> function for the mapping. You can customise the colours used with <code>scale_</code> functions, which you will learn about below and in <span class="quarto-unresolved-ref">?sec-plotstyle</span>).</p>
 </div>
 </div>
 </section><section id="format-axes" class="level4"><h4 class="anchored" data-anchor-id="format-axes">Format axes</h4>
@@ -1154,7 +1154,7 @@ Setting limits with the scale_ function
 </div>
 </div>
 </div>
-<p>However, it is more accessible to include this sort of information in plain text for screen readers. You can add a text caption in the chunk header, and some document types will even automatically number figures for you (you’ll learn about this in <a href="#sec-linked-docs"><span class="quarto-unresolved-ref">sec-linked-docs</span></a>). You can also add alt-text descriptions for screen readers that describe the image.</p>
+<p>However, it is more accessible to include this sort of information in plain text for screen readers. You can add a text caption in the chunk header, and some document types will even automatically number figures for you (you’ll learn about this in <a href="10-custom.html#sec-linked-docs"><span>Section&nbsp;10.2.2</span></a>). You can also add alt-text descriptions for screen readers that describe the image.</p>
 <div class="cell" data-layout-align="center" data-verbatim="r fig-gait-vs-steps, fig.cap=&quot;As gait speed increases, number of steps increases.&quot;, fig.alt=&quot;A scatterplot showing gait speed on the x-axis (range 0.0-1.3 m/s) and number of steps on the y-axis (range 0-9829 steps) with a trend line showing that as gait speed increases, number of steps increases from about 0.6m/s gait speed/2400 steps to about 1.2m/s gait speed/7400 steps.&quot;">
 <div class="verbatim">
 <pre class="sourceCode r code-with-copy"><code class="sourceCode R">```{r fig-gait-vs-steps, fig.cap="As gait speed increases, number of steps increases.", fig.alt="A scatterplot showing gait speed on the x-axis (range 0.0-1.3 m/s) and number of steps on the y-axis (range 0-9829 steps) with a trend line showing that as gait speed increases, number of steps increases from about 0.6m/s gait speed/2400 steps to about 1.2m/s gait speed/7400 steps."}</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre>
@@ -1192,7 +1192,7 @@ Customising bar plot appearance
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>You probably want to customise some things, like the colours, order of the columns, and their labels. Inspect the code below and try running it layer by layer to figure out where these things change. The functions <code>scale_fill_manual()</code> and <code>scale_x_discrete()</code> are new, but work in the same way as the other <code>scale_</code> functions. You’ll learn more about this in <a href="#sec-custom-viz"><span class="quarto-unresolved-ref">sec-custom-viz</span></a>.</p>
+<p>You probably want to customise some things, like the colours, order of the columns, and their labels. Inspect the code below and try running it layer by layer to figure out where these things change. The functions <code>scale_fill_manual()</code> and <code>scale_x_discrete()</code> are new, but work in the same way as the other <code>scale_</code> functions. You’ll learn more about this in <a href="10-custom.html#sec-custom-viz"><span>Section&nbsp;10.1</span></a>.</p>
 <div class="cell" data-layout-align="center" data-webex.hide="Code">
 <div class="callout-note callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
@@ -1317,7 +1317,7 @@ Code
 </div>
 </div>
 </section><section id="pie-chart" class="level4"><h4 class="anchored" data-anchor-id="pie-chart">Pie chart</h4>
-<p>Pie charts are a <a href="https://www.data-to-viz.com/caveat/pie.html" target="_blank">misleading form of data visualisation</a>, so we won’t cover them. We’ll cover options for visualising proportions, like waffle, lollipop and treemap plots, in <a href="#sec-other-plots"><span class="quarto-unresolved-ref">sec-other-plots</span></a>.</p>
+<p>Pie charts are a <a href="https://www.data-to-viz.com/caveat/pie.html" target="_blank">misleading form of data visualisation</a>, so we won’t cover them. We’ll cover options for visualising proportions, like waffle, lollipop and treemap plots, in <a href="10-custom.html#sec-other-plots"><span>Section&nbsp;10.1.4</span></a>.</p>
 <div class="callout-note try callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1372,8 +1372,8 @@ Test your understanding
 <div class="cell" data-layout-align="center">
 <ul>
 <li>What mapping would you use?
-<div id="radio_FGUVKNSIWU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_FGUVKNSIWU" value="answer"><span>aes(x = country, y = population)</span></label><label><input type="radio" autocomplete="off" name="radio_FGUVKNSIWU" value="x"><span>aes(x = population, y = country)</span></label><label><input type="radio" autocomplete="off" name="radio_FGUVKNSIWU" value="x"><span>aes(x = country)</span></label><label><input type="radio" autocomplete="off" name="radio_FGUVKNSIWU" value="x"><span>aes(x = island)</span></label><label><input type="radio" autocomplete="off" name="radio_FGUVKNSIWU" value="x"><span>aes(y = population)</span></label>
+<div id="radio_RNZOPBCXYL" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RNZOPBCXYL" value="answer"><span>aes(x = country, y = population)</span></label><label><input type="radio" autocomplete="off" name="radio_RNZOPBCXYL" value="x"><span>aes(x = population, y = country)</span></label><label><input type="radio" autocomplete="off" name="radio_RNZOPBCXYL" value="x"><span>aes(x = country)</span></label><label><input type="radio" autocomplete="off" name="radio_RNZOPBCXYL" value="x"><span>aes(x = island)</span></label><label><input type="radio" autocomplete="off" name="radio_RNZOPBCXYL" value="x"><span>aes(y = population)</span></label>
 </div>
 </li>
 </ul>
@@ -1387,8 +1387,8 @@ Test your understanding
 <div class="cell" data-layout-align="center">
 <ul>
 <li>What mapping would you use?
-<div id="radio_SBRGOYDOYB" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_SBRGOYDOYB" value="x"><span>aes(x = country, y = population)</span></label><label><input type="radio" autocomplete="off" name="radio_SBRGOYDOYB" value="x"><span>aes(x = population, y = country)</span></label><label><input type="radio" autocomplete="off" name="radio_SBRGOYDOYB" value="x"><span>aes(x = country)</span></label><label><input type="radio" autocomplete="off" name="radio_SBRGOYDOYB" value="answer"><span>aes(x = island)</span></label><label><input type="radio" autocomplete="off" name="radio_SBRGOYDOYB" value="x"><span>aes(y = population)</span></label>
+<div id="radio_CEILJAQPGU" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CEILJAQPGU" value="x"><span>aes(x = country, y = population)</span></label><label><input type="radio" autocomplete="off" name="radio_CEILJAQPGU" value="x"><span>aes(x = population, y = country)</span></label><label><input type="radio" autocomplete="off" name="radio_CEILJAQPGU" value="x"><span>aes(x = country)</span></label><label><input type="radio" autocomplete="off" name="radio_CEILJAQPGU" value="answer"><span>aes(x = island)</span></label><label><input type="radio" autocomplete="off" name="radio_CEILJAQPGU" value="x"><span>aes(y = population)</span></label>
 </div>
 </li>
 </ul>
@@ -1474,8 +1474,8 @@ Test your understanding
 <div class="cell" data-layout-align="center">
 <ul>
 <li>How would you set the mapping for this plot?
-<div id="radio_QJNPYWHTSY" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_QJNPYWHTSY" value="x"><span>aes(x = country, y = population)</span></label><label><input type="radio" autocomplete="off" name="radio_QJNPYWHTSY" value="x"><span>aes(x = population, y = country)</span></label><label><input type="radio" autocomplete="off" name="radio_QJNPYWHTSY" value="answer"><span>aes(x = population)</span></label><label><input type="radio" autocomplete="off" name="radio_QJNPYWHTSY" value="x"><span>aes(x = population, y = count)</span></label>
+<div id="radio_UETJSFDPRL" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_UETJSFDPRL" value="x"><span>aes(x = country, y = population)</span></label><label><input type="radio" autocomplete="off" name="radio_UETJSFDPRL" value="x"><span>aes(x = population, y = country)</span></label><label><input type="radio" autocomplete="off" name="radio_UETJSFDPRL" value="answer"><span>aes(x = population)</span></label><label><input type="radio" autocomplete="off" name="radio_UETJSFDPRL" value="x"><span>aes(x = population, y = count)</span></label>
 </div>
 </li>
 </ul>
@@ -1615,7 +1615,7 @@ Frequency plot alternative
 </div>
 <div id="callout-17" class="callout-17-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Alternatively, you can use <code>geom_freqpoly()</code> to plot a line connecting the top of each bin (see <a href="#sec-freqpoly"><span class="quarto-unresolved-ref">sec-freqpoly</span></a>).</p>
+<p>Alternatively, you can use <code>geom_freqpoly()</code> to plot a line connecting the top of each bin (see <a href="10-custom.html#sec-freqpoly"><span>Section&nbsp;10.1.4.1.1</span></a>).</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a><span class="co"># frequency plot</span></span>
 <span id="cb57-2"><a href="#cb57-2"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> steps,</span>
@@ -1782,23 +1782,23 @@ Test your understanding
 <option value="x">geom_violinplot()</option></select>
 </li>
 <li>What does the mapping look like for both plots?
-<div id="radio_RXAFDLSKYU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_RXAFDLSKYU" value="x"><span>aes(x = musculoskeletal, y = gaitspeed, colour = gaitspeed)</span></label><label><input type="radio" autocomplete="off" name="radio_RXAFDLSKYU" value="x"><span>aes(x = musculoskeletal, y = gaitspeed, fill = gaitspeed)</span></label><label><input type="radio" autocomplete="off" name="radio_RXAFDLSKYU" value="answer"><span>aes(x = musculoskeletal, y = gaitspeed, fill = musculoskeletal)</span></label><label><input type="radio" autocomplete="off" name="radio_RXAFDLSKYU" value="x"><span>aes(x = musculoskeletal, y = gaitspeed, colour = musculoskeletal)</span></label>
+<div id="radio_MHENNHROUV" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_MHENNHROUV" value="x"><span>aes(x = musculoskeletal, y = gaitspeed, colour = gaitspeed)</span></label><label><input type="radio" autocomplete="off" name="radio_MHENNHROUV" value="x"><span>aes(x = musculoskeletal, y = gaitspeed, colour = musculoskeletal)</span></label><label><input type="radio" autocomplete="off" name="radio_MHENNHROUV" value="answer"><span>aes(x = musculoskeletal, y = gaitspeed, fill = musculoskeletal)</span></label><label><input type="radio" autocomplete="off" name="radio_MHENNHROUV" value="x"><span>aes(x = musculoskeletal, y = gaitspeed, fill = gaitspeed)</span></label>
 </div>
 </li>
 <li>Which musculoskeletal disease is characterised by the slowest median gait speed? <select class="webex-select"><option value="blank"></option>
+<option value="x">None</option>
 <option value="x">Osteoarthritis</option>
-<option value="answer">Osteoporosis</option>
-<option value="x">Rheumatoid arthritis</option>
 <option value="x">Sarcopenia</option>
-<option value="x">None</option></select>
+<option value="answer">Osteoporosis</option>
+<option value="x">Rheumatoid arthritis</option></select>
 </li>
 <li>Which musculoskeletal disease is characterised by the quickest median gait speed? <select class="webex-select"><option value="blank"></option>
-<option value="answer">None</option>
 <option value="x">Osteoarthritis</option>
+<option value="x">Sarcopenia</option>
 <option value="x">Osteoporosis</option>
 <option value="x">Rheumatoid arthritis</option>
-<option value="x">Sarcopenia</option></select>
+<option value="answer">None</option></select>
 </li>
 </ul>
 </div>
@@ -1820,7 +1820,7 @@ Test your understanding
 </div>
 </div>
 </section><section id="trendlines" class="level4"><h4 class="anchored" data-anchor-id="trendlines">Trendlines</h4>
-<p>In <a href="#fig-layers">Figure&nbsp;<span class="quarto-unresolved-ref">fig-layers</span></a>, we emphasised the relationship between gait speed and number of steps with a trendline created by <code>geom_smooth()</code> using the argument <code>method = lm</code> (“lm” stands for “linear model” or a straight line relationship). You can also set <code>method = loess</code> to visualise a non-linear relationship.</p>
+<p>In <a href="#fig-layers">Figure&nbsp;<span>3.1</span></a>, we emphasised the relationship between gait speed and number of steps with a trendline created by <code>geom_smooth()</code> using the argument <code>method = lm</code> (“lm” stands for “linear model” or a straight line relationship). You can also set <code>method = loess</code> to visualise a non-linear relationship.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1"></a>lm_plot <span class="ot">&lt;-</span> </span>
 <span id="cb63-2"><a href="#cb63-2"></a>  <span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> gaitspeed, <span class="at">y =</span> steps)) <span class="sc">+</span></span>
@@ -2008,12 +2008,12 @@ More plots styles
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>These are not, by any means, all the plot types that you can make in R. This chapter just gave you a basic overview, and we will go into more detail in <a href="#sec-custom-viz"><span class="quarto-unresolved-ref">sec-custom-viz</span></a>). The <a href="#resources-viz">further resources</a> section at the end of this chapter lists many resources, but the <a href="http://www.r-graph-gallery.com/" target="_blank">R Graph Gallery</a> is especially useful to get inspiration for the kinds of beautiful plots you can make in R.</p>
+<p>These are not, by any means, all the plot types that you can make in R. This chapter just gave you a basic overview, and we will go into more detail in <a href="10-custom.html#sec-custom-viz"><span>Section&nbsp;10.1</span></a>). The <a href="#resources-viz">further resources</a> section at the end of this chapter lists many resources, but the <a href="http://www.r-graph-gallery.com/" target="_blank">R Graph Gallery</a> is especially useful to get inspiration for the kinds of beautiful plots you can make in R.</p>
 </div>
 </div>
 </section></section></section><section id="exercises" class="level2" data-number="3.5"><h2 data-number="3.5" class="anchored" data-anchor-id="exercises">
 <span class="header-section-number">3.5</span> Exercises</h2>
-<p>For the final step in this chapter, we will create a report of data visualisations. You may need to refer back to <a href="#sec-reports"><span class="quarto-unresolved-ref">sec-reports</span></a>) to help you complete these exercises and you may also want to take a break before you work through this section. We’d also recommend you <a class="glossary">knit<span class="def"></span></a> at every step so that you can see how your output changes.</p>
+<p>For the final step in this chapter, we will create a report of data visualisations. You may need to refer back to <a href="02-reports.html"><span>Chapter&nbsp;2</span></a>) to help you complete these exercises and you may also want to take a break before you work through this section. We’d also recommend you <a class="glossary">knit<span class="def"></span></a> at every step so that you can see how your output changes.</p>
 <section id="sec-exercises-new-rmd-3" class="level3" data-number="3.5.1"><h3 data-number="3.5.1" class="anchored" data-anchor-id="sec-exercises-new-rmd-3">
 <span class="header-section-number">3.5.1</span> New Markdown</h3>
 <p>Create and save a new R Markdown document named <code>plots_report.Rmd</code> and give it the title “Healthy ageing report”. Remove the default template text and then load the packages and code below in the set-up code chunk:</p>
@@ -2031,7 +2031,7 @@ More plots styles
 </div>
 </section><section id="sec-exercises-summary" class="level3" data-number="3.5.2"><h3 data-number="3.5.2" class="anchored" data-anchor-id="sec-exercises-summary">
 <span class="header-section-number">3.5.2</span> Summary</h3>
-<p>Create a level 1 heading titled “Overview”. Underneath this heading, write a short summary of what the data set contains and what each of the variables means (you can use the information from <a href="#sec-plots-loading-data"><span class="quarto-unresolved-ref">sec-plots-loading-data</span></a> if you like).</p>
+<p>Create a level 1 heading titled “Overview”. Underneath this heading, write a short summary of what the data set contains and what each of the variables means (you can use the information from <a href="#sec-plots-loading-data"><span>Section&nbsp;3.3.1</span></a> if you like).</p>
 </section><section id="presenting-plots" class="level3" data-number="3.5.3"><h3 data-number="3.5.3" class="anchored" data-anchor-id="presenting-plots">
 <span class="header-section-number">3.5.3</span> Presenting plots</h3>
 <p>Pick your two favourites plots from all the examples we’ve made in this chapter. For each plot:</p>
@@ -2051,7 +2051,7 @@ More plots styles
 <li>Organise your Markdown so that the plots are shown <strong>after</strong> the text summary.</li>
 </ul></section><section id="editing-your-markdown-display" class="level3" data-number="3.5.5"><h3 data-number="3.5.5" class="anchored" data-anchor-id="editing-your-markdown-display">
 <span class="header-section-number">3.5.5</span> Editing your Markdown display</h3>
-<p>Adjust the set-up of your Markdown so that your knitted report does not show any code, messages, or warnings, and all figures are 8 x 5 (see <a href="#sec-rmd-setup"><span class="quarto-unresolved-ref">sec-rmd-setup</span></a>).</p>
+<p>Adjust the set-up of your Markdown so that your knitted report does not show any code, messages, or warnings, and all figures are 8 x 5 (see <a href="02-reports.html#sec-rmd-setup"><span>Section&nbsp;2.6.1</span></a>).</p>
 </section><section id="share-your-work" class="level3" data-number="3.5.6"><h3 data-number="3.5.6" class="anchored" data-anchor-id="share-your-work">
 <span class="header-section-number">3.5.6</span> Share your work</h3>
 <p>Once you’ve completed this activity, post it in the Week 3 channel on Teams so that you can compare which plots you chose and visual style with other learners on the course.</p>
@@ -2065,7 +2065,7 @@ More plots styles
 <ul>
 <li><a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-visualization.pdf">ggplot2 cheat sheet</a></li>
 <li>
-<a href="https://healthteachr.github.io/introdataviz/">Data visualisation using R, for researchers who don’t use R</a> <span class="citation" data-cites="nordmann_2021">(<a href="#ref-nordmann_2021" role="doc-biblioref">Nordmann et al., 2021</a>)</span>
+<a href="https://healthteachr.github.io/introdataviz/">Data visualisation using R, for researchers who don’t use R</a> <span class="citation" data-cites="nordmann_2021">(<a href="11-refs.html#ref-nordmann_2021" role="doc-biblioref">Nordmann et al., 2021</a>)</span>
 </li>
 <li>
 <a href="http://r4ds.had.co.nz/data-visualisation.html">Chapter 3: Data Visualisation</a> of <em>R for Data Science</em>
@@ -2082,7 +2082,7 @@ More plots styles
 </ul>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography">
+<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography" style="display: none">
 <div id="ref-nordmann_2021" class="csl-entry" role="doc-biblioentry">
 Nordmann, E., McAleer, P., Toivo, W., Paterson, H., &amp; DeBruine, L. M. (2021). <em>Data visualisation using <span>R</span>, for researchers who don’t use <span>R</span></em>. PsyArXiv. <a href="https://doi.org/10.31234/osf.io/4huvw">https://doi.org/10.31234/osf.io/4huvw</a>
 </div>
