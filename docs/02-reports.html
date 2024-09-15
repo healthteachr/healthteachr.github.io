@@ -775,7 +775,7 @@ Could not find function
 <div class="callout-body-container callout-body">
 <p>If you get an error message that looks like:</p>
 <blockquote class="blockquote">
-<p>Error in read_csv(“https://healthteachr.github.io/ads-v2/data/nhldraft.csv”) :<br>
+<p>Error in read_csv(“https://healthteachr.github.io/data/nhldraft.csv”) :<br>
 could not find function “read_csv”</p>
 </blockquote>
 <p>This means that you have not loaded tidyverse. Check that <code><a href="https://tidyverse.tidyverse.org">library(tidyverse)</a></code> is in the setup chunk and that you have run the setup chunk.</p>
@@ -792,7 +792,7 @@ could not find function “read_csv”</p>
 <span class="header-section-number">2.4.2</span> Local data files</h3>
 <p>More commonly, you will be working from data files that are stored locally on your computer. But where should you put all of your files? You usually want to have all your scripts and data files for a single project inside one folder on your computer, that project’s <a class="glossary">working directory<span class="def"></span></a>, and we have already set up the main directory <code class="path">02-reports</code>for this chapter.</p>
 <p>You can organise files in subdirectories inside this main project directory, such as putting all raw data files in a subdirectory called <code class="path">data</code> and saving any image files to a subdirectory called <code class="path">images</code>. Using subdirectories helps avoid one single folder becoming too cluttered, which is important if you’re working on big projects.</p>
-<p>In your <code class="path">02-reports</code> directory, create a new folder named <code class="path">data</code>, <a href="https://healthteachr.github.io/ads-v2/data/nhldraft.csv" download="">download a copy of the hockey data file</a>, and save it in this new subdirectory.</p>
+<p>In your <code class="path">02-reports</code> directory, create a new folder named <code class="path">data</code>, <a href="https://healthteachr.github.io/data/nhldraft.csv" download="">download a copy of the hockey data file</a>, and save it in this new subdirectory.</p>
 <p>To load in data from a local file, again we can use the <code>read_csv()</code> function, but this time rather than specifying a url, give it the subdirectory and file name.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-with-filename">
@@ -1583,10 +1583,10 @@ Solution
 </div>
 <div id="callout-26" class="callout-26-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"https://healthteachr.github.io/ads-v2/images/logos/logo.png"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"https://healthteachr.github.io/images/logos/logo.png"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="https://healthteachr.github.io/ads-v2/images/logos/logo.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="https://healthteachr.github.io/images/logos/logo.png" class="img-fluid figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1599,7 +1599,7 @@ Solution
 Alternative Solution
 </button>
 <p>You can add an image from the web using its URL:</p>
-<pre><code>![Applied Data Skills](https://healthteachr.github.io/ads-v2/images/logos/logo.png)</code></pre>
+<pre><code>![Applied Data Skills](https://healthteachr.github.io/images/logos/logo.png)</code></pre>
 <p>Or save an image into your project directory (e.g., in the images folder) and add it using the relative path:</p>
 <pre><code>![Applied Data Skills](images/logos/logo.png)</code></pre>
 </div>
