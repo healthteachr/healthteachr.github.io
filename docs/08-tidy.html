@@ -1,0 +1,3092 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.475">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Applied Data Skills - 8&nbsp; Data Tidying</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./09-wrangle.html" rel="next">
+<link href="./07-joins.html" rel="prev">
+<link href="./images/logos/favicon.ico" rel="icon">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-6NP3MF25W3"></script><script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-6NP3MF25W3', { 'anonymize_ip': true});
+</script><link rel="stylesheet" href="include/healthteachr.css">
+<link rel="stylesheet" href="include/webex.css">
+<link rel="stylesheet" href="include/style.css">
+</head>
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data Tidying</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Applied Data Skills</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/healthteachr/ads-v2/" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+    <a href="" title="Share" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-share"></i></a>
+    <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-0">
+<li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=%7Curl%7C">
+            <i class="bi bi-bi-twitter pe-1"></i>
+          Twitter
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=%7Curl%7C">
+            <i class="bi bi-bi-facebook pe-1"></i>
+          Facebook
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=%7Curl%7C">
+            <i class="bi bi-bi-linkedin pe-1"></i>
+          LinkedIn
+          </a>
+        </li>
+    </ul>
+<a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Overview</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Intro to R and RStudio</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-reports.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Reports with R Markdown</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-viz.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Visualisation</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Import</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-summary.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data Summaries</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-formative.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Practice Report</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-joins.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Relations</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-tidy.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data Tidying</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-wrangle.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Data Wrangling</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-custom.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Customising Visualisations &amp; Reports</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-refs.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-license.html" class="sidebar-item-text sidebar-link">License/Citation</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Appendices</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./app-installing-r.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Installing R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./app-updating-r.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Updating R, RStudio, and packages</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./app-symbols.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Symbols</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./app-conventions.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Conventions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./app-teams.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Using Teams</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./app-debugging.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Debugging</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./app-datatypes.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">G</span>&nbsp; <span class="chapter-title">Data Types</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./app-dates.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">H</span>&nbsp; <span class="chapter-title">Dates and Times</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./app-styling.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">I</span>&nbsp; <span class="chapter-title">Styling Plots</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./app-spotify.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">J</span>&nbsp; <span class="chapter-title">Spotify Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./app-webpage.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">K</span>&nbsp; <span class="chapter-title">Webpages</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#sec-ilo-tidy" id="toc-sec-ilo-tidy" class="nav-link active" data-scroll-target="#sec-ilo-tidy">Intended Learning Outcomes</a></li>
+  <li><a href="#sec-walkthrough-tidy" id="toc-sec-walkthrough-tidy" class="nav-link" data-scroll-target="#sec-walkthrough-tidy">Walkthrough video</a></li>
+  <li><a href="#sec-setup-tidy" id="toc-sec-setup-tidy" class="nav-link" data-scroll-target="#sec-setup-tidy"><span class="toc-section-number">8.1</span>  Set-up</a></li>
+  <li>
+<a href="#data-structures" id="toc-data-structures" class="nav-link" data-scroll-target="#data-structures"><span class="toc-section-number">8.2</span>  Data Structures</a>
+  <ul class="collapse">
+<li><a href="#untidy-data" id="toc-untidy-data" class="nav-link" data-scroll-target="#untidy-data"><span class="toc-section-number">8.2.1</span>  Untidy data</a></li>
+  <li><a href="#tidy-data" id="toc-tidy-data" class="nav-link" data-scroll-target="#tidy-data"><span class="toc-section-number">8.2.2</span>  Tidy data</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#reshaping-data" id="toc-reshaping-data" class="nav-link" data-scroll-target="#reshaping-data"><span class="toc-section-number">8.3</span>  Reshaping Data</a>
+  <ul class="collapse">
+<li><a href="#wide-to-long" id="toc-wide-to-long" class="nav-link" data-scroll-target="#wide-to-long"><span class="toc-section-number">8.3.1</span>  Wide to long</a></li>
+  <li><a href="#long-to-wide" id="toc-long-to-wide" class="nav-link" data-scroll-target="#long-to-wide"><span class="toc-section-number">8.3.2</span>  Long to wide</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#sec-multistep" id="toc-sec-multistep" class="nav-link" data-scroll-target="#sec-multistep"><span class="toc-section-number">8.4</span>  Multi-step tidying</a>
+  <ul class="collapse">
+<li><a href="#one-observation-per-row" id="toc-one-observation-per-row" class="nav-link" data-scroll-target="#one-observation-per-row"><span class="toc-section-number">8.4.1</span>  One observation per row</a></li>
+  <li><a href="#one-variable-per-column" id="toc-one-variable-per-column" class="nav-link" data-scroll-target="#one-variable-per-column"><span class="toc-section-number">8.4.2</span>  One variable per column</a></li>
+  <li><a href="#one-value-per-cell" id="toc-one-value-per-cell" class="nav-link" data-scroll-target="#one-value-per-cell"><span class="toc-section-number">8.4.3</span>  One value per cell</a></li>
+  <li><a href="#altering-data" id="toc-altering-data" class="nav-link" data-scroll-target="#altering-data"><span class="toc-section-number">8.4.4</span>  Altering data</a></li>
+  <li><a href="#fixing-data-types" id="toc-fixing-data-types" class="nav-link" data-scroll-target="#fixing-data-types"><span class="toc-section-number">8.4.5</span>  Fixing data types</a></li>
+  </ul>
+</li>
+  <li><a href="#sec-pipes" id="toc-sec-pipes" class="nav-link" data-scroll-target="#sec-pipes"><span class="toc-section-number">8.5</span>  Pipes</a></li>
+  <li>
+<a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="toc-section-number">8.6</span>  Exercises</a>
+  <ul class="collapse">
+<li><a href="#survey-1" id="toc-survey-1" class="nav-link" data-scroll-target="#survey-1"><span class="toc-section-number">8.6.1</span>  Survey 1</a></li>
+  <li><a href="#tidy-1" id="toc-tidy-1" class="nav-link" data-scroll-target="#tidy-1"><span class="toc-section-number">8.6.2</span>  Tidy 1</a></li>
+  <li><a href="#survey-2" id="toc-survey-2" class="nav-link" data-scroll-target="#survey-2"><span class="toc-section-number">8.6.3</span>  Survey 2</a></li>
+  <li><a href="#analysis-and-visualisation" id="toc-analysis-and-visualisation" class="nav-link" data-scroll-target="#analysis-and-visualisation"><span class="toc-section-number">8.6.4</span>  Analysis and visualisation</a></li>
+  <li><a href="#your-data" id="toc-your-data" class="nav-link" data-scroll-target="#your-data"><span class="toc-section-number">8.6.5</span>  Your data</a></li>
+  </ul>
+</li>
+  <li><a href="#sec-glossary-tidy" id="toc-sec-glossary-tidy" class="nav-link" data-scroll-target="#sec-glossary-tidy"><span class="toc-section-number">8.7</span>  Glossary</a></li>
+  <li><a href="#sec-resources-tidy" id="toc-sec-resources-tidy" class="nav-link" data-scroll-target="#sec-resources-tidy"><span class="toc-section-number">8.8</span>  Further resources</a></li>
+  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/healthteachr/ads-v2/edit/master/08-tidy.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/healthteachr/ads-v2/issues/new" class="toc-action">Report an issue</a></p><p><a href="https://github.com/healthteachr/ads-v2/blob/master/08-tidy.qmd" class="toc-action">View source</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title"><span id="sec-tidy" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data Tidying</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header><section id="sec-ilo-tidy" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="sec-ilo-tidy">Intended Learning Outcomes</h2>
+<ul>
+<li>Be able to reshape data between long and wide formats</li>
+<li>Separate, change, reorder, and rename columns</li>
+<li>Use pipes to chain together functions</li>
+</ul></section><section id="sec-walkthrough-tidy" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="sec-walkthrough-tidy">Walkthrough video</h2>
+<p>There is a walkthrough video of this chapter available via <a href="https://echo360.org.uk/media/3f9cbd60-622e-4128-95e7-d825e5fa922c/public">Echo360</a>. Please note that there may have been minor edits to the book since the video was recorded. Where there are differences, the book should always take precedence.</p>
+</section><section id="sec-setup-tidy" class="level2" data-number="8.1"><h2 data-number="8.1" class="anchored" data-anchor-id="sec-setup-tidy">
+<span class="header-section-number">8.1</span> Set-up</h2>
+<p>First, create a new project for the work we’ll do in this chapter named <code class="path">08-tidy</code>. Second, open and save a new R Markdown document named <code>tidy.Rmd</code>, delete the welcome text and load the required packages for this chapter.</p>
+<div class="cell" data-layout-align="center" data-verbatim="r setup, include=FALSE">
+<div class="verbatim">
+<pre class="sourceCode r code-with-copy"><code class="sourceCode R">```{r setup, include=FALSE}</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># for data wrangling</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'ggplot2' was built under R version 4.3.3</code></pre>
+</div>
+<pre class="sourceCode r code-with-copy"><code class="sourceCode R">```</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre>
+</div>
+</div>
+<p>You’ll need to make a folder called “data” and download two data files into it: <a href="https://healthteachr.github.io/data/tidy_data.csv" download="">tidy_data.csv</a> and <a href="https://healthteachr.github.io/data/untidy_data.csv" download="">untidy_data.csv</a>.</p>
+<p>Download the <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/tidyr.pdf">Data tidying cheat sheet</a>.</p>
+</section><section id="data-structures" class="level2" data-number="8.2"><h2 data-number="8.2" class="anchored" data-anchor-id="data-structures">
+<span class="header-section-number">8.2</span> Data Structures</h2>
+<p>The data you work with will likely come in many different formats and structures. Some of these structures may be driven by how the software you use outputs the data, but data structures may also differ because of human intervention or attempts at organisation, some of which may not be particularly helpful.</p>
+<p>Data cleaning and tidying will likely be the most time consuming and difficult task you perform. Whilst you can create code recipes for analyses and visualisations, as Hadley Whickham puts it, <a href="https://vita.had.co.nz/papers/tidy-data.pdf">“every messy dataset is messy in its own way”</a>, which means that you will often have to solve new problems that are specific to the dataset. Additionally, moving between data structures that are intuitive to read by humans and those that are useful for a computer requires a conceptual shift that only comes with practice.</p>
+<p>This is all a verbose way of saying that what lies ahead in this chapter is unlikely to sink in on the first attempt and you will need to practice with different examples (preferably with data you know well) before you truly feel comfortable with it.</p>
+<p>First, some terminology.</p>
+<p>An <a class="glossary">observation<span class="def"></span></a> is all the information about a single “thing” in a single condition, such as at one point in time. These things can be participants, scores, injuries, feedback questionnaires, social media posts, or really anything. Observations should have a way to identify them, such as a unique ID or a unique combination of values like country and year.</p>
+<p>A <a class="glossary">variable<span class="def"></span></a> is one type of information about the observation. For example, if the observation is a lacrosse goal, the variables you might have about the goal are the goal ID, the goal scorer’s ID, the time of the goal, the location on the pitch where the play was made, and the goal scorer’s player position.</p>
+<p>A <a class="glossary">value<span class="def"></span></a> is the data for one variable for one observation. For example, the value of the time variable from the observation of a goal might be <code>19:38:54</code>.</p>
+<div class="callout-note try callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The following table is data that shows the number of items (in this case, agility ladders) each amateur football coach bought each year.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped">
+<thead><tr class="header">
+<th style="text-align: right;">coach_id</th>
+<th style="text-align: right;">year</th>
+<th style="text-align: right;">items</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2018</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: right;">8</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2018</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: right;">6</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<ul>
+<li>What is <code>items</code>? <select class="webex-select"><option value="blank"></option>
+<option value="x">Observation</option>
+<option value="answer">Variable</option>
+<option value="x">Value</option></select>
+</li>
+<li>How many observations are there in this dataset? <input class="webex-solveme nospaces" size="1" data-answer="[&quot;6&quot;]">
+</li>
+<li>What is <code>8</code>? <select class="webex-select"><option value="blank"></option>
+<option value="x">Observation</option>
+<option value="x">Variable</option>
+<option value="answer">Value</option></select>
+</li>
+</ul>
+<div class="webex-solution">
+<button>
+Explain these answers
+</button>
+<ul>
+<li>There are three variables, <code>coach_id</code>, <code>year</code>, and <code>items</code>.</li>
+<li>There are six observations, one for each of two coaches for each of three years.</li>
+<li>
+<code>8</code> is a value because it is a single data point for one variable for one observation.</li>
+</ul>
+</div>
+</div>
+</div>
+<section id="untidy-data" class="level3" data-number="8.2.1"><h3 data-number="8.2.1" class="anchored" data-anchor-id="untidy-data">
+<span class="header-section-number">8.2.1</span> Untidy data</h3>
+<p>First, let’s have a look at an example of a messy, or untidy, dataset. Each row has all of the data relating to one coach.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>untidy_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/untidy_data.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="kable-table">
+<div id="tbl-untidy-data" class="anchored">
+<table class="table table-sm table-striped">
+<caption>Table&nbsp;8.1: Untidy table</caption>
+<colgroup>
+<col style="width: 8%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 15%">
+</colgroup>
+<thead><tr class="header">
+<th style="text-align: right;">coach_id</th>
+<th style="text-align: left;">itemsprice_2018</th>
+<th style="text-align: left;">itemsprice_2019</th>
+<th style="text-align: left;">itemsprice_2020</th>
+<th style="text-align: right;">totalprice_2018</th>
+<th style="text-align: right;">totalprice_2019</th>
+<th style="text-align: right;">totalprice_2020</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">2 (3.91)</td>
+<td style="text-align: left;">8 (4.72)</td>
+<td style="text-align: left;">10 (5.59)</td>
+<td style="text-align: right;">7.82</td>
+<td style="text-align: right;">37.76</td>
+<td style="text-align: right;">55.90</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">1 (3.91)</td>
+<td style="text-align: left;">6 (4.72)</td>
+<td style="text-align: left;">1 (5.59)</td>
+<td style="text-align: right;">3.91</td>
+<td style="text-align: right;">28.32</td>
+<td style="text-align: right;">5.59</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">4 (3.91)</td>
+<td style="text-align: left;">5 (4.72)</td>
+<td style="text-align: left;">5 (5.59)</td>
+<td style="text-align: right;">15.64</td>
+<td style="text-align: right;">23.60</td>
+<td style="text-align: right;">27.95</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">10 (3.91)</td>
+<td style="text-align: left;">1 (4.72)</td>
+<td style="text-align: left;">3 (5.59)</td>
+<td style="text-align: right;">39.10</td>
+<td style="text-align: right;">4.72</td>
+<td style="text-align: right;">16.77</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">3 (3.91)</td>
+<td style="text-align: left;">9 (4.72)</td>
+<td style="text-align: left;">8 (5.59)</td>
+<td style="text-align: right;">11.73</td>
+<td style="text-align: right;">42.48</td>
+<td style="text-align: right;">44.72</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<ul>
+<li>The <code>itemsprice_{year}</code> columns contain two values (number of items and price per item)</li>
+<li>The <code>totalprice_{year}</code> columns contain the total amount spent by that coach that year, i.e., items * price.</li>
+<li>There is data for three different years in the dataset.</li>
+</ul>
+<p>Let’s say you wanted to calculate the total price per coach over the three years and the total number of items bought per coach. You can’t perform mathematical operations on the <code>itemsprice_{year}</code> columns because they are <a class="glossary">character<span class="def"></span></a> <a class="glossary">data types<span class="def"></span></a>.</p>
+<p>You would probably normally use Excel to</p>
+<ol type="1">
+<li>split <code>itemsprice_2018</code> column into <code>item_2018</code> and <code>price_2018</code> columns</li>
+<li>split <code>itemsprice_2019</code> column into <code>item_2019</code> and <code>price_2019</code> columns</li>
+<li>split <code>itemsprice_2020</code> column into <code>item_2018</code> and <code>price_2020</code> columns</li>
+<li>add <code>item_2018 + item_2019 + item_2020</code> to get the total number of items bought per coach</li>
+<li>add <code>totalprice_2018 + totalprice_2019 + totalprice_2020</code> to get the total price per coach</li>
+</ol>
+<div class="callout-note try callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Think about how many steps in Excel this would be if there were 10 years in the table, or a different number of years each time you encountered data like this.</p>
+</div>
+</div>
+</section><section id="tidy-data" class="level3" data-number="8.2.2"><h3 data-number="8.2.2" class="anchored" data-anchor-id="tidy-data">
+<span class="header-section-number">8.2.2</span> Tidy data</h3>
+<p>There are three rules for “<a class="glossary">tidy data<span class="def"></span></a>, which is data in a format that makes it easier to combine data from different tables, create summary tables, and visualise your data.</p>
+<ul>
+<li>Each observation must have its own row</li>
+<li>Each variable must have its own column</li>
+<li>Each value must have its own cell</li>
+</ul>
+<p>This is the tidy version:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>tidy_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/tidy_data.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="kable-table">
+<div id="tbl-tidy-data" class="anchored">
+<table class="table table-sm table-striped">
+<caption>Table&nbsp;8.2: Tidy table</caption>
+<thead><tr class="header">
+<th style="text-align: right;">coach_id</th>
+<th style="text-align: right;">year</th>
+<th style="text-align: right;">items</th>
+<th style="text-align: right;">price_per_item</th>
+<th style="text-align: right;">totalprice</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2018</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">3.91</td>
+<td style="text-align: right;">7.82</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">4.72</td>
+<td style="text-align: right;">37.76</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">5.59</td>
+<td style="text-align: right;">55.90</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2018</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3.91</td>
+<td style="text-align: right;">3.91</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">4.72</td>
+<td style="text-align: right;">28.32</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">5.59</td>
+<td style="text-align: right;">5.59</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">2018</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">3.91</td>
+<td style="text-align: right;">15.64</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">4.72</td>
+<td style="text-align: right;">23.60</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">5.59</td>
+<td style="text-align: right;">27.95</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">2018</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">3.91</td>
+<td style="text-align: right;">39.10</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">4.72</td>
+<td style="text-align: right;">4.72</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">5.59</td>
+<td style="text-align: right;">16.77</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">2018</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">3.91</td>
+<td style="text-align: right;">11.73</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">4.72</td>
+<td style="text-align: right;">42.48</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">5.59</td>
+<td style="text-align: right;">44.72</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<ul>
+<li>There are now five variables (columns) because there are five different types of information we have for each observation: the coach id, the year, number of items bought, price per item, and total price.</li>
+<li>Each row is a coach’s orders in a particular year.</li>
+<li>The number of items (<code>items</code>) and price per item (<code>price_per_item</code>) are in separate columns, so now you can perform mathematical operations on them.</li>
+</ul>
+<p>To calculate the total price per coach over the three years and the total number of items bought per coach in R, you could then:</p>
+<ol type="1">
+<li>group the table by coach_id</li>
+<li>sum the <code>items</code> column to get the total number of items bought per coach</li>
+<li>sum the <code>totalprice</code> column to get the total price per coach</li>
+</ol>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>tidy_data <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">group_by</span>(coach_id) <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb5-4"><a href="#cb5-4"></a>    <span class="at">total_items =</span> <span class="fu">sum</span>(items),</span>
+<span id="cb5-5"><a href="#cb5-5"></a>    <span class="at">total_price =</span> <span class="fu">sum</span>(totalprice)</span>
+<span id="cb5-6"><a href="#cb5-6"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped">
+<thead><tr class="header">
+<th style="text-align: right;">coach_id</th>
+<th style="text-align: right;">total_items</th>
+<th style="text-align: right;">total_price</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">101.48</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">37.82</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">67.19</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">60.59</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">98.93</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If there were 10 years in the table, or a different number of years each time you encountered data like this, the code for producing the tables and plots above never changes.</p>
+</div>
+</div>
+<p>If you have control over how the data are recorded, it will make your life easier to record it in a tidy format from the start. However, we don’t always have control, so this class will also teach you how to convert untidy tables into tidy tables.</p>
+</section></section><section id="reshaping-data" class="level2" data-number="8.3"><h2 data-number="8.3" class="anchored" data-anchor-id="reshaping-data">
+<span class="header-section-number">8.3</span> Reshaping Data</h2>
+<p>Data tables can be in <a class="glossary">wide<span class="def"></span></a> format or <a class="glossary">long<span class="def"></span></a> format (or a mix of the two). Wide data are where all of the observations about one thing are in the same row, while long data are where each observation is on a separate row. You often need to convert between these formats to do different types of summaries or visualisation. You may have done something similar using pivot tables in Excel.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="images/tidy/excel_pivot_table.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Converting between wide and long formats using pivot tables in Excel.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>It can be easier to just consider one type of measurement at a time. <code>untidy_data</code> has two types of measurements, total price and price per item. Let’s look at just the <code>totalprice</code> data first.</p>
+<p>We can select just the columns we want using the <code><a href="https://dplyr.tidyverse.org/reference/select.html">dplyr::select()</a></code> function. This function’s first argument is the data table you want to select from, then each argument after that is either the name of a column in that table, or <code>new_name = old_name</code>. This is a useful function for changing the column names and order of columns, as well as selecting a subset of columns.</p>
+<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Note that because the names of the columns are numbers, they need to be wrapped in backticks otherwise you’ll get an error like:</p>
+<pre><code>Error: unexpected '=' in:
+"  coach_id, 
+  2018 ="</code></pre>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># select just the coach ID and 3 total price columns</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>wide_totalprice <span class="ot">&lt;-</span> <span class="fu">select</span>(</span>
+<span id="cb7-3"><a href="#cb7-3"></a>  <span class="at">.data =</span> untidy_data,</span>
+<span id="cb7-4"><a href="#cb7-4"></a>  coach_id, </span>
+<span id="cb7-5"><a href="#cb7-5"></a>  <span class="st">`</span><span class="at">2018</span><span class="st">`</span> <span class="ot">=</span> totalprice_2018,</span>
+<span id="cb7-6"><a href="#cb7-6"></a>  <span class="st">`</span><span class="at">2019</span><span class="st">`</span> <span class="ot">=</span> totalprice_2019,</span>
+<span id="cb7-7"><a href="#cb7-7"></a>  <span class="st">`</span><span class="at">2020</span><span class="st">`</span> <span class="ot">=</span> totalprice_2020</span>
+<span id="cb7-8"><a href="#cb7-8"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="kable-table">
+<div id="tbl-wide-data" class="anchored">
+<table class="table table-sm table-striped">
+<caption>Table&nbsp;8.3: Wide table</caption>
+<thead><tr class="header">
+<th style="text-align: right;">coach_id</th>
+<th style="text-align: right;">2018</th>
+<th style="text-align: right;">2019</th>
+<th style="text-align: right;">2020</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">7.82</td>
+<td style="text-align: right;">37.76</td>
+<td style="text-align: right;">55.90</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">3.91</td>
+<td style="text-align: right;">28.32</td>
+<td style="text-align: right;">5.59</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">15.64</td>
+<td style="text-align: right;">23.60</td>
+<td style="text-align: right;">27.95</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">39.10</td>
+<td style="text-align: right;">4.72</td>
+<td style="text-align: right;">16.77</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">11.73</td>
+<td style="text-align: right;">42.48</td>
+<td style="text-align: right;">44.72</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<p>This is in wide format, where each row is a coach, and represents the data from several years. This is a really intuitive way for humans to read a table, but it’s not as easy to process with code.</p>
+<p>The same data can be represented in a long format by creating a new column that specifies what <code>year</code> the observation is from and a new column that specifies the <code>totalprice</code> of that observation. This is easier to use to make summaries and plots.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>long_totalprice <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(</span>
+<span id="cb8-2"><a href="#cb8-2"></a>  <span class="at">data =</span> wide_totalprice,</span>
+<span id="cb8-3"><a href="#cb8-3"></a>  <span class="at">cols =</span> <span class="st">`</span><span class="at">2018</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2020</span><span class="st">`</span>,</span>
+<span id="cb8-4"><a href="#cb8-4"></a>  <span class="at">names_to =</span> <span class="st">"year"</span>,</span>
+<span id="cb8-5"><a href="#cb8-5"></a>  <span class="at">values_to =</span> <span class="st">"totalprice"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="kable-table">
+<div id="tbl-long-data" class="anchored">
+<table class="table table-sm table-striped">
+<caption>Table&nbsp;8.4: Long table</caption>
+<thead><tr class="header">
+<th style="text-align: right;">coach_id</th>
+<th style="text-align: left;">year</th>
+<th style="text-align: right;">totalprice</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">2018</td>
+<td style="text-align: right;">7.82</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">2019</td>
+<td style="text-align: right;">37.76</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">2020</td>
+<td style="text-align: right;">55.90</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">2018</td>
+<td style="text-align: right;">3.91</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">2019</td>
+<td style="text-align: right;">28.32</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">2020</td>
+<td style="text-align: right;">5.59</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">2018</td>
+<td style="text-align: right;">15.64</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">2019</td>
+<td style="text-align: right;">23.60</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">2020</td>
+<td style="text-align: right;">27.95</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">2018</td>
+<td style="text-align: right;">39.10</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">2019</td>
+<td style="text-align: right;">4.72</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">2020</td>
+<td style="text-align: right;">16.77</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">2018</td>
+<td style="text-align: right;">11.73</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">2019</td>
+<td style="text-align: right;">42.48</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">2020</td>
+<td style="text-align: right;">44.72</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<p>It also makes it very easy to use with <code>ggplot()</code>. Run the following plot, and consider how you’d make it with the wide version (it is likely impossible).</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">ggplot</span>(long_totalprice, <span class="fu">aes</span>(<span class="at">x =</span> totalprice, <span class="at">fill =</span> year)) <span class="sc">+</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">10</span>, <span class="at">color =</span> <span class="st">"black"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="08-tidy_files/figure-html/long-ggplot-demo-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Most plots are easier to make with data in a long format.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout-note try callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Create a long version of the following table of how many million followers each athlete has on different social media platforms. You don’t need to use code, just sketch it in a notebook or make a table in a spreadsheet.</p>
+<table class="table">
+<thead><tr class="header">
+<th style="text-align: left;">athlete</th>
+<th style="text-align: left;">X</th>
+<th style="text-align: left;">instagram</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Serena Williams</td>
+<td style="text-align: left;">10.4</td>
+<td style="text-align: left;">17.3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Usain Bolt</td>
+<td style="text-align: left;">4.7</td>
+<td style="text-align: left;">13.8</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Simone Biles</td>
+<td style="text-align: left;">1.6</td>
+<td style="text-align: left;">7.1</td>
+</tr>
+</tbody>
+</table>
+<div class="webex-solution">
+<button>
+Answer
+</button>
+<p>Your answer doesn’t need to have the same column headers or be in the same order.</p>
+<table class="table">
+<thead><tr class="header">
+<th style="text-align: left;">account</th>
+<th style="text-align: left;">social_media</th>
+<th style="text-align: left;">followers</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Serena Williams</td>
+<td style="text-align: left;">X</td>
+<td style="text-align: left;">10.4</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Serena Williams</td>
+<td style="text-align: left;">instagram</td>
+<td style="text-align: left;">17.3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Usain Bolt</td>
+<td style="text-align: left;">X</td>
+<td style="text-align: left;">4.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Usain Bolt</td>
+<td style="text-align: left;">instagram</td>
+<td style="text-align: left;">13.8</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Simone Biles</td>
+<td style="text-align: left;">X</td>
+<td style="text-align: left;">1.6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Simone Biles</td>
+<td style="text-align: left;">instagram</td>
+<td style="text-align: left;">7.1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you’re a researcher and you’re used to thinking about IVs and DVs, you may find it easier to remember that each IV and DV should have its own column, rather than a column for each level of the IV.</p>
+</div>
+</div>
+<p>The pivot functions allow you to transform a data table from wide to long or long to wide.</p>
+<section id="wide-to-long" class="level3" data-number="8.3.1"><h3 data-number="8.3.1" class="anchored" data-anchor-id="wide-to-long">
+<span class="header-section-number">8.3.1</span> Wide to long</h3>
+<p>The function <code>pivot_longer()</code> converts a wide data table to a longer format by converting the headers from specified columns into the values of new columns, and combining the values of those columns into a new condensed column.</p>
+<p>This function has several arguments:</p>
+<ul>
+<li>
+<code>cols</code>: the columns you want to make long; you can refer to them by their names, like <code>c(`2018`, `2019`, `2020`)</code> or <code>`2018`:`2020`</code> or by their numbers, like <code>c(2, 3, 4)</code> or <code>2:4</code>
+</li>
+<li>
+<code>names_to</code>: what you want to call the new column that the <code>cols</code> column header names will go into</li>
+<li>
+<code>values_to</code>: what you want to call the new column that contains the values in the <code>cols</code>
+</li>
+</ul>
+<p>With the pivot functions, it can be easier to show than tell - run the below code and then compare <code>wide_totalprice</code> with <code>long_totalprice</code> and the pivot code and try to map each argument to what has changed.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>long_totalprice <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(</span>
+<span id="cb10-2"><a href="#cb10-2"></a>  <span class="at">data =</span> wide_totalprice, </span>
+<span id="cb10-3"><a href="#cb10-3"></a>  <span class="at">cols =</span> <span class="st">`</span><span class="at">2018</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2020</span><span class="st">`</span>, <span class="co"># columns to make long </span></span>
+<span id="cb10-4"><a href="#cb10-4"></a>  <span class="at">names_to =</span> <span class="st">"year"</span>, <span class="co"># new column name for headers</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a>  <span class="at">values_to =</span> <span class="st">"totalprice"</span> <span class="co"># new column name for values</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="long-to-wide" class="level3" data-number="8.3.2"><h3 data-number="8.3.2" class="anchored" data-anchor-id="long-to-wide">
+<span class="header-section-number">8.3.2</span> Long to wide</h3>
+<p>We can also go from long to wide format using the <code>pivot_wider()</code> function. Instead of returning to the original table with a row for each coach and a column for each year, this new wide table will have a row for each year and a column for each coach. It can be awkward to have numbers for column names, so we use <code>names_prefix</code> to add “C_” before each new column name.</p>
+<ul>
+<li>
+<code>id_cols</code>: the column(s) that uniquely identify each new row</li>
+<li>
+<code>names_from</code>: the column(s) that contain your new column headers</li>
+<li>
+<code>names_prefix</code>: A prefix to add to the values in the names column</li>
+<li>
+<code>values_from</code>: the column that contains the values for the new columns</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>wide_by_coach <span class="ot">&lt;-</span> <span class="fu">pivot_wider</span>(</span>
+<span id="cb11-2"><a href="#cb11-2"></a>  <span class="at">data =</span> long_totalprice,</span>
+<span id="cb11-3"><a href="#cb11-3"></a>  <span class="at">id_cols =</span> year, <span class="co"># identifying column(s)</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a>  <span class="at">names_from =</span> coach_id, <span class="co"># the new column names</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a>  <span class="at">names_prefix =</span> <span class="st">"C_"</span>, <span class="co"># prefix for new column names</span></span>
+<span id="cb11-6"><a href="#cb11-6"></a>  <span class="at">values_from =</span> totalprice <span class="co"># the new column values</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="kable-table">
+<div id="tbl-wide-pivot" class="anchored">
+<table class="table table-sm table-striped">
+<caption>Table&nbsp;8.5: Data made wider with pivot_wider()</caption>
+<thead><tr class="header">
+<th style="text-align: left;">year</th>
+<th style="text-align: right;">C_1</th>
+<th style="text-align: right;">C_2</th>
+<th style="text-align: right;">C_3</th>
+<th style="text-align: right;">C_4</th>
+<th style="text-align: right;">C_5</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">2018</td>
+<td style="text-align: right;">7.82</td>
+<td style="text-align: right;">3.91</td>
+<td style="text-align: right;">15.64</td>
+<td style="text-align: right;">39.10</td>
+<td style="text-align: right;">11.73</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2019</td>
+<td style="text-align: right;">37.76</td>
+<td style="text-align: right;">28.32</td>
+<td style="text-align: right;">23.60</td>
+<td style="text-align: right;">4.72</td>
+<td style="text-align: right;">42.48</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2020</td>
+<td style="text-align: right;">55.90</td>
+<td style="text-align: right;">5.59</td>
+<td style="text-align: right;">27.95</td>
+<td style="text-align: right;">16.77</td>
+<td style="text-align: right;">44.72</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</section></section><section id="sec-multistep" class="level2" data-number="8.4"><h2 data-number="8.4" class="anchored" data-anchor-id="sec-multistep">
+<span class="header-section-number">8.4</span> Multi-step tidying</h2>
+<p>You often need to go from wide, to long, to an intermediate shape in order to get your data into a format that is useful for plotting, where there is a column for each variable that you want to represent with an aesthetic.</p>
+<p>Our full <code>untidy_data</code> table has seven columns: a coach ID, three columns for <code>itemsprice</code> and 3 columns for <code>totalprice</code>.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped">
+<colgroup>
+<col style="width: 8%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 15%">
+</colgroup>
+<thead><tr class="header">
+<th style="text-align: right;">coach_id</th>
+<th style="text-align: left;">itemsprice_2018</th>
+<th style="text-align: left;">itemsprice_2019</th>
+<th style="text-align: left;">itemsprice_2020</th>
+<th style="text-align: right;">totalprice_2018</th>
+<th style="text-align: right;">totalprice_2019</th>
+<th style="text-align: right;">totalprice_2020</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">2 (3.91)</td>
+<td style="text-align: left;">8 (4.72)</td>
+<td style="text-align: left;">10 (5.59)</td>
+<td style="text-align: right;">7.82</td>
+<td style="text-align: right;">37.76</td>
+<td style="text-align: right;">55.90</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">1 (3.91)</td>
+<td style="text-align: left;">6 (4.72)</td>
+<td style="text-align: left;">1 (5.59)</td>
+<td style="text-align: right;">3.91</td>
+<td style="text-align: right;">28.32</td>
+<td style="text-align: right;">5.59</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">4 (3.91)</td>
+<td style="text-align: left;">5 (4.72)</td>
+<td style="text-align: left;">5 (5.59)</td>
+<td style="text-align: right;">15.64</td>
+<td style="text-align: right;">23.60</td>
+<td style="text-align: right;">27.95</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">10 (3.91)</td>
+<td style="text-align: left;">1 (4.72)</td>
+<td style="text-align: left;">3 (5.59)</td>
+<td style="text-align: right;">39.10</td>
+<td style="text-align: right;">4.72</td>
+<td style="text-align: right;">16.77</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">3 (3.91)</td>
+<td style="text-align: left;">9 (4.72)</td>
+<td style="text-align: left;">8 (5.59)</td>
+<td style="text-align: right;">11.73</td>
+<td style="text-align: right;">42.48</td>
+<td style="text-align: right;">44.72</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>We want to get it into the tidy format below where each row is an observation of one coach per year, with the columns of <code>coach_id</code>, <code>year</code>, <code>item</code>, <code>price_per_item</code> and <code>totalprice</code>. Before trying to reshape any dataset, you should be able to visualise what it will look like. Sketching out your tables on a piece of paper can really help make these transformations make sense.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped">
+<thead><tr class="header">
+<th style="text-align: right;">coach_id</th>
+<th style="text-align: right;">year</th>
+<th style="text-align: right;">items</th>
+<th style="text-align: right;">price_per_item</th>
+<th style="text-align: right;">totalprice</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2018</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">3.91</td>
+<td style="text-align: right;">7.82</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">4.72</td>
+<td style="text-align: right;">37.76</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">5.59</td>
+<td style="text-align: right;">55.90</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2018</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3.91</td>
+<td style="text-align: right;">3.91</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">4.72</td>
+<td style="text-align: right;">28.32</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">5.59</td>
+<td style="text-align: right;">5.59</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">2018</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">3.91</td>
+<td style="text-align: right;">15.64</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">4.72</td>
+<td style="text-align: right;">23.60</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">5.59</td>
+<td style="text-align: right;">27.95</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">2018</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">3.91</td>
+<td style="text-align: right;">39.10</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">4.72</td>
+<td style="text-align: right;">4.72</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">5.59</td>
+<td style="text-align: right;">16.77</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">2018</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">3.91</td>
+<td style="text-align: right;">11.73</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">4.72</td>
+<td style="text-align: right;">42.48</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">5.59</td>
+<td style="text-align: right;">44.72</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<section id="one-observation-per-row" class="level3" data-number="8.4.1"><h3 data-number="8.4.1" class="anchored" data-anchor-id="one-observation-per-row">
+<span class="header-section-number">8.4.1</span> One observation per row</h3>
+<p>The original table has observations from each coach over three years. This is too many observations per row, so first we’ll start by making the table long. We need to make 6 rows for each coach, one for each category (item price/total price) and year combination, with columns for the coach ID, year, category, and value.</p>
+<p>Because we’ll be combining columns with numeric (<code>totalprice</code>) and character (<code>itemsprice</code>) data, we need to make the new <code>value</code> column a character data type using <code>values_transform</code>, since numbers can be represented as characters (like <code>"3.5"</code>), but character strings can’t be represented as numbers.</p>
+<p>The argument <code>names_sep</code> is set to the character string used to join names if <code>names_from</code> is more than one column. Alternatively, you can use the argument <code>names_pattern</code>, which can be more powerful but also a little harder to understand how to set up.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>longer_data <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(</span>
+<span id="cb12-2"><a href="#cb12-2"></a>  <span class="at">data =</span> untidy_data, </span>
+<span id="cb12-3"><a href="#cb12-3"></a>  <span class="at">cols =</span> itemsprice_2018<span class="sc">:</span>totalprice_2020, <span class="co"># columns to make long </span></span>
+<span id="cb12-4"><a href="#cb12-4"></a>  <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">"category"</span>, <span class="st">"year"</span>), <span class="co"># new column names for cols</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a>  <span class="at">names_sep =</span> <span class="st">"_"</span>, <span class="co"># how to split cols into new columns</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a>  <span class="co"># names_pattern = "(.*)_(.*)", # alternative to names_sep</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a>  <span class="at">values_to =</span> <span class="st">"value"</span>, <span class="co"># new column name for values</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a>  </span>
+<span id="cb12-9"><a href="#cb12-9"></a>  <span class="co"># make sure new columns are the right data type</span></span>
+<span id="cb12-10"><a href="#cb12-10"></a>  <span class="at">names_transform =</span> <span class="fu">list</span>(<span class="at">year =</span> as.integer),</span>
+<span id="cb12-11"><a href="#cb12-11"></a>  <span class="at">values_transform =</span> <span class="fu">list</span>(<span class="at">value =</span> as.character) </span>
+<span id="cb12-12"><a href="#cb12-12"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="kable-table">
+<div id="tbl-wide-to-long" class="anchored">
+<table class="table table-sm table-striped">
+<caption>Table&nbsp;8.6: Untidy data converted from wide to long.</caption>
+<thead><tr class="header">
+<th style="text-align: right;">coach_id</th>
+<th style="text-align: left;">category</th>
+<th style="text-align: right;">year</th>
+<th style="text-align: left;">value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">itemsprice</td>
+<td style="text-align: right;">2018</td>
+<td style="text-align: left;">2 (3.91)</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">itemsprice</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: left;">8 (4.72)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">itemsprice</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: left;">10 (5.59)</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">totalprice</td>
+<td style="text-align: right;">2018</td>
+<td style="text-align: left;">7.82</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">totalprice</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: left;">37.76</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">totalprice</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: left;">55.9</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">itemsprice</td>
+<td style="text-align: right;">2018</td>
+<td style="text-align: left;">1 (3.91)</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">itemsprice</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: left;">6 (4.72)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">itemsprice</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: left;">1 (5.59)</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">totalprice</td>
+<td style="text-align: right;">2018</td>
+<td style="text-align: left;">3.91</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">totalprice</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: left;">28.32</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">totalprice</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: left;">5.59</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">itemsprice</td>
+<td style="text-align: right;">2018</td>
+<td style="text-align: left;">4 (3.91)</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">itemsprice</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: left;">5 (4.72)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">itemsprice</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: left;">5 (5.59)</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">totalprice</td>
+<td style="text-align: right;">2018</td>
+<td style="text-align: left;">15.64</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">totalprice</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: left;">23.6</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">totalprice</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: left;">27.95</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">itemsprice</td>
+<td style="text-align: right;">2018</td>
+<td style="text-align: left;">10 (3.91)</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">itemsprice</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: left;">1 (4.72)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">itemsprice</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: left;">3 (5.59)</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">totalprice</td>
+<td style="text-align: right;">2018</td>
+<td style="text-align: left;">39.1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">totalprice</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: left;">4.72</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">totalprice</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: left;">16.77</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">itemsprice</td>
+<td style="text-align: right;">2018</td>
+<td style="text-align: left;">3 (3.91)</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">itemsprice</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: left;">9 (4.72)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">itemsprice</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: left;">8 (5.59)</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">totalprice</td>
+<td style="text-align: right;">2018</td>
+<td style="text-align: left;">11.73</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">totalprice</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: left;">42.48</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">totalprice</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: left;">44.72</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</section><section id="one-variable-per-column" class="level3" data-number="8.4.2"><h3 data-number="8.4.2" class="anchored" data-anchor-id="one-variable-per-column">
+<span class="header-section-number">8.4.2</span> One variable per column</h3>
+<p>Now this table is long, but not tidy. The <code>value</code> column contains data from two different variables. We need to make the table wider, but not as wide as before. We want to keep the <code>year</code> column and make new columns called <code>itemsprice</code> and <code>totalprice</code> with the relevant coach’s <code>value</code> for that variable and year.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>wider_data <span class="ot">&lt;-</span> <span class="fu">pivot_wider</span>(</span>
+<span id="cb13-2"><a href="#cb13-2"></a>  <span class="at">data =</span> longer_data,</span>
+<span id="cb13-3"><a href="#cb13-3"></a>  <span class="at">id_cols =</span> <span class="fu">c</span>(coach_id, year),</span>
+<span id="cb13-4"><a href="#cb13-4"></a>  <span class="at">names_from =</span> category,</span>
+<span id="cb13-5"><a href="#cb13-5"></a>  <span class="at">values_from =</span> value</span>
+<span id="cb13-6"><a href="#cb13-6"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="kable-table">
+<div id="tbl-intermediate" class="anchored">
+<table class="table table-sm table-striped">
+<caption>Table&nbsp;8.7: Data converted from long to an intermediate shape.</caption>
+<thead><tr class="header">
+<th style="text-align: right;">coach_id</th>
+<th style="text-align: right;">year</th>
+<th style="text-align: left;">itemsprice</th>
+<th style="text-align: left;">totalprice</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2018</td>
+<td style="text-align: left;">2 (3.91)</td>
+<td style="text-align: left;">7.82</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: left;">8 (4.72)</td>
+<td style="text-align: left;">37.76</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: left;">10 (5.59)</td>
+<td style="text-align: left;">55.9</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2018</td>
+<td style="text-align: left;">1 (3.91)</td>
+<td style="text-align: left;">3.91</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: left;">6 (4.72)</td>
+<td style="text-align: left;">28.32</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: left;">1 (5.59)</td>
+<td style="text-align: left;">5.59</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">2018</td>
+<td style="text-align: left;">4 (3.91)</td>
+<td style="text-align: left;">15.64</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: left;">5 (4.72)</td>
+<td style="text-align: left;">23.6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: left;">5 (5.59)</td>
+<td style="text-align: left;">27.95</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">2018</td>
+<td style="text-align: left;">10 (3.91)</td>
+<td style="text-align: left;">39.1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: left;">1 (4.72)</td>
+<td style="text-align: left;">4.72</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: left;">3 (5.59)</td>
+<td style="text-align: left;">16.77</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">2018</td>
+<td style="text-align: left;">3 (3.91)</td>
+<td style="text-align: left;">11.73</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: left;">9 (4.72)</td>
+<td style="text-align: left;">42.48</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: left;">8 (5.59)</td>
+<td style="text-align: left;">44.72</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Techinically, you can skip setting the <code>id_cols</code> argument, because all of the columns apart from the <code>names_from</code> column and the <code>values_from</code> column identify the observation (e.g., each observation is identified by the unique combination of <code>coach_id</code> and <code>year</code>). You only have to set the <code>id_cols</code> argument when this is not the case.</p>
+</div>
+</div>
+</section><section id="one-value-per-cell" class="level3" data-number="8.4.3"><h3 data-number="8.4.3" class="anchored" data-anchor-id="one-value-per-cell">
+<span class="header-section-number">8.4.3</span> One value per cell</h3>
+<p>The cells in the <code>itemsprice</code> column actually contain two different values. We need to split it into two columns for the variables <code>items</code>, and <code>price_per_item</code>. You can split a column into parts with the function <code><a href="https://tidyr.tidyverse.org/reference/separate.html">tidyr::separate()</a></code>. There is a space between the number of items and the brackets, so we can split it along this space – if you are in charge of how data is stored, ensuring data is entered consistently makes this much easier.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>split_data <span class="ot">&lt;-</span> <span class="fu">separate</span>(</span>
+<span id="cb14-2"><a href="#cb14-2"></a>  <span class="at">data =</span> wider_data, </span>
+<span id="cb14-3"><a href="#cb14-3"></a>  <span class="at">col =</span> itemsprice, <span class="co"># the column to split</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a>  <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"items"</span>, <span class="st">"price_per_item"</span>), <span class="co"># the new columns to create</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a>  <span class="at">sep =</span> <span class="st">" "</span>, <span class="co"># split col by space</span></span>
+<span id="cb14-6"><a href="#cb14-6"></a>  <span class="at">remove =</span> <span class="cn">TRUE</span>, <span class="co"># whether to remove the old col</span></span>
+<span id="cb14-7"><a href="#cb14-7"></a>  <span class="at">convert =</span> <span class="cn">TRUE</span> <span class="co"># whether to fix the data type of the new columns</span></span>
+<span id="cb14-8"><a href="#cb14-8"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="kable-table">
+<div id="tbl-split" class="anchored">
+<table class="table table-sm table-striped">
+<caption>Table&nbsp;8.8: The itemsprice column split into items and price_per_item using separate().</caption>
+<thead><tr class="header">
+<th style="text-align: right;">coach_id</th>
+<th style="text-align: right;">year</th>
+<th style="text-align: right;">items</th>
+<th style="text-align: left;">price_per_item</th>
+<th style="text-align: left;">totalprice</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2018</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">(3.91)</td>
+<td style="text-align: left;">7.82</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">(4.72)</td>
+<td style="text-align: left;">37.76</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: left;">(5.59)</td>
+<td style="text-align: left;">55.9</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2018</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">(3.91)</td>
+<td style="text-align: left;">3.91</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">(4.72)</td>
+<td style="text-align: left;">28.32</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">(5.59)</td>
+<td style="text-align: left;">5.59</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">2018</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">(3.91)</td>
+<td style="text-align: left;">15.64</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">(4.72)</td>
+<td style="text-align: left;">23.6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">(5.59)</td>
+<td style="text-align: left;">27.95</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">2018</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: left;">(3.91)</td>
+<td style="text-align: left;">39.1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">(4.72)</td>
+<td style="text-align: left;">4.72</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">(5.59)</td>
+<td style="text-align: left;">16.77</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">2018</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">(3.91)</td>
+<td style="text-align: left;">11.73</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: left;">(4.72)</td>
+<td style="text-align: left;">42.48</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">(5.59)</td>
+<td style="text-align: left;">44.72</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If the new columns should have a different <a class="glossary">data type<span class="def"></span></a> from the old column, set <code>convert = TRUE</code> to automatically fix them. This is common when you have columns that contain multiple numbers, separated by commas or semicolons. These are character types before they are separated, but should be numeric types after so that you can do mathematical operations like sum them.</p>
+</div>
+</div>
+</section><section id="altering-data" class="level3" data-number="8.4.4"><h3 data-number="8.4.4" class="anchored" data-anchor-id="altering-data">
+<span class="header-section-number">8.4.4</span> Altering data</h3>
+<p>The column <code>price_per_item</code> is still a character column because it has parentheses. There are a few ways to fix this. You can use the <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">dplyr::mutate()</a></code> function to change a column or add a new one.</p>
+<p>Here, we’ll use <code><a href="https://stringr.tidyverse.org/reference/str_replace.html">stringr::str_replace_all()</a></code> to replace all of the “(” and “)” with ““.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>mutated_data <span class="ot">&lt;-</span> <span class="fu">mutate</span>(</span>
+<span id="cb15-2"><a href="#cb15-2"></a>  <span class="at">.data =</span> split_data,</span>
+<span id="cb15-3"><a href="#cb15-3"></a>  <span class="at">price_per_item =</span> stringr<span class="sc">::</span><span class="fu">str_replace_all</span>(</span>
+<span id="cb15-4"><a href="#cb15-4"></a>    <span class="at">string =</span> price_per_item, </span>
+<span id="cb15-5"><a href="#cb15-5"></a>    <span class="at">pattern =</span> <span class="st">"[()]"</span>, </span>
+<span id="cb15-6"><a href="#cb15-6"></a>    <span class="at">replacement =</span> <span class="st">""</span></span>
+<span id="cb15-7"><a href="#cb15-7"></a>  )</span>
+<span id="cb15-8"><a href="#cb15-8"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="kable-table">
+<div id="tbl-mutate" class="anchored">
+<table class="table table-sm table-striped">
+<caption>Table&nbsp;8.9: Mutating data to remove the parentheses from price_per_item.</caption>
+<thead><tr class="header">
+<th style="text-align: right;">coach_id</th>
+<th style="text-align: right;">year</th>
+<th style="text-align: right;">items</th>
+<th style="text-align: left;">price_per_item</th>
+<th style="text-align: left;">totalprice</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2018</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">3.91</td>
+<td style="text-align: left;">7.82</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">4.72</td>
+<td style="text-align: left;">37.76</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: left;">5.59</td>
+<td style="text-align: left;">55.9</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2018</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">3.91</td>
+<td style="text-align: left;">3.91</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">4.72</td>
+<td style="text-align: left;">28.32</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">5.59</td>
+<td style="text-align: left;">5.59</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">2018</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">3.91</td>
+<td style="text-align: left;">15.64</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">4.72</td>
+<td style="text-align: left;">23.6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">5.59</td>
+<td style="text-align: left;">27.95</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">2018</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: left;">3.91</td>
+<td style="text-align: left;">39.1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">4.72</td>
+<td style="text-align: left;">4.72</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">5.59</td>
+<td style="text-align: left;">16.77</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">2018</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">3.91</td>
+<td style="text-align: left;">11.73</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: left;">4.72</td>
+<td style="text-align: left;">42.48</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">5.59</td>
+<td style="text-align: left;">44.72</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</section><section id="fixing-data-types" class="level3" data-number="8.4.5"><h3 data-number="8.4.5" class="anchored" data-anchor-id="fixing-data-types">
+<span class="header-section-number">8.4.5</span> Fixing data types</h3>
+<p>The <code>price_per_item</code> and <code>totalprice</code> columns are still characters, so you can’t do things like calculate the sum of <code>totalprice</code>.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># check the data types</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="fu">glimpse</span>(mutated_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 15
+Columns: 5
+$ coach_id       &lt;dbl&gt; 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5
+$ year           &lt;int&gt; 2018, 2019, 2020, 2018, 2019, 2020, 2018, 2019, 2020, 2…
+$ items          &lt;int&gt; 2, 8, 10, 1, 6, 1, 4, 5, 5, 10, 1, 3, 3, 9, 8
+$ price_per_item &lt;chr&gt; "3.91", "4.72", "5.59", "3.91", "4.72", "5.59", "3.91",…
+$ totalprice     &lt;chr&gt; "7.82", "37.76", "55.9", "3.91", "28.32", "5.59", "15.6…</code></pre>
+</div>
+</div>
+<p>Once the data are clean and tidy, you can fix all of your column data types in one step using <code><a href="https://readr.tidyverse.org/reference/type_convert.html">readr::type_convert()</a></code>. This is good practice when you’ve finished cleaning a data set. If the automatic type detection doesn’t work as expected, this usually means that you still have non-numeric characters in a column where there were only supposed to be numbers. You can also manually set the column types in the same way as for <code><a href="https://readr.tidyverse.org/reference/read_delim.html">readr::read_csv()</a></code> (see <a href="04-data.html"><span>Chapter&nbsp;4</span></a>)).</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>tidy_data <span class="ot">&lt;-</span> <span class="fu">type_convert</span>(</span>
+<span id="cb18-2"><a href="#cb18-2"></a>  <span class="at">df =</span> mutated_data,</span>
+<span id="cb18-3"><a href="#cb18-3"></a>  <span class="at">trim_ws =</span> <span class="cn">TRUE</span> <span class="co"># removes spaces before and after values</span></span>
+<span id="cb18-4"><a href="#cb18-4"></a>)</span>
+<span id="cb18-5"><a href="#cb18-5"></a></span>
+<span id="cb18-6"><a href="#cb18-6"></a><span class="co"># check the data types</span></span>
+<span id="cb18-7"><a href="#cb18-7"></a><span class="fu">glimpse</span>(tidy_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 15
+Columns: 5
+$ coach_id       &lt;dbl&gt; 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5
+$ year           &lt;int&gt; 2018, 2019, 2020, 2018, 2019, 2020, 2018, 2019, 2020, 2…
+$ items          &lt;int&gt; 2, 8, 10, 1, 6, 1, 4, 5, 5, 10, 1, 3, 3, 9, 8
+$ price_per_item &lt;dbl&gt; 3.91, 4.72, 5.59, 3.91, 4.72, 5.59, 3.91, 4.72, 5.59, 3…
+$ totalprice     &lt;dbl&gt; 7.82, 37.76, 55.90, 3.91, 28.32, 5.59, 15.64, 23.60, 27…</code></pre>
+</div>
+</div>
+</section></section><section id="sec-pipes" class="level2" data-number="8.5"><h2 data-number="8.5" class="anchored" data-anchor-id="sec-pipes">
+<span class="header-section-number">8.5</span> Pipes</h2>
+<div style="width: 200px; float: right;">
+<p><img src="images/tidy/pipe_sticker.png" style="width: 100%"></p>
+</div>
+<p>We’ve already introduced pipes in <a href="05-summary.html#sec-pipes-first"><span>Section&nbsp;5.3.2</span></a> but this type of data processing is where they really start to shine, as they can significantly reduce the amount of code you write.</p>
+<p>As a recap, a pipe takes the result of the previous function and sends it to the next function as its first argument, which means that you do not need to create intermediate objects. Below is all the code we’ve used in this chapter, and in the process we created five objects. This can get very confusing in longer scripts.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>untidy_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/untidy_data.csv"</span>, </span>
+<span id="cb20-2"><a href="#cb20-2"></a>                        <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb20-3"><a href="#cb20-3"></a></span>
+<span id="cb20-4"><a href="#cb20-4"></a>longer_data <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(</span>
+<span id="cb20-5"><a href="#cb20-5"></a>  <span class="at">data =</span> untidy_data,</span>
+<span id="cb20-6"><a href="#cb20-6"></a>  <span class="at">cols =</span> itemsprice_2018<span class="sc">:</span>totalprice_2020,</span>
+<span id="cb20-7"><a href="#cb20-7"></a>  <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">"category"</span>, <span class="st">"year"</span>),</span>
+<span id="cb20-8"><a href="#cb20-8"></a>  <span class="at">names_sep =</span> <span class="st">"_"</span>, </span>
+<span id="cb20-9"><a href="#cb20-9"></a>  <span class="at">values_to =</span> <span class="st">"value"</span>, </span>
+<span id="cb20-10"><a href="#cb20-10"></a>  <span class="at">names_transform =</span> <span class="fu">list</span>(<span class="at">year =</span> as.integer),</span>
+<span id="cb20-11"><a href="#cb20-11"></a>  <span class="at">values_transform =</span> <span class="fu">list</span>(<span class="at">value =</span> as.character) </span>
+<span id="cb20-12"><a href="#cb20-12"></a>) </span>
+<span id="cb20-13"><a href="#cb20-13"></a></span>
+<span id="cb20-14"><a href="#cb20-14"></a>wider_data <span class="ot">&lt;-</span> <span class="fu">pivot_wider</span>(</span>
+<span id="cb20-15"><a href="#cb20-15"></a>  <span class="at">data =</span> longer_data,</span>
+<span id="cb20-16"><a href="#cb20-16"></a>  <span class="at">id_cols =</span> <span class="fu">c</span>(coach_id, year),</span>
+<span id="cb20-17"><a href="#cb20-17"></a>  <span class="at">names_from =</span> category,</span>
+<span id="cb20-18"><a href="#cb20-18"></a>  <span class="at">values_from =</span> value</span>
+<span id="cb20-19"><a href="#cb20-19"></a>)</span>
+<span id="cb20-20"><a href="#cb20-20"></a></span>
+<span id="cb20-21"><a href="#cb20-21"></a>split_data <span class="ot">&lt;-</span> <span class="fu">separate</span>(</span>
+<span id="cb20-22"><a href="#cb20-22"></a>  <span class="at">data =</span> wider_data,</span>
+<span id="cb20-23"><a href="#cb20-23"></a>  <span class="at">col =</span> itemsprice,</span>
+<span id="cb20-24"><a href="#cb20-24"></a>  <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"items"</span>, <span class="st">"price_per_item"</span>),</span>
+<span id="cb20-25"><a href="#cb20-25"></a>  <span class="at">sep =</span> <span class="st">" "</span>, </span>
+<span id="cb20-26"><a href="#cb20-26"></a>  <span class="at">remove =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb20-27"><a href="#cb20-27"></a>  <span class="at">convert =</span> <span class="cn">TRUE</span></span>
+<span id="cb20-28"><a href="#cb20-28"></a>) </span>
+<span id="cb20-29"><a href="#cb20-29"></a></span>
+<span id="cb20-30"><a href="#cb20-30"></a>mutated_data <span class="ot">&lt;-</span> <span class="fu">mutate</span>(</span>
+<span id="cb20-31"><a href="#cb20-31"></a>  <span class="at">.data =</span> split_data,</span>
+<span id="cb20-32"><a href="#cb20-32"></a>  <span class="at">price_per_item =</span> stringr<span class="sc">::</span><span class="fu">str_replace_all</span>(</span>
+<span id="cb20-33"><a href="#cb20-33"></a>    <span class="at">string =</span> price_per_item, </span>
+<span id="cb20-34"><a href="#cb20-34"></a>    <span class="at">pattern =</span> <span class="st">"[()]"</span>, </span>
+<span id="cb20-35"><a href="#cb20-35"></a>    <span class="at">replacement =</span> <span class="st">""</span></span>
+<span id="cb20-36"><a href="#cb20-36"></a>  )</span>
+<span id="cb20-37"><a href="#cb20-37"></a>) </span>
+<span id="cb20-38"><a href="#cb20-38"></a></span>
+<span id="cb20-39"><a href="#cb20-39"></a>tidy_data <span class="ot">&lt;-</span> <span class="fu">type_convert</span>(</span>
+<span id="cb20-40"><a href="#cb20-40"></a>  <span class="at">df =</span> mutated_data,</span>
+<span id="cb20-41"><a href="#cb20-41"></a>  <span class="at">trim_ws =</span> <span class="cn">TRUE</span></span>
+<span id="cb20-42"><a href="#cb20-42"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You <em>can</em> give each object the same name and keep replacing the old data object with the new one at each step. This will keep your environment clean, but it makes debugging code much harder.</p>
+</div>
+</div>
+<p>For longer series of steps like the one above, using pipes can eliminate many intermediate objects. This also makes it easier to add an intermediate step to your process without having to think of a new table name and edit the table input to the next step (which is really easy to accidentally miss).</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>tidy_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="at">file =</span> <span class="st">"data/untidy_data.csv"</span>,</span>
+<span id="cb21-2"><a href="#cb21-2"></a>                      <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb21-3"><a href="#cb21-3"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb21-4"><a href="#cb21-4"></a>    <span class="at">cols =</span> itemsprice_2018<span class="sc">:</span>totalprice_2020,</span>
+<span id="cb21-5"><a href="#cb21-5"></a>    <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">"category"</span>, <span class="st">"year"</span>),</span>
+<span id="cb21-6"><a href="#cb21-6"></a>    <span class="at">names_sep =</span> <span class="st">"_"</span>, </span>
+<span id="cb21-7"><a href="#cb21-7"></a>    <span class="at">values_to =</span> <span class="st">"value"</span>, </span>
+<span id="cb21-8"><a href="#cb21-8"></a>    <span class="at">names_transform =</span> <span class="fu">list</span>(<span class="at">year =</span> as.integer),</span>
+<span id="cb21-9"><a href="#cb21-9"></a>    <span class="at">values_transform =</span> <span class="fu">list</span>(<span class="at">value =</span> as.character) </span>
+<span id="cb21-10"><a href="#cb21-10"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb21-11"><a href="#cb21-11"></a>  <span class="fu">pivot_wider</span>(</span>
+<span id="cb21-12"><a href="#cb21-12"></a>    <span class="at">id_cols =</span> <span class="fu">c</span>(coach_id, year),</span>
+<span id="cb21-13"><a href="#cb21-13"></a>    <span class="at">names_from =</span> category,</span>
+<span id="cb21-14"><a href="#cb21-14"></a>    <span class="at">values_from =</span> value</span>
+<span id="cb21-15"><a href="#cb21-15"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb21-16"><a href="#cb21-16"></a>  <span class="fu">separate</span>(</span>
+<span id="cb21-17"><a href="#cb21-17"></a>    <span class="at">col =</span> itemsprice,</span>
+<span id="cb21-18"><a href="#cb21-18"></a>    <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"items"</span>, <span class="st">"price_per_item"</span>),</span>
+<span id="cb21-19"><a href="#cb21-19"></a>    <span class="at">sep =</span> <span class="st">" "</span>, </span>
+<span id="cb21-20"><a href="#cb21-20"></a>    <span class="at">remove =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb21-21"><a href="#cb21-21"></a>    <span class="at">convert =</span> <span class="cn">TRUE</span></span>
+<span id="cb21-22"><a href="#cb21-22"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb21-23"><a href="#cb21-23"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb21-24"><a href="#cb21-24"></a>    <span class="at">price_per_item =</span> stringr<span class="sc">::</span><span class="fu">str_replace_all</span>(</span>
+<span id="cb21-25"><a href="#cb21-25"></a>      <span class="at">string =</span> price_per_item, </span>
+<span id="cb21-26"><a href="#cb21-26"></a>      <span class="at">pattern =</span> <span class="st">"[()]"</span>, </span>
+<span id="cb21-27"><a href="#cb21-27"></a>      <span class="at">replacement =</span> <span class="st">""</span></span>
+<span id="cb21-28"><a href="#cb21-28"></a>    )</span>
+<span id="cb21-29"><a href="#cb21-29"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb21-30"><a href="#cb21-30"></a>  <span class="fu">type_convert</span>(</span>
+<span id="cb21-31"><a href="#cb21-31"></a>    <span class="at">trim_ws =</span> <span class="cn">TRUE</span></span>
+<span id="cb21-32"><a href="#cb21-32"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You can read the code above like this:</p>
+<ol type="1">
+<li>
+<p>Read the data with <code>read_csv()</code></p>
+<ul>
+<li>
+<code>file</code>: from the file at r path(“data/untidy_data.csv”)`,</li>
+<li>
+<code>show_col_types</code>: do not show the column types message; <strong>and then</strong>
+</li>
+</ul>
+</li>
+<li>
+<p>Reshape the data longer with <code>pivot_longer()</code></p>
+<ul>
+<li>
+<code>cols</code>: take the columns from <code>itemsprice_2018</code> to <code>totalprice_2020</code>,</li>
+<li>
+<code>names_to</code>: create new columns called “category” and “year” from the <code>cols</code> header names,</li>
+<li>
+<code>names_sep</code>: separate the column names using “_”</li>
+<li>
+<code>values_to</code>: create a new column called “value” from the <code>cols</code> values,</li>
+<li>
+<code>names_transform</code>: transform the <code>year</code> column to integers,</li>
+<li>
+<code>values_transform</code>: transform the <code>value</code> column to characters; <strong>and then</strong>
+</li>
+</ul>
+</li>
+<li>
+<p>Reshape the data wider with <code>pivot_wider()</code></p>
+<ul>
+<li>
+<code>id_cols</code>: each row should be an observation of a unique <code>coach_id</code> and <code>year</code>,</li>
+<li>
+<code>names_from</code>: get the new column names from the values in the <code>category</code> column,</li>
+<li>
+<code>values_from</code>: get the new column values from the values in the <code>value</code> column; <strong>and then</strong>
+</li>
+</ul>
+</li>
+<li>
+<p>Split multiple values in the same column with <code>separate()</code></p>
+<ul>
+<li>
+<code>col</code>: separate the column <code>itemsprice</code>,</li>
+<li>
+<code>into</code>: into new columns called “items” and “price_per_item”,</li>
+<li>
+<code>sep</code>: separate the values at each ” “,</li>
+<li>
+<code>remove</code>: do remove the old column,</li>
+<li>
+<code>convert</code>: do convert the new columns into the right data types; <strong>and then</strong>
+</li>
+</ul>
+</li>
+<li>
+<p>Change a column with <code>mutate()</code></p>
+<ul>
+<li>
+<p><code>price_per_item</code>: replace the existing column <code>price_per_item</code> with the result of a search and replace with <code>str_replace_all()</code>:</p>
+<ul>
+<li>
+<code>string</code>: the strings to modify come from the <code>price_per_item</code> columns,</li>
+<li>
+<code>pattern</code>: search for left or right parentheses,</li>
+<li>
+<code>replacement</code>: replace them with ““; <strong>and then</strong>,</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Fix data types with <code>type_convert()</code></p>
+<ul>
+<li>
+<code>trim_ws</code>: remove spaces, tabs, and line breaks from the start and end of each value</li>
+</ul>
+</li>
+</ol>
+<p>Don’t feel like you always need to get all of your data wrangling code into a single pipeline. You should make intermediate objects whenever you need to break up your code because it’s getting too complicated or if you need to debug something.</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You can debug a pipe by highlighting from the beginning to just before the pipe you want to stop at. Try this by highlighting from <code>data &lt;-</code> to the end of the <code>separate</code> function and typing command-enter (mac) or control-enter (PC). What does <code>data</code> look like now?</p>
+</div>
+</div>
+</section><section id="exercises" class="level2" data-number="8.6"><h2 data-number="8.6" class="anchored" data-anchor-id="exercises">
+<span class="header-section-number">8.6</span> Exercises</h2>
+<p>Let’s try a couple of examples.</p>
+<ul>
+<li>Save your current Markdown, close it, and open a new Rmd named “Patient_survey”.</li>
+<li>Download a copy of <a href="https://healthteachr.github.io/data/wide_exercise-1.csv">wide_exercise-1.csv</a> and <a href="https://healthteachr.github.io/data/wide_exercise-2.csv">wide_exercise-2.csv</a> into your data folder.</li>
+<li>In the set-up code chunk, load the <pkg>tidyverse</pkg> then load the two data files in using <code>read_csv()</code> and name the objects <code>wide1</code> and <code>wide2</code>
+</li>
+</ul>
+<div class="cell" data-layout-align="center" data-webex.hide="true">
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb22-2"><a href="#cb22-2"></a>wide1 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/wide_exercise-1.csv"</span>)</span>
+<span id="cb22-3"><a href="#cb22-3"></a>wide2 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/wide_exercise-2.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+<p>The two datasets represent simulated data from a patient satisfaction survey. We’ll do them one at a time, as they differ in complexity.</p>
+<section id="survey-1" class="level3" data-number="8.6.1"><h3 data-number="8.6.1" class="anchored" data-anchor-id="survey-1">
+<span class="header-section-number">8.6.1</span> Survey 1</h3>
+<p><code>wide1</code> has data from 50 patients who were asked five questions about their most recent experience at a health centre. The results from this questionnaire are typically reported as a single overall satisfaction score, which is calculated by taking the mean of the five responses. Additionally, the survey also records whether the patient was attending the clinic for the first time, or as a repeat patient.</p>
+<ul>
+<li>Use your method of choice to look at the dataset and familiarise yourself with its structure and data.</li>
+</ul>
+<p>As noted, it’s important to think through what your tidied data should look like. Often, the problem with data wrangling in R isn’t actually the code, it’s a lack of understanding of the data that’s being worked on.</p>
+<ol type="1">
+<li>How many <strong>variables</strong> should the long-form version of <code>wide</code> have? <input class="webex-solveme nospaces" size="1" data-answer="[&quot;4&quot;]">
+</li>
+<li>How many <strong>observations</strong> should the long-form version of <code>wide1</code> have? <input class="webex-solveme nospaces" size="3" data-answer="[&quot;250&quot;]">
+</li>
+</ol>
+<div class="webex-solution">
+<button>
+Explain these answers
+</button>
+<ol type="1">
+<li>There should be four variables, as there are 4 types of data: patient id, whether they are a repeat patient, the question they were asked, and their response.</li>
+<li>There will be 250 observations or rows of data because each patient will have 5 rows of data (one per question) and there are 50 patients (50 * 5 = 250).</li>
+</ol>
+</div>
+</section><section id="tidy-1" class="level3" data-number="8.6.2"><h3 data-number="8.6.2" class="anchored" data-anchor-id="tidy-1">
+<span class="header-section-number">8.6.2</span> Tidy 1</h3>
+<p>Transform <code>wide1</code> to long-form using <code>pivot_longer()</code> and store it in an object named <code>tidy1</code></p>
+<div class="cell" data-layout-align="center" data-webex.hide="true">
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>tidy1 <span class="ot">&lt;-</span> wide1 <span class="sc">%&gt;%</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> q1<span class="sc">:</span>q5,</span>
+<span id="cb23-3"><a href="#cb23-3"></a>               <span class="at">names_to =</span> <span class="st">"question"</span>, </span>
+<span id="cb23-4"><a href="#cb23-4"></a>               <span class="at">values_to =</span> <span class="st">"response"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="survey-2" class="level3" data-number="8.6.3"><h3 data-number="8.6.3" class="anchored" data-anchor-id="survey-2">
+<span class="header-section-number">8.6.3</span> Survey 2</h3>
+<p><code>wide2</code> also has data from 50 patients, however, there are now two measures included in the questionnaire. There are still five questions that relate to satisfaction, but there are also five questions that relate to whether the patient would recommend the medical practice to a friend. Both measures are typically reported by calculating an overall mean for each of the five items.</p>
+<ul>
+<li>Use your method of choice to look at the dataset and familiarise yourself with its structure and data.</li>
+</ul>
+<p>This is not as simple as the first exercise because there’s actually two potential ways you might tidy this data, depending on what you want to do with it and how you conceptualise the two different measurements. It’s important to recognise that many of your coding problems will not have just one solution.</p>
+<section id="tidy-2a" class="level4"><h4 class="anchored" data-anchor-id="tidy-2a">Tidy 2a</h4>
+<p>For the first option, we’re going to treat the “satisfaction” and “recommendation” measurements as two categories of the same variable. This will be a fully long-form data set with five variables <code>id</code>, <code>repeat_patient</code>, <code>question</code> (the question number), <code>category</code> (whether it’s <code>sat</code> or <code>rec</code>), and <code>response</code> (the numerical rating).</p>
+<ul>
+<li>How many <strong>observations</strong> should the fully long-form version of <code>wide2</code> have? <input class="webex-solveme nospaces" size="3" data-answer="[&quot;500&quot;]">
+</li>
+</ul>
+<div class="webex-solution">
+<button>
+Explain this answer
+</button>
+<p>There will be 500 rows of data because each participant will have 10 rows: 5 for the satisfaction questions and five for the recommendation questions.</p>
+</div>
+<p>Transform <code>wide2</code> to full long-form using <code>pivot_longer()</code> and store it in an object named <code>tidy2a</code>.</p>
+<p>This exercise requires multiple steps and you may need to look at the help documentation.</p>
+<div class="webex-solution">
+<button>
+Hint 1
+</button>
+<p><code>data %&gt;% pivot_longer() %&gt;% separate()</code></p>
+</div>
+<div class="webex-solution">
+<button>
+Hint 2
+</button>
+<p><code>into  = c("col1", "col2")</code></p>
+</div>
+<div class="cell" data-layout-align="center" data-webex.hide="true">
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>tidy2a <span class="ot">&lt;-</span> wide2 <span class="sc">%&gt;%</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> q1_sat<span class="sc">:</span>q5_rec,</span>
+<span id="cb24-3"><a href="#cb24-3"></a>               <span class="at">names_to =</span> <span class="st">"question"</span>, </span>
+<span id="cb24-4"><a href="#cb24-4"></a>               <span class="at">values_to =</span> <span class="st">"response"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb24-5"><a href="#cb24-5"></a>  <span class="fu">separate</span>(<span class="at">col =</span> <span class="st">"question"</span>, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"question"</span>, <span class="st">"category"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center" data-webex.hide="Alternative solution">
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Alternative solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="co"># combine pivot_longer and separate by setting two values for names_to</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a><span class="co"># must include names_sep to determine how to separate the column names</span></span>
+<span id="cb25-3"><a href="#cb25-3"></a>tidy2a <span class="ot">&lt;-</span> wide2 <span class="sc">%&gt;%</span></span>
+<span id="cb25-4"><a href="#cb25-4"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> q1_sat<span class="sc">:</span>q5_rec,</span>
+<span id="cb25-5"><a href="#cb25-5"></a>               <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">"question"</span>, <span class="st">"category"</span>), </span>
+<span id="cb25-6"><a href="#cb25-6"></a>               <span class="at">names_sep =</span> <span class="st">"_"</span>,</span>
+<span id="cb25-7"><a href="#cb25-7"></a>               <span class="at">values_to =</span> <span class="st">"response"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="tidy-2b" class="level4"><h4 class="anchored" data-anchor-id="tidy-2b">Tidy 2b</h4>
+<p>The second option is to treat the satisfaction and recommendation scores as two distinct variables. This only makes sense if the satisfaction and recommendation scores for each question number are related to each other (e.g., q1 is about the same thing for both questions), making them part of the same observation.</p>
+<p>This version should also have five variables, but it won’t be fully long-form, it’ll be a slight mix of the two that we’re going to call “semi-long”. The variables in the semi-long version will be <code>id</code>, <code>repeat</code>, <code>question</code> (the question number), <code>sat</code> (the response for the satisfaction question), and <code>rec</code> (the response for the recommendation question).</p>
+<ul>
+<li>How many <strong>observations</strong> should the semi-long version of <code>wide2</code> have? <input class="webex-solveme nospaces" size="3" data-answer="[&quot;250&quot;]">
+</li>
+</ul>
+<div class="webex-solution">
+<button>
+Explain this answer
+</button>
+<p>There will be 250 rows of data because, just like <code>tidy1</code>, each participant will have 5 rows, one for each of the five questions. The different responses to the satisfaction and recommendation questions are in different variables.</p>
+</div>
+<p>This also takes multiple steps.</p>
+<div class="webex-solution">
+<button>
+Hint 1
+</button>
+<p>You can reuse the code from <code>tidy2a</code>, you just need to add on an extra line that makes the data slightly wider.</p>
+</div>
+<div class="webex-solution">
+<button>
+Hint 2
+</button>
+<p><code>data %&gt;% pivot_longer() %&gt;% separate() %&gt;% pivot_wider()</code></p>
+</div>
+<div class="cell" data-layout-align="center" data-webex.hide="true">
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>tidy2b <span class="ot">&lt;-</span> wide2 <span class="sc">%&gt;%</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> q1_sat<span class="sc">:</span>q5_rec,</span>
+<span id="cb26-3"><a href="#cb26-3"></a>               <span class="at">names_to =</span> <span class="st">"question"</span>, </span>
+<span id="cb26-4"><a href="#cb26-4"></a>               <span class="at">values_to =</span> <span class="st">"response"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb26-5"><a href="#cb26-5"></a>  <span class="fu">separate</span>(<span class="at">col =</span> <span class="st">"question"</span>, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"question"</span>, <span class="st">"category"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb26-6"><a href="#cb26-6"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="st">"category"</span>, <span class="at">values_from =</span> <span class="st">"response"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section></section><section id="analysis-and-visualisation" class="level3" data-number="8.6.4"><h3 data-number="8.6.4" class="anchored" data-anchor-id="analysis-and-visualisation">
+<span class="header-section-number">8.6.4</span> Analysis and visualisation</h3>
+<p>Using <code>group_by()</code> and <code>summarise()</code>, calculate the mean score for each participant for both satisfaction and recommendation. Do this for both versions of the dataset so that you can see how the structure of the dataset changes the approach you need to take.</p>
+<div class="cell" data-layout-align="center" data-webex.hide="true">
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>tidy2a <span class="sc">%&gt;%</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a>  <span class="fu">group_by</span>(id, category) <span class="sc">%&gt;%</span></span>
+<span id="cb27-3"><a href="#cb27-3"></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(response),</span>
+<span id="cb27-4"><a href="#cb27-4"></a>            <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb27-5"><a href="#cb27-5"></a></span>
+<span id="cb27-6"><a href="#cb27-6"></a>tidy2b <span class="sc">%&gt;%</span></span>
+<span id="cb27-7"><a href="#cb27-7"></a>  <span class="fu">group_by</span>(id) <span class="sc">%&gt;%</span></span>
+<span id="cb27-8"><a href="#cb27-8"></a>  <span class="fu">summarise</span>(<span class="at">mean_satisfaction =</span> <span class="fu">mean</span>(sat),</span>
+<span id="cb27-9"><a href="#cb27-9"></a>            <span class="at">mean_rec =</span> <span class="fu">mean</span>(rec))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+<p>Replicate the following:</p>
+<section id="plot-1" class="level4"><h4 class="anchored" data-anchor-id="plot-1">Plot 1</h4>
+<p>Scatterplot showing the relationship between satisfaction and recommendation scores, by whether the patient is a repeat patient.</p>
+<div class="webex-solution">
+<button>
+Hint
+</button>
+<p><code>geom_jitter()</code></p>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="08-tidy_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center" data-webex.hide="true">
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-17" class="callout-17-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">ggplot</span>(tidy2b, <span class="fu">aes</span>(<span class="at">x =</span> sat, <span class="at">y =</span> rec, <span class="at">colour =</span> repeat_patient)) <span class="sc">+</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a>  <span class="fu">geom_jitter</span>() <span class="sc">+</span></span>
+<span id="cb28-3"><a href="#cb28-3"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
+<span id="cb28-4"><a href="#cb28-4"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Satisfaction score"</span>, <span class="at">y =</span> <span class="st">"Recommendation score"</span>, <span class="at">title =</span> <span class="st">"Satisfaction and recommendation scores"</span>) <span class="sc">+</span></span>
+<span id="cb28-5"><a href="#cb28-5"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="plot-2" class="level4"><h4 class="anchored" data-anchor-id="plot-2">Plot 2</h4>
+<p>Boxplots showing satisfaction and recommends scores for new and repeat patients separately.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="08-tidy_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center" data-webex.hide="true">
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-18" class="callout-18-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="fu">ggplot</span>(tidy2a, <span class="fu">aes</span>(<span class="at">x =</span> repeat_patient, <span class="at">y =</span> response, <span class="at">fill =</span> repeat_patient)) <span class="sc">+</span></span>
+<span id="cb29-2"><a href="#cb29-2"></a>  <span class="fu">geom_boxplot</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb29-3"><a href="#cb29-3"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>category)<span class="sc">+</span></span>
+<span id="cb29-4"><a href="#cb29-4"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb29-5"><a href="#cb29-5"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="plot-3" class="level4"><h4 class="anchored" data-anchor-id="plot-3">Plot 3</h4>
+<p>Histogram showing the distribution of all responses, across questions and categories.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="08-tidy_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center" data-webex.hide="true">
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-19" class="callout-19-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">ggplot</span>(tidy2a, <span class="fu">aes</span>(<span class="at">x =</span> response)) <span class="sc">+</span></span>
+<span id="cb30-2"><a href="#cb30-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">colour =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"Grey"</span>) <span class="sc">+</span></span>
+<span id="cb30-3"><a href="#cb30-3"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Responses across all questions and categories"</span>) <span class="sc">+</span></span>
+<span id="cb30-4"><a href="#cb30-4"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section></section><section id="your-data" class="level3" data-number="8.6.5"><h3 data-number="8.6.5" class="anchored" data-anchor-id="your-data">
+<span class="header-section-number">8.6.5</span> Your data</h3>
+<p>Finally, find a wide-form dataset of your own and try and tidy it into long-form. If you get stuck or you just want to check your solution, post it on Teams - just remember to be careful about sharing confidential data if it’s your own dataset.</p>
+<p>If your head hurts a bit at this point, rest assured it’s absolutely normal. As we said at the start, reshaping and tidying data is a conceptual leap and there’s no shortcut to the fact it just takes a bit of time and practice with different datasets - you will get there eventually!</p>
+</section></section><section id="sec-glossary-tidy" class="level2" data-number="8.7"><h2 data-number="8.7" class="anchored" data-anchor-id="sec-glossary-tidy">
+<span class="header-section-number">8.7</span> Glossary</h2>
+<div class="cell" data-layout-align="center">
+<p>|term |definition | |:———–|:———-| |character | | |data type | | |long | | |observation | | |tidy data | | |value | | |variable | | |wide | |</p>
+</div>
+</section><section id="sec-resources-tidy" class="level2" data-number="8.8"><h2 data-number="8.8" class="anchored" data-anchor-id="sec-resources-tidy">
+<span class="header-section-number">8.8</span> Further resources</h2>
+<ul>
+<li><a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/tidyr.pdf">Data tidying cheat sheet</a></li>
+<li><a href="http://vita.had.co.nz/papers/tidy-data.html">Tidy Data</a></li>
+<li>
+<a href="http://r4ds.had.co.nz/tidy-data.html">Chapter 12: Tidy Data</a> in <em>R for Data Science</em>
+</li>
+<li>
+<a href="http://r4ds.had.co.nz/pipes.html">Chapter 18: Pipes</a> in <em>R for Data Science</em>
+</li>
+</ul>
+
+
+</section></main><!-- /main --><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script><script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  if (t = document.getElementById("webex-total_correct")) {
+    var correct = document.getElementsByClassName("webex-correct").length;
+    var solvemes = document.getElementsByClassName("webex-solveme").length;
+    var radiogroups = document.getElementsByClassName("webex-radiogroup").length;
+    var selects = document.getElementsByClassName("webex-select").length;
+
+    t.innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("webex onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+    $(solveme[i]).after(" <span class='webex-icon'></span>");
+  }
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    $(selects[i]).after(" <span class='webex-icon'></span>");
+  }
+
+  update_total_correct();
+}
+
+</script><script>
+$( document ).ready(function() {
+  var cite = ' ';
+  var psyteachr = ' <a href="https://psyteachr.github.io/"><img src="images/logos/psyteachr_logo.png" style="height: 31px; color: white;" alt="psyTeachR: Reproducible Research" /></a>';
+  var license = ' <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/" target="blank"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a>';
+
+  $("footer div.row div:eq(1) p").html(
+    psyteachr + license + cite
+  );
+
+  function move_sidebar() {
+    var w = window.innerWidth;
+    if (w < 992) {
+      $("#toc").appendTo($("#main-nav"));
+    } else {
+      $("#toc").appendTo($("div.sidebar-chapter"));
+    }
+  }
+  move_sidebar();
+  window.onresize = move_sidebar;
+});
+</script><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./07-joins.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Relations</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./09-wrangle.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Data Wrangling</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">CC-BY 2022, healthTeachR</div>   
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+<li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/healthteachr/ads-v2">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+</div>
+  </div>
+</footer>
+
+
+</body></html>
