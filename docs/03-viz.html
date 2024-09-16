@@ -415,14 +415,17 @@ gtag('config', 'G-6NP3MF25W3', { 'anonymize_ip': true});
 <pre class="sourceCode r code-with-copy"><code class="sourceCode R">```{r setup, include=FALSE}</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># includes ggplot2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tidyverse' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
 <pre><code>Warning: package 'ggplot2' was built under R version 4.3.3</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">library</span>(patchwork) <span class="co"># for multi-part plots</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">library</span>(ggthemes)  <span class="co"># for plot themes</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">library</span>(patchwork) <span class="co"># for multi-part plots</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="fu">library</span>(ggthemes)  <span class="co"># for plot themes</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: package 'ggthemes' was built under R version 4.3.3</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">library</span>(lubridate) <span class="co"># for manipulating dates</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">library</span>(lubridate) <span class="co"># for manipulating dates</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre class="sourceCode r code-with-copy"><code class="sourceCode R">```</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 </div>
@@ -482,7 +485,7 @@ gtag('config', 'G-6NP3MF25W3', { 'anonymize_ip': true});
 </div>
 </div>
 </div>
-<p>Variables can be classified as <a class="glossary">continuous<span class="def"></span></a> (numbers) or <a class="glossary">categorical<span class="def"></span></a> (labels). When you’re plotting data, it’s important to know what kind of variables you have, which can help you decide what types of plots are most appropriate. Each variable also has a <a class="glossary">data type<span class="def"></span></a>, such as <a class="glossary">numeric<span class="def"></span></a> (numbers), <a class="glossary">character<span class="def"></span></a> (text), or <a class="glossary">logical<span class="def"></span></a> (TRUE/FALSE values). Some plots can only work on some data types. Make sure you have watched the mini-lecture on types of data from last week before you work through this chapter. Additionally, <span class="quarto-unresolved-ref">?sec-data-types</span> has more details, as this concept will be relevant repeatedly.</p>
+<p>Variables can be classified as <a class="glossary">continuous<span class="def"></span></a> (numbers) or <a class="glossary">categorical<span class="def"></span></a> (labels). When you’re plotting data, it’s important to know what kind of variables you have, which can help you decide what types of plots are most appropriate. Each variable also has a <a class="glossary">data type<span class="def"></span></a>, such as <a class="glossary">numeric<span class="def"></span></a> (numbers), <a class="glossary">character<span class="def"></span></a> (text), or <a class="glossary">logical<span class="def"></span></a> (TRUE/FALSE values). Some plots can only work on some data types. Make sure you have watched the mini-lecture on types of data from last week before you work through this chapter. Additionally, <a href="app-datatypes.html"><span>Appendix&nbsp;G</span></a> has more details, as this concept will be relevant repeatedly.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -517,9 +520,9 @@ Do not factor numbers
 <div class="code-with-filename-file">
 <pre><strong>Example</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="dv">0</span>, .<span class="dv">5</span>)  <span class="co"># numeric vector</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a>f <span class="ot">&lt;-</span> <span class="fu">factor</span>(x)     <span class="co"># convert to factor</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a>x <span class="sc">==</span> <span class="fu">as.numeric</span>(f) <span class="co"># does not convert back to numeric </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="dv">0</span>, .<span class="dv">5</span>)  <span class="co"># numeric vector</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>f <span class="ot">&lt;-</span> <span class="fu">factor</span>(x)     <span class="co"># convert to factor</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>x <span class="sc">==</span> <span class="fu">as.numeric</span>(f) <span class="co"># does not convert back to numeric </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE FALSE FALSE</code></pre>
@@ -530,7 +533,7 @@ Do not factor numbers
 <div class="code-with-filename-file">
 <pre><strong>You cannot average a factor</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>m <span class="ot">&lt;-</span> <span class="fu">mean</span>(f)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>m <span class="ot">&lt;-</span> <span class="fu">mean</span>(f)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in mean.default(f): argument is not numeric or logical: returning NA</code></pre>
@@ -543,17 +546,17 @@ Do not factor numbers
 <span class="header-section-number">3.2.3</span> Dates and times</h3>
 <p>Dates and times are a special case of variable. They can act like categorical or continuous variables, and there are special ways to plot them. Dates and times can be hard to work with, but the [<pkg>lubridate</pkg>(https://lubridate.tidyverse.org/) package provides functions to help you with this.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># the current date</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a>lubridate<span class="sc">::</span><span class="fu">today</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># the current date</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>lubridate<span class="sc">::</span><span class="fu">today</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "2024-09-15"</code></pre>
+<pre><code>[1] "2024-09-16"</code></pre>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># the current date and time in the GMT timezone</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a>lubridate<span class="sc">::</span><span class="fu">now</span>(<span class="at">tzone =</span> <span class="st">"GMT"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># the current date and time in the GMT timezone</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>lubridate<span class="sc">::</span><span class="fu">now</span>(<span class="at">tzone =</span> <span class="st">"GMT"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "2024-09-15 18:51:28 GMT"</code></pre>
+<pre><code>[1] "2024-09-16 17:22:51 GMT"</code></pre>
 </div>
 </div>
 <div class="callout-note try callout callout-style-default callout-captioned">
@@ -568,7 +571,7 @@ Test your understanding
 <div class="callout-body-container callout-body">
 <p>Coming back to the patients dataset, what type of variable is in each column? You can use the function <code>glimpse()</code> to show a list of the column names, their data types, and the first few values in each column - here is the output of running <code>glimpse()</code> on the patients dataset.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">glimpse</span>(patients)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">glimpse</span>(patients)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 4
 Columns: 6
@@ -702,7 +705,7 @@ $ generalhealth &lt;fct&gt; poor, very good, fair, very good</code></pre>
 <p>Let’s build up the plot above, layer by layer. First we need to get the data. We’ll learn how to load data from different sources in <a href="04-data.html"><span>Chapter&nbsp;4</span></a>, but this time we’ll use the same method as we did in <a href="02-reports.html#sec-loading-online"><span>Section&nbsp;2.4.1</span></a> and load it from an online source.</p>
 <p>When you load the data, <code>read_csv()</code> will produce a message that gives you information about the data it has imported and what assumptions it has made. The “column specification” tells you what each column is named and what type of data R has categorised each variable as. The abbreviation “chr” is for <a class="glossary">character<span class="def"></span></a> columns, “dbl” is for <a class="glossary">double<span class="def"></span></a> columns, and “dttm” is a date/time column.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>function_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://healthteachr.github.io/data/Function_and_PA_data.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>function_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://healthteachr.github.io/data/Function_and_PA_data.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 100 Columns: 10
 ── Column specification ────────────────────────────────────────────────────────
@@ -740,7 +743,7 @@ dttm (1): test_start
 </ul>
 <p>Unless you specify the column types, data importing functions will just guess the types and usually default to double for columns with numbers and character for columns with letters. Use the function <code>spec()</code> to find out all of the column types and edit them if needed.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">spec</span>(function_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">spec</span>(function_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>cols(
   id = col_double(),
@@ -771,34 +774,34 @@ Define objects before you use them
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="co"># updated column types</span></span>
-<span id="cb20-2"><a href="#cb20-2"></a>function_col_types <span class="ot">&lt;-</span> <span class="fu">cols</span>(</span>
-<span id="cb20-3"><a href="#cb20-3"></a>  <span class="at">id =</span> <span class="fu">col_character</span>(),</span>
-<span id="cb20-4"><a href="#cb20-4"></a>  <span class="at">sex =</span> <span class="fu">col_factor</span>(<span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Male"</span>, <span class="st">"Female"</span>)),</span>
-<span id="cb20-5"><a href="#cb20-5"></a>  <span class="at">gaitspeed =</span> <span class="fu">col_double</span>(),</span>
-<span id="cb20-6"><a href="#cb20-6"></a>  <span class="at">age =</span> <span class="fu">col_integer</span>(),</span>
-<span id="cb20-7"><a href="#cb20-7"></a>  <span class="at">steps =</span> <span class="fu">col_integer</span>(),</span>
-<span id="cb20-8"><a href="#cb20-8"></a>  <span class="at">musculoskeletal =</span> <span class="fu">col_factor</span>(<span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Osteoarthritis"</span>, <span class="st">"Rheumatoid arthritis"</span>, <span class="st">"Osteoporosis"</span>, <span class="st">"Sarcopenia"</span>, <span class="st">"None"</span>)),</span>
-<span id="cb20-9"><a href="#cb20-9"></a>  <span class="at">condition_type =</span> <span class="fu">col_factor</span>(<span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Joints"</span>, <span class="st">"Bones"</span>, <span class="st">"Muscles"</span>, <span class="st">"None"</span>)),</span>
-<span id="cb20-10"><a href="#cb20-10"></a>  <span class="at">test_start =</span> <span class="fu">col_datetime</span>(<span class="at">format =</span> <span class="st">""</span>),</span>
-<span id="cb20-11"><a href="#cb20-11"></a>  <span class="at">generalhealth =</span> <span class="fu">col_integer</span>()</span>
-<span id="cb20-12"><a href="#cb20-12"></a>)</span>
-<span id="cb20-13"><a href="#cb20-13"></a></span>
-<span id="cb20-14"><a href="#cb20-14"></a><span class="co"># re-import data with correct column  types</span></span>
-<span id="cb20-15"><a href="#cb20-15"></a>function_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://healthteachr.github.io/data/Function_and_PA_data.csv"</span>,</span>
-<span id="cb20-16"><a href="#cb20-16"></a>                        <span class="at">col_types =</span> function_col_types)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="co"># updated column types</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a>function_col_types <span class="ot">&lt;-</span> <span class="fu">cols</span>(</span>
+<span id="cb21-3"><a href="#cb21-3"></a>  <span class="at">id =</span> <span class="fu">col_character</span>(),</span>
+<span id="cb21-4"><a href="#cb21-4"></a>  <span class="at">sex =</span> <span class="fu">col_factor</span>(<span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Male"</span>, <span class="st">"Female"</span>)),</span>
+<span id="cb21-5"><a href="#cb21-5"></a>  <span class="at">gaitspeed =</span> <span class="fu">col_double</span>(),</span>
+<span id="cb21-6"><a href="#cb21-6"></a>  <span class="at">age =</span> <span class="fu">col_integer</span>(),</span>
+<span id="cb21-7"><a href="#cb21-7"></a>  <span class="at">steps =</span> <span class="fu">col_integer</span>(),</span>
+<span id="cb21-8"><a href="#cb21-8"></a>  <span class="at">musculoskeletal =</span> <span class="fu">col_factor</span>(<span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Osteoarthritis"</span>, <span class="st">"Rheumatoid arthritis"</span>, <span class="st">"Osteoporosis"</span>, <span class="st">"Sarcopenia"</span>, <span class="st">"None"</span>)),</span>
+<span id="cb21-9"><a href="#cb21-9"></a>  <span class="at">condition_type =</span> <span class="fu">col_factor</span>(<span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Joints"</span>, <span class="st">"Bones"</span>, <span class="st">"Muscles"</span>, <span class="st">"None"</span>)),</span>
+<span id="cb21-10"><a href="#cb21-10"></a>  <span class="at">test_start =</span> <span class="fu">col_datetime</span>(<span class="at">format =</span> <span class="st">""</span>),</span>
+<span id="cb21-11"><a href="#cb21-11"></a>  <span class="at">generalhealth =</span> <span class="fu">col_integer</span>()</span>
+<span id="cb21-12"><a href="#cb21-12"></a>)</span>
+<span id="cb21-13"><a href="#cb21-13"></a></span>
+<span id="cb21-14"><a href="#cb21-14"></a><span class="co"># re-import data with correct column  types</span></span>
+<span id="cb21-15"><a href="#cb21-15"></a>function_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://healthteachr.github.io/data/Function_and_PA_data.csv"</span>,</span>
+<span id="cb21-16"><a href="#cb21-16"></a>                        <span class="at">col_types =</span> function_col_types)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="plot-setup" class="level3" data-number="3.3.2"><h3 data-number="3.3.2" class="anchored" data-anchor-id="plot-setup">
 <span class="header-section-number">3.3.2</span> Plot setup</h3>
 <section id="default-theme" class="level4"><h4 class="anchored" data-anchor-id="default-theme">Default theme</h4>
-<p>Plots in this book use the black-and-white theme, not the default grey theme, so set your default theme to the same so your plots will look like the examples below. At the top of your script, in the setup chunk after you’ve loaded the tidyverse package, add the following code and run it. You’ll learn more ways to customise your theme in <a href="#sec-themes"><span>Section&nbsp;3.3.3.4</span></a> and <span class="quarto-unresolved-ref">?sec-themes-appendix</span>.</p>
+<p>Plots in this book use the black-and-white theme, not the default grey theme, so set your default theme to the same so your plots will look like the examples below. At the top of your script, in the setup chunk after you’ve loaded the tidyverse package, add the following code and run it. You’ll learn more ways to customise your theme in <a href="#sec-themes"><span>Section&nbsp;3.3.3.4</span></a> and <a href="app-styling.html#sec-themes-appendix"><span>Section&nbsp;I.3</span></a>.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_bw</span>()) <span class="co"># set the default theme</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_bw</span>()) <span class="co"># set the default theme</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="sec-plot-setup-data" class="level4"><h4 class="anchored" data-anchor-id="sec-plot-setup-data">Data</h4>
 <p>Every plot starts with the <code>ggplot()</code> function and a data table. If your data are not loaded or you have a typo in your code, this will give you an error message. It’s best to check your plot after each step, so that you can figure out where errors are more easily.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> function_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> function_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-build-plot-setup" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="03-viz_files/figure-html/fig-build-plot-setup-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -811,11 +814,11 @@ Define objects before you use them
 <p>The next <a class="glossary">argument<span class="def"></span></a> to <code>ggplot()</code> is the <code>mapping</code>. This tells the plot which columns in the data should be represented by, or “mapped” to, different aspects of the plot, such as the x-axis, y-axis, line colour, object fill, or line style. These aspects, or “aesthetics”, are listed inside the <code>aes()</code> function.</p>
 <p>Set the arguments <code>x</code> and <code>y</code> to the names of the columns you want to be plotted on those axes. Here, we want to plot gait speed on the x-axis and steps on the y-axis.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="co"># set up the plot with mapping</span></span>
-<span id="cb23-2"><a href="#cb23-2"></a><span class="fu">ggplot</span>(</span>
-<span id="cb23-3"><a href="#cb23-3"></a>  <span class="at">data =</span> function_data, </span>
-<span id="cb23-4"><a href="#cb23-4"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> gaitspeed, <span class="at">y =</span> steps)</span>
-<span id="cb23-5"><a href="#cb23-5"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="co"># set up the plot with mapping</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a><span class="fu">ggplot</span>(</span>
+<span id="cb24-3"><a href="#cb24-3"></a>  <span class="at">data =</span> function_data, </span>
+<span id="cb24-4"><a href="#cb24-4"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> gaitspeed, <span class="at">y =</span> steps)</span>
+<span id="cb24-5"><a href="#cb24-5"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-build-plot-mapping" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="03-viz_files/figure-html/fig-build-plot-mapping-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -836,15 +839,15 @@ ggplot argument names
 <div class="callout-body-container callout-body">
 <p>In the example above, we wrote out the names of the <a class="glossary">arguments<span class="def"></span></a> <code>data</code> and <code>mapping</code>, but in practice, almost everyone omits them. Just make sure you put the data and mapping in the right order.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">ggplot</span>(function_data,  <span class="fu">aes</span>(<span class="at">x =</span> gaitspeed, <span class="at">y =</span> steps))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">ggplot</span>(function_data,  <span class="fu">aes</span>(<span class="at">x =</span> gaitspeed, <span class="at">y =</span> steps))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
 </section><section id="geoms" class="level4"><h4 class="anchored" data-anchor-id="geoms">Geoms</h4>
 <p>Now we can add our plot elements in layers. These are referred to as <a class="glossary">geoms<span class="def"></span></a> and their functions start with <code>geom_</code>. You <strong>add</strong> layers onto the base plot created by <code>ggplot()</code> with a plus (<code>+</code>).</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> gaitspeed, <span class="at">y =</span> steps)) <span class="sc">+</span></span>
-<span id="cb25-2"><a href="#cb25-2"></a>  <span class="fu">geom_point</span>() <span class="co"># scatterplot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> gaitspeed, <span class="at">y =</span> steps)) <span class="sc">+</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a>  <span class="fu">geom_point</span>() <span class="co"># scatterplot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-build-plot-geoms" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="03-viz_files/figure-html/fig-build-plot-geoms-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -867,14 +870,14 @@ Location of the +
 <div class="callout-body-container callout-body">
 <p>Somewhat annoyingly, the plus has to be on the end of the previous line, not at the start of the next line. If you do make this mistake, it will run the first line of code to produce the base layer but then you will get the following error message rather than adding on <code>geom_point()</code>.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> gaitspeed, <span class="at">y =</span> steps))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> gaitspeed, <span class="at">y =</span> steps))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="03-viz_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="sc">+</span> <span class="fu">geom_point</span>() <span class="co"># scatterplot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="sc">+</span> <span class="fu">geom_point</span>() <span class="co"># scatterplot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error:
 ! Cannot use `+` with a single argument.
@@ -887,15 +890,15 @@ Location of the +
 </section><section id="multiple-geoms" class="level4"><h4 class="anchored" data-anchor-id="multiple-geoms">Multiple geoms</h4>
 <p>Part of the power of <pkg>ggplot2</pkg> is that you can add more than one geom to a plot by adding on extra layers and so it quickly becomes possible to make complex and informative visualisation. Importantly, the layers display in the order you set them up. The code below uses the same geoms to produce a scatterplot with a line of best fit, but orders them differently.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="co"># Points first</span></span>
-<span id="cb29-2"><a href="#cb29-2"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> gaitspeed, <span class="at">y =</span> steps)) <span class="sc">+</span></span>
-<span id="cb29-3"><a href="#cb29-3"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="co"># scatterplot</span></span>
-<span id="cb29-4"><a href="#cb29-4"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm) <span class="co"># line of best fit</span></span>
-<span id="cb29-5"><a href="#cb29-5"></a></span>
-<span id="cb29-6"><a href="#cb29-6"></a><span class="co"># Line first</span></span>
-<span id="cb29-7"><a href="#cb29-7"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> gaitspeed, <span class="at">y =</span> steps)) <span class="sc">+</span></span>
-<span id="cb29-8"><a href="#cb29-8"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm) <span class="sc">+</span> <span class="co"># line of best fit</span></span>
-<span id="cb29-9"><a href="#cb29-9"></a>  <span class="fu">geom_point</span>() <span class="co"># scatterplot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="co"># Points first</span></span>
+<span id="cb30-2"><a href="#cb30-2"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> gaitspeed, <span class="at">y =</span> steps)) <span class="sc">+</span></span>
+<span id="cb30-3"><a href="#cb30-3"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="co"># scatterplot</span></span>
+<span id="cb30-4"><a href="#cb30-4"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm) <span class="co"># line of best fit</span></span>
+<span id="cb30-5"><a href="#cb30-5"></a></span>
+<span id="cb30-6"><a href="#cb30-6"></a><span class="co"># Line first</span></span>
+<span id="cb30-7"><a href="#cb30-7"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> gaitspeed, <span class="at">y =</span> steps)) <span class="sc">+</span></span>
+<span id="cb30-8"><a href="#cb30-8"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm) <span class="sc">+</span> <span class="co"># line of best fit</span></span>
+<span id="cb30-9"><a href="#cb30-9"></a>  <span class="fu">geom_point</span>() <span class="co"># scatterplot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -909,26 +912,26 @@ Location of the +
 </section><section id="saving-plots" class="level4"><h4 class="anchored" data-anchor-id="saving-plots">Saving plots</h4>
 <p>Just like you can save numbers and data tables to objects, you can also save the output of <code>ggplot()</code>. The code below produces the same plots we created above but saves them to objects named <code>point_first</code> and <code>line_first</code>. If you run just this code, the plots won’t display like they have done before. Instead, you’ll see the object names appear in the environment pane.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>point_first <span class="ot">&lt;-</span> </span>
-<span id="cb30-2"><a href="#cb30-2"></a>  <span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> gaitspeed, <span class="at">y =</span> steps)) <span class="sc">+</span></span>
-<span id="cb30-3"><a href="#cb30-3"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="co"># scatterplot</span></span>
-<span id="cb30-4"><a href="#cb30-4"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm) <span class="co"># line of best fit</span></span>
-<span id="cb30-5"><a href="#cb30-5"></a>  </span>
-<span id="cb30-6"><a href="#cb30-6"></a>line_first <span class="ot">&lt;-</span></span>
-<span id="cb30-7"><a href="#cb30-7"></a>  <span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> gaitspeed, <span class="at">y =</span> steps)) <span class="sc">+</span></span>
-<span id="cb30-8"><a href="#cb30-8"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm) <span class="sc">+</span> <span class="co"># line of best fit</span></span>
-<span id="cb30-9"><a href="#cb30-9"></a>  <span class="fu">geom_point</span>() <span class="co"># scatterplot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a>point_first <span class="ot">&lt;-</span> </span>
+<span id="cb31-2"><a href="#cb31-2"></a>  <span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> gaitspeed, <span class="at">y =</span> steps)) <span class="sc">+</span></span>
+<span id="cb31-3"><a href="#cb31-3"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="co"># scatterplot</span></span>
+<span id="cb31-4"><a href="#cb31-4"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm) <span class="co"># line of best fit</span></span>
+<span id="cb31-5"><a href="#cb31-5"></a>  </span>
+<span id="cb31-6"><a href="#cb31-6"></a>line_first <span class="ot">&lt;-</span></span>
+<span id="cb31-7"><a href="#cb31-7"></a>  <span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> gaitspeed, <span class="at">y =</span> steps)) <span class="sc">+</span></span>
+<span id="cb31-8"><a href="#cb31-8"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm) <span class="sc">+</span> <span class="co"># line of best fit</span></span>
+<span id="cb31-9"><a href="#cb31-9"></a>  <span class="fu">geom_point</span>() <span class="co"># scatterplot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>To view the plots, call the objects by name. This will output each plot separately.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a>point_first <span class="co"># view first plot</span></span>
-<span id="cb31-2"><a href="#cb31-2"></a>line_first <span class="co"># view second plot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a>point_first <span class="co"># view first plot</span></span>
+<span id="cb32-2"><a href="#cb32-2"></a>line_first <span class="co"># view second plot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="combining-plots" class="level4"><h4 class="anchored" data-anchor-id="combining-plots">Combining plots</h4>
 <p>One of the reasons to save your plots to objects is so that you can combine multiple plots using functions from the <code>patchwork</code> package. The below code produces the above plot by combining the two plots with <code>+</code> and then specifying that we want the plots produced on a single row with the <code>nrow</code> argument in <code>plot_layout()</code>.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="co"># add plots together in 1 row</span></span>
-<span id="cb32-2"><a href="#cb32-2"></a>point_first <span class="sc">+</span> line_first <span class="sc">+</span> <span class="fu">plot_layout</span>(<span class="at">nrow =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="co"># add plots together in 1 row</span></span>
+<span id="cb33-2"><a href="#cb33-2"></a>point_first <span class="sc">+</span> line_first <span class="sc">+</span> <span class="fu">plot_layout</span>(<span class="at">nrow =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-build-plot-geom2b" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="03-viz_files/figure-html/fig-build-plot-geom2b-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -954,18 +957,18 @@ Try changing nrow to 2
 <span class="header-section-number">3.3.3</span> Customising plots</h3>
 <p>There are nearly endless ways to customise ggplots. We’ll cover a few of the basic customisations here.</p>
 <section id="styling-geoms" class="level4"><h4 class="anchored" data-anchor-id="styling-geoms">Styling geoms</h4>
-<p>We should definitely put the line in front of the points, but the points are still a bit dark. If you want to change the overall style of a geom, you can set the arguments <code>colour</code>, <code>alpha</code>, <code>shape</code>, <code>size</code> and <code>linetype</code> inside the geom function. There are many different values that you can set these to; <span class="quarto-unresolved-ref">?sec-plotstyle</span>) gives details of these. Play around with different values below and figure out what the <a class="glossary">default values<span class="def"></span></a> are for <code>shape</code> and <code>size</code>.</p>
+<p>We should definitely put the line in front of the points, but the points are still a bit dark. If you want to change the overall style of a geom, you can set the arguments <code>colour</code>, <code>alpha</code>, <code>shape</code>, <code>size</code> and <code>linetype</code> inside the geom function. There are many different values that you can set these to; <a href="app-styling.html"><span>Appendix&nbsp;I</span></a>) gives details of these. Play around with different values below and figure out what the <a class="glossary">default values<span class="def"></span></a> are for <code>shape</code> and <code>size</code>.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> gaitspeed, <span class="at">y =</span> steps)) <span class="sc">+</span></span>
-<span id="cb33-2"><a href="#cb33-2"></a>  <span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">"dodgerblue"</span>, </span>
-<span id="cb33-3"><a href="#cb33-3"></a>             <span class="at">alpha =</span> <span class="fl">0.2</span>, <span class="co"># 20% transparency</span></span>
-<span id="cb33-4"><a href="#cb33-4"></a>             <span class="at">shape =</span> <span class="dv">18</span>,  <span class="co"># solid diamond</span></span>
-<span id="cb33-5"><a href="#cb33-5"></a>             <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span> </span>
-<span id="cb33-6"><a href="#cb33-6"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm, </span>
-<span id="cb33-7"><a href="#cb33-7"></a>              <span class="at">formula =</span> y<span class="sc">~</span>x, <span class="co"># formula used to draw line, </span></span>
-<span id="cb33-8"><a href="#cb33-8"></a>              <span class="co"># setting method &amp; formula avoids an annoying message</span></span>
-<span id="cb33-9"><a href="#cb33-9"></a>              <span class="at">colour =</span> <span class="fu">rgb</span>(<span class="dv">0</span>, .<span class="dv">5</span>, .<span class="dv">8</span>),</span>
-<span id="cb33-10"><a href="#cb33-10"></a>              <span class="at">linetype =</span> <span class="dv">3</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> gaitspeed, <span class="at">y =</span> steps)) <span class="sc">+</span></span>
+<span id="cb34-2"><a href="#cb34-2"></a>  <span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">"dodgerblue"</span>, </span>
+<span id="cb34-3"><a href="#cb34-3"></a>             <span class="at">alpha =</span> <span class="fl">0.2</span>, <span class="co"># 20% transparency</span></span>
+<span id="cb34-4"><a href="#cb34-4"></a>             <span class="at">shape =</span> <span class="dv">18</span>,  <span class="co"># solid diamond</span></span>
+<span id="cb34-5"><a href="#cb34-5"></a>             <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb34-6"><a href="#cb34-6"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm, </span>
+<span id="cb34-7"><a href="#cb34-7"></a>              <span class="at">formula =</span> y<span class="sc">~</span>x, <span class="co"># formula used to draw line, </span></span>
+<span id="cb34-8"><a href="#cb34-8"></a>              <span class="co"># setting method &amp; formula avoids an annoying message</span></span>
+<span id="cb34-9"><a href="#cb34-9"></a>              <span class="at">colour =</span> <span class="fu">rgb</span>(<span class="dv">0</span>, .<span class="dv">5</span>, .<span class="dv">8</span>),</span>
+<span id="cb34-10"><a href="#cb34-10"></a>              <span class="at">linetype =</span> <span class="dv">3</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-build-plot-style" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="03-viz_files/figure-html/fig-build-plot-style-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -984,7 +987,7 @@ Setting aesthetics overall versus by category
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This method is only for changing the style of <em>all</em> the shapes made with that geom. If you want, for example, points to have different colours depending on the type of musculoskeletal disease, you set the argument <code>colour = musculoskeletal</code> inside the <code>aes()</code> function for the mapping. You can customise the colours used with <code>scale_</code> functions, which you will learn about below and in <span class="quarto-unresolved-ref">?sec-plotstyle</span>).</p>
+<p>This method is only for changing the style of <em>all</em> the shapes made with that geom. If you want, for example, points to have different colours depending on the type of musculoskeletal disease, you set the argument <code>colour = musculoskeletal</code> inside the <code>aes()</code> function for the mapping. You can customise the colours used with <code>scale_</code> functions, which you will learn about below and in <a href="app-styling.html"><span>Appendix&nbsp;I</span></a>).</p>
 </div>
 </div>
 </section><section id="format-axes" class="level4"><h4 class="anchored" data-anchor-id="format-axes">Format axes</h4>
@@ -995,24 +998,24 @@ Setting aesthetics overall versus by category
 <div class="code-with-filename-file">
 <pre><strong>Example of seq()</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="fu">seq</span>(<span class="at">from =</span> <span class="fl">0.0</span>, <span class="at">to =</span> <span class="fl">1.4</span>, <span class="at">by =</span> <span class="fl">0.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="fu">seq</span>(<span class="at">from =</span> <span class="fl">0.0</span>, <span class="at">to =</span> <span class="fl">1.4</span>, <span class="at">by =</span> <span class="fl">0.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.0 0.2 0.4 0.6 0.8 1.0 1.2 1.4</code></pre>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> gaitspeed, <span class="at">y =</span> steps)) <span class="sc">+</span></span>
-<span id="cb36-2"><a href="#cb36-2"></a>  <span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">"dodgerblue"</span>, </span>
-<span id="cb36-3"><a href="#cb36-3"></a>             <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span> </span>
-<span id="cb36-4"><a href="#cb36-4"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm, </span>
-<span id="cb36-5"><a href="#cb36-5"></a>              <span class="at">formula =</span> y<span class="sc">~</span>x, </span>
-<span id="cb36-6"><a href="#cb36-6"></a>              <span class="at">colour =</span> <span class="fu">rgb</span>(<span class="dv">0</span>, .<span class="dv">5</span>, .<span class="dv">8</span>)) <span class="sc">+</span></span>
-<span id="cb36-7"><a href="#cb36-7"></a>  <span class="co"># customise axis labels and breaks</span></span>
-<span id="cb36-8"><a href="#cb36-8"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">"Gait speed (m/s)"</span>, </span>
-<span id="cb36-9"><a href="#cb36-9"></a>                     <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="fl">0.0</span>, <span class="at">to =</span> <span class="fl">1.4</span>, <span class="at">by =</span> <span class="fl">0.2</span>)) <span class="sc">+</span></span>
-<span id="cb36-10"><a href="#cb36-10"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Number of steps"</span>,</span>
-<span id="cb36-11"><a href="#cb36-11"></a>                     <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">10000</span>, <span class="at">by =</span> <span class="dv">2500</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> gaitspeed, <span class="at">y =</span> steps)) <span class="sc">+</span></span>
+<span id="cb37-2"><a href="#cb37-2"></a>  <span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">"dodgerblue"</span>, </span>
+<span id="cb37-3"><a href="#cb37-3"></a>             <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span> </span>
+<span id="cb37-4"><a href="#cb37-4"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm, </span>
+<span id="cb37-5"><a href="#cb37-5"></a>              <span class="at">formula =</span> y<span class="sc">~</span>x, </span>
+<span id="cb37-6"><a href="#cb37-6"></a>              <span class="at">colour =</span> <span class="fu">rgb</span>(<span class="dv">0</span>, .<span class="dv">5</span>, .<span class="dv">8</span>)) <span class="sc">+</span></span>
+<span id="cb37-7"><a href="#cb37-7"></a>  <span class="co"># customise axis labels and breaks</span></span>
+<span id="cb37-8"><a href="#cb37-8"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">"Gait speed (m/s)"</span>, </span>
+<span id="cb37-9"><a href="#cb37-9"></a>                     <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="fl">0.0</span>, <span class="at">to =</span> <span class="fl">1.4</span>, <span class="at">by =</span> <span class="fl">0.2</span>)) <span class="sc">+</span></span>
+<span id="cb37-10"><a href="#cb37-10"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Number of steps"</span>,</span>
+<span id="cb37-11"><a href="#cb37-11"></a>                     <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">10000</span>, <span class="at">by =</span> <span class="dv">2500</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-build-plot-axes" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="03-viz_files/figure-html/fig-build-plot-axes-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -1037,19 +1040,19 @@ Minor breaks
 </section><section id="axis-limits" class="level4"><h4 class="anchored" data-anchor-id="axis-limits">Axis limits</h4>
 <p>If you want to change the minimum and maximum values on an axis, use the <code>coord_cartesian()</code> function. Many plots make more sense if the minimum and maximum values represent the range of possible values, even if those values aren’t present in the data. Here, gait speed and number of steps can’t be less than 0, so we’ll set the minimum values to 0 and the maximum values to the first break above the highest value.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> gaitspeed, <span class="at">y =</span> steps)) <span class="sc">+</span></span>
-<span id="cb37-2"><a href="#cb37-2"></a>  <span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">"dodgerblue"</span>, </span>
-<span id="cb37-3"><a href="#cb37-3"></a>             <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span> </span>
-<span id="cb37-4"><a href="#cb37-4"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm, </span>
-<span id="cb37-5"><a href="#cb37-5"></a>              <span class="at">formula =</span> y<span class="sc">~</span>x, </span>
-<span id="cb37-6"><a href="#cb37-6"></a>              <span class="at">colour =</span> <span class="fu">rgb</span>(<span class="dv">0</span>, .<span class="dv">5</span>, .<span class="dv">8</span>)) <span class="sc">+</span></span>
-<span id="cb37-7"><a href="#cb37-7"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">"Gait speed (m/s)"</span>, </span>
-<span id="cb37-8"><a href="#cb37-8"></a>                     <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="fl">0.0</span>, <span class="at">to =</span> <span class="fl">1.4</span>, <span class="at">by =</span> <span class="fl">0.2</span>)) <span class="sc">+</span></span>
-<span id="cb37-9"><a href="#cb37-9"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Number of steps"</span>,</span>
-<span id="cb37-10"><a href="#cb37-10"></a>                     <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">10000</span>, <span class="at">by =</span> <span class="dv">2500</span>)) <span class="sc">+</span></span>
-<span id="cb37-11"><a href="#cb37-11"></a>  <span class="co"># set axis limits</span></span>
-<span id="cb37-12"><a href="#cb37-12"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="fl">0.0</span>, <span class="fl">1.4</span>), </span>
-<span id="cb37-13"><a href="#cb37-13"></a>                  <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10000</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> gaitspeed, <span class="at">y =</span> steps)) <span class="sc">+</span></span>
+<span id="cb38-2"><a href="#cb38-2"></a>  <span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">"dodgerblue"</span>, </span>
+<span id="cb38-3"><a href="#cb38-3"></a>             <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span> </span>
+<span id="cb38-4"><a href="#cb38-4"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm, </span>
+<span id="cb38-5"><a href="#cb38-5"></a>              <span class="at">formula =</span> y<span class="sc">~</span>x, </span>
+<span id="cb38-6"><a href="#cb38-6"></a>              <span class="at">colour =</span> <span class="fu">rgb</span>(<span class="dv">0</span>, .<span class="dv">5</span>, .<span class="dv">8</span>)) <span class="sc">+</span></span>
+<span id="cb38-7"><a href="#cb38-7"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">"Gait speed (m/s)"</span>, </span>
+<span id="cb38-8"><a href="#cb38-8"></a>                     <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="fl">0.0</span>, <span class="at">to =</span> <span class="fl">1.4</span>, <span class="at">by =</span> <span class="fl">0.2</span>)) <span class="sc">+</span></span>
+<span id="cb38-9"><a href="#cb38-9"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Number of steps"</span>,</span>
+<span id="cb38-10"><a href="#cb38-10"></a>                     <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">10000</span>, <span class="at">by =</span> <span class="dv">2500</span>)) <span class="sc">+</span></span>
+<span id="cb38-11"><a href="#cb38-11"></a>  <span class="co"># set axis limits</span></span>
+<span id="cb38-12"><a href="#cb38-12"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="fl">0.0</span>, <span class="fl">1.4</span>), </span>
+<span id="cb38-13"><a href="#cb38-13"></a>                  <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10000</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-build-plot-limits" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="03-viz_files/figure-html/fig-build-plot-limits-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -1075,31 +1078,6 @@ Setting limits with the scale_ function
 <p><pkg>ggplot2</pkg> comes with several built-in themes, such as <code>theme_minimal()</code> and <code>theme_bw()</code>, but the <a href="https://yutannihilation.github.io/allYourFigureAreBelongToUs/ggthemes/"><pkg>ggthemes</pkg></a> package provides even more themes to match different software, such as GoogleDocs or Stata, or publications, such as the Economist or the Wall Street Journal. Let’s add the GoogleDocs theme, but change the font size to 20 with the <code>base_size</code> argument.</p>
 <p>It’s also worth highlighting that this code is starting to look quite complicated because of the number of layers, but because we’ve built it up slowly it should (hopefully!) make sense. If you see examples of <pkg>ggplot2</pkg> code online that you’d like to adapt, build the plot up layer by layer and it will make it easier to understand what each layer adds.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> gaitspeed, <span class="at">y =</span> steps)) <span class="sc">+</span></span>
-<span id="cb38-2"><a href="#cb38-2"></a>  <span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">"dodgerblue"</span>, </span>
-<span id="cb38-3"><a href="#cb38-3"></a>             <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span> </span>
-<span id="cb38-4"><a href="#cb38-4"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm, </span>
-<span id="cb38-5"><a href="#cb38-5"></a>              <span class="at">formula =</span> y<span class="sc">~</span>x, </span>
-<span id="cb38-6"><a href="#cb38-6"></a>              <span class="at">colour =</span> <span class="fu">rgb</span>(<span class="dv">0</span>, .<span class="dv">5</span>, .<span class="dv">8</span>)) <span class="sc">+</span></span>
-<span id="cb38-7"><a href="#cb38-7"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">"Gait speed (m/s)"</span>, </span>
-<span id="cb38-8"><a href="#cb38-8"></a>                     <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="fl">0.0</span>, <span class="at">to =</span> <span class="fl">1.4</span>, <span class="at">by =</span> <span class="fl">0.2</span>)) <span class="sc">+</span></span>
-<span id="cb38-9"><a href="#cb38-9"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Number of steps"</span>,</span>
-<span id="cb38-10"><a href="#cb38-10"></a>                     <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">10000</span>, <span class="at">by =</span> <span class="dv">2500</span>)) <span class="sc">+</span></span>
-<span id="cb38-11"><a href="#cb38-11"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="fl">0.0</span>, <span class="fl">1.4</span>), </span>
-<span id="cb38-12"><a href="#cb38-12"></a>                  <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10000</span>)) <span class="sc">+</span></span>
-<span id="cb38-13"><a href="#cb38-13"></a>  <span class="co"># change the theme</span></span>
-<span id="cb38-14"><a href="#cb38-14"></a>  ggthemes<span class="sc">::</span><span class="fu">theme_gdocs</span>(<span class="at">base_size =</span> <span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div id="fig-build-plot-theme" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="03-viz_files/figure-html/fig-build-plot-theme-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;3.11: Changing the theme to the Google Docs style.</figcaption><p></p>
-</figure>
-</div>
-</div>
-</div>
-</section><section id="theme-tweaks" class="level4"><h4 class="anchored" data-anchor-id="theme-tweaks">Theme tweaks</h4>
-<p>If you’re still not quite happy with a theme, you can customise it even further with the <code>themes()</code> function. Check the help for this function to see all of the possible options. The most common thing you’ll want to do is to remove an element entirely. You do this by setting the relevant argument to <code>element_blank()</code>. Below, we’re getting rid of the x-axis line and the plot background, which removes the line around the plot.</p>
-<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> gaitspeed, <span class="at">y =</span> steps)) <span class="sc">+</span></span>
 <span id="cb39-2"><a href="#cb39-2"></a>  <span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">"dodgerblue"</span>, </span>
 <span id="cb39-3"><a href="#cb39-3"></a>             <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span> </span>
@@ -1112,21 +1090,18 @@ Setting limits with the scale_ function
 <span id="cb39-10"><a href="#cb39-10"></a>                     <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">10000</span>, <span class="at">by =</span> <span class="dv">2500</span>)) <span class="sc">+</span></span>
 <span id="cb39-11"><a href="#cb39-11"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="fl">0.0</span>, <span class="fl">1.4</span>), </span>
 <span id="cb39-12"><a href="#cb39-12"></a>                  <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10000</span>)) <span class="sc">+</span></span>
-<span id="cb39-13"><a href="#cb39-13"></a>  <span class="fu">theme_gdocs</span>(<span class="at">base_size =</span> <span class="dv">11</span>) <span class="sc">+</span></span>
-<span id="cb39-14"><a href="#cb39-14"></a>  <span class="co"># customise theme elements</span></span>
-<span id="cb39-15"><a href="#cb39-15"></a>  <span class="fu">theme</span>(<span class="at">axis.line.x =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb39-16"><a href="#cb39-16"></a>        <span class="at">plot.background =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb39-13"><a href="#cb39-13"></a>  <span class="co"># change the theme</span></span>
+<span id="cb39-14"><a href="#cb39-14"></a>  ggthemes<span class="sc">::</span><span class="fu">theme_gdocs</span>(<span class="at">base_size =</span> <span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-build-plot-custom-theme" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="03-viz_files/figure-html/fig-build-plot-custom-theme-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;3.12: Customising the theme to remove the x-axis line and background outline.</figcaption><p></p>
+<div id="fig-build-plot-theme" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="03-viz_files/figure-html/fig-build-plot-theme-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;3.11: Changing the theme to the Google Docs style.</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
-</section></section><section id="sec-captions" class="level3" data-number="3.3.4"><h3 data-number="3.3.4" class="anchored" data-anchor-id="sec-captions">
-<span class="header-section-number">3.3.4</span> Figure captions</h3>
-<p>You can add a caption directly to the image using the <code>labs()</code> function, which also allows you to add or edit the title, subtitle, and axis labels.</p>
+</section><section id="theme-tweaks" class="level4"><h4 class="anchored" data-anchor-id="theme-tweaks">Theme tweaks</h4>
+<p>If you’re still not quite happy with a theme, you can customise it even further with the <code>themes()</code> function. Check the help for this function to see all of the possible options. The most common thing you’ll want to do is to remove an element entirely. You do this by setting the relevant argument to <code>element_blank()</code>. Below, we’re getting rid of the x-axis line and the plot background, which removes the line around the plot.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> gaitspeed, <span class="at">y =</span> steps)) <span class="sc">+</span></span>
 <span id="cb40-2"><a href="#cb40-2"></a>  <span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">"dodgerblue"</span>, </span>
@@ -1141,11 +1116,39 @@ Setting limits with the scale_ function
 <span id="cb40-11"><a href="#cb40-11"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="fl">0.0</span>, <span class="fl">1.4</span>), </span>
 <span id="cb40-12"><a href="#cb40-12"></a>                  <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10000</span>)) <span class="sc">+</span></span>
 <span id="cb40-13"><a href="#cb40-13"></a>  <span class="fu">theme_gdocs</span>(<span class="at">base_size =</span> <span class="dv">11</span>) <span class="sc">+</span></span>
-<span id="cb40-14"><a href="#cb40-14"></a>  <span class="fu">theme</span>(<span class="at">axis.line.x =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb40-15"><a href="#cb40-15"></a>        <span class="at">plot.background =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
-<span id="cb40-16"><a href="#cb40-16"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"The relationship between gait speed and physical activity"</span>,</span>
-<span id="cb40-17"><a href="#cb40-17"></a>       <span class="at">subtitle =</span> <span class="st">"2020 Healthy Ageing Data"</span>,</span>
-<span id="cb40-18"><a href="#cb40-18"></a>       <span class="at">caption =</span> <span class="st">"Figure 1. As gait speed increases, number of steps increases."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb40-14"><a href="#cb40-14"></a>  <span class="co"># customise theme elements</span></span>
+<span id="cb40-15"><a href="#cb40-15"></a>  <span class="fu">theme</span>(<span class="at">axis.line.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb40-16"><a href="#cb40-16"></a>        <span class="at">plot.background =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-build-plot-custom-theme" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="03-viz_files/figure-html/fig-build-plot-custom-theme-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;3.12: Customising the theme to remove the x-axis line and background outline.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section></section><section id="sec-captions" class="level3" data-number="3.3.4"><h3 data-number="3.3.4" class="anchored" data-anchor-id="sec-captions">
+<span class="header-section-number">3.3.4</span> Figure captions</h3>
+<p>You can add a caption directly to the image using the <code>labs()</code> function, which also allows you to add or edit the title, subtitle, and axis labels.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> gaitspeed, <span class="at">y =</span> steps)) <span class="sc">+</span></span>
+<span id="cb41-2"><a href="#cb41-2"></a>  <span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">"dodgerblue"</span>, </span>
+<span id="cb41-3"><a href="#cb41-3"></a>             <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span> </span>
+<span id="cb41-4"><a href="#cb41-4"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm, </span>
+<span id="cb41-5"><a href="#cb41-5"></a>              <span class="at">formula =</span> y<span class="sc">~</span>x, </span>
+<span id="cb41-6"><a href="#cb41-6"></a>              <span class="at">colour =</span> <span class="fu">rgb</span>(<span class="dv">0</span>, .<span class="dv">5</span>, .<span class="dv">8</span>)) <span class="sc">+</span></span>
+<span id="cb41-7"><a href="#cb41-7"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">"Gait speed (m/s)"</span>, </span>
+<span id="cb41-8"><a href="#cb41-8"></a>                     <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="fl">0.0</span>, <span class="at">to =</span> <span class="fl">1.4</span>, <span class="at">by =</span> <span class="fl">0.2</span>)) <span class="sc">+</span></span>
+<span id="cb41-9"><a href="#cb41-9"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Number of steps"</span>,</span>
+<span id="cb41-10"><a href="#cb41-10"></a>                     <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">10000</span>, <span class="at">by =</span> <span class="dv">2500</span>)) <span class="sc">+</span></span>
+<span id="cb41-11"><a href="#cb41-11"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="fl">0.0</span>, <span class="fl">1.4</span>), </span>
+<span id="cb41-12"><a href="#cb41-12"></a>                  <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10000</span>)) <span class="sc">+</span></span>
+<span id="cb41-13"><a href="#cb41-13"></a>  <span class="fu">theme_gdocs</span>(<span class="at">base_size =</span> <span class="dv">11</span>) <span class="sc">+</span></span>
+<span id="cb41-14"><a href="#cb41-14"></a>  <span class="fu">theme</span>(<span class="at">axis.line.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb41-15"><a href="#cb41-15"></a>        <span class="at">plot.background =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb41-16"><a href="#cb41-16"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"The relationship between gait speed and physical activity"</span>,</span>
+<span id="cb41-17"><a href="#cb41-17"></a>       <span class="at">subtitle =</span> <span class="st">"2020 Healthy Ageing Data"</span>,</span>
+<span id="cb41-18"><a href="#cb41-18"></a>       <span class="at">caption =</span> <span class="st">"Figure 1. As gait speed increases, number of steps increases."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-caption" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="03-viz_files/figure-html/fig-caption-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -1158,7 +1161,7 @@ Setting limits with the scale_ function
 <div class="cell" data-layout-align="center" data-verbatim="r fig-gait-vs-steps, fig.cap=&quot;As gait speed increases, number of steps increases.&quot;, fig.alt=&quot;A scatterplot showing gait speed on the x-axis (range 0.0-1.3 m/s) and number of steps on the y-axis (range 0-9829 steps) with a trend line showing that as gait speed increases, number of steps increases from about 0.6m/s gait speed/2400 steps to about 1.2m/s gait speed/7400 steps.&quot;">
 <div class="verbatim">
 <pre class="sourceCode r code-with-copy"><code class="sourceCode R">```{r fig-gait-vs-steps, fig.cap="As gait speed increases, number of steps increases.", fig.alt="A scatterplot showing gait speed on the x-axis (range 0.0-1.3 m/s) and number of steps on the y-axis (range 0-9829 steps) with a trend line showing that as gait speed increases, number of steps increases from about 0.6m/s gait speed/2400 steps to about 1.2m/s gait speed/7400 steps."}</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre>
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="co"># figure code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="co"># figure code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre class="sourceCode r code-with-copy"><code class="sourceCode R">```</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 </div>
@@ -1172,8 +1175,8 @@ Setting limits with the scale_ function
 <section id="bar-plot" class="level4"><h4 class="anchored" data-anchor-id="bar-plot">Bar plot</h4>
 <p>If you want to count the number of things per category, you can use <code>geom_bar()</code>. You only need to provide a <code>x</code> mapping to <code>geom_bar()</code> because by default <code>geom_bar()</code> uses the number of observations in each group of <code>x</code> as the value for <code>y</code>, so you don’t need to tell it what to put on the y-axis.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> condition_type)) <span class="sc">+</span></span>
-<span id="cb42-2"><a href="#cb42-2"></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> condition_type)) <span class="sc">+</span></span>
+<span id="cb43-2"><a href="#cb43-2"></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-bar" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="03-viz_files/figure-html/fig-bar-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -1206,34 +1209,34 @@ Code
 </div>
 <div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> condition_type, </span>
-<span id="cb43-2"><a href="#cb43-2"></a>                        <span class="at">fill =</span> condition_type)) <span class="sc">+</span></span>
-<span id="cb43-3"><a href="#cb43-3"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
-<span id="cb43-4"><a href="#cb43-4"></a>  <span class="fu">scale_x_discrete</span>(</span>
-<span id="cb43-5"><a href="#cb43-5"></a>    <span class="co"># change axis title</span></span>
-<span id="cb43-6"><a href="#cb43-6"></a>    <span class="at">name =</span> <span class="st">"Type of condition"</span>, </span>
-<span id="cb43-7"><a href="#cb43-7"></a>    <span class="co"># change order</span></span>
-<span id="cb43-8"><a href="#cb43-8"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="st">"Joints"</span>, <span class="st">"Bones"</span>, <span class="st">"Muscles"</span>, <span class="st">"None"</span>), </span>
-<span id="cb43-9"><a href="#cb43-9"></a>    <span class="co"># change labels</span></span>
-<span id="cb43-10"><a href="#cb43-10"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Joints"</span>, <span class="st">"Bones"</span>, <span class="st">"Muscles"</span>, <span class="st">"None"</span>) </span>
-<span id="cb43-11"><a href="#cb43-11"></a>  ) <span class="sc">+</span></span>
-<span id="cb43-12"><a href="#cb43-12"></a>  <span class="fu">scale_fill_manual</span>(</span>
-<span id="cb43-13"><a href="#cb43-13"></a>    <span class="co"># change colours</span></span>
-<span id="cb43-14"><a href="#cb43-14"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="at">Joints =</span> <span class="st">"goldenrod"</span>, </span>
-<span id="cb43-15"><a href="#cb43-15"></a>               <span class="at">Bones =</span> <span class="st">"darkgreen"</span>, </span>
-<span id="cb43-16"><a href="#cb43-16"></a>               <span class="at">Muscles =</span> <span class="st">"dodgerblue3"</span>, </span>
-<span id="cb43-17"><a href="#cb43-17"></a>               <span class="at">None =</span> <span class="st">"purple3"</span>),</span>
-<span id="cb43-18"><a href="#cb43-18"></a>    <span class="co"># remove the legend</span></span>
-<span id="cb43-19"><a href="#cb43-19"></a>    <span class="at">guide =</span> <span class="st">"none"</span> </span>
-<span id="cb43-20"><a href="#cb43-20"></a>  ) <span class="sc">+</span></span>
-<span id="cb43-21"><a href="#cb43-21"></a>  <span class="fu">scale_y_continuous</span>(</span>
-<span id="cb43-22"><a href="#cb43-22"></a>    <span class="at">name =</span> <span class="st">""</span>, <span class="co"># remove axis title</span></span>
-<span id="cb43-23"><a href="#cb43-23"></a>    <span class="co"># remove the space above and below the y-axis</span></span>
-<span id="cb43-24"><a href="#cb43-24"></a>    <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">add =</span> <span class="dv">0</span>)</span>
-<span id="cb43-25"><a href="#cb43-25"></a>  ) <span class="sc">+</span></span>
-<span id="cb43-26"><a href="#cb43-26"></a>  <span class="co"># minimum = 0, maximum = 65</span></span>
-<span id="cb43-27"><a href="#cb43-27"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">65</span>)) <span class="sc">+</span> </span>
-<span id="cb43-28"><a href="#cb43-28"></a>  <span class="fu">ggtitle</span>(<span class="st">"Number of participants with each type of musculoskeletal condition"</span>) <span class="co"># add a title</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> condition_type, </span>
+<span id="cb44-2"><a href="#cb44-2"></a>                        <span class="at">fill =</span> condition_type)) <span class="sc">+</span></span>
+<span id="cb44-3"><a href="#cb44-3"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb44-4"><a href="#cb44-4"></a>  <span class="fu">scale_x_discrete</span>(</span>
+<span id="cb44-5"><a href="#cb44-5"></a>    <span class="co"># change axis title</span></span>
+<span id="cb44-6"><a href="#cb44-6"></a>    <span class="at">name =</span> <span class="st">"Type of condition"</span>, </span>
+<span id="cb44-7"><a href="#cb44-7"></a>    <span class="co"># change order</span></span>
+<span id="cb44-8"><a href="#cb44-8"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="st">"Joints"</span>, <span class="st">"Bones"</span>, <span class="st">"Muscles"</span>, <span class="st">"None"</span>), </span>
+<span id="cb44-9"><a href="#cb44-9"></a>    <span class="co"># change labels</span></span>
+<span id="cb44-10"><a href="#cb44-10"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Joints"</span>, <span class="st">"Bones"</span>, <span class="st">"Muscles"</span>, <span class="st">"None"</span>) </span>
+<span id="cb44-11"><a href="#cb44-11"></a>  ) <span class="sc">+</span></span>
+<span id="cb44-12"><a href="#cb44-12"></a>  <span class="fu">scale_fill_manual</span>(</span>
+<span id="cb44-13"><a href="#cb44-13"></a>    <span class="co"># change colours</span></span>
+<span id="cb44-14"><a href="#cb44-14"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="at">Joints =</span> <span class="st">"goldenrod"</span>, </span>
+<span id="cb44-15"><a href="#cb44-15"></a>               <span class="at">Bones =</span> <span class="st">"darkgreen"</span>, </span>
+<span id="cb44-16"><a href="#cb44-16"></a>               <span class="at">Muscles =</span> <span class="st">"dodgerblue3"</span>, </span>
+<span id="cb44-17"><a href="#cb44-17"></a>               <span class="at">None =</span> <span class="st">"purple3"</span>),</span>
+<span id="cb44-18"><a href="#cb44-18"></a>    <span class="co"># remove the legend</span></span>
+<span id="cb44-19"><a href="#cb44-19"></a>    <span class="at">guide =</span> <span class="st">"none"</span> </span>
+<span id="cb44-20"><a href="#cb44-20"></a>  ) <span class="sc">+</span></span>
+<span id="cb44-21"><a href="#cb44-21"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb44-22"><a href="#cb44-22"></a>    <span class="at">name =</span> <span class="st">""</span>, <span class="co"># remove axis title</span></span>
+<span id="cb44-23"><a href="#cb44-23"></a>    <span class="co"># remove the space above and below the y-axis</span></span>
+<span id="cb44-24"><a href="#cb44-24"></a>    <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">add =</span> <span class="dv">0</span>)</span>
+<span id="cb44-25"><a href="#cb44-25"></a>  ) <span class="sc">+</span></span>
+<span id="cb44-26"><a href="#cb44-26"></a>  <span class="co"># minimum = 0, maximum = 65</span></span>
+<span id="cb44-27"><a href="#cb44-27"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">65</span>)) <span class="sc">+</span> </span>
+<span id="cb44-28"><a href="#cb44-28"></a>  <span class="fu">ggtitle</span>(<span class="st">"Number of participants with each type of musculoskeletal condition"</span>) <span class="co"># add a title</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="03-viz_files/figure-html/custom-bar-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -1249,8 +1252,8 @@ Code
 </section><section id="column-plot" class="level4"><h4 class="anchored" data-anchor-id="column-plot">Column plot</h4>
 <p>If your data already have a column with the number you want to plot, you can use <code>geom_col()</code> to plot it. We can use the <code>count()</code> function to make a table with a row for each <code>condition_type</code> and a column called <code>n</code> with the number of observations in that category.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a>function_count_data <span class="ot">&lt;-</span> <span class="fu">count</span>(function_data, condition_type)</span>
-<span id="cb44-2"><a href="#cb44-2"></a>function_count_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a>function_count_data <span class="ot">&lt;-</span> <span class="fu">count</span>(function_data, condition_type)</span>
+<span id="cb45-2"><a href="#cb45-2"></a>function_count_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="table table-sm table-striped">
@@ -1306,8 +1309,8 @@ Code
 </table>
 <p>The mapping for <code>geom_col()</code> requires you to set both the <code>x</code> and <code>y</code> aesthetics. Set <code>y = n</code> because we want to plot the number of musculoskeletal diseases per condition type, and that information is in the column called <code>n</code>.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a><span class="fu">ggplot</span>(function_count_data, <span class="fu">aes</span>(<span class="at">x =</span> condition_type, <span class="at">y =</span> n)) <span class="sc">+</span></span>
-<span id="cb45-2"><a href="#cb45-2"></a>  <span class="fu">geom_col</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="fu">ggplot</span>(function_count_data, <span class="fu">aes</span>(<span class="at">x =</span> condition_type, <span class="at">y =</span> n)) <span class="sc">+</span></span>
+<span id="cb46-2"><a href="#cb46-2"></a>  <span class="fu">geom_col</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-col" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="03-viz_files/figure-html/fig-col-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -1372,8 +1375,8 @@ Test your understanding
 <div class="cell" data-layout-align="center">
 <ul>
 <li>What mapping would you use?
-<div id="radio_RNZOPBCXYL" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_RNZOPBCXYL" value="answer"><span>aes(x = country, y = population)</span></label><label><input type="radio" autocomplete="off" name="radio_RNZOPBCXYL" value="x"><span>aes(x = population, y = country)</span></label><label><input type="radio" autocomplete="off" name="radio_RNZOPBCXYL" value="x"><span>aes(x = country)</span></label><label><input type="radio" autocomplete="off" name="radio_RNZOPBCXYL" value="x"><span>aes(x = island)</span></label><label><input type="radio" autocomplete="off" name="radio_RNZOPBCXYL" value="x"><span>aes(y = population)</span></label>
+<div id="radio_ZSIWKFFAYJ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ZSIWKFFAYJ" value="answer"><span>aes(x = country, y = population)</span></label><label><input type="radio" autocomplete="off" name="radio_ZSIWKFFAYJ" value="x"><span>aes(x = population, y = country)</span></label><label><input type="radio" autocomplete="off" name="radio_ZSIWKFFAYJ" value="x"><span>aes(x = country)</span></label><label><input type="radio" autocomplete="off" name="radio_ZSIWKFFAYJ" value="x"><span>aes(x = island)</span></label><label><input type="radio" autocomplete="off" name="radio_ZSIWKFFAYJ" value="x"><span>aes(y = population)</span></label>
 </div>
 </li>
 </ul>
@@ -1387,8 +1390,8 @@ Test your understanding
 <div class="cell" data-layout-align="center">
 <ul>
 <li>What mapping would you use?
-<div id="radio_CEILJAQPGU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_CEILJAQPGU" value="x"><span>aes(x = country, y = population)</span></label><label><input type="radio" autocomplete="off" name="radio_CEILJAQPGU" value="x"><span>aes(x = population, y = country)</span></label><label><input type="radio" autocomplete="off" name="radio_CEILJAQPGU" value="x"><span>aes(x = country)</span></label><label><input type="radio" autocomplete="off" name="radio_CEILJAQPGU" value="answer"><span>aes(x = island)</span></label><label><input type="radio" autocomplete="off" name="radio_CEILJAQPGU" value="x"><span>aes(y = population)</span></label>
+<div id="radio_XHXFEWCQEA" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XHXFEWCQEA" value="x"><span>aes(x = country, y = population)</span></label><label><input type="radio" autocomplete="off" name="radio_XHXFEWCQEA" value="x"><span>aes(x = population, y = country)</span></label><label><input type="radio" autocomplete="off" name="radio_XHXFEWCQEA" value="x"><span>aes(x = country)</span></label><label><input type="radio" autocomplete="off" name="radio_XHXFEWCQEA" value="answer"><span>aes(x = island)</span></label><label><input type="radio" autocomplete="off" name="radio_XHXFEWCQEA" value="x"><span>aes(y = population)</span></label>
 </div>
 </li>
 </ul>
@@ -1400,8 +1403,8 @@ Test your understanding
 <p>If you have a continuous variable, like number of steps, you can use <code>geom_histogram()</code> to show the distribution. Just like <code>geom_bar()</code> you are only required to specify the <code>x</code> variable.</p>
 <p>A histogram splits the data into “bins” along the x-axis and shows the count of how many observations are in each bin along the y-axis.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> steps)) <span class="sc">+</span></span>
-<span id="cb46-2"><a href="#cb46-2"></a>  <span class="fu">geom_histogram</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> steps)) <span class="sc">+</span></span>
+<span id="cb47-2"><a href="#cb47-2"></a>  <span class="fu">geom_histogram</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 </div>
@@ -1415,18 +1418,18 @@ Test your understanding
 </div>
 <p>You should always set the <code>binwidth</code> or number of <code>bins</code> to something meaningful for your data (otherwise you get the annoying message above). You might need to try a few options before you find something that looks good and conveys the meaning of your plot – try changing the values of <code>binwidth</code> and <code>bins</code> below to see what works best.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a><span class="co"># adjust width of each bar</span></span>
-<span id="cb48-2"><a href="#cb48-2"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> steps)) <span class="sc">+</span></span>
-<span id="cb48-3"><a href="#cb48-3"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">500</span>)</span>
-<span id="cb48-4"><a href="#cb48-4"></a></span>
-<span id="cb48-5"><a href="#cb48-5"></a><span class="co"># adjust number of bars</span></span>
-<span id="cb48-6"><a href="#cb48-6"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> steps)) <span class="sc">+</span></span>
-<span id="cb48-7"><a href="#cb48-7"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a><span class="co"># adjust width of each bar</span></span>
+<span id="cb49-2"><a href="#cb49-2"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> steps)) <span class="sc">+</span></span>
+<span id="cb49-3"><a href="#cb49-3"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">500</span>)</span>
+<span id="cb49-4"><a href="#cb49-4"></a></span>
+<span id="cb49-5"><a href="#cb49-5"></a><span class="co"># adjust number of bars</span></span>
+<span id="cb49-6"><a href="#cb49-6"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> steps)) <span class="sc">+</span></span>
+<span id="cb49-7"><a href="#cb49-7"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>By default, the bars start <em>centered</em> on 0, so if <code>binwidth</code> is set to 500, the first bar would include -250 to 250 steps, which doesn’t make much sense. We can set <code>boundary = 0</code> so that each bar represents increments of 500 steps <em>starting</em> from 0.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> steps)) <span class="sc">+</span></span>
-<span id="cb49-2"><a href="#cb49-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">500</span>, <span class="at">boundary =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> steps)) <span class="sc">+</span></span>
+<span id="cb50-2"><a href="#cb50-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">500</span>, <span class="at">boundary =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-histogram-boundary0" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="03-viz_files/figure-html/fig-histogram-boundary0-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -1437,13 +1440,13 @@ Test your understanding
 </div>
 <p>Finally, the default style of grey bars is ugly, so you can change that by setting the <code>fill</code> and <code>colour</code>, as well as using <code>scale_x_continuous()</code> to update the axis labels.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> steps)) <span class="sc">+</span></span>
-<span id="cb50-2"><a href="#cb50-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">250</span>, </span>
-<span id="cb50-3"><a href="#cb50-3"></a>                 <span class="at">boundary =</span> <span class="dv">0</span>, </span>
-<span id="cb50-4"><a href="#cb50-4"></a>                 <span class="at">fill =</span> <span class="st">"white"</span>, </span>
-<span id="cb50-5"><a href="#cb50-5"></a>                 <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb50-6"><a href="#cb50-6"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">"Number of steps"</span>,</span>
-<span id="cb50-7"><a href="#cb50-7"></a>                     <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">10000</span>, <span class="dv">2500</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> steps)) <span class="sc">+</span></span>
+<span id="cb51-2"><a href="#cb51-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">250</span>, </span>
+<span id="cb51-3"><a href="#cb51-3"></a>                 <span class="at">boundary =</span> <span class="dv">0</span>, </span>
+<span id="cb51-4"><a href="#cb51-4"></a>                 <span class="at">fill =</span> <span class="st">"white"</span>, </span>
+<span id="cb51-5"><a href="#cb51-5"></a>                 <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb51-6"><a href="#cb51-6"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">"Number of steps"</span>,</span>
+<span id="cb51-7"><a href="#cb51-7"></a>                     <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">10000</span>, <span class="dv">2500</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-histogram-custom" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="03-viz_files/figure-html/fig-histogram-custom-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -1474,8 +1477,8 @@ Test your understanding
 <div class="cell" data-layout-align="center">
 <ul>
 <li>How would you set the mapping for this plot?
-<div id="radio_UETJSFDPRL" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_UETJSFDPRL" value="x"><span>aes(x = country, y = population)</span></label><label><input type="radio" autocomplete="off" name="radio_UETJSFDPRL" value="x"><span>aes(x = population, y = country)</span></label><label><input type="radio" autocomplete="off" name="radio_UETJSFDPRL" value="answer"><span>aes(x = population)</span></label><label><input type="radio" autocomplete="off" name="radio_UETJSFDPRL" value="x"><span>aes(x = population, y = count)</span></label>
+<div id="radio_SMMPFKBCWN" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SMMPFKBCWN" value="x"><span>aes(x = country, y = population)</span></label><label><input type="radio" autocomplete="off" name="radio_SMMPFKBCWN" value="x"><span>aes(x = population, y = country)</span></label><label><input type="radio" autocomplete="off" name="radio_SMMPFKBCWN" value="answer"><span>aes(x = population)</span></label><label><input type="radio" autocomplete="off" name="radio_SMMPFKBCWN" value="x"><span>aes(x = population, y = count)</span></label>
 </div>
 </li>
 </ul>
@@ -1504,8 +1507,8 @@ Axis label customisation
 <div class="callout-body-container callout-body">
 <p>If you’re curious how we got the x-axis labels to read “100K” instead of “100000”, you just need to add a vector of <code>labels</code> the same length as <code>breaks</code>.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="fl">1e6</span>, <span class="fl">1e5</span>),</span>
-<span id="cb51-2"><a href="#cb51-2"></a>                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="fu">paste0</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">9</span><span class="sc">*</span><span class="dv">100</span>, <span class="st">"K"</span>), <span class="st">"1M"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="fl">1e6</span>, <span class="fl">1e5</span>),</span>
+<span id="cb52-2"><a href="#cb52-2"></a>                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="fu">paste0</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">9</span><span class="sc">*</span><span class="dv">100</span>, <span class="st">"K"</span>), <span class="st">"1M"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -1517,10 +1520,10 @@ Axis label customisation
 <p>In previous plots, we have used <code>fill</code> purely for visual reasons, e.g., we changed the colour of the histogram bars to make them look nicer. However, you can also use <code>fill</code> to represent another variable so that the colours become meaningful.</p>
 <p>Setting the <code>fill</code> aesthetic <strong>in the mapping</strong> will produce different coloured bars for each category of the <code>fill</code> variable, in this case <code>condition_type</code>.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> steps, <span class="at">fill =</span> condition_type)) <span class="sc">+</span></span>
-<span id="cb52-2"><a href="#cb52-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">boundary =</span> <span class="dv">0</span>, </span>
-<span id="cb52-3"><a href="#cb52-3"></a>                 <span class="at">binwidth =</span> <span class="dv">250</span>,</span>
-<span id="cb52-4"><a href="#cb52-4"></a>                 <span class="at">color =</span> <span class="st">"black"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> steps, <span class="at">fill =</span> condition_type)) <span class="sc">+</span></span>
+<span id="cb53-2"><a href="#cb53-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">boundary =</span> <span class="dv">0</span>, </span>
+<span id="cb53-3"><a href="#cb53-3"></a>                 <span class="at">binwidth =</span> <span class="dv">250</span>,</span>
+<span id="cb53-4"><a href="#cb53-4"></a>                 <span class="at">color =</span> <span class="st">"black"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="03-viz_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -1541,11 +1544,11 @@ Arguments inside aes()
 <div class="callout-body-container callout-body">
 <p>When you set an aspect to represent the data, you do this inside the <code>aes()</code> function for the mapping, not as an argument to the geom. If you try to set this in a geom, you’ll get the following error (unless you coincidentally have an object named <code>condition_type</code> that is a colour word).</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> steps)) <span class="sc">+</span></span>
-<span id="cb53-2"><a href="#cb53-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">boundary =</span> <span class="dv">0</span>, </span>
-<span id="cb53-3"><a href="#cb53-3"></a>                 <span class="at">binwidth =</span> <span class="dv">250</span>, </span>
-<span id="cb53-4"><a href="#cb53-4"></a>                 <span class="at">color =</span> <span class="st">"black"</span>,</span>
-<span id="cb53-5"><a href="#cb53-5"></a>                 <span class="at">fill =</span> condition_type)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> steps)) <span class="sc">+</span></span>
+<span id="cb54-2"><a href="#cb54-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">boundary =</span> <span class="dv">0</span>, </span>
+<span id="cb54-3"><a href="#cb54-3"></a>                 <span class="at">binwidth =</span> <span class="dv">250</span>, </span>
+<span id="cb54-4"><a href="#cb54-4"></a>                 <span class="at">color =</span> <span class="st">"black"</span>,</span>
+<span id="cb54-5"><a href="#cb54-5"></a>                 <span class="at">fill =</span> condition_type)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error in eval(expr, envir, enclos): object 'condition_type' not found</code></pre>
 </div>
@@ -1566,12 +1569,12 @@ Area plot alternative
 <div class="callout-body-container callout-body">
 <p>The function <code>geom_area()</code> gives a similar effect when <code>stat = "bin"</code>.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a><span class="co"># area plot</span></span>
-<span id="cb55-2"><a href="#cb55-2"></a><span class="fu">ggplot</span>(function_data, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> steps, <span class="at">fill =</span> condition_type)) <span class="sc">+</span></span>
-<span id="cb55-3"><a href="#cb55-3"></a>  <span class="fu">geom_area</span>(<span class="at">stat =</span> <span class="st">"bin"</span>, </span>
-<span id="cb55-4"><a href="#cb55-4"></a>            <span class="at">boundary =</span> <span class="dv">0</span>, </span>
-<span id="cb55-5"><a href="#cb55-5"></a>            <span class="at">binwidth =</span> <span class="dv">250</span>, </span>
-<span id="cb55-6"><a href="#cb55-6"></a>            <span class="at">color =</span> <span class="st">"black"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1"></a><span class="co"># area plot</span></span>
+<span id="cb56-2"><a href="#cb56-2"></a><span class="fu">ggplot</span>(function_data, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> steps, <span class="at">fill =</span> condition_type)) <span class="sc">+</span></span>
+<span id="cb56-3"><a href="#cb56-3"></a>  <span class="fu">geom_area</span>(<span class="at">stat =</span> <span class="st">"bin"</span>, </span>
+<span id="cb56-4"><a href="#cb56-4"></a>            <span class="at">boundary =</span> <span class="dv">0</span>, </span>
+<span id="cb56-5"><a href="#cb56-5"></a>            <span class="at">binwidth =</span> <span class="dv">250</span>, </span>
+<span id="cb56-6"><a href="#cb56-6"></a>            <span class="at">color =</span> <span class="st">"black"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="03-viz_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -1586,15 +1589,15 @@ Area plot alternative
 </section><section id="dodged-histogram" class="level4"><h4 class="anchored" data-anchor-id="dodged-histogram">Dodged histogram</h4>
 <p>By default, the categories are positioned stacked on top of each other. If you want to compare more than one distribution, you can set the <code>position</code> argument of <code>geom_histogram()</code> to “dodge” to put the bars for each group next to each other instead of stacking them. However, this can look confusing with several categories.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1"></a><span class="co"># dodged histogram</span></span>
-<span id="cb56-2"><a href="#cb56-2"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> steps, </span>
-<span id="cb56-3"><a href="#cb56-3"></a>                        <span class="at">fill =</span> condition_type,</span>
-<span id="cb56-4"><a href="#cb56-4"></a>                        <span class="at">colour =</span> condition_type))<span class="sc">+</span></span>
-<span id="cb56-5"><a href="#cb56-5"></a>  <span class="fu">geom_histogram</span>(<span class="at">boundary =</span> <span class="dv">0</span>, </span>
-<span id="cb56-6"><a href="#cb56-6"></a>                 <span class="at">binwidth =</span> <span class="dv">250</span>, </span>
-<span id="cb56-7"><a href="#cb56-7"></a>                 <span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
-<span id="cb56-8"><a href="#cb56-8"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">"Number of steps"</span>,</span>
-<span id="cb56-9"><a href="#cb56-9"></a>                     <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">10000</span>, <span class="dv">2500</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a><span class="co"># dodged histogram</span></span>
+<span id="cb57-2"><a href="#cb57-2"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> steps, </span>
+<span id="cb57-3"><a href="#cb57-3"></a>                        <span class="at">fill =</span> condition_type,</span>
+<span id="cb57-4"><a href="#cb57-4"></a>                        <span class="at">colour =</span> condition_type))<span class="sc">+</span></span>
+<span id="cb57-5"><a href="#cb57-5"></a>  <span class="fu">geom_histogram</span>(<span class="at">boundary =</span> <span class="dv">0</span>, </span>
+<span id="cb57-6"><a href="#cb57-6"></a>                 <span class="at">binwidth =</span> <span class="dv">250</span>, </span>
+<span id="cb57-7"><a href="#cb57-7"></a>                 <span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb57-8"><a href="#cb57-8"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">"Number of steps"</span>,</span>
+<span id="cb57-9"><a href="#cb57-9"></a>                     <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">10000</span>, <span class="dv">2500</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-histogram-dodge" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="03-viz_files/figure-html/fig-histogram-dodge-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -1617,14 +1620,14 @@ Frequency plot alternative
 <div class="callout-body-container callout-body">
 <p>Alternatively, you can use <code>geom_freqpoly()</code> to plot a line connecting the top of each bin (see <a href="10-custom.html#sec-freqpoly"><span>Section&nbsp;10.1.4.1.1</span></a>).</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a><span class="co"># frequency plot</span></span>
-<span id="cb57-2"><a href="#cb57-2"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> steps,</span>
-<span id="cb57-3"><a href="#cb57-3"></a>                        <span class="at">colour =</span> condition_type)) <span class="sc">+</span></span>
-<span id="cb57-4"><a href="#cb57-4"></a>  <span class="fu">geom_freqpoly</span>(<span class="at">binwidth =</span> <span class="dv">250</span>, </span>
-<span id="cb57-5"><a href="#cb57-5"></a>                <span class="at">boundary =</span> <span class="dv">0</span>,</span>
-<span id="cb57-6"><a href="#cb57-6"></a>                <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb57-7"><a href="#cb57-7"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">"Number of steps"</span>,</span>
-<span id="cb57-8"><a href="#cb57-8"></a>                     <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">10000</span>, <span class="dv">2500</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1"></a><span class="co"># frequency plot</span></span>
+<span id="cb58-2"><a href="#cb58-2"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> steps,</span>
+<span id="cb58-3"><a href="#cb58-3"></a>                        <span class="at">colour =</span> condition_type)) <span class="sc">+</span></span>
+<span id="cb58-4"><a href="#cb58-4"></a>  <span class="fu">geom_freqpoly</span>(<span class="at">binwidth =</span> <span class="dv">250</span>, </span>
+<span id="cb58-5"><a href="#cb58-5"></a>                <span class="at">boundary =</span> <span class="dv">0</span>,</span>
+<span id="cb58-6"><a href="#cb58-6"></a>                <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb58-7"><a href="#cb58-7"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">"Number of steps"</span>,</span>
+<span id="cb58-8"><a href="#cb58-8"></a>                     <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">10000</span>, <span class="dv">2500</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
 ℹ Please use `linewidth` instead.</code></pre>
@@ -1643,17 +1646,17 @@ Frequency plot alternative
 </section><section id="violin-plot" class="level4"><h4 class="anchored" data-anchor-id="violin-plot">Violin plot</h4>
 <p>Another way to compare groups of continuous variables is the violin plot. This is like a density plot, but rotated 90 degrees and mirrored - the fatter the violin, the larger proportion of data points there are at that value.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1"></a>violin_area <span class="ot">&lt;-</span> </span>
-<span id="cb59-2"><a href="#cb59-2"></a>  <span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> condition_type, <span class="at">y =</span> steps)) <span class="sc">+</span></span>
-<span id="cb59-3"><a href="#cb59-3"></a>  <span class="fu">geom_violin</span>() <span class="sc">+</span></span>
-<span id="cb59-4"><a href="#cb59-4"></a>  <span class="fu">ggtitle</span>(<span class="st">'scale = "area"'</span>)</span>
-<span id="cb59-5"><a href="#cb59-5"></a></span>
-<span id="cb59-6"><a href="#cb59-6"></a>violin_count <span class="ot">&lt;-</span> </span>
-<span id="cb59-7"><a href="#cb59-7"></a>  <span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> condition_type, <span class="at">y =</span> steps)) <span class="sc">+</span></span>
-<span id="cb59-8"><a href="#cb59-8"></a>  <span class="fu">geom_violin</span>(<span class="at">scale =</span> <span class="st">"count"</span>) <span class="sc">+</span></span>
-<span id="cb59-9"><a href="#cb59-9"></a>  <span class="fu">ggtitle</span>(<span class="st">'scale = "count"'</span>)</span>
-<span id="cb59-10"><a href="#cb59-10"></a></span>
-<span id="cb59-11"><a href="#cb59-11"></a>violin_area <span class="sc">+</span> violin_count</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1"></a>violin_area <span class="ot">&lt;-</span> </span>
+<span id="cb60-2"><a href="#cb60-2"></a>  <span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> condition_type, <span class="at">y =</span> steps)) <span class="sc">+</span></span>
+<span id="cb60-3"><a href="#cb60-3"></a>  <span class="fu">geom_violin</span>() <span class="sc">+</span></span>
+<span id="cb60-4"><a href="#cb60-4"></a>  <span class="fu">ggtitle</span>(<span class="st">'scale = "area"'</span>)</span>
+<span id="cb60-5"><a href="#cb60-5"></a></span>
+<span id="cb60-6"><a href="#cb60-6"></a>violin_count <span class="ot">&lt;-</span> </span>
+<span id="cb60-7"><a href="#cb60-7"></a>  <span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> condition_type, <span class="at">y =</span> steps)) <span class="sc">+</span></span>
+<span id="cb60-8"><a href="#cb60-8"></a>  <span class="fu">geom_violin</span>(<span class="at">scale =</span> <span class="st">"count"</span>) <span class="sc">+</span></span>
+<span id="cb60-9"><a href="#cb60-9"></a>  <span class="fu">ggtitle</span>(<span class="st">'scale = "count"'</span>)</span>
+<span id="cb60-10"><a href="#cb60-10"></a></span>
+<span id="cb60-11"><a href="#cb60-11"></a>violin_area <span class="sc">+</span> violin_count</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-violin-plot" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="03-viz_files/figure-html/fig-violin-plot-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -1666,20 +1669,20 @@ Frequency plot alternative
 <p>Boxplots serve a similar purpose to violin plots (without the giggles from the back row). They don’t show you the shape of the distribution, but rather some statistics about it. The middle line represents the <a class="glossary">median<span class="def"></span></a>; half the data are above this line and half below it. The box encloses the 25th to 75th percentiles of the data, so 50% of the data falls inside the box. The “whiskers” extending above and below the box extend 1.5 times the height of the box, although you can change this with the <code>coef</code> argument. The points show <a class="glossary">outliers<span class="def"></span></a> – individual data points that fall outside of this range.</p>
 <p>Boxplots can be horizontal if you swap to x and y columns, and there are many other customisations you can apply.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1"></a>boxplot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> condition_type, <span class="at">y =</span> steps)) <span class="sc">+</span></span>
-<span id="cb60-2"><a href="#cb60-2"></a> <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb60-3"><a href="#cb60-3"></a>  <span class="fu">ggtitle</span>(<span class="st">"Default vertical boxplot"</span>)</span>
-<span id="cb60-4"><a href="#cb60-4"></a></span>
-<span id="cb60-5"><a href="#cb60-5"></a>custom <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">y =</span> condition_type,<span class="at">x =</span> steps)) <span class="sc">+</span></span>
-<span id="cb60-6"><a href="#cb60-6"></a> <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">"grey80"</span>, </span>
-<span id="cb60-7"><a href="#cb60-7"></a>              <span class="at">outlier.colour =</span> <span class="st">"red"</span>,</span>
-<span id="cb60-8"><a href="#cb60-8"></a>              <span class="at">outlier.shape =</span> <span class="dv">8</span>,</span>
-<span id="cb60-9"><a href="#cb60-9"></a>              <span class="at">coef =</span> <span class="dv">1</span>,   <span class="co"># length of whiskers relative to box</span></span>
-<span id="cb60-10"><a href="#cb60-10"></a>              <span class="at">varwidth =</span> <span class="cn">TRUE</span>, <span class="co"># set width proportional to sample size</span></span>
-<span id="cb60-11"><a href="#cb60-11"></a>              <span class="at">notch =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb60-12"><a href="#cb60-12"></a>  <span class="fu">ggtitle</span>(<span class="st">"Customised horizontal boxplot"</span>)</span>
-<span id="cb60-13"><a href="#cb60-13"></a></span>
-<span id="cb60-14"><a href="#cb60-14"></a>boxplot <span class="sc">+</span> custom</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1"></a>boxplot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> condition_type, <span class="at">y =</span> steps)) <span class="sc">+</span></span>
+<span id="cb61-2"><a href="#cb61-2"></a> <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb61-3"><a href="#cb61-3"></a>  <span class="fu">ggtitle</span>(<span class="st">"Default vertical boxplot"</span>)</span>
+<span id="cb61-4"><a href="#cb61-4"></a></span>
+<span id="cb61-5"><a href="#cb61-5"></a>custom <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">y =</span> condition_type,<span class="at">x =</span> steps)) <span class="sc">+</span></span>
+<span id="cb61-6"><a href="#cb61-6"></a> <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">"grey80"</span>, </span>
+<span id="cb61-7"><a href="#cb61-7"></a>              <span class="at">outlier.colour =</span> <span class="st">"red"</span>,</span>
+<span id="cb61-8"><a href="#cb61-8"></a>              <span class="at">outlier.shape =</span> <span class="dv">8</span>,</span>
+<span id="cb61-9"><a href="#cb61-9"></a>              <span class="at">coef =</span> <span class="dv">1</span>,   <span class="co"># length of whiskers relative to box</span></span>
+<span id="cb61-10"><a href="#cb61-10"></a>              <span class="at">varwidth =</span> <span class="cn">TRUE</span>, <span class="co"># set width proportional to sample size</span></span>
+<span id="cb61-11"><a href="#cb61-11"></a>              <span class="at">notch =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb61-12"><a href="#cb61-12"></a>  <span class="fu">ggtitle</span>(<span class="st">"Customised horizontal boxplot"</span>)</span>
+<span id="cb61-13"><a href="#cb61-13"></a></span>
+<span id="cb61-14"><a href="#cb61-14"></a>boxplot <span class="sc">+</span> custom</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-box-plot" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="03-viz_files/figure-html/fig-box-plot-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -1691,31 +1694,31 @@ Frequency plot alternative
 </section><section id="combo-plots" class="level4"><h4 class="anchored" data-anchor-id="combo-plots">Combo plots</h4>
 <p>Violin plots are frequently layered with other geoms that represent the mean or median values in the data. This is a lot of code; to help your understanding, run it layer by layer to see how it builds up and change the values throughout the code.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1"></a><span class="co"># add fill and colour to the mapping</span></span>
-<span id="cb61-2"><a href="#cb61-2"></a></span>
-<span id="cb61-3"><a href="#cb61-3"></a><span class="fu">ggplot</span>(function_data,  <span class="fu">aes</span>(<span class="at">x =</span> condition_type, </span>
-<span id="cb61-4"><a href="#cb61-4"></a>                         <span class="at">y =</span> steps,</span>
-<span id="cb61-5"><a href="#cb61-5"></a>                         <span class="at">fill =</span> condition_type,</span>
-<span id="cb61-6"><a href="#cb61-6"></a>                         <span class="at">colour =</span> condition_type)) <span class="sc">+</span></span>
-<span id="cb61-7"><a href="#cb61-7"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">"Type of condition"</span>) <span class="sc">+</span></span>
-<span id="cb61-8"><a href="#cb61-8"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Number of steps"</span>,</span>
-<span id="cb61-9"><a href="#cb61-9"></a>                     <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">10000</span>, <span class="dv">2500</span>)) <span class="sc">+</span></span>
-<span id="cb61-10"><a href="#cb61-10"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10000</span>)) <span class="sc">+</span></span>
-<span id="cb61-11"><a href="#cb61-11"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="st">"none"</span>, <span class="at">colour =</span> <span class="st">"none"</span>) <span class="sc">+</span> </span>
-<span id="cb61-12"><a href="#cb61-12"></a>  <span class="co"># add a violin plot</span></span>
-<span id="cb61-13"><a href="#cb61-13"></a>  <span class="fu">geom_violin</span>(<span class="at">draw_quantiles =</span> <span class="fl">0.5</span>, <span class="co"># adds a line at median (50%) score</span></span>
-<span id="cb61-14"><a href="#cb61-14"></a>              <span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span> </span>
-<span id="cb61-15"><a href="#cb61-15"></a>  <span class="co"># add a boxplot</span></span>
-<span id="cb61-16"><a href="#cb61-16"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> <span class="fl">0.25</span>, </span>
-<span id="cb61-17"><a href="#cb61-17"></a>               <span class="at">fill =</span> <span class="st">"white"</span>, </span>
-<span id="cb61-18"><a href="#cb61-18"></a>               <span class="at">alpha =</span> <span class="fl">0.75</span>, </span>
-<span id="cb61-19"><a href="#cb61-19"></a>               <span class="at">fatten =</span> <span class="dv">0</span>, <span class="co"># removes the median line</span></span>
-<span id="cb61-20"><a href="#cb61-20"></a>               <span class="at">outlier.alpha =</span> <span class="dv">0</span>) <span class="sc">+</span> </span>
-<span id="cb61-21"><a href="#cb61-21"></a>  <span class="co"># add a point that represents the mean</span></span>
-<span id="cb61-22"><a href="#cb61-22"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, </span>
-<span id="cb61-23"><a href="#cb61-23"></a>               <span class="at">geom =</span> <span class="st">"point"</span>, </span>
-<span id="cb61-24"><a href="#cb61-24"></a>               <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span> </span>
-<span id="cb61-25"><a href="#cb61-25"></a>  <span class="fu">ggtitle</span>(<span class="st">"ViolinBox"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1"></a><span class="co"># add fill and colour to the mapping</span></span>
+<span id="cb62-2"><a href="#cb62-2"></a></span>
+<span id="cb62-3"><a href="#cb62-3"></a><span class="fu">ggplot</span>(function_data,  <span class="fu">aes</span>(<span class="at">x =</span> condition_type, </span>
+<span id="cb62-4"><a href="#cb62-4"></a>                         <span class="at">y =</span> steps,</span>
+<span id="cb62-5"><a href="#cb62-5"></a>                         <span class="at">fill =</span> condition_type,</span>
+<span id="cb62-6"><a href="#cb62-6"></a>                         <span class="at">colour =</span> condition_type)) <span class="sc">+</span></span>
+<span id="cb62-7"><a href="#cb62-7"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">"Type of condition"</span>) <span class="sc">+</span></span>
+<span id="cb62-8"><a href="#cb62-8"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Number of steps"</span>,</span>
+<span id="cb62-9"><a href="#cb62-9"></a>                     <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">10000</span>, <span class="dv">2500</span>)) <span class="sc">+</span></span>
+<span id="cb62-10"><a href="#cb62-10"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10000</span>)) <span class="sc">+</span></span>
+<span id="cb62-11"><a href="#cb62-11"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="st">"none"</span>, <span class="at">colour =</span> <span class="st">"none"</span>) <span class="sc">+</span> </span>
+<span id="cb62-12"><a href="#cb62-12"></a>  <span class="co"># add a violin plot</span></span>
+<span id="cb62-13"><a href="#cb62-13"></a>  <span class="fu">geom_violin</span>(<span class="at">draw_quantiles =</span> <span class="fl">0.5</span>, <span class="co"># adds a line at median (50%) score</span></span>
+<span id="cb62-14"><a href="#cb62-14"></a>              <span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span> </span>
+<span id="cb62-15"><a href="#cb62-15"></a>  <span class="co"># add a boxplot</span></span>
+<span id="cb62-16"><a href="#cb62-16"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> <span class="fl">0.25</span>, </span>
+<span id="cb62-17"><a href="#cb62-17"></a>               <span class="at">fill =</span> <span class="st">"white"</span>, </span>
+<span id="cb62-18"><a href="#cb62-18"></a>               <span class="at">alpha =</span> <span class="fl">0.75</span>, </span>
+<span id="cb62-19"><a href="#cb62-19"></a>               <span class="at">fatten =</span> <span class="dv">0</span>, <span class="co"># removes the median line</span></span>
+<span id="cb62-20"><a href="#cb62-20"></a>               <span class="at">outlier.alpha =</span> <span class="dv">0</span>) <span class="sc">+</span> </span>
+<span id="cb62-21"><a href="#cb62-21"></a>  <span class="co"># add a point that represents the mean</span></span>
+<span id="cb62-22"><a href="#cb62-22"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, </span>
+<span id="cb62-23"><a href="#cb62-23"></a>               <span class="at">geom =</span> <span class="st">"point"</span>, </span>
+<span id="cb62-24"><a href="#cb62-24"></a>               <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb62-25"><a href="#cb62-25"></a>  <span class="fu">ggtitle</span>(<span class="st">"ViolinBox"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-violin-combos" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="03-viz_files/figure-html/fig-violin-combos-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -1782,23 +1785,23 @@ Test your understanding
 <option value="x">geom_violinplot()</option></select>
 </li>
 <li>What does the mapping look like for both plots?
-<div id="radio_MHENNHROUV" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_MHENNHROUV" value="x"><span>aes(x = musculoskeletal, y = gaitspeed, colour = gaitspeed)</span></label><label><input type="radio" autocomplete="off" name="radio_MHENNHROUV" value="x"><span>aes(x = musculoskeletal, y = gaitspeed, colour = musculoskeletal)</span></label><label><input type="radio" autocomplete="off" name="radio_MHENNHROUV" value="answer"><span>aes(x = musculoskeletal, y = gaitspeed, fill = musculoskeletal)</span></label><label><input type="radio" autocomplete="off" name="radio_MHENNHROUV" value="x"><span>aes(x = musculoskeletal, y = gaitspeed, fill = gaitspeed)</span></label>
+<div id="radio_PHEKJUROVX" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_PHEKJUROVX" value="answer"><span>aes(x = musculoskeletal, y = gaitspeed, fill = musculoskeletal)</span></label><label><input type="radio" autocomplete="off" name="radio_PHEKJUROVX" value="x"><span>aes(x = musculoskeletal, y = gaitspeed, colour = gaitspeed)</span></label><label><input type="radio" autocomplete="off" name="radio_PHEKJUROVX" value="x"><span>aes(x = musculoskeletal, y = gaitspeed, colour = musculoskeletal)</span></label><label><input type="radio" autocomplete="off" name="radio_PHEKJUROVX" value="x"><span>aes(x = musculoskeletal, y = gaitspeed, fill = gaitspeed)</span></label>
 </div>
 </li>
 <li>Which musculoskeletal disease is characterised by the slowest median gait speed? <select class="webex-select"><option value="blank"></option>
-<option value="x">None</option>
-<option value="x">Osteoarthritis</option>
+<option value="x">Rheumatoid arthritis</option>
 <option value="x">Sarcopenia</option>
+<option value="x">None</option>
 <option value="answer">Osteoporosis</option>
-<option value="x">Rheumatoid arthritis</option></select>
+<option value="x">Osteoarthritis</option></select>
 </li>
 <li>Which musculoskeletal disease is characterised by the quickest median gait speed? <select class="webex-select"><option value="blank"></option>
-<option value="x">Osteoarthritis</option>
 <option value="x">Sarcopenia</option>
-<option value="x">Osteoporosis</option>
 <option value="x">Rheumatoid arthritis</option>
-<option value="answer">None</option></select>
+<option value="x">Osteoarthritis</option>
+<option value="answer">None</option>
+<option value="x">Osteoporosis</option></select>
 </li>
 </ul>
 </div>
@@ -1809,8 +1812,8 @@ Test your understanding
 <section id="scatterplot" class="level4"><h4 class="anchored" data-anchor-id="scatterplot">Scatterplot</h4>
 <p>The function to create a scatterplot is called <code>geom_point()</code>.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> gaitspeed, <span class="at">y =</span> steps)) <span class="sc">+</span></span>
-<span id="cb62-2"><a href="#cb62-2"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> gaitspeed, <span class="at">y =</span> steps)) <span class="sc">+</span></span>
+<span id="cb63-2"><a href="#cb63-2"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-demo-point" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="03-viz_files/figure-html/fig-demo-point-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -1822,19 +1825,19 @@ Test your understanding
 </section><section id="trendlines" class="level4"><h4 class="anchored" data-anchor-id="trendlines">Trendlines</h4>
 <p>In <a href="#fig-layers">Figure&nbsp;<span>3.1</span></a>, we emphasised the relationship between gait speed and number of steps with a trendline created by <code>geom_smooth()</code> using the argument <code>method = lm</code> (“lm” stands for “linear model” or a straight line relationship). You can also set <code>method = loess</code> to visualise a non-linear relationship.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1"></a>lm_plot <span class="ot">&lt;-</span> </span>
-<span id="cb63-2"><a href="#cb63-2"></a>  <span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> gaitspeed, <span class="at">y =</span> steps)) <span class="sc">+</span></span>
-<span id="cb63-3"><a href="#cb63-3"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb63-4"><a href="#cb63-4"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm, <span class="at">formula =</span> y<span class="sc">~</span>x) <span class="sc">+</span></span>
-<span id="cb63-5"><a href="#cb63-5"></a>  <span class="fu">ggtitle</span>(<span class="st">"method = lm"</span>)</span>
-<span id="cb63-6"><a href="#cb63-6"></a></span>
-<span id="cb63-7"><a href="#cb63-7"></a>loess_plot <span class="ot">&lt;-</span> </span>
-<span id="cb63-8"><a href="#cb63-8"></a>  <span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> gaitspeed, <span class="at">y =</span> steps)) <span class="sc">+</span></span>
-<span id="cb63-9"><a href="#cb63-9"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb63-10"><a href="#cb63-10"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> loess, <span class="at">formula =</span> y<span class="sc">~</span>x) <span class="sc">+</span></span>
-<span id="cb63-11"><a href="#cb63-11"></a>  <span class="fu">ggtitle</span>(<span class="st">"method = loess"</span>)</span>
-<span id="cb63-12"><a href="#cb63-12"></a></span>
-<span id="cb63-13"><a href="#cb63-13"></a>lm_plot <span class="sc">+</span> loess_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1"></a>lm_plot <span class="ot">&lt;-</span> </span>
+<span id="cb64-2"><a href="#cb64-2"></a>  <span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> gaitspeed, <span class="at">y =</span> steps)) <span class="sc">+</span></span>
+<span id="cb64-3"><a href="#cb64-3"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb64-4"><a href="#cb64-4"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm, <span class="at">formula =</span> y<span class="sc">~</span>x) <span class="sc">+</span></span>
+<span id="cb64-5"><a href="#cb64-5"></a>  <span class="fu">ggtitle</span>(<span class="st">"method = lm"</span>)</span>
+<span id="cb64-6"><a href="#cb64-6"></a></span>
+<span id="cb64-7"><a href="#cb64-7"></a>loess_plot <span class="ot">&lt;-</span> </span>
+<span id="cb64-8"><a href="#cb64-8"></a>  <span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> gaitspeed, <span class="at">y =</span> steps)) <span class="sc">+</span></span>
+<span id="cb64-9"><a href="#cb64-9"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb64-10"><a href="#cb64-10"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> loess, <span class="at">formula =</span> y<span class="sc">~</span>x) <span class="sc">+</span></span>
+<span id="cb64-11"><a href="#cb64-11"></a>  <span class="fu">ggtitle</span>(<span class="st">"method = loess"</span>)</span>
+<span id="cb64-12"><a href="#cb64-12"></a></span>
+<span id="cb64-13"><a href="#cb64-13"></a>lm_plot <span class="sc">+</span> loess_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-2-continuous" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="03-viz_files/figure-html/fig-2-continuous-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -1859,9 +1862,9 @@ Error shading
 </section><section id="dates" class="level4"><h4 class="anchored" data-anchor-id="dates">Dates</h4>
 <p>The <code>test_start</code> column contains both a date and a time, so use the <code><a href="https://rdrr.io/r/base/date.html">date()</a></code> function from <pkg>lubridate</pkg> to convert it to just a date. We’ll need it in this format to be able to transform the x-axis below.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> lubridate<span class="sc">::</span><span class="fu">date</span>(test_start), </span>
-<span id="cb64-2"><a href="#cb64-2"></a>                        <span class="at">y =</span> CASP19)) <span class="sc">+</span> </span>
-<span id="cb64-3"><a href="#cb64-3"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm, <span class="at">formula =</span> y<span class="sc">~</span>x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> lubridate<span class="sc">::</span><span class="fu">date</span>(test_start), </span>
+<span id="cb65-2"><a href="#cb65-2"></a>                        <span class="at">y =</span> CASP19)) <span class="sc">+</span> </span>
+<span id="cb65-3"><a href="#cb65-3"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm, <span class="at">formula =</span> y<span class="sc">~</span>x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-date-x" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="03-viz_files/figure-html/fig-date-x-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -1872,14 +1875,14 @@ Error shading
 </div>
 <p>We can use <code>scale_x_date()</code> to set the <code>date_breaks</code> to be “1 month” apart. The <code>date_labels</code> argument uses a code for different date formats; you can see the full list of possibilities in the help for <code><a href="https://rdrr.io/r/base/strptime.html">?strptime</a></code>. For example, <code>%b</code> means “Abbreviated month name”, whilst if you wanted to use a format like “2020/01/31” you could try <code>"%Y/%m/%d"</code>.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> lubridate<span class="sc">::</span><span class="fu">date</span>(test_start), </span>
-<span id="cb65-2"><a href="#cb65-2"></a>                        <span class="at">y =</span> CASP19)) <span class="sc">+</span></span>
-<span id="cb65-3"><a href="#cb65-3"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm, <span class="at">formula =</span> y<span class="sc">~</span>x) <span class="sc">+</span></span>
-<span id="cb65-4"><a href="#cb65-4"></a>  <span class="fu">scale_x_date</span>(<span class="at">name =</span> <span class="st">""</span>,</span>
-<span id="cb65-5"><a href="#cb65-5"></a>               <span class="at">date_breaks =</span> <span class="st">"1 month"</span>, </span>
-<span id="cb65-6"><a href="#cb65-6"></a>               <span class="at">date_labels =</span> <span class="st">"%b"</span>) <span class="sc">+</span></span>
-<span id="cb65-7"><a href="#cb65-7"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Quality-of-life"</span>) <span class="sc">+</span></span>
-<span id="cb65-8"><a href="#cb65-8"></a>  <span class="fu">ggtitle</span>(<span class="st">"2020 Quality-of-life"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> lubridate<span class="sc">::</span><span class="fu">date</span>(test_start), </span>
+<span id="cb66-2"><a href="#cb66-2"></a>                        <span class="at">y =</span> CASP19)) <span class="sc">+</span></span>
+<span id="cb66-3"><a href="#cb66-3"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm, <span class="at">formula =</span> y<span class="sc">~</span>x) <span class="sc">+</span></span>
+<span id="cb66-4"><a href="#cb66-4"></a>  <span class="fu">scale_x_date</span>(<span class="at">name =</span> <span class="st">""</span>,</span>
+<span id="cb66-5"><a href="#cb66-5"></a>               <span class="at">date_breaks =</span> <span class="st">"1 month"</span>, </span>
+<span id="cb66-6"><a href="#cb66-6"></a>               <span class="at">date_labels =</span> <span class="st">"%b"</span>) <span class="sc">+</span></span>
+<span id="cb66-7"><a href="#cb66-7"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Quality-of-life"</span>) <span class="sc">+</span></span>
+<span id="cb66-8"><a href="#cb66-8"></a>  <span class="fu">ggtitle</span>(<span class="st">"2020 Quality-of-life"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-date-month" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="03-viz_files/figure-html/fig-date-month-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -1912,18 +1915,18 @@ Solution
 </div>
 <div id="callout-21" class="callout-21-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> lubridate<span class="sc">::</span><span class="fu">date</span>(test_start), </span>
-<span id="cb66-2"><a href="#cb66-2"></a>                        <span class="at">y =</span> CASP19)) <span class="sc">+</span></span>
-<span id="cb66-3"><a href="#cb66-3"></a>  <span class="co"># show individual data, jitter the height to avoid overlap</span></span>
-<span id="cb66-4"><a href="#cb66-4"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="dv">0</span>, <span class="at">height =</span> .<span class="dv">1</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span> </span>
-<span id="cb66-5"><a href="#cb66-5"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm,  <span class="at">formula =</span> y<span class="sc">~</span>x) <span class="sc">+</span></span>
-<span id="cb66-6"><a href="#cb66-6"></a>  <span class="fu">scale_x_date</span>(<span class="at">name =</span> <span class="st">""</span>,</span>
-<span id="cb66-7"><a href="#cb66-7"></a>               <span class="at">date_breaks =</span> <span class="st">"1 month"</span>, </span>
-<span id="cb66-8"><a href="#cb66-8"></a>               <span class="at">date_labels =</span> <span class="st">"%b"</span>) <span class="sc">+</span></span>
-<span id="cb66-9"><a href="#cb66-9"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Quality-of-life"</span>,</span>
-<span id="cb66-10"><a href="#cb66-10"></a>                     <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">57</span>, <span class="dv">10</span>)) <span class="sc">+</span></span>
-<span id="cb66-11"><a href="#cb66-11"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">57</span>)) <span class="sc">+</span> <span class="co"># changes limits</span></span>
-<span id="cb66-12"><a href="#cb66-12"></a>  <span class="fu">ggtitle</span>(<span class="st">"2020 Quality-of-life"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> lubridate<span class="sc">::</span><span class="fu">date</span>(test_start), </span>
+<span id="cb67-2"><a href="#cb67-2"></a>                        <span class="at">y =</span> CASP19)) <span class="sc">+</span></span>
+<span id="cb67-3"><a href="#cb67-3"></a>  <span class="co"># show individual data, jitter the height to avoid overlap</span></span>
+<span id="cb67-4"><a href="#cb67-4"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="dv">0</span>, <span class="at">height =</span> .<span class="dv">1</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span> </span>
+<span id="cb67-5"><a href="#cb67-5"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm,  <span class="at">formula =</span> y<span class="sc">~</span>x) <span class="sc">+</span></span>
+<span id="cb67-6"><a href="#cb67-6"></a>  <span class="fu">scale_x_date</span>(<span class="at">name =</span> <span class="st">""</span>,</span>
+<span id="cb67-7"><a href="#cb67-7"></a>               <span class="at">date_breaks =</span> <span class="st">"1 month"</span>, </span>
+<span id="cb67-8"><a href="#cb67-8"></a>               <span class="at">date_labels =</span> <span class="st">"%b"</span>) <span class="sc">+</span></span>
+<span id="cb67-9"><a href="#cb67-9"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Quality-of-life"</span>,</span>
+<span id="cb67-10"><a href="#cb67-10"></a>                     <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">57</span>, <span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb67-11"><a href="#cb67-11"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">57</span>)) <span class="sc">+</span> <span class="co"># changes limits</span></span>
+<span id="cb67-12"><a href="#cb67-12"></a>  <span class="fu">ggtitle</span>(<span class="st">"2020 Quality-of-life"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="03-viz_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -1941,8 +1944,8 @@ Solution
 <p>When you have a limited range of numeric values, such as an ordinal rating scale, sometimes overlapping data makes it difficult to see what is going on in a point plot. For example, the plot below shows general health ratings by gait speed, but because all the ratings are 1, 2, 3, 4 or 5, it makes it hard to see exactly how many data points there are at each point.</p>
 <p>In this section, we’ll explore a few options for dealing with this.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> gaitspeed, <span class="at">y =</span> generalhealth)) <span class="sc">+</span> </span>
-<span id="cb67-2"><a href="#cb67-2"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> gaitspeed, <span class="at">y =</span> generalhealth)) <span class="sc">+</span> </span>
+<span id="cb68-2"><a href="#cb68-2"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-over-plot" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="03-viz_files/figure-html/fig-over-plot-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -1967,8 +1970,8 @@ Change these values to understand what jitter is doing
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> gaitspeed, <span class="at">y =</span> generalhealth)) <span class="sc">+</span></span>
-<span id="cb68-2"><a href="#cb68-2"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="dv">0</span>, <span class="at">height =</span> .<span class="dv">2</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> gaitspeed, <span class="at">y =</span> generalhealth)) <span class="sc">+</span></span>
+<span id="cb69-2"><a href="#cb69-2"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="dv">0</span>, <span class="at">height =</span> .<span class="dv">2</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-jitter-plot" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="03-viz_files/figure-html/fig-jitter-plot-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -1980,16 +1983,16 @@ Change these values to understand what jitter is doing
 </section><section id="facets" class="level4"><h4 class="anchored" data-anchor-id="facets">Facets</h4>
 <p>Alternatively, you can use <code>facet_wrap()</code> to create a separate plot for each level of general health. <code>facet_wrap()</code> uses the tilde (~) symbol, which you can roughly translate as “by”, e.g., facet the plot <em>by</em> general health rating. The <code>labeller</code> function controls the labels above each plot. <code>label_both</code> specifies that we want both the variable name (generalhealth) and the value (e.g., 1) printed on the plot to make it easier to read.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> gaitspeed)) <span class="sc">+</span></span>
-<span id="cb69-2"><a href="#cb69-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.05</span>, </span>
-<span id="cb69-3"><a href="#cb69-3"></a>                 <span class="at">boundary =</span> <span class="dv">0</span>, </span>
-<span id="cb69-4"><a href="#cb69-4"></a>                 <span class="at">fill =</span> <span class="st">"dodgerblue"</span>, </span>
-<span id="cb69-5"><a href="#cb69-5"></a>                 <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb69-6"><a href="#cb69-6"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>generalhealth, </span>
-<span id="cb69-7"><a href="#cb69-7"></a>             <span class="at">ncol =</span> <span class="dv">1</span>, <span class="co"># try changing this to 2 </span></span>
-<span id="cb69-8"><a href="#cb69-8"></a>             <span class="at">labeller =</span> label_both) <span class="sc">+</span></span>
-<span id="cb69-9"><a href="#cb69-9"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">"Gait speed (m/s)"</span>,</span>
-<span id="cb69-10"><a href="#cb69-10"></a>                     <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="fl">0.0</span>, <span class="fl">1.4</span>, <span class="fl">0.2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> gaitspeed)) <span class="sc">+</span></span>
+<span id="cb70-2"><a href="#cb70-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.05</span>, </span>
+<span id="cb70-3"><a href="#cb70-3"></a>                 <span class="at">boundary =</span> <span class="dv">0</span>, </span>
+<span id="cb70-4"><a href="#cb70-4"></a>                 <span class="at">fill =</span> <span class="st">"dodgerblue"</span>, </span>
+<span id="cb70-5"><a href="#cb70-5"></a>                 <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb70-6"><a href="#cb70-6"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>generalhealth, </span>
+<span id="cb70-7"><a href="#cb70-7"></a>             <span class="at">ncol =</span> <span class="dv">1</span>, <span class="co"># try changing this to 2 </span></span>
+<span id="cb70-8"><a href="#cb70-8"></a>             <span class="at">labeller =</span> label_both) <span class="sc">+</span></span>
+<span id="cb70-9"><a href="#cb70-9"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">"Gait speed (m/s)"</span>,</span>
+<span id="cb70-10"><a href="#cb70-10"></a>                     <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="fl">0.0</span>, <span class="fl">1.4</span>, <span class="fl">0.2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-fact-plot" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="03-viz_files/figure-html/fig-fact-plot-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -2018,16 +2021,16 @@ More plots styles
 <span class="header-section-number">3.5.1</span> New Markdown</h3>
 <p>Create and save a new R Markdown document named <code>plots_report.Rmd</code> and give it the title “Healthy ageing report”. Remove the default template text and then load the packages and code below in the set-up code chunk:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1"></a><span class="fu">library</span>(tidyverse) </span>
-<span id="cb70-2"><a href="#cb70-2"></a><span class="fu">library</span>(patchwork) </span>
-<span id="cb70-3"><a href="#cb70-3"></a><span class="fu">library</span>(ggthemes)  </span>
-<span id="cb70-4"><a href="#cb70-4"></a><span class="fu">library</span>(lubridate) </span>
-<span id="cb70-5"><a href="#cb70-5"></a><span class="fu">library</span>(knitr)</span>
-<span id="cb70-6"><a href="#cb70-6"></a><span class="fu">library</span>(kableExtra)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1"></a><span class="fu">library</span>(tidyverse) </span>
+<span id="cb71-2"><a href="#cb71-2"></a><span class="fu">library</span>(patchwork) </span>
+<span id="cb71-3"><a href="#cb71-3"></a><span class="fu">library</span>(ggthemes)  </span>
+<span id="cb71-4"><a href="#cb71-4"></a><span class="fu">library</span>(lubridate) </span>
+<span id="cb71-5"><a href="#cb71-5"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb71-6"><a href="#cb71-6"></a><span class="fu">library</span>(kableExtra)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: package 'kableExtra' was built under R version 4.3.3</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1"></a>function_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://healthteachr.github.io/data/Function_and_PA_data.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1"></a>function_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://healthteachr.github.io/data/Function_and_PA_data.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="sec-exercises-summary" class="level3" data-number="3.5.2"><h3 data-number="3.5.2" class="anchored" data-anchor-id="sec-exercises-summary">
 <span class="header-section-number">3.5.2</span> Summary</h3>

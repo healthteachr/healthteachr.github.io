@@ -382,6 +382,9 @@ gtag('config', 'G-6NP3MF25W3', { 'anonymize_ip': true});
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)   <span class="co"># data wrangling functions</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tidyverse' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
 <pre><code>Warning: package 'ggplot2' was built under R version 4.3.3</code></pre>
 </div>
 </div>
@@ -389,14 +392,14 @@ gtag('config', 'G-6NP3MF25W3', { 'anonymize_ip': true});
 <p>Download the <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-transformation.pdf">Data transformation cheat sheet</a>.</p>
 </section><section id="wrangling-functions" class="level2" data-number="9.2"><h2 data-number="9.2" class="anchored" data-anchor-id="wrangling-functions">
 <span class="header-section-number">9.2</span> Wrangling functions</h2>
-<p>Data wrangling refers to the process of cleaning, transforming, and restructuring your data to get it into the format you need for analysis and it’s something you will spend an awful lot of time doing. Most <a class="glossary">data wrangling<span class="def"></span></a> involves the reshaping functions you learned in <a href="#sec-tidy"><span class="quarto-unresolved-ref">sec-tidy</span></a> and six functions from the <pkg>dplyr</pkg> package that is loaded as part of the <pkg>tidyverse</pkg>: <code>select</code>, <code>filter</code>, <code>arrange</code>, <code>mutate</code>, <code>summarise</code>, and <code>group_by</code>. You’ll remember the last two from <a href="#sec-summary"><span class="quarto-unresolved-ref">sec-summary</span></a>, so we’ll only cover them briefly.</p>
+<p>Data wrangling refers to the process of cleaning, transforming, and restructuring your data to get it into the format you need for analysis and it’s something you will spend an awful lot of time doing. Most <a class="glossary">data wrangling<span class="def"></span></a> involves the reshaping functions you learned in <a href="08-tidy.html"><span>Chapter&nbsp;8</span></a> and six functions from the <pkg>dplyr</pkg> package that is loaded as part of the <pkg>tidyverse</pkg>: <code>select</code>, <code>filter</code>, <code>arrange</code>, <code>mutate</code>, <code>summarise</code>, and <code>group_by</code>. You’ll remember the last two from <a href="05-summary.html"><span>Chapter&nbsp;5</span></a>, so we’ll only cover them briefly.</p>
 <p>It’s worth highlighting that in this chapter we’re going to cover these common functions and common uses of said functions. However, <pkg>dplyr</pkg> (and packages beyond it) has a huge number of additional wrangling functions and each function has many different arguments. Essentially, if you think you should be able to wrangle your data in a particular way that we haven’t explicitly shown you, you almost certainly can, it might just take a bit of Googling to find out how.</p>
 <div class="cell" data-layout-align="center">
 
 </div>
 <p>We’ll use a small example table with a sprinter’s velocity out of the blocks (m/s) and performance satisfaction for two years from three starting block positions (bunched: &lt;30 cm spacing between blocks; medium: 30-35 cm spacing between blocks; elongated: &gt;35 cm spacing between blocks) over two block angles. After you load the data, use <code>glimpse(velocity)</code> or <code>View(velocity)</code> to get familiar with the data.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>velocity <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/velocity.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>velocity <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/velocity.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -478,26 +481,26 @@ gtag('config', 'G-6NP3MF25W3', { 'anonymize_ip': true});
 <section id="by-name-or-index" class="level4"><h4 class="anchored" data-anchor-id="by-name-or-index">By name or index</h4>
 <p>You can select columns by name or number (which is sometimes referred to as the column index). Selecting by number can be useful when the column names are long or complicated.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># select single column by name</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a>block_angle_dat <span class="ot">&lt;-</span> velocity <span class="sc">%&gt;%</span> <span class="fu">select</span>(angle) </span>
-<span id="cb4-3"><a href="#cb4-3"></a></span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="co"># select single column by number</span></span>
-<span id="cb4-5"><a href="#cb4-5"></a>block_angle_dat <span class="ot">&lt;-</span> velocity <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="dv">2</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># select single column by name</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>block_angle_dat <span class="ot">&lt;-</span> velocity <span class="sc">%&gt;%</span> <span class="fu">select</span>(angle) </span>
+<span id="cb5-3"><a href="#cb5-3"></a></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="co"># select single column by number</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a>block_angle_dat <span class="ot">&lt;-</span> velocity <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="dv">2</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You can select each column individually, separated by commas (e.g., <code>position, velocity_2022</code>) but you can also select all columns from one to another by separating them with a colon (e.g., <code>velocity_2022:satisfaction_2023</code>).</p>
 <p>The colon notation can be much faster because you don’t need to type out each individual variable name, but make sure that you know what order your columns are in and always check the output to make sure you have selected what you intended.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># select columns individually</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>velocity2022 <span class="ot">&lt;-</span> velocity <span class="sc">%&gt;%</span> <span class="fu">select</span>(position, angle, velocity_2022)</span>
-<span id="cb5-3"><a href="#cb5-3"></a></span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="co"># select columns with colon</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a>velocity2022 <span class="ot">&lt;-</span> velocity <span class="sc">%&gt;%</span> <span class="fu">select</span>(position<span class="sc">:</span>velocity_2022)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># select columns individually</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>velocity2022 <span class="ot">&lt;-</span> velocity <span class="sc">%&gt;%</span> <span class="fu">select</span>(position, angle, velocity_2022)</span>
+<span id="cb6-3"><a href="#cb6-3"></a></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="co"># select columns with colon</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a>velocity2022 <span class="ot">&lt;-</span> velocity <span class="sc">%&gt;%</span> <span class="fu">select</span>(position<span class="sc">:</span>velocity_2022)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You can rename columns at the same time as selecting them by setting <code>new_name = old_col</code>.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>positions <span class="ot">&lt;-</span> velocity <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="st">`</span><span class="at">Space between blocks</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="dv">3</span><span class="sc">:</span><span class="dv">6</span>)</span>
-<span id="cb6-2"><a href="#cb6-2"></a></span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="fu">head</span>(positions, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>positions <span class="ot">&lt;-</span> velocity <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="st">`</span><span class="at">Space between blocks</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="dv">3</span><span class="sc">:</span><span class="dv">6</span>)</span>
+<span id="cb7-2"><a href="#cb7-2"></a></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="fu">head</span>(positions, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="table table-sm table-striped">
@@ -538,11 +541,11 @@ gtag('config', 'G-6NP3MF25W3', { 'anonymize_ip': true});
 </section><section id="un-selecting-columns" class="level4"><h4 class="anchored" data-anchor-id="un-selecting-columns">Un-selecting columns</h4>
 <p>You can select columns either by telling R which ones you want to keep as in the previous examples, or by specifying which ones you want to exclude by using a minus symbol to un-select columns. You can also use the colon notation to de-select columns, but to do so you need to put parentheses around the span first, e.g., <code>-(velocity_2022:velocity_2023)</code>, not <code>-velocity_2022:velocity_2023</code>.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># de-select individual columns</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a>satisfaction <span class="ot">&lt;-</span> velocity <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>velocity_2022, <span class="sc">-</span>velocity_2023)</span>
-<span id="cb7-3"><a href="#cb7-3"></a></span>
-<span id="cb7-4"><a href="#cb7-4"></a><span class="co"># de-select a range of columns</span></span>
-<span id="cb7-5"><a href="#cb7-5"></a>satisfaction <span class="ot">&lt;-</span> velocity <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>(velocity_2022<span class="sc">:</span>velocity_2023))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># de-select individual columns</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>satisfaction <span class="ot">&lt;-</span> velocity <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>velocity_2022, <span class="sc">-</span>velocity_2023)</span>
+<span id="cb8-3"><a href="#cb8-3"></a></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="co"># de-select a range of columns</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a>satisfaction <span class="ot">&lt;-</span> velocity <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>(velocity_2022<span class="sc">:</span>velocity_2023))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="select-helpers" class="level4"><h4 class="anchored" data-anchor-id="select-helpers">Select helpers</h4>
 <p>Finally, you can select columns based on criteria about the column names.</p>
@@ -592,26 +595,26 @@ Note
 <ul>
 <li>
 <code>velocity %&gt;% select(contains("_"))</code>
-<div id="radio_DSUDZGNDJC" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_DSUDZGNDJC" value="x"><span>velocity_2022, velocity_2023</span></label><label><input type="radio" autocomplete="off" name="radio_DSUDZGNDJC" value="x"><span>velocity_2023, satisfaction_2023</span></label><label><input type="radio" autocomplete="off" name="radio_DSUDZGNDJC" value="answer"><span>velocity_2022, velocity_2023, satisfaction_2022, satisfaction_2023</span></label><label><input type="radio" autocomplete="off" name="radio_DSUDZGNDJC" value="x"><span>velocity_2022, velocity_2023</span></label>
+<div id="radio_RNBIXGQASC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RNBIXGQASC" value="x"><span>velocity_2022, velocity_2023</span></label><label><input type="radio" autocomplete="off" name="radio_RNBIXGQASC" value="x"><span>velocity_2023, satisfaction_2023</span></label><label><input type="radio" autocomplete="off" name="radio_RNBIXGQASC" value="answer"><span>velocity_2022, velocity_2023, satisfaction_2022, satisfaction_2023</span></label><label><input type="radio" autocomplete="off" name="radio_RNBIXGQASC" value="x"><span>velocity_2022, velocity_2023</span></label>
 </div>
 </li>
 <li>
 <code>velocity %&gt;% select(num_range("velocity_", 2022:2023))</code>
-<div id="radio_TRYYSYKXZR" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_TRYYSYKXZR" value="x"><span>velocity_2022, velocity_2023</span></label><label><input type="radio" autocomplete="off" name="radio_TRYYSYKXZR" value="x"><span>velocity_2023, satisfaction_2023</span></label><label><input type="radio" autocomplete="off" name="radio_TRYYSYKXZR" value="x"><span>velocity_2022, velocity_2023, satisfaction_2022, satisfaction_2023</span></label><label><input type="radio" autocomplete="off" name="radio_TRYYSYKXZR" value="answer"><span>velocity_2022, velocity_2023</span></label>
+<div id="radio_OXYJLGDVSZ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_OXYJLGDVSZ" value="x"><span>velocity_2022, velocity_2023</span></label><label><input type="radio" autocomplete="off" name="radio_OXYJLGDVSZ" value="x"><span>velocity_2023, satisfaction_2023</span></label><label><input type="radio" autocomplete="off" name="radio_OXYJLGDVSZ" value="x"><span>velocity_2022, velocity_2023, satisfaction_2022, satisfaction_2023</span></label><label><input type="radio" autocomplete="off" name="radio_OXYJLGDVSZ" value="answer"><span>velocity_2022, velocity_2023</span></label>
 </div>
 </li>
 <li>
 <code>velocity %&gt;% select(starts_with("velocity"))</code>
-<div id="radio_LJHRODDPHZ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_LJHRODDPHZ" value="answer"><span>velocity_2022, velocity_2023</span></label><label><input type="radio" autocomplete="off" name="radio_LJHRODDPHZ" value="x"><span>velocity_2023, satisfaction_2023</span></label><label><input type="radio" autocomplete="off" name="radio_LJHRODDPHZ" value="x"><span>velocity_2022, velocity_2023, satisfaction_2022, satisfaction_2023</span></label><label><input type="radio" autocomplete="off" name="radio_LJHRODDPHZ" value="x"><span>velocity_2022, velocity_2023</span></label>
+<div id="radio_NYGXEPGFBX" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_NYGXEPGFBX" value="answer"><span>velocity_2022, velocity_2023</span></label><label><input type="radio" autocomplete="off" name="radio_NYGXEPGFBX" value="x"><span>velocity_2023, satisfaction_2023</span></label><label><input type="radio" autocomplete="off" name="radio_NYGXEPGFBX" value="x"><span>velocity_2022, velocity_2023, satisfaction_2022, satisfaction_2023</span></label><label><input type="radio" autocomplete="off" name="radio_NYGXEPGFBX" value="x"><span>velocity_2022, velocity_2023</span></label>
 </div>
 </li>
 <li>
 <code>velocity %&gt;% select(ends_with("2023"))</code>
-<div id="radio_VVBAFDOQEH" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_VVBAFDOQEH" value="x"><span>velocity_2022, velocity_2023</span></label><label><input type="radio" autocomplete="off" name="radio_VVBAFDOQEH" value="answer"><span>velocity_2023, satisfaction_2023</span></label><label><input type="radio" autocomplete="off" name="radio_VVBAFDOQEH" value="x"><span>velocity_2022, velocity_2023, satisfaction_2022, satisfaction_2023</span></label><label><input type="radio" autocomplete="off" name="radio_VVBAFDOQEH" value="x"><span>velocity_2022, velocity_2023</span></label>
+<div id="radio_GQKBBVTUOU" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_GQKBBVTUOU" value="x"><span>velocity_2022, velocity_2023</span></label><label><input type="radio" autocomplete="off" name="radio_GQKBBVTUOU" value="answer"><span>velocity_2023, satisfaction_2023</span></label><label><input type="radio" autocomplete="off" name="radio_GQKBBVTUOU" value="x"><span>velocity_2022, velocity_2023, satisfaction_2022, satisfaction_2023</span></label><label><input type="radio" autocomplete="off" name="radio_GQKBBVTUOU" value="x"><span>velocity_2022, velocity_2023</span></label>
 </div>
 </li>
 </ul>
@@ -622,17 +625,17 @@ Note
 <p>Whilst <code>select()</code> chooses the columns you want to retain, <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code> chooses the rows to retain by matching row or column criteria.</p>
 <p>You can filter by a single criterion. This criterion can be rows where a certain column’s value matches a character value (e.g., “elongated”) or a number (e.g., 3.51). It can also be the result of a logical equation (e.g., keep all rows with a specific column value larger than a certain value). The criterion is checked for each row, and if the result is FALSE, the row is removed. You can reverse equations by specifying <code>!=</code> where <code>!</code> means “not”.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># select all rows where position equals elongated</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a>velocity <span class="sc">%&gt;%</span> <span class="fu">filter</span>(position <span class="sc">==</span> <span class="st">"elongated"</span>)</span>
-<span id="cb8-3"><a href="#cb8-3"></a></span>
-<span id="cb8-4"><a href="#cb8-4"></a><span class="co"># select all rows where velocity_2023 was exactly equal to 3.51</span></span>
-<span id="cb8-5"><a href="#cb8-5"></a>velocity <span class="sc">%&gt;%</span> <span class="fu">filter</span>(velocity_2023 <span class="sc">==</span> <span class="fl">3.51</span>)</span>
-<span id="cb8-6"><a href="#cb8-6"></a></span>
-<span id="cb8-7"><a href="#cb8-7"></a><span class="co"># select all rows where velocity_2022 was more than 3.1</span></span>
-<span id="cb8-8"><a href="#cb8-8"></a>velocity <span class="sc">%&gt;%</span> <span class="fu">filter</span>(velocity_2022 <span class="sc">&gt;</span> <span class="fl">3.1</span>)</span>
-<span id="cb8-9"><a href="#cb8-9"></a></span>
-<span id="cb8-10"><a href="#cb8-10"></a><span class="co"># everything but the elongated starting block position</span></span>
-<span id="cb8-11"><a href="#cb8-11"></a>velocity <span class="sc">%&gt;%</span> <span class="fu">filter</span>(position <span class="sc">!=</span> <span class="st">"elongated"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># select all rows where position equals elongated</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>velocity <span class="sc">%&gt;%</span> <span class="fu">filter</span>(position <span class="sc">==</span> <span class="st">"elongated"</span>)</span>
+<span id="cb9-3"><a href="#cb9-3"></a></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="co"># select all rows where velocity_2023 was exactly equal to 3.51</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a>velocity <span class="sc">%&gt;%</span> <span class="fu">filter</span>(velocity_2023 <span class="sc">==</span> <span class="fl">3.51</span>)</span>
+<span id="cb9-6"><a href="#cb9-6"></a></span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="co"># select all rows where velocity_2022 was more than 3.1</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a>velocity <span class="sc">%&gt;%</span> <span class="fu">filter</span>(velocity_2022 <span class="sc">&gt;</span> <span class="fl">3.1</span>)</span>
+<span id="cb9-9"><a href="#cb9-9"></a></span>
+<span id="cb9-10"><a href="#cb9-10"></a><span class="co"># everything but the elongated starting block position</span></span>
+<span id="cb9-11"><a href="#cb9-11"></a>velocity <span class="sc">%&gt;%</span> <span class="fu">filter</span>(position <span class="sc">!=</span> <span class="st">"elongated"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout-warning callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
@@ -730,42 +733,42 @@ Note
 </div>
 <p>You can also select on multiple criteria by separating them by commas (rows will be kept if they match <em>all</em> criteria). Additionally, you can use <code>&amp;</code> (“and”) and <code>|</code> (“or”) to create complex criteria.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># positions and angles with improvement in velocity from 2022 to 2023 and with "very high" satisfaction in 2023</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a>improvement_and_satisfaction <span class="ot">&lt;-</span> velocity <span class="sc">%&gt;%</span> </span>
-<span id="cb9-3"><a href="#cb9-3"></a>  <span class="fu">filter</span>(</span>
-<span id="cb9-4"><a href="#cb9-4"></a>    velocity_2023 <span class="sc">&gt;</span> velocity_2022,</span>
-<span id="cb9-5"><a href="#cb9-5"></a>    satisfaction_2023<span class="sc">==</span><span class="st">"very high"</span></span>
-<span id="cb9-6"><a href="#cb9-6"></a>  )</span>
-<span id="cb9-7"><a href="#cb9-7"></a></span>
-<span id="cb9-8"><a href="#cb9-8"></a><span class="co"># the same as above, using &amp; instead of a comma</span></span>
-<span id="cb9-9"><a href="#cb9-9"></a>improvement_and_satisfaction <span class="ot">&lt;-</span> velocity <span class="sc">%&gt;%</span> </span>
-<span id="cb9-10"><a href="#cb9-10"></a>  <span class="fu">filter</span>(</span>
-<span id="cb9-11"><a href="#cb9-11"></a>    velocity_2023 <span class="sc">&gt;</span> velocity_2022 <span class="sc">&amp;</span></span>
-<span id="cb9-12"><a href="#cb9-12"></a>    satisfaction_2023<span class="sc">==</span><span class="st">"very high"</span></span>
-<span id="cb9-13"><a href="#cb9-13"></a>  )</span>
-<span id="cb9-14"><a href="#cb9-14"></a></span>
-<span id="cb9-15"><a href="#cb9-15"></a><span class="co"># positions and angles with improvement in velocity from 2022 to 2023 or with "very high" satisfaction in 2023</span></span>
-<span id="cb9-16"><a href="#cb9-16"></a>improvement_or_satisfaction <span class="ot">&lt;-</span> velocity <span class="sc">%&gt;%</span> </span>
-<span id="cb9-17"><a href="#cb9-17"></a>  <span class="fu">filter</span>(</span>
-<span id="cb9-18"><a href="#cb9-18"></a>    velocity_2023 <span class="sc">&gt;</span> velocity_2022 <span class="sc">|</span></span>
-<span id="cb9-19"><a href="#cb9-19"></a>    satisfaction_2023<span class="sc">==</span><span class="st">"very high"</span></span>
-<span id="cb9-20"><a href="#cb9-20"></a>  )</span>
-<span id="cb9-21"><a href="#cb9-21"></a></span>
-<span id="cb9-22"><a href="#cb9-22"></a><span class="co"># Improvement in velocity between 2022 and 2023 greater than 0.2 m/s</span></span>
-<span id="cb9-23"><a href="#cb9-23"></a>big_improvement <span class="ot">&lt;-</span> velocity <span class="sc">%&gt;%</span></span>
-<span id="cb9-24"><a href="#cb9-24"></a>  <span class="fu">filter</span>(velocity_2023 <span class="sc">-</span> velocity_2022 <span class="sc">&gt;</span> <span class="fl">0.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># positions and angles with improvement in velocity from 2022 to 2023 and with "very high" satisfaction in 2023</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>improvement_and_satisfaction <span class="ot">&lt;-</span> velocity <span class="sc">%&gt;%</span> </span>
+<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">filter</span>(</span>
+<span id="cb10-4"><a href="#cb10-4"></a>    velocity_2023 <span class="sc">&gt;</span> velocity_2022,</span>
+<span id="cb10-5"><a href="#cb10-5"></a>    satisfaction_2023<span class="sc">==</span><span class="st">"very high"</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a>  )</span>
+<span id="cb10-7"><a href="#cb10-7"></a></span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="co"># the same as above, using &amp; instead of a comma</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a>improvement_and_satisfaction <span class="ot">&lt;-</span> velocity <span class="sc">%&gt;%</span> </span>
+<span id="cb10-10"><a href="#cb10-10"></a>  <span class="fu">filter</span>(</span>
+<span id="cb10-11"><a href="#cb10-11"></a>    velocity_2023 <span class="sc">&gt;</span> velocity_2022 <span class="sc">&amp;</span></span>
+<span id="cb10-12"><a href="#cb10-12"></a>    satisfaction_2023<span class="sc">==</span><span class="st">"very high"</span></span>
+<span id="cb10-13"><a href="#cb10-13"></a>  )</span>
+<span id="cb10-14"><a href="#cb10-14"></a></span>
+<span id="cb10-15"><a href="#cb10-15"></a><span class="co"># positions and angles with improvement in velocity from 2022 to 2023 or with "very high" satisfaction in 2023</span></span>
+<span id="cb10-16"><a href="#cb10-16"></a>improvement_or_satisfaction <span class="ot">&lt;-</span> velocity <span class="sc">%&gt;%</span> </span>
+<span id="cb10-17"><a href="#cb10-17"></a>  <span class="fu">filter</span>(</span>
+<span id="cb10-18"><a href="#cb10-18"></a>    velocity_2023 <span class="sc">&gt;</span> velocity_2022 <span class="sc">|</span></span>
+<span id="cb10-19"><a href="#cb10-19"></a>    satisfaction_2023<span class="sc">==</span><span class="st">"very high"</span></span>
+<span id="cb10-20"><a href="#cb10-20"></a>  )</span>
+<span id="cb10-21"><a href="#cb10-21"></a></span>
+<span id="cb10-22"><a href="#cb10-22"></a><span class="co"># Improvement in velocity between 2022 and 2023 greater than 0.2 m/s</span></span>
+<span id="cb10-23"><a href="#cb10-23"></a>big_improvement <span class="ot">&lt;-</span> velocity <span class="sc">%&gt;%</span></span>
+<span id="cb10-24"><a href="#cb10-24"></a>  <span class="fu">filter</span>(velocity_2023 <span class="sc">-</span> velocity_2022 <span class="sc">&gt;</span> <span class="fl">0.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>If you want the filter to retain multiple specific values in the same variable, the <a class="glossary">match operator<span class="def"></span></a> (<code>%in%</code>) should be used rather than <code>|</code> (or). The <code>!</code> can also be used in combination here, but it is placed before the variable name.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># retain any rows where position is bunched or medium, and where angle equals &lt;50 degrees</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a>velocity <span class="sc">%&gt;%</span></span>
-<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">filter</span>(position <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"bunched"</span>, <span class="st">"medium"</span>),</span>
-<span id="cb10-4"><a href="#cb10-4"></a>         angle <span class="sc">==</span> <span class="st">"&lt;50 degrees"</span>)</span>
-<span id="cb10-5"><a href="#cb10-5"></a></span>
-<span id="cb10-6"><a href="#cb10-6"></a><span class="co"># retain any rows where the position is not elongated, and where the angle does not equal &lt;50 degrees</span></span>
-<span id="cb10-7"><a href="#cb10-7"></a>velocity <span class="sc">%&gt;%</span></span>
-<span id="cb10-8"><a href="#cb10-8"></a>  <span class="fu">filter</span>(<span class="sc">!</span>position <span class="sc">%in%</span> <span class="st">"elongated"</span>,</span>
-<span id="cb10-9"><a href="#cb10-9"></a>         angle <span class="sc">!=</span> <span class="st">"&lt;50 degrees"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># retain any rows where position is bunched or medium, and where angle equals &lt;50 degrees</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>velocity <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a>  <span class="fu">filter</span>(position <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"bunched"</span>, <span class="st">"medium"</span>),</span>
+<span id="cb11-4"><a href="#cb11-4"></a>         angle <span class="sc">==</span> <span class="st">"&lt;50 degrees"</span>)</span>
+<span id="cb11-5"><a href="#cb11-5"></a></span>
+<span id="cb11-6"><a href="#cb11-6"></a><span class="co"># retain any rows where the position is not elongated, and where the angle does not equal &lt;50 degrees</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a>velocity <span class="sc">%&gt;%</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a>  <span class="fu">filter</span>(<span class="sc">!</span>position <span class="sc">%in%</span> <span class="st">"elongated"</span>,</span>
+<span id="cb11-9"><a href="#cb11-9"></a>         angle <span class="sc">!=</span> <span class="st">"&lt;50 degrees"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <table class="table">
 <colgroup>
@@ -818,8 +821,8 @@ Note
 </table>
 <p>Finally, you can also pass many other functions to filter. For example, the package <pkg>stringr</pkg> that is loaded as part of the <pkg>tidyverse</pkg> contains many different functions for working with <a class="glossary">strings<span class="def"></span></a> (character data). For example, you you use <code>str_detect()</code> to only retain rows where the performance satisfaction rating includes the word “high”.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>velocity <span class="sc">%&gt;%</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(satisfaction_2022, <span class="st">"high"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>velocity <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(satisfaction_2022, <span class="st">"high"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="table table-sm table-striped">
@@ -887,11 +890,11 @@ Warning
 <span class="header-section-number">9.2.3</span> Arrange</h3>
 <p>You can sort your dataset using <code>arrange()</code>. You will find yourself needing to sort data in R much less than you do in Excel, since you don’t need to have rows next to each other in order to, for example, calculate group means. But <code>arrange()</code> can be useful when preparing data for display in tables. <code>arrange()</code> works on character data where it will sort alphabetically, as well as numeric data where the default is ascending order (smallest to largest). Reverse the order using <code>desc()</code>.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># arranging the table </span></span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="co"># first by angle in alphabetical order</span></span>
-<span id="cb12-3"><a href="#cb12-3"></a><span class="co"># then by "position" in reverse alphabetical order</span></span>
-<span id="cb12-4"><a href="#cb12-4"></a>velocity <span class="sc">%&gt;%</span></span>
-<span id="cb12-5"><a href="#cb12-5"></a>  <span class="fu">arrange</span>(angle, <span class="fu">desc</span>(position))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># arranging the table </span></span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="co"># first by angle in alphabetical order</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="co"># then by "position" in reverse alphabetical order</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a>velocity <span class="sc">%&gt;%</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a>  <span class="fu">arrange</span>(angle, <span class="fu">desc</span>(position))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="table table-sm table-striped">
@@ -977,10 +980,10 @@ Note
 <div class="callout-body-container callout-body">
 <p>If you want to sort character data/categories in a specific order, turn the column into a <a class="glossary">factor<span class="def"></span></a> and set the <code>levels</code> in the desired order.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>velocity <span class="sc">%&gt;%</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a>  <span class="fu">mutate</span>(<span class="at">position =</span> <span class="fu">factor</span>(position, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"bunched"</span>, <span class="st">"medium"</span>, <span class="st">"elongated"</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb13-3"><a href="#cb13-3"></a>  <span class="fu">filter</span>(angle <span class="sc">==</span> <span class="st">"&gt;50 degrees"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb13-4"><a href="#cb13-4"></a>  <span class="fu">arrange</span>(position)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>velocity <span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a>  <span class="fu">mutate</span>(<span class="at">position =</span> <span class="fu">factor</span>(position, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"bunched"</span>, <span class="st">"medium"</span>, <span class="st">"elongated"</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a>  <span class="fu">filter</span>(angle <span class="sc">==</span> <span class="st">"&gt;50 degrees"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a>  <span class="fu">arrange</span>(position)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="table table-sm table-striped">
@@ -1036,18 +1039,18 @@ Note
 <span class="header-section-number">9.2.4</span> Mutate</h3>
 <p>The function <code>mutate()</code> allows you to add new columns or change existing ones by overwriting them by using the syntax <code>new_column = operation</code>. You can add more than one column in the same mutate function by separating the columns with a comma. Once you make a new column, you can use it in further column definitions. For example, the creation of <code>improvement_percent</code> below uses the column <code>improvement_raw</code>, which is created above it.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>velocity2 <span class="ot">&lt;-</span> velocity <span class="sc">%&gt;%</span></span>
-<span id="cb14-2"><a href="#cb14-2"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb14-3"><a href="#cb14-3"></a>    <span class="at">improvement_raw =</span> velocity_2023 <span class="sc">-</span> velocity_2022,</span>
-<span id="cb14-4"><a href="#cb14-4"></a>    <span class="at">improvement_percent =</span> (improvement_raw <span class="sc">/</span> velocity_2022) <span class="sc">*</span> <span class="dv">100</span>,</span>
-<span id="cb14-5"><a href="#cb14-5"></a>    <span class="at">position =</span> <span class="fu">paste</span>(position, <span class="st">"start"</span>)</span>
-<span id="cb14-6"><a href="#cb14-6"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>velocity2 <span class="ot">&lt;-</span> velocity <span class="sc">%&gt;%</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb15-3"><a href="#cb15-3"></a>    <span class="at">improvement_raw =</span> velocity_2023 <span class="sc">-</span> velocity_2022,</span>
+<span id="cb15-4"><a href="#cb15-4"></a>    <span class="at">improvement_percent =</span> (improvement_raw <span class="sc">/</span> velocity_2022) <span class="sc">*</span> <span class="dv">100</span>,</span>
+<span id="cb15-5"><a href="#cb15-5"></a>    <span class="at">position =</span> <span class="fu">paste</span>(position, <span class="st">"start"</span>)</span>
+<span id="cb15-6"><a href="#cb15-6"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><code>mutate()</code> can also be used in conjunction with other functions and Boolean operators. For example, we can add another column to <code>velocity2</code> that states whether there was an improvement in velocity out of the blocks that year or overwrite our <code>angle</code> variable as a factor. Just like when we used <a class="glossary">Boolean expressions<span class="def"></span></a> with filter, it will evaluate the equation and return TRUE or FALSE depending on whether the observation meets the criteria.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>velocity2 <span class="ot">&lt;-</span> velocity2 <span class="sc">%&gt;%</span></span>
-<span id="cb15-2"><a href="#cb15-2"></a>  <span class="fu">mutate</span>(<span class="at">improvement_category =</span> improvement_raw <span class="sc">&gt;</span> <span class="dv">0</span>,</span>
-<span id="cb15-3"><a href="#cb15-3"></a>         <span class="at">angle =</span> <span class="fu">as.factor</span>(angle))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>velocity2 <span class="ot">&lt;-</span> velocity2 <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a>  <span class="fu">mutate</span>(<span class="at">improvement_category =</span> improvement_raw <span class="sc">&gt;</span> <span class="dv">0</span>,</span>
+<span id="cb16-3"><a href="#cb16-3"></a>         <span class="at">angle =</span> <span class="fu">as.factor</span>(angle))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout-warning callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
@@ -1064,45 +1067,45 @@ Warning
 </div>
 <p>You can also use <code>case_when()</code> to specify what values to return, rather than defaulting to TRUE or FALSE:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>velocity3 <span class="ot">&lt;-</span> velocity2 <span class="sc">%&gt;%</span></span>
-<span id="cb16-2"><a href="#cb16-2"></a>  <span class="fu">mutate</span>(<span class="at">improvement_category =</span> <span class="fu">case_when</span>(improvement_raw <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"IMPROVEMENT"</span>,</span>
-<span id="cb16-3"><a href="#cb16-3"></a>                                     improvement_raw <span class="sc">&lt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"NO IMPROVEMENT"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>velocity3 <span class="ot">&lt;-</span> velocity2 <span class="sc">%&gt;%</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a>  <span class="fu">mutate</span>(<span class="at">improvement_category =</span> <span class="fu">case_when</span>(improvement_raw <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"IMPROVEMENT"</span>,</span>
+<span id="cb17-3"><a href="#cb17-3"></a>                                     improvement_raw <span class="sc">&lt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"NO IMPROVEMENT"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Use it to recode values:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># create a column where coaches get a bonus if the sprinter's performance satisfaction was overall high or very high</span></span>
-<span id="cb17-2"><a href="#cb17-2"></a></span>
-<span id="cb17-3"><a href="#cb17-3"></a>bonus <span class="ot">&lt;-</span> velocity3 <span class="sc">%&gt;%</span></span>
-<span id="cb17-4"><a href="#cb17-4"></a>  <span class="fu">mutate</span>(<span class="at">bonus_2022 =</span> <span class="fu">case_when</span>(satisfaction_2022 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"very low"</span>, <span class="st">"low"</span>, <span class="st">"neutral"</span>) <span class="sc">~</span> <span class="st">"no bonus"</span>,</span>
-<span id="cb17-5"><a href="#cb17-5"></a>                                satisfaction_2022 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"high"</span>, <span class="st">"very high"</span>) <span class="sc">~</span> <span class="st">"bonus"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># create a column where coaches get a bonus if the sprinter's performance satisfaction was overall high or very high</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a></span>
+<span id="cb18-3"><a href="#cb18-3"></a>bonus <span class="ot">&lt;-</span> velocity3 <span class="sc">%&gt;%</span></span>
+<span id="cb18-4"><a href="#cb18-4"></a>  <span class="fu">mutate</span>(<span class="at">bonus_2022 =</span> <span class="fu">case_when</span>(satisfaction_2022 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"very low"</span>, <span class="st">"low"</span>, <span class="st">"neutral"</span>) <span class="sc">~</span> <span class="st">"no bonus"</span>,</span>
+<span id="cb18-5"><a href="#cb18-5"></a>                                satisfaction_2022 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"high"</span>, <span class="st">"very high"</span>) <span class="sc">~</span> <span class="st">"bonus"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>And combine different criteria:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># new club management takes over - coaches only get a bonus if performance satisfaction was overall high or very high AND there was an improvement in performance</span></span>
-<span id="cb18-2"><a href="#cb18-2"></a></span>
-<span id="cb18-3"><a href="#cb18-3"></a>bonus2 <span class="ot">&lt;-</span> velocity3 <span class="sc">%&gt;%</span></span>
-<span id="cb18-4"><a href="#cb18-4"></a>  <span class="fu">mutate</span>(<span class="at">bonus_2023 =</span> <span class="fu">case_when</span>(satisfaction_2023 <span class="sc">==</span> <span class="st">"high"</span> <span class="sc">&amp;</span> </span>
-<span id="cb18-5"><a href="#cb18-5"></a>                                  improvement_category <span class="sc">==</span> <span class="st">"IMPROVEMENT"</span> <span class="sc">~</span> <span class="st">"bonus"</span>,</span>
-<span id="cb18-6"><a href="#cb18-6"></a>                                satisfaction_2023 <span class="sc">==</span> <span class="st">"very high"</span> <span class="sc">&amp;</span> </span>
-<span id="cb18-7"><a href="#cb18-7"></a>                                  improvement_category <span class="sc">==</span> <span class="st">"IMPROVEMENT"</span> <span class="sc">~</span> <span class="st">"bonus"</span>,</span>
-<span id="cb18-8"><a href="#cb18-8"></a>                                <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"No bonus"</span>)) <span class="co"># set all other values to "no bonus"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="co"># new club management takes over - coaches only get a bonus if performance satisfaction was overall high or very high AND there was an improvement in performance</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a></span>
+<span id="cb19-3"><a href="#cb19-3"></a>bonus2 <span class="ot">&lt;-</span> velocity3 <span class="sc">%&gt;%</span></span>
+<span id="cb19-4"><a href="#cb19-4"></a>  <span class="fu">mutate</span>(<span class="at">bonus_2023 =</span> <span class="fu">case_when</span>(satisfaction_2023 <span class="sc">==</span> <span class="st">"high"</span> <span class="sc">&amp;</span> </span>
+<span id="cb19-5"><a href="#cb19-5"></a>                                  improvement_category <span class="sc">==</span> <span class="st">"IMPROVEMENT"</span> <span class="sc">~</span> <span class="st">"bonus"</span>,</span>
+<span id="cb19-6"><a href="#cb19-6"></a>                                satisfaction_2023 <span class="sc">==</span> <span class="st">"very high"</span> <span class="sc">&amp;</span> </span>
+<span id="cb19-7"><a href="#cb19-7"></a>                                  improvement_category <span class="sc">==</span> <span class="st">"IMPROVEMENT"</span> <span class="sc">~</span> <span class="st">"bonus"</span>,</span>
+<span id="cb19-8"><a href="#cb19-8"></a>                                <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"No bonus"</span>)) <span class="co"># set all other values to "no bonus"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Just like <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code>, <code>mutate()</code> is incredibly powerful and the scope of what you can create is far beyond what we can cover in this book.</p>
 </section><section id="sec-dplyr-summarise" class="level3" data-number="9.2.5"><h3 data-number="9.2.5" class="anchored" data-anchor-id="sec-dplyr-summarise">
 <span class="header-section-number">9.2.5</span> Summarise</h3>
-<p>You were introduced to the <code>summarise()</code> function in <a href="#sec-summary-summarise"><span class="quarto-unresolved-ref">sec-summary-summarise</span></a>. This applies summary functions to an entire table (or groups, as you’ll see in the next section).</p>
-<p>Let’s say we want to determine the mean velocity, plus the minimum and maximum velocity, for any starting block position, block angle, and year. First, we need to reshape the data like we learned in <a href="#sec-tidy"><span class="quarto-unresolved-ref">sec-tidy</span></a>, so that there is a column for year and one column for velocity, instead of separate columns for each year. We’ll also drop the satisfaction data as we don’t need it for this analysis.</p>
+<p>You were introduced to the <code>summarise()</code> function in <a href="05-summary.html#sec-summary-summarise"><span>Section&nbsp;5.3</span></a>. This applies summary functions to an entire table (or groups, as you’ll see in the next section).</p>
+<p>Let’s say we want to determine the mean velocity, plus the minimum and maximum velocity, for any starting block position, block angle, and year. First, we need to reshape the data like we learned in <a href="08-tidy.html"><span>Chapter&nbsp;8</span></a>, so that there is a column for year and one column for velocity, instead of separate columns for each year. We’ll also drop the satisfaction data as we don’t need it for this analysis.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>velocity4 <span class="ot">&lt;-</span> velocity <span class="sc">%&gt;%</span></span>
-<span id="cb19-2"><a href="#cb19-2"></a>  <span class="fu">select</span>(<span class="sc">-</span>satisfaction_2022, <span class="sc">-</span>satisfaction_2023) <span class="sc">%&gt;%</span></span>
-<span id="cb19-3"><a href="#cb19-3"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> velocity_2022<span class="sc">:</span>velocity_2023,</span>
-<span id="cb19-4"><a href="#cb19-4"></a>               <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">"velocity"</span>, <span class="st">"year"</span>),</span>
-<span id="cb19-5"><a href="#cb19-5"></a>               <span class="at">names_sep =</span> <span class="st">"_"</span>,</span>
-<span id="cb19-6"><a href="#cb19-6"></a>               <span class="at">values_to =</span> <span class="st">"value"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb19-7"><a href="#cb19-7"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> velocity,</span>
-<span id="cb19-8"><a href="#cb19-8"></a>              <span class="at">values_from =</span> value)</span>
-<span id="cb19-9"><a href="#cb19-9"></a></span>
-<span id="cb19-10"><a href="#cb19-10"></a><span class="fu">head</span>(velocity4) <span class="co"># check the format</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>velocity4 <span class="ot">&lt;-</span> velocity <span class="sc">%&gt;%</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a>  <span class="fu">select</span>(<span class="sc">-</span>satisfaction_2022, <span class="sc">-</span>satisfaction_2023) <span class="sc">%&gt;%</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> velocity_2022<span class="sc">:</span>velocity_2023,</span>
+<span id="cb20-4"><a href="#cb20-4"></a>               <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">"velocity"</span>, <span class="st">"year"</span>),</span>
+<span id="cb20-5"><a href="#cb20-5"></a>               <span class="at">names_sep =</span> <span class="st">"_"</span>,</span>
+<span id="cb20-6"><a href="#cb20-6"></a>               <span class="at">values_to =</span> <span class="st">"value"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb20-7"><a href="#cb20-7"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> velocity,</span>
+<span id="cb20-8"><a href="#cb20-8"></a>              <span class="at">values_from =</span> value)</span>
+<span id="cb20-9"><a href="#cb20-9"></a></span>
+<span id="cb20-10"><a href="#cb20-10"></a><span class="fu">head</span>(velocity4) <span class="co"># check the format</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="table table-sm table-striped">
@@ -1156,12 +1159,12 @@ Warning
 </div>
 <p>Now we can create summary statistics for the table.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>velocity4 <span class="sc">%&gt;%</span></span>
-<span id="cb20-2"><a href="#cb20-2"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb20-3"><a href="#cb20-3"></a>    <span class="at">mean_velocity =</span> <span class="fu">mean</span>(velocity),</span>
-<span id="cb20-4"><a href="#cb20-4"></a>    <span class="at">min_velocity =</span> <span class="fu">min</span>(velocity),</span>
-<span id="cb20-5"><a href="#cb20-5"></a>    <span class="at">max_velocity =</span> <span class="fu">max</span>(velocity)</span>
-<span id="cb20-6"><a href="#cb20-6"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>velocity4 <span class="sc">%&gt;%</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb21-3"><a href="#cb21-3"></a>    <span class="at">mean_velocity =</span> <span class="fu">mean</span>(velocity),</span>
+<span id="cb21-4"><a href="#cb21-4"></a>    <span class="at">min_velocity =</span> <span class="fu">min</span>(velocity),</span>
+<span id="cb21-5"><a href="#cb21-5"></a>    <span class="at">max_velocity =</span> <span class="fu">max</span>(velocity)</span>
+<span id="cb21-6"><a href="#cb21-6"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="table table-sm table-striped">
@@ -1181,21 +1184,21 @@ Warning
 </div>
 </section><section id="sec-dplyr-groupby" class="level3" data-number="9.2.6"><h3 data-number="9.2.6" class="anchored" data-anchor-id="sec-dplyr-groupby">
 <span class="header-section-number">9.2.6</span> Group By</h3>
-<p>You were introduced to the <code>group_by()</code> function in <a href="#sec-grouping"><span class="quarto-unresolved-ref">sec-grouping</span></a>. For example, you can break down the summary statistics above by year and block angle.</p>
+<p>You were introduced to the <code>group_by()</code> function in <a href="05-summary.html#sec-grouping"><span>Section&nbsp;5.5</span></a>. For example, you can break down the summary statistics above by year and block angle.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>year_angle <span class="ot">&lt;-</span> velocity4 <span class="sc">%&gt;%</span></span>
-<span id="cb21-2"><a href="#cb21-2"></a>  <span class="fu">group_by</span>(year, angle) <span class="sc">%&gt;%</span></span>
-<span id="cb21-3"><a href="#cb21-3"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb21-4"><a href="#cb21-4"></a>    <span class="at">mean_velocity =</span> <span class="fu">mean</span>(velocity),</span>
-<span id="cb21-5"><a href="#cb21-5"></a>    <span class="at">min_velocity =</span> <span class="fu">min</span>(velocity),</span>
-<span id="cb21-6"><a href="#cb21-6"></a>    <span class="at">max_velocity =</span> <span class="fu">max</span>(velocity)</span>
-<span id="cb21-7"><a href="#cb21-7"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb21-8"><a href="#cb21-8"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>year_angle <span class="ot">&lt;-</span> velocity4 <span class="sc">%&gt;%</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a>  <span class="fu">group_by</span>(year, angle) <span class="sc">%&gt;%</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb22-4"><a href="#cb22-4"></a>    <span class="at">mean_velocity =</span> <span class="fu">mean</span>(velocity),</span>
+<span id="cb22-5"><a href="#cb22-5"></a>    <span class="at">min_velocity =</span> <span class="fu">min</span>(velocity),</span>
+<span id="cb22-6"><a href="#cb22-6"></a>    <span class="at">max_velocity =</span> <span class="fu">max</span>(velocity)</span>
+<span id="cb22-7"><a href="#cb22-7"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb22-8"><a href="#cb22-8"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`summarise()` has grouped output by 'year'. You can override using the
 `.groups` argument.</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>year_angle</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>year_angle</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="table table-sm table-striped">
@@ -1242,13 +1245,13 @@ Warning
 </div>
 <p>Note that you can use the other wrangling functions on the summary table, for example:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="co"># arrange by maximum velocity</span></span>
-<span id="cb24-2"><a href="#cb24-2"></a>year_angle <span class="sc">%&gt;%</span></span>
-<span id="cb24-3"><a href="#cb24-3"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(max_velocity))</span>
-<span id="cb24-4"><a href="#cb24-4"></a></span>
-<span id="cb24-5"><a href="#cb24-5"></a><span class="co"># filter out block angles of &gt;50 degrees</span></span>
-<span id="cb24-6"><a href="#cb24-6"></a>year_angle <span class="sc">%&gt;%</span></span>
-<span id="cb24-7"><a href="#cb24-7"></a>  <span class="fu">filter</span>(angle <span class="sc">!=</span> <span class="st">"&gt;50 degrees"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="co"># arrange by maximum velocity</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a>year_angle <span class="sc">%&gt;%</span></span>
+<span id="cb25-3"><a href="#cb25-3"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(max_velocity))</span>
+<span id="cb25-4"><a href="#cb25-4"></a></span>
+<span id="cb25-5"><a href="#cb25-5"></a><span class="co"># filter out block angles of &gt;50 degrees</span></span>
+<span id="cb25-6"><a href="#cb25-6"></a>year_angle <span class="sc">%&gt;%</span></span>
+<span id="cb25-7"><a href="#cb25-7"></a>  <span class="fu">filter</span>(angle <span class="sc">!=</span> <span class="st">"&gt;50 degrees"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout-note try callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
@@ -1262,23 +1265,23 @@ Note
 <div class="callout-body-container callout-body">
 <p>How would you find out the maximum velocity for each starting block position?</p>
 <div class="cell" data-layout-align="center">
-<div id="radio_HZSMENBVQD" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_HZSMENBVQD" value="x"><span>
-<pre>velocity3 %&gt;%
-  group_by(position) %&gt;%
-  summarise(max_velocity = max(position)</pre>
-</span></label><label><input type="radio" autocomplete="off" name="radio_HZSMENBVQD" value="x"><span>
-<pre>velocity3 %&gt;%
-  group_by(velocity) %&gt;%
-  summarise(max_velocity = max(position)</pre>
-</span></label><label><input type="radio" autocomplete="off" name="radio_HZSMENBVQD" value="answer"><span>
+<div id="radio_ONQQWHUIWK" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ONQQWHUIWK" value="answer"><span>
 <pre>velocity3 %&gt;%
   group_by(position) %&gt;%
   summarise(max_velocity = max(velocity)</pre>
-</span></label><label><input type="radio" autocomplete="off" name="radio_HZSMENBVQD" value="x"><span>
+</span></label><label><input type="radio" autocomplete="off" name="radio_ONQQWHUIWK" value="x"><span>
 <pre>velocity3 %&gt;%
   group_by(velocity) %&gt;%
   summarise(max_velocity = max(velocity)</pre>
+</span></label><label><input type="radio" autocomplete="off" name="radio_ONQQWHUIWK" value="x"><span>
+<pre>velocity3 %&gt;%
+  group_by(position) %&gt;%
+  summarise(max_velocity = max(position)</pre>
+</span></label><label><input type="radio" autocomplete="off" name="radio_ONQQWHUIWK" value="x"><span>
+<pre>velocity3 %&gt;%
+  group_by(velocity) %&gt;%
+  summarise(max_velocity = max(position)</pre>
 </span></label>
 </div>
 </div>
@@ -1286,9 +1289,9 @@ Note
 </div>
 <p>You can also use <code>group_by()</code> in combination with other functions. For example, <code>slice_max()</code> returns the top N rows, ordered by a specific variable.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="co"># return top 3 velocities</span></span>
-<span id="cb25-2"><a href="#cb25-2"></a>velocity4 <span class="sc">%&gt;%</span></span>
-<span id="cb25-3"><a href="#cb25-3"></a>  <span class="fu">slice_max</span>(<span class="at">n =</span> <span class="dv">3</span>, <span class="at">order_by =</span> velocity)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="co"># return top 3 velocities</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a>velocity4 <span class="sc">%&gt;%</span></span>
+<span id="cb26-3"><a href="#cb26-3"></a>  <span class="fu">slice_max</span>(<span class="at">n =</span> <span class="dv">3</span>, <span class="at">order_by =</span> velocity)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="table table-sm table-striped">
@@ -1324,10 +1327,10 @@ Note
 </div>
 <p>But this can be combined with <code>group_by()</code> to return the top velocity for each starting block position:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="co"># return top velocity for each position</span></span>
-<span id="cb26-2"><a href="#cb26-2"></a>velocity4 <span class="sc">%&gt;%</span></span>
-<span id="cb26-3"><a href="#cb26-3"></a>  <span class="fu">group_by</span>(position) <span class="sc">%&gt;%</span></span>
-<span id="cb26-4"><a href="#cb26-4"></a>  <span class="fu">slice_max</span>(<span class="at">n =</span> <span class="dv">1</span>, <span class="at">order_by =</span> velocity)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="co"># return top velocity for each position</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a>velocity4 <span class="sc">%&gt;%</span></span>
+<span id="cb27-3"><a href="#cb27-3"></a>  <span class="fu">group_by</span>(position) <span class="sc">%&gt;%</span></span>
+<span id="cb27-4"><a href="#cb27-4"></a>  <span class="fu">slice_max</span>(<span class="at">n =</span> <span class="dv">1</span>, <span class="at">order_by =</span> velocity)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="table table-sm table-striped">
@@ -1367,9 +1370,9 @@ Note
 <span class="header-section-number">9.3.1</span> Rounding</h3>
 <p>Let’s say we want to round all the values to zero decimal places. The pattern below uses the <code>across()</code> function to apply the <code><a href="https://rdrr.io/r/base/Round.html">round()</a></code> function to the columns from <code>mean_velocity</code> to <code>max_velocity</code>.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>year_angle <span class="sc">%&gt;%</span></span>
-<span id="cb27-2"><a href="#cb27-2"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="at">.cols =</span> mean_velocity<span class="sc">:</span>max_velocity, </span>
-<span id="cb27-3"><a href="#cb27-3"></a>                <span class="at">.fns =</span> round))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>year_angle <span class="sc">%&gt;%</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="at">.cols =</span> mean_velocity<span class="sc">:</span>max_velocity, </span>
+<span id="cb28-3"><a href="#cb28-3"></a>                <span class="at">.fns =</span> round))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="table table-sm table-striped">
@@ -1416,8 +1419,8 @@ Note
 </div>
 <p>Please note that R rounds .5 to the nearest even number, rather than always up, like you were probably taught in school. This prevents overestimation biases, since x.5 is <em>exactly</em> halfway between x and x+1, so there is no reason it should always round up.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">round</span>(<span class="fl">0.5</span>)</span>
-<span id="cb28-2"><a href="#cb28-2"></a><span class="fu">round</span>(<span class="fl">1.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="fu">round</span>(<span class="fl">0.5</span>)</span>
+<span id="cb29-2"><a href="#cb29-2"></a><span class="fu">round</span>(<span class="fl">1.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0
 [1] 2</code></pre>
@@ -1426,20 +1429,20 @@ Note
 <p>However, this might throw a monkey wrench into your own systems. For example, a school policy might be to round up for course marks at x.5. The solution is to define your own version of <code><a href="https://rdrr.io/r/base/Round.html">round()</a></code> (modified from <a href="http://andrewlandgraf.com/2012/06/15/rounding-in-r/" target="_blank">Andrew Landgraf’s blog</a>). Put it in a hidden code block at the top of your script, with a clear warning that this is changing the way <code><a href="https://rdrr.io/r/base/Round.html">round()</a></code> normally works. You don’t need to understand how this function works, just how to use it.</p>
 <p>when you run this code, a new section will appear in the environment pane labelled “Functions”. In addition to using functions from packages, you can also make your own. It’s not something we are going to go into detail on in this course, but it’s useful to know the functionality exists.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="co">#!!!!!! redefining round so 5s round up !!!!!! </span></span>
-<span id="cb30-2"><a href="#cb30-2"></a>round <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">digits =</span> <span class="dv">0</span>) {</span>
-<span id="cb30-3"><a href="#cb30-3"></a>  posneg <span class="ot">=</span> <span class="fu">sign</span>(x)</span>
-<span id="cb30-4"><a href="#cb30-4"></a>  z <span class="ot">=</span> <span class="fu">abs</span>(x)<span class="sc">*</span><span class="dv">10</span><span class="sc">^</span>digits</span>
-<span id="cb30-5"><a href="#cb30-5"></a>  z <span class="ot">=</span> z <span class="sc">+</span> <span class="fl">0.5</span> <span class="sc">+</span> <span class="fu">sqrt</span>(.Machine<span class="sc">$</span>double.eps)</span>
-<span id="cb30-6"><a href="#cb30-6"></a>  z <span class="ot">=</span> <span class="fu">trunc</span>(z)</span>
-<span id="cb30-7"><a href="#cb30-7"></a>  z <span class="ot">=</span> z<span class="sc">/</span><span class="dv">10</span><span class="sc">^</span>digits</span>
-<span id="cb30-8"><a href="#cb30-8"></a>  z<span class="sc">*</span>posneg</span>
-<span id="cb30-9"><a href="#cb30-9"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="co">#!!!!!! redefining round so 5s round up !!!!!! </span></span>
+<span id="cb31-2"><a href="#cb31-2"></a>round <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">digits =</span> <span class="dv">0</span>) {</span>
+<span id="cb31-3"><a href="#cb31-3"></a>  posneg <span class="ot">=</span> <span class="fu">sign</span>(x)</span>
+<span id="cb31-4"><a href="#cb31-4"></a>  z <span class="ot">=</span> <span class="fu">abs</span>(x)<span class="sc">*</span><span class="dv">10</span><span class="sc">^</span>digits</span>
+<span id="cb31-5"><a href="#cb31-5"></a>  z <span class="ot">=</span> z <span class="sc">+</span> <span class="fl">0.5</span> <span class="sc">+</span> <span class="fu">sqrt</span>(.Machine<span class="sc">$</span>double.eps)</span>
+<span id="cb31-6"><a href="#cb31-6"></a>  z <span class="ot">=</span> <span class="fu">trunc</span>(z)</span>
+<span id="cb31-7"><a href="#cb31-7"></a>  z <span class="ot">=</span> z<span class="sc">/</span><span class="dv">10</span><span class="sc">^</span>digits</span>
+<span id="cb31-8"><a href="#cb31-8"></a>  z<span class="sc">*</span>posneg</span>
+<span id="cb31-9"><a href="#cb31-9"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now <code><a href="https://rdrr.io/r/base/Round.html">round()</a></code> should work as you’d expect.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="fu">round</span>(<span class="fl">0.5</span>)</span>
-<span id="cb31-2"><a href="#cb31-2"></a><span class="fu">round</span>(<span class="fl">1.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">round</span>(<span class="fl">0.5</span>)</span>
+<span id="cb32-2"><a href="#cb32-2"></a><span class="fu">round</span>(<span class="fl">1.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1
 [1] 2</code></pre>
@@ -1447,8 +1450,8 @@ Note
 </div>
 <p>Just remove your version if you want R to go back to the original method. Remember that you have to define the new round method in any script that uses it, and run the definition code before you use it interactively. You can check your Environment pane to see whether <code>round</code> is listed under “Functions”.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="co"># remove new round() method</span></span>
-<span id="cb33-2"><a href="#cb33-2"></a><span class="fu">rm</span>(round)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="co"># remove new round() method</span></span>
+<span id="cb34-2"><a href="#cb34-2"></a><span class="fu">rm</span>(round)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="sec-missing-values" class="level3" data-number="9.3.2"><h3 data-number="9.3.2" class="anchored" data-anchor-id="sec-missing-values">
 <span class="header-section-number">9.3.2</span> Missing values</h3>
@@ -1459,22 +1462,22 @@ Note
 <p>First, we’re going to recode the data to add in the missing values</p>
 <p>For the bunched starting block position data, we can use <code><a href="https://rdrr.io/r/base/ifelse.html">ifelse()</a></code> to set the value of velocity to 0 if the year is 2023 and position is “bunched”, otherwise use the value from the velocity column (i.e., don’t change).</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>missing_bad <span class="ot">&lt;-</span> velocity4 <span class="sc">%&gt;%</span></span>
-<span id="cb34-2"><a href="#cb34-2"></a>  <span class="fu">mutate</span>(<span class="at">velocity =</span> <span class="fu">ifelse</span>(</span>
-<span id="cb34-3"><a href="#cb34-3"></a>    <span class="at">test =</span> year <span class="sc">==</span> <span class="dv">2023</span> <span class="sc">&amp;</span> position <span class="sc">==</span> <span class="st">"bunched"</span>, </span>
-<span id="cb34-4"><a href="#cb34-4"></a>    <span class="at">yes =</span> <span class="dv">0</span>, <span class="co"># value if above conditions are met</span></span>
-<span id="cb34-5"><a href="#cb34-5"></a>    <span class="at">no =</span> velocity <span class="co"># value if above conditions are not met</span></span>
-<span id="cb34-6"><a href="#cb34-6"></a>  ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a>missing_bad <span class="ot">&lt;-</span> velocity4 <span class="sc">%&gt;%</span></span>
+<span id="cb35-2"><a href="#cb35-2"></a>  <span class="fu">mutate</span>(<span class="at">velocity =</span> <span class="fu">ifelse</span>(</span>
+<span id="cb35-3"><a href="#cb35-3"></a>    <span class="at">test =</span> year <span class="sc">==</span> <span class="dv">2023</span> <span class="sc">&amp;</span> position <span class="sc">==</span> <span class="st">"bunched"</span>, </span>
+<span id="cb35-4"><a href="#cb35-4"></a>    <span class="at">yes =</span> <span class="dv">0</span>, <span class="co"># value if above conditions are met</span></span>
+<span id="cb35-5"><a href="#cb35-5"></a>    <span class="at">no =</span> velocity <span class="co"># value if above conditions are not met</span></span>
+<span id="cb35-6"><a href="#cb35-6"></a>  ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Alternatively, we can use <code>case_when()</code> to convert the velocities for 2023 to <code>0</code>. The last line of <code>TRUE ~ velocity</code> means that the default value is retrieved from the velocity column, if none of the previous criteria applied.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a>missing_bad <span class="ot">&lt;-</span> velocity4 <span class="sc">%&gt;%</span></span>
-<span id="cb35-2"><a href="#cb35-2"></a>  <span class="fu">mutate</span>(<span class="at">velocity =</span> <span class="fu">case_when</span>(</span>
-<span id="cb35-3"><a href="#cb35-3"></a>    <span class="co"># set to 0 when year is 2023 and position is bunched</span></span>
-<span id="cb35-4"><a href="#cb35-4"></a>    year <span class="sc">==</span> <span class="dv">2023</span> <span class="sc">&amp;</span> position <span class="sc">==</span> <span class="st">"bunched"</span> <span class="sc">~</span> <span class="dv">0</span>, </span>
-<span id="cb35-5"><a href="#cb35-5"></a>    <span class="co"># otherwise, set to the value in the velocity column</span></span>
-<span id="cb35-6"><a href="#cb35-6"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> velocity   </span>
-<span id="cb35-7"><a href="#cb35-7"></a>  ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>missing_bad <span class="ot">&lt;-</span> velocity4 <span class="sc">%&gt;%</span></span>
+<span id="cb36-2"><a href="#cb36-2"></a>  <span class="fu">mutate</span>(<span class="at">velocity =</span> <span class="fu">case_when</span>(</span>
+<span id="cb36-3"><a href="#cb36-3"></a>    <span class="co"># set to 0 when year is 2023 and position is bunched</span></span>
+<span id="cb36-4"><a href="#cb36-4"></a>    year <span class="sc">==</span> <span class="dv">2023</span> <span class="sc">&amp;</span> position <span class="sc">==</span> <span class="st">"bunched"</span> <span class="sc">~</span> <span class="dv">0</span>, </span>
+<span id="cb36-5"><a href="#cb36-5"></a>    <span class="co"># otherwise, set to the value in the velocity column</span></span>
+<span id="cb36-6"><a href="#cb36-6"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> velocity   </span>
+<span id="cb36-7"><a href="#cb36-7"></a>  ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="webex-solution">
 <button>
@@ -1483,18 +1486,18 @@ Using case_when() for multiple criteria
 <p>The <code>case_when()</code> function allows allows you to set multiple criteria, although we’re only using one non-default criterion here. It can be very useful, but takes a little practice.</p>
 <p>The example below creates a label for each row. Notice how the label for the first row is “x &lt; 2”, even though this row also fits the second criterion “y &lt; 4”. This is because <code>case_when()</code> applies the first match to each row, even if other criteria in the function also match that row.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb36-2"><a href="#cb36-2"></a>  <span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
-<span id="cb36-3"><a href="#cb36-3"></a>  <span class="at">y =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span>
-<span id="cb36-4"><a href="#cb36-4"></a>)</span>
-<span id="cb36-5"><a href="#cb36-5"></a></span>
-<span id="cb36-6"><a href="#cb36-6"></a>data <span class="sc">%&gt;%</span></span>
-<span id="cb36-7"><a href="#cb36-7"></a>  <span class="fu">mutate</span>(<span class="at">label =</span> <span class="fu">case_when</span>(</span>
-<span id="cb36-8"><a href="#cb36-8"></a>    x <span class="sc">&lt;</span> <span class="dv">2</span>           <span class="sc">~</span> <span class="st">"x &lt; 2"</span>,</span>
-<span id="cb36-9"><a href="#cb36-9"></a>    y <span class="sc">&lt;</span> <span class="dv">4</span>           <span class="sc">~</span> <span class="st">"y &lt; 4"</span>,</span>
-<span id="cb36-10"><a href="#cb36-10"></a>    x <span class="sc">==</span> <span class="dv">5</span> <span class="sc">&amp;</span> y <span class="sc">==</span> <span class="dv">5</span> <span class="sc">~</span> <span class="st">"both 5"</span>,</span>
-<span id="cb36-11"><a href="#cb36-11"></a>    <span class="cn">TRUE</span>            <span class="sc">~</span> <span class="st">"default"</span></span>
-<span id="cb36-12"><a href="#cb36-12"></a>  ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a>data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb37-2"><a href="#cb37-2"></a>  <span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
+<span id="cb37-3"><a href="#cb37-3"></a>  <span class="at">y =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span>
+<span id="cb37-4"><a href="#cb37-4"></a>)</span>
+<span id="cb37-5"><a href="#cb37-5"></a></span>
+<span id="cb37-6"><a href="#cb37-6"></a>data <span class="sc">%&gt;%</span></span>
+<span id="cb37-7"><a href="#cb37-7"></a>  <span class="fu">mutate</span>(<span class="at">label =</span> <span class="fu">case_when</span>(</span>
+<span id="cb37-8"><a href="#cb37-8"></a>    x <span class="sc">&lt;</span> <span class="dv">2</span>           <span class="sc">~</span> <span class="st">"x &lt; 2"</span>,</span>
+<span id="cb37-9"><a href="#cb37-9"></a>    y <span class="sc">&lt;</span> <span class="dv">4</span>           <span class="sc">~</span> <span class="st">"y &lt; 4"</span>,</span>
+<span id="cb37-10"><a href="#cb37-10"></a>    x <span class="sc">==</span> <span class="dv">5</span> <span class="sc">&amp;</span> y <span class="sc">==</span> <span class="dv">5</span> <span class="sc">~</span> <span class="st">"both 5"</span>,</span>
+<span id="cb37-11"><a href="#cb37-11"></a>    <span class="cn">TRUE</span>            <span class="sc">~</span> <span class="st">"default"</span></span>
+<span id="cb37-12"><a href="#cb37-12"></a>  ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="table table-sm table-striped">
@@ -1537,14 +1540,14 @@ Using case_when() for multiple criteria
 </div>
 <p>For the medium starting block position, we need to recode these values as “missing”. Since this is character data, and velocities are numeric data, the result will be <a class="glossary">coerced<span class="def"></span></a> to a character.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="co"># set velocity values to "missing" for medium starting block position 2023 rows</span></span>
-<span id="cb37-2"><a href="#cb37-2"></a>missing_bad <span class="ot">&lt;-</span> missing_bad <span class="sc">%&gt;%</span></span>
-<span id="cb37-3"><a href="#cb37-3"></a>  <span class="fu">mutate</span>(<span class="at">velocity =</span> <span class="fu">ifelse</span>(year <span class="sc">==</span> <span class="dv">2023</span> <span class="sc">&amp;</span> position <span class="sc">==</span> <span class="st">"medium"</span>, </span>
-<span id="cb37-4"><a href="#cb37-4"></a>                        <span class="st">"missing"</span>, </span>
-<span id="cb37-5"><a href="#cb37-5"></a>                        velocity))</span>
-<span id="cb37-6"><a href="#cb37-6"></a></span>
-<span id="cb37-7"><a href="#cb37-7"></a><span class="co"># check structure of data, velocity now character</span></span>
-<span id="cb37-8"><a href="#cb37-8"></a><span class="fu">str</span>(missing_bad)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="co"># set velocity values to "missing" for medium starting block position 2023 rows</span></span>
+<span id="cb38-2"><a href="#cb38-2"></a>missing_bad <span class="ot">&lt;-</span> missing_bad <span class="sc">%&gt;%</span></span>
+<span id="cb38-3"><a href="#cb38-3"></a>  <span class="fu">mutate</span>(<span class="at">velocity =</span> <span class="fu">ifelse</span>(year <span class="sc">==</span> <span class="dv">2023</span> <span class="sc">&amp;</span> position <span class="sc">==</span> <span class="st">"medium"</span>, </span>
+<span id="cb38-4"><a href="#cb38-4"></a>                        <span class="st">"missing"</span>, </span>
+<span id="cb38-5"><a href="#cb38-5"></a>                        velocity))</span>
+<span id="cb38-6"><a href="#cb38-6"></a></span>
+<span id="cb38-7"><a href="#cb38-7"></a><span class="co"># check structure of data, velocity now character</span></span>
+<span id="cb38-8"><a href="#cb38-8"></a><span class="fu">str</span>(missing_bad)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>tibble [12 × 4] (S3: tbl_df/tbl/data.frame)
  $ position: chr [1:12] "bunched" "bunched" "bunched" "bunched" ...
@@ -1555,17 +1558,17 @@ Using case_when() for multiple criteria
 </div>
 <p>If we’re using <code>case_when()</code>, first we need to convert the velocity column to a character, as this function is a little pickier and won’t let you combine <a class="glossary">data types<span class="def"></span></a>, since this almost always means that you’re making a mistake.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="co"># set velocity values to "missing" for medium starting block position 2023 rows</span></span>
-<span id="cb39-2"><a href="#cb39-2"></a>missing_bad <span class="ot">&lt;-</span> missing_bad <span class="sc">%&gt;%</span></span>
-<span id="cb39-3"><a href="#cb39-3"></a>  <span class="fu">mutate</span>(<span class="at">velocity =</span> <span class="fu">as.character</span>(velocity),</span>
-<span id="cb39-4"><a href="#cb39-4"></a>         <span class="at">velocity =</span> <span class="fu">case_when</span>(year <span class="sc">==</span> <span class="dv">2023</span> <span class="sc">&amp;</span> position <span class="sc">==</span> <span class="st">"medium"</span> <span class="sc">~</span> <span class="st">"missing"</span>, </span>
-<span id="cb39-5"><a href="#cb39-5"></a>                           <span class="cn">TRUE</span> <span class="sc">~</span> velocity))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="co"># set velocity values to "missing" for medium starting block position 2023 rows</span></span>
+<span id="cb40-2"><a href="#cb40-2"></a>missing_bad <span class="ot">&lt;-</span> missing_bad <span class="sc">%&gt;%</span></span>
+<span id="cb40-3"><a href="#cb40-3"></a>  <span class="fu">mutate</span>(<span class="at">velocity =</span> <span class="fu">as.character</span>(velocity),</span>
+<span id="cb40-4"><a href="#cb40-4"></a>         <span class="at">velocity =</span> <span class="fu">case_when</span>(year <span class="sc">==</span> <span class="dv">2023</span> <span class="sc">&amp;</span> position <span class="sc">==</span> <span class="st">"medium"</span> <span class="sc">~</span> <span class="st">"missing"</span>, </span>
+<span id="cb40-5"><a href="#cb40-5"></a>                           <span class="cn">TRUE</span> <span class="sc">~</span> velocity))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now, if you try to compute the mean velocity, you will get an error message and the result will be <code>NA</code>.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="co"># try to compute mean velocity</span></span>
-<span id="cb40-2"><a href="#cb40-2"></a>missing_bad <span class="sc">%&gt;%</span></span>
-<span id="cb40-3"><a href="#cb40-3"></a>  <span class="fu">summarise</span>(<span class="at">mean_velocity =</span> <span class="fu">mean</span>(velocity))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="co"># try to compute mean velocity</span></span>
+<span id="cb41-2"><a href="#cb41-2"></a>missing_bad <span class="sc">%&gt;%</span></span>
+<span id="cb41-3"><a href="#cb41-3"></a>  <span class="fu">summarise</span>(<span class="at">mean_velocity =</span> <span class="fu">mean</span>(velocity))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: There was 1 warning in `summarise()`.
 ℹ In argument: `mean_velocity = mean(velocity)`.
@@ -1588,28 +1591,28 @@ Caused by warning in `mean.default()`:
 </section><section id="convert-missing-values-to-na" class="level4"><h4 class="anchored" data-anchor-id="convert-missing-values-to-na">Convert missing values to NA</h4>
 <p>To set the missing values to NA, you could use either <code><a href="https://rdrr.io/r/base/ifelse.html">ifelse()</a></code> or <code>case_when()</code>. Because the <code>velocity</code> column was converted to character, we also need to transform this back to numeric.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a>missing_data <span class="ot">&lt;-</span> missing_bad <span class="sc">%&gt;%</span></span>
-<span id="cb42-2"><a href="#cb42-2"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb42-3"><a href="#cb42-3"></a>    <span class="co"># set "0" values to NA using ifelse</span></span>
-<span id="cb42-4"><a href="#cb42-4"></a>    <span class="at">velocity =</span> <span class="fu">ifelse</span>(velocity <span class="sc">==</span> <span class="dv">0</span>, <span class="cn">NA</span>, velocity),</span>
-<span id="cb42-5"><a href="#cb42-5"></a>    <span class="co"># set "missing" values to NA using case_when</span></span>
-<span id="cb42-6"><a href="#cb42-6"></a>    <span class="at">velocity =</span> <span class="fu">case_when</span>(velocity <span class="sc">==</span> <span class="st">"missing"</span> <span class="sc">~</span> <span class="cn">NA_character_</span>,</span>
-<span id="cb42-7"><a href="#cb42-7"></a>                      <span class="cn">TRUE</span> <span class="sc">~</span> velocity),</span>
-<span id="cb42-8"><a href="#cb42-8"></a>    <span class="co"># convert to numeric</span></span>
-<span id="cb42-9"><a href="#cb42-9"></a>    <span class="at">velocity =</span> <span class="fu">as.numeric</span>(velocity)</span>
-<span id="cb42-10"><a href="#cb42-10"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a>missing_data <span class="ot">&lt;-</span> missing_bad <span class="sc">%&gt;%</span></span>
+<span id="cb43-2"><a href="#cb43-2"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb43-3"><a href="#cb43-3"></a>    <span class="co"># set "0" values to NA using ifelse</span></span>
+<span id="cb43-4"><a href="#cb43-4"></a>    <span class="at">velocity =</span> <span class="fu">ifelse</span>(velocity <span class="sc">==</span> <span class="dv">0</span>, <span class="cn">NA</span>, velocity),</span>
+<span id="cb43-5"><a href="#cb43-5"></a>    <span class="co"># set "missing" values to NA using case_when</span></span>
+<span id="cb43-6"><a href="#cb43-6"></a>    <span class="at">velocity =</span> <span class="fu">case_when</span>(velocity <span class="sc">==</span> <span class="st">"missing"</span> <span class="sc">~</span> <span class="cn">NA_character_</span>,</span>
+<span id="cb43-7"><a href="#cb43-7"></a>                      <span class="cn">TRUE</span> <span class="sc">~</span> velocity),</span>
+<span id="cb43-8"><a href="#cb43-8"></a>    <span class="co"># convert to numeric</span></span>
+<span id="cb43-9"><a href="#cb43-9"></a>    <span class="at">velocity =</span> <span class="fu">as.numeric</span>(velocity)</span>
+<span id="cb43-10"><a href="#cb43-10"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Because <code>case_when()</code> is so picky about character types, you need to specify which type of NA you’re using (there is a specific NA for each data type).</p>
 <p>Technically, <code>NA</code> has a <a class="glossary">logical<span class="def"></span></a> data type, so functions that aren’t as picky about combining data types will <a class="glossary">coerce<span class="def"></span></a> this to the NA version for the most compatible data type.</p>
 <p>Now, if we try to calculate the mean velocity, we get missing values for any summary value that used one of the bunched or medium starting block position 2023 velocity values.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a>missing_data <span class="sc">%&gt;%</span></span>
-<span id="cb43-2"><a href="#cb43-2"></a>  <span class="fu">group_by</span>(position) <span class="sc">%&gt;%</span></span>
-<span id="cb43-3"><a href="#cb43-3"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb43-4"><a href="#cb43-4"></a>    <span class="at">mean_velocity =</span> <span class="fu">mean</span>(velocity),</span>
-<span id="cb43-5"><a href="#cb43-5"></a>    <span class="at">min_velocity =</span> <span class="fu">min</span>(velocity),</span>
-<span id="cb43-6"><a href="#cb43-6"></a>    <span class="at">max_velocity =</span> <span class="fu">max</span>(velocity),</span>
-<span id="cb43-7"><a href="#cb43-7"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a>missing_data <span class="sc">%&gt;%</span></span>
+<span id="cb44-2"><a href="#cb44-2"></a>  <span class="fu">group_by</span>(position) <span class="sc">%&gt;%</span></span>
+<span id="cb44-3"><a href="#cb44-3"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb44-4"><a href="#cb44-4"></a>    <span class="at">mean_velocity =</span> <span class="fu">mean</span>(velocity),</span>
+<span id="cb44-5"><a href="#cb44-5"></a>    <span class="at">min_velocity =</span> <span class="fu">min</span>(velocity),</span>
+<span id="cb44-6"><a href="#cb44-6"></a>    <span class="at">max_velocity =</span> <span class="fu">max</span>(velocity),</span>
+<span id="cb44-7"><a href="#cb44-7"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="table table-sm table-striped">
@@ -1646,14 +1649,14 @@ Caused by warning in `mean.default()`:
 </section><section id="ignore-missing-values" class="level4"><h4 class="anchored" data-anchor-id="ignore-missing-values">Ignore missing values</h4>
 <p>This is because <code>NA</code> basically means “I don’t know”, and the sum of 100 and “I don’t know” is “I don’t know”, not 100. However, when you’re calculating means, you often want to just ignore missing values. Set <code>na.rm = TRUE</code> in the summary function to remove missing values before calculating.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a>missing_data <span class="sc">%&gt;%</span></span>
-<span id="cb44-2"><a href="#cb44-2"></a>  <span class="fu">group_by</span>(position) <span class="sc">%&gt;%</span></span>
-<span id="cb44-3"><a href="#cb44-3"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb44-4"><a href="#cb44-4"></a>    <span class="at">mean_velocity =</span> <span class="fu">mean</span>(velocity, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb44-5"><a href="#cb44-5"></a>    <span class="at">min_velocity =</span> <span class="fu">min</span>(velocity, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb44-6"><a href="#cb44-6"></a>    <span class="at">max_velocity =</span> <span class="fu">max</span>(velocity, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb44-7"><a href="#cb44-7"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
-<span id="cb44-8"><a href="#cb44-8"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a>missing_data <span class="sc">%&gt;%</span></span>
+<span id="cb45-2"><a href="#cb45-2"></a>  <span class="fu">group_by</span>(position) <span class="sc">%&gt;%</span></span>
+<span id="cb45-3"><a href="#cb45-3"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb45-4"><a href="#cb45-4"></a>    <span class="at">mean_velocity =</span> <span class="fu">mean</span>(velocity, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb45-5"><a href="#cb45-5"></a>    <span class="at">min_velocity =</span> <span class="fu">min</span>(velocity, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb45-6"><a href="#cb45-6"></a>    <span class="at">max_velocity =</span> <span class="fu">max</span>(velocity, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb45-7"><a href="#cb45-7"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb45-8"><a href="#cb45-8"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="table table-sm table-striped">
@@ -1690,14 +1693,14 @@ Caused by warning in `mean.default()`:
 </section><section id="count-missing-values" class="level4"><h4 class="anchored" data-anchor-id="count-missing-values">Count missing values</h4>
 <p>If you want to find out how many missing or non-missing values there are in a column, use the <code><a href="https://rdrr.io/r/base/NA.html">is.na()</a></code> function to get a <a class="glossary">logical<span class="def"></span></a> vector of whether or not each value is missing, and use <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code> to count how many values are TRUE or <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code> to calculate the proportion of TRUE values.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a>missing_data <span class="sc">%&gt;%</span></span>
-<span id="cb45-2"><a href="#cb45-2"></a>  <span class="fu">group_by</span>(year, angle) <span class="sc">%&gt;%</span></span>
-<span id="cb45-3"><a href="#cb45-3"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb45-4"><a href="#cb45-4"></a>    <span class="at">n_valid =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(velocity)),</span>
-<span id="cb45-5"><a href="#cb45-5"></a>    <span class="at">n_missing =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(velocity)),</span>
-<span id="cb45-6"><a href="#cb45-6"></a>    <span class="at">prop_missing =</span> <span class="fu">mean</span>(<span class="fu">is.na</span>(velocity)),</span>
-<span id="cb45-7"><a href="#cb45-7"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
-<span id="cb45-8"><a href="#cb45-8"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a>missing_data <span class="sc">%&gt;%</span></span>
+<span id="cb46-2"><a href="#cb46-2"></a>  <span class="fu">group_by</span>(year, angle) <span class="sc">%&gt;%</span></span>
+<span id="cb46-3"><a href="#cb46-3"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb46-4"><a href="#cb46-4"></a>    <span class="at">n_valid =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(velocity)),</span>
+<span id="cb46-5"><a href="#cb46-5"></a>    <span class="at">n_missing =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(velocity)),</span>
+<span id="cb46-6"><a href="#cb46-6"></a>    <span class="at">prop_missing =</span> <span class="fu">mean</span>(<span class="fu">is.na</span>(velocity)),</span>
+<span id="cb46-7"><a href="#cb46-7"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb46-8"><a href="#cb46-8"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="table table-sm table-striped">
@@ -1745,18 +1748,18 @@ Caused by warning in `mean.default()`:
 </section><section id="omit-missing-values" class="level4"><h4 class="anchored" data-anchor-id="omit-missing-values">Omit missing values</h4>
 <p>You may also want to remove rows that have missing values and only work from complete datasets. <code>drop_na()</code> will remove any row that has a missing observation. You can use <code>drop_na()</code> on the entire dataset which will remove any row that has <em>any</em> missing value, or you can specify to only remove rows that are missing a specific value.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="co"># remove any rows with any missing values</span></span>
-<span id="cb46-2"><a href="#cb46-2"></a>complete_data <span class="ot">&lt;-</span> missing_data <span class="sc">%&gt;%</span></span>
-<span id="cb46-3"><a href="#cb46-3"></a>  <span class="fu">drop_na</span>()</span>
-<span id="cb46-4"><a href="#cb46-4"></a></span>
-<span id="cb46-5"><a href="#cb46-5"></a><span class="co"># remove any rows that are missing a value for velocity</span></span>
-<span id="cb46-6"><a href="#cb46-6"></a>complete_velocity <span class="ot">&lt;-</span> missing_data <span class="sc">%&gt;%</span></span>
-<span id="cb46-7"><a href="#cb46-7"></a>  <span class="fu">drop_na</span>(velocity)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a><span class="co"># remove any rows with any missing values</span></span>
+<span id="cb47-2"><a href="#cb47-2"></a>complete_data <span class="ot">&lt;-</span> missing_data <span class="sc">%&gt;%</span></span>
+<span id="cb47-3"><a href="#cb47-3"></a>  <span class="fu">drop_na</span>()</span>
+<span id="cb47-4"><a href="#cb47-4"></a></span>
+<span id="cb47-5"><a href="#cb47-5"></a><span class="co"># remove any rows that are missing a value for velocity</span></span>
+<span id="cb47-6"><a href="#cb47-6"></a>complete_velocity <span class="ot">&lt;-</span> missing_data <span class="sc">%&gt;%</span></span>
+<span id="cb47-7"><a href="#cb47-7"></a>  <span class="fu">drop_na</span>(velocity)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Missing data can be quite difficult to deal with depending on how it is represented. As always, no amount of coding expertise can make up for not understanding the structure and idiosyncrasies of your data.</p>
 </section></section></section><section id="sec-together-wrangle" class="level2" data-number="9.4"><h2 data-number="9.4" class="anchored" data-anchor-id="sec-together-wrangle">
 <span class="header-section-number">9.4</span> Exercises</h2>
-<p>Let’s try some exercises using a dataset you already encountered in <a href="#sec-viz"><span class="quarto-unresolved-ref">sec-viz</span></a> so that you can see how much more you’re able to do with the data now.</p>
+<p>Let’s try some exercises using a dataset you already encountered in <a href="03-viz.html"><span>Chapter&nbsp;3</span></a> so that you can see how much more you’re able to do with the data now.</p>
 <ul>
 <li>Save your current Markdown, close it, and open a new Rmd named “function_data_mad_skillz”.</li>
 <li>In the set-up code chunk, load the tidyverse, then load the dataset from https://healthteachr.github.io/data/Function_and_PA_data into an object named <code>function_data</code>.</li>
@@ -1775,8 +1778,8 @@ Solution
 </div>
 <div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb47-2"><a href="#cb47-2"></a>function_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://healthteachr.github.io/data/Function_and_PA_data.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb48-2"><a href="#cb48-2"></a>function_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://healthteachr.github.io/data/Function_and_PA_data.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 100 Columns: 10
 ── Column specification ────────────────────────────────────────────────────────
@@ -1813,29 +1816,29 @@ Solution
 </div>
 <div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a><span class="co"># case_when() method</span></span>
-<span id="cb49-2"><a href="#cb49-2"></a>function_data <span class="ot">&lt;-</span> function_data <span class="sc">%&gt;%</span></span>
-<span id="cb49-3"><a href="#cb49-3"></a>  <span class="fu">mutate</span>(<span class="at">hospitalised =</span> <span class="fu">case_when</span>(condition_type <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Joints"</span>, <span class="st">"Bones"</span>, <span class="st">"Muscles"</span>) <span class="sc">~</span> <span class="st">"hospitalised"</span>,</span>
-<span id="cb49-4"><a href="#cb49-4"></a>                             condition_type <span class="sc">==</span> <span class="st">"None"</span> <span class="sc">~</span> <span class="st">"not hospitalised"</span>))</span>
-<span id="cb49-5"><a href="#cb49-5"></a></span>
-<span id="cb49-6"><a href="#cb49-6"></a><span class="co"># ifelse() method</span></span>
-<span id="cb49-7"><a href="#cb49-7"></a></span>
-<span id="cb49-8"><a href="#cb49-8"></a>function_data <span class="ot">&lt;-</span> function_data <span class="sc">%&gt;%</span></span>
-<span id="cb49-9"><a href="#cb49-9"></a>  <span class="fu">mutate</span>(<span class="at">hospitalised =</span> <span class="fu">ifelse</span>(<span class="at">test =</span> condition_type <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Joints"</span>, <span class="st">"Bones"</span>, <span class="st">"Muscles"</span>),</span>
-<span id="cb49-10"><a href="#cb49-10"></a>                           <span class="at">yes =</span> <span class="st">"hospitalised"</span>,</span>
-<span id="cb49-11"><a href="#cb49-11"></a>                           <span class="at">no =</span> <span class="st">"not hospitalised"</span>))</span>
-<span id="cb49-12"><a href="#cb49-12"></a></span>
-<span id="cb49-13"><a href="#cb49-13"></a><span class="co"># mean quality-of-life scores</span></span>
-<span id="cb49-14"><a href="#cb49-14"></a>function_data <span class="sc">%&gt;%</span></span>
-<span id="cb49-15"><a href="#cb49-15"></a>  <span class="fu">group_by</span>(hospitalised) <span class="sc">%&gt;%</span></span>
-<span id="cb49-16"><a href="#cb49-16"></a>  <span class="fu">summarise</span>(<span class="at">mean_QoL =</span> <span class="fu">mean</span>(CASP19))</span>
-<span id="cb49-17"><a href="#cb49-17"></a></span>
-<span id="cb49-18"><a href="#cb49-18"></a><span class="co"># possible visualisation </span></span>
-<span id="cb49-19"><a href="#cb49-19"></a></span>
-<span id="cb49-20"><a href="#cb49-20"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> CASP19, <span class="at">fill =</span> hospitalised)) <span class="sc">+</span></span>
-<span id="cb49-21"><a href="#cb49-21"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb49-22"><a href="#cb49-22"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>hospitalised) <span class="sc">+</span></span>
-<span id="cb49-23"><a href="#cb49-23"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Quality-of-life scores by hospital admission"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a><span class="co"># case_when() method</span></span>
+<span id="cb50-2"><a href="#cb50-2"></a>function_data <span class="ot">&lt;-</span> function_data <span class="sc">%&gt;%</span></span>
+<span id="cb50-3"><a href="#cb50-3"></a>  <span class="fu">mutate</span>(<span class="at">hospitalised =</span> <span class="fu">case_when</span>(condition_type <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Joints"</span>, <span class="st">"Bones"</span>, <span class="st">"Muscles"</span>) <span class="sc">~</span> <span class="st">"hospitalised"</span>,</span>
+<span id="cb50-4"><a href="#cb50-4"></a>                             condition_type <span class="sc">==</span> <span class="st">"None"</span> <span class="sc">~</span> <span class="st">"not hospitalised"</span>))</span>
+<span id="cb50-5"><a href="#cb50-5"></a></span>
+<span id="cb50-6"><a href="#cb50-6"></a><span class="co"># ifelse() method</span></span>
+<span id="cb50-7"><a href="#cb50-7"></a></span>
+<span id="cb50-8"><a href="#cb50-8"></a>function_data <span class="ot">&lt;-</span> function_data <span class="sc">%&gt;%</span></span>
+<span id="cb50-9"><a href="#cb50-9"></a>  <span class="fu">mutate</span>(<span class="at">hospitalised =</span> <span class="fu">ifelse</span>(<span class="at">test =</span> condition_type <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Joints"</span>, <span class="st">"Bones"</span>, <span class="st">"Muscles"</span>),</span>
+<span id="cb50-10"><a href="#cb50-10"></a>                           <span class="at">yes =</span> <span class="st">"hospitalised"</span>,</span>
+<span id="cb50-11"><a href="#cb50-11"></a>                           <span class="at">no =</span> <span class="st">"not hospitalised"</span>))</span>
+<span id="cb50-12"><a href="#cb50-12"></a></span>
+<span id="cb50-13"><a href="#cb50-13"></a><span class="co"># mean quality-of-life scores</span></span>
+<span id="cb50-14"><a href="#cb50-14"></a>function_data <span class="sc">%&gt;%</span></span>
+<span id="cb50-15"><a href="#cb50-15"></a>  <span class="fu">group_by</span>(hospitalised) <span class="sc">%&gt;%</span></span>
+<span id="cb50-16"><a href="#cb50-16"></a>  <span class="fu">summarise</span>(<span class="at">mean_QoL =</span> <span class="fu">mean</span>(CASP19))</span>
+<span id="cb50-17"><a href="#cb50-17"></a></span>
+<span id="cb50-18"><a href="#cb50-18"></a><span class="co"># possible visualisation </span></span>
+<span id="cb50-19"><a href="#cb50-19"></a></span>
+<span id="cb50-20"><a href="#cb50-20"></a><span class="fu">ggplot</span>(function_data, <span class="fu">aes</span>(<span class="at">x =</span> CASP19, <span class="at">fill =</span> hospitalised)) <span class="sc">+</span></span>
+<span id="cb50-21"><a href="#cb50-21"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb50-22"><a href="#cb50-22"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>hospitalised) <span class="sc">+</span></span>
+<span id="cb50-23"><a href="#cb50-23"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Quality-of-life scores by hospital admission"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="09-wrangle_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -1888,13 +1891,13 @@ Solution
 </div>
 <div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a><span class="co"># method 1 - tidyverse</span></span>
-<span id="cb50-2"><a href="#cb50-2"></a>mean_speed <span class="ot">&lt;-</span> function_data <span class="sc">%&gt;%</span></span>
-<span id="cb50-3"><a href="#cb50-3"></a>  <span class="fu">summarise</span>(<span class="at">mean_speed =</span> <span class="fu">mean</span>(gaitspeed)) <span class="sc">%&gt;%</span></span>
-<span id="cb50-4"><a href="#cb50-4"></a>  <span class="fu">pull</span>(mean_speed)</span>
-<span id="cb50-5"><a href="#cb50-5"></a></span>
-<span id="cb50-6"><a href="#cb50-6"></a><span class="co"># method 2 - base R</span></span>
-<span id="cb50-7"><a href="#cb50-7"></a>mean_speed <span class="ot">&lt;-</span> <span class="fu">mean</span>(function_data<span class="sc">$</span>gaitspeed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a><span class="co"># method 1 - tidyverse</span></span>
+<span id="cb51-2"><a href="#cb51-2"></a>mean_speed <span class="ot">&lt;-</span> function_data <span class="sc">%&gt;%</span></span>
+<span id="cb51-3"><a href="#cb51-3"></a>  <span class="fu">summarise</span>(<span class="at">mean_speed =</span> <span class="fu">mean</span>(gaitspeed)) <span class="sc">%&gt;%</span></span>
+<span id="cb51-4"><a href="#cb51-4"></a>  <span class="fu">pull</span>(mean_speed)</span>
+<span id="cb51-5"><a href="#cb51-5"></a></span>
+<span id="cb51-6"><a href="#cb51-6"></a><span class="co"># method 2 - base R</span></span>
+<span id="cb51-7"><a href="#cb51-7"></a>mean_speed <span class="ot">&lt;-</span> <span class="fu">mean</span>(function_data<span class="sc">$</span>gaitspeed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -1913,8 +1916,8 @@ Solution
 </div>
 <div id="callout-11" class="callout-11-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a>fast_speed <span class="ot">&lt;-</span> function_data <span class="sc">%&gt;%</span></span>
-<span id="cb51-2"><a href="#cb51-2"></a>  <span class="fu">filter</span>(gaitspeed <span class="sc">&gt;</span> mean_speed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a>fast_speed <span class="ot">&lt;-</span> function_data <span class="sc">%&gt;%</span></span>
+<span id="cb52-2"><a href="#cb52-2"></a>  <span class="fu">filter</span>(gaitspeed <span class="sc">&gt;</span> mean_speed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -1933,9 +1936,9 @@ Solution
 </div>
 <div id="callout-12" class="callout-12-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a>fast_speed <span class="sc">%&gt;%</span></span>
-<span id="cb52-2"><a href="#cb52-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> condition_type)) <span class="sc">+</span></span>
-<span id="cb52-3"><a href="#cb52-3"></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a>fast_speed <span class="sc">%&gt;%</span></span>
+<span id="cb53-2"><a href="#cb53-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> condition_type)) <span class="sc">+</span></span>
+<span id="cb53-3"><a href="#cb53-3"></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="09-wrangle_files/figure-html/unnamed-chunk-39-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -1971,23 +1974,23 @@ Solution
 </div>
 <div id="callout-13" class="callout-13-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a><span class="co"># this is one possible solution, there are many other valid approaches </span></span>
-<span id="cb53-2"><a href="#cb53-2"></a></span>
-<span id="cb53-3"><a href="#cb53-3"></a><span class="co"># calculate mean gait speed across all participants</span></span>
-<span id="cb53-4"><a href="#cb53-4"></a>mean_speed <span class="ot">&lt;-</span> <span class="fu">mean</span>(function_data<span class="sc">$</span>gaitspeed)</span>
-<span id="cb53-5"><a href="#cb53-5"></a></span>
-<span id="cb53-6"><a href="#cb53-6"></a><span class="co"># calculate mean steps for each type of musculoskeletal disease</span></span>
-<span id="cb53-7"><a href="#cb53-7"></a>follow_data <span class="ot">&lt;-</span> function_data <span class="sc">%&gt;%</span></span>
-<span id="cb53-8"><a href="#cb53-8"></a>  <span class="fu">group_by</span>(musculoskeletal) <span class="sc">%&gt;%</span></span>
-<span id="cb53-9"><a href="#cb53-9"></a>  <span class="fu">summarise</span>(<span class="at">mean_steps =</span> <span class="fu">mean</span>(steps)) <span class="sc">%&gt;%</span></span>
-<span id="cb53-10"><a href="#cb53-10"></a><span class="co">#then join it to the function data  </span></span>
-<span id="cb53-11"><a href="#cb53-11"></a>  <span class="fu">left_join</span>(function_data, <span class="at">by =</span> <span class="st">"musculoskeletal"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb53-12"><a href="#cb53-12"></a><span class="co"># then add on the column</span></span>
-<span id="cb53-13"><a href="#cb53-13"></a>  <span class="fu">mutate</span>(<span class="at">follow_up =</span> <span class="fu">case_when</span>(gaitspeed <span class="sc">&lt;</span> mean_speed <span class="sc">&amp;</span> </span>
-<span id="cb53-14"><a href="#cb53-14"></a>                               steps <span class="sc">&lt;</span> mean_steps <span class="sc">&amp;</span> </span>
-<span id="cb53-15"><a href="#cb53-15"></a>                               CASP19 <span class="sc">&lt;</span> <span class="dv">30</span> <span class="sc">~</span> <span class="st">"yes"</span>,</span>
-<span id="cb53-16"><a href="#cb53-16"></a>                               <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"no"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb53-17"><a href="#cb53-17"></a>  <span class="fu">select</span>(id, condition_type, hospitalised, follow_up)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a><span class="co"># this is one possible solution, there are many other valid approaches </span></span>
+<span id="cb54-2"><a href="#cb54-2"></a></span>
+<span id="cb54-3"><a href="#cb54-3"></a><span class="co"># calculate mean gait speed across all participants</span></span>
+<span id="cb54-4"><a href="#cb54-4"></a>mean_speed <span class="ot">&lt;-</span> <span class="fu">mean</span>(function_data<span class="sc">$</span>gaitspeed)</span>
+<span id="cb54-5"><a href="#cb54-5"></a></span>
+<span id="cb54-6"><a href="#cb54-6"></a><span class="co"># calculate mean steps for each type of musculoskeletal disease</span></span>
+<span id="cb54-7"><a href="#cb54-7"></a>follow_data <span class="ot">&lt;-</span> function_data <span class="sc">%&gt;%</span></span>
+<span id="cb54-8"><a href="#cb54-8"></a>  <span class="fu">group_by</span>(musculoskeletal) <span class="sc">%&gt;%</span></span>
+<span id="cb54-9"><a href="#cb54-9"></a>  <span class="fu">summarise</span>(<span class="at">mean_steps =</span> <span class="fu">mean</span>(steps)) <span class="sc">%&gt;%</span></span>
+<span id="cb54-10"><a href="#cb54-10"></a><span class="co">#then join it to the function data  </span></span>
+<span id="cb54-11"><a href="#cb54-11"></a>  <span class="fu">left_join</span>(function_data, <span class="at">by =</span> <span class="st">"musculoskeletal"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb54-12"><a href="#cb54-12"></a><span class="co"># then add on the column</span></span>
+<span id="cb54-13"><a href="#cb54-13"></a>  <span class="fu">mutate</span>(<span class="at">follow_up =</span> <span class="fu">case_when</span>(gaitspeed <span class="sc">&lt;</span> mean_speed <span class="sc">&amp;</span> </span>
+<span id="cb54-14"><a href="#cb54-14"></a>                               steps <span class="sc">&lt;</span> mean_steps <span class="sc">&amp;</span> </span>
+<span id="cb54-15"><a href="#cb54-15"></a>                               CASP19 <span class="sc">&lt;</span> <span class="dv">30</span> <span class="sc">~</span> <span class="st">"yes"</span>,</span>
+<span id="cb54-16"><a href="#cb54-16"></a>                               <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"no"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb54-17"><a href="#cb54-17"></a>  <span class="fu">select</span>(id, condition_type, hospitalised, follow_up)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -2030,45 +2033,45 @@ Solution
 </div>
 <div id="callout-14" class="callout-14-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a><span class="co"># in total</span></span>
-<span id="cb54-2"><a href="#cb54-2"></a>follow_data <span class="sc">%&gt;%</span></span>
-<span id="cb54-3"><a href="#cb54-3"></a>  <span class="fu">group_by</span>(follow_up) <span class="sc">%&gt;%</span></span>
-<span id="cb54-4"><a href="#cb54-4"></a>  <span class="fu">count</span>()<span class="sc">%&gt;%</span></span>
-<span id="cb54-5"><a href="#cb54-5"></a>  <span class="fu">filter</span>(follow_up <span class="sc">==</span> <span class="st">"yes"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb54-6"><a href="#cb54-6"></a>  <span class="fu">pull</span>(n)</span>
-<span id="cb54-7"><a href="#cb54-7"></a></span>
-<span id="cb54-8"><a href="#cb54-8"></a><span class="co"># with a condition affecting the bones</span></span>
-<span id="cb54-9"><a href="#cb54-9"></a>follow_data <span class="sc">%&gt;%</span></span>
-<span id="cb54-10"><a href="#cb54-10"></a>  <span class="fu">group_by</span>(follow_up, condition_type) <span class="sc">%&gt;%</span></span>
-<span id="cb54-11"><a href="#cb54-11"></a>  <span class="fu">count</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb54-12"><a href="#cb54-12"></a>  <span class="fu">filter</span>(condition_type <span class="sc">==</span> <span class="st">"Bones"</span>,</span>
-<span id="cb54-13"><a href="#cb54-13"></a>         follow_up <span class="sc">==</span> <span class="st">"yes"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb54-14"><a href="#cb54-14"></a>  <span class="fu">pull</span>(n)</span>
-<span id="cb54-15"><a href="#cb54-15"></a></span>
-<span id="cb54-16"><a href="#cb54-16"></a><span class="co"># who were hospitalised in the last year</span></span>
-<span id="cb54-17"><a href="#cb54-17"></a>follow_data <span class="sc">%&gt;%</span></span>
-<span id="cb54-18"><a href="#cb54-18"></a>  <span class="fu">group_by</span>(follow_up, hospitalised) <span class="sc">%&gt;%</span></span>
-<span id="cb54-19"><a href="#cb54-19"></a>  <span class="fu">count</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb54-20"><a href="#cb54-20"></a>  <span class="fu">filter</span>(hospitalised <span class="sc">==</span> <span class="st">"hospitalised"</span>,</span>
-<span id="cb54-21"><a href="#cb54-21"></a>         follow_up <span class="sc">==</span> <span class="st">"yes"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb54-22"><a href="#cb54-22"></a>  <span class="fu">pull</span>(n)</span>
-<span id="cb54-23"><a href="#cb54-23"></a></span>
-<span id="cb54-24"><a href="#cb54-24"></a><span class="co"># who were not hospitalised in the last year</span></span>
-<span id="cb54-25"><a href="#cb54-25"></a>follow_data <span class="sc">%&gt;%</span></span>
-<span id="cb54-26"><a href="#cb54-26"></a>  <span class="fu">group_by</span>(follow_up, hospitalised) <span class="sc">%&gt;%</span></span>
-<span id="cb54-27"><a href="#cb54-27"></a>  <span class="fu">count</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb54-28"><a href="#cb54-28"></a>  <span class="fu">filter</span>(hospitalised <span class="sc">==</span> <span class="st">"not hospitalised"</span>,</span>
-<span id="cb54-29"><a href="#cb54-29"></a>         follow_up <span class="sc">==</span> <span class="st">"yes"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb54-30"><a href="#cb54-30"></a>  <span class="fu">pull</span>(n)</span>
-<span id="cb54-31"><a href="#cb54-31"></a></span>
-<span id="cb54-32"><a href="#cb54-32"></a><span class="co"># most follow-ups needed</span></span>
-<span id="cb54-33"><a href="#cb54-33"></a>follow_data <span class="sc">%&gt;%</span></span>
-<span id="cb54-34"><a href="#cb54-34"></a>  <span class="fu">group_by</span>(follow_up, condition_type) <span class="sc">%&gt;%</span></span>
-<span id="cb54-35"><a href="#cb54-35"></a>  <span class="fu">count</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb54-36"><a href="#cb54-36"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb54-37"><a href="#cb54-37"></a>  <span class="fu">filter</span>(follow_up <span class="sc">==</span> <span class="st">"yes"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb54-38"><a href="#cb54-38"></a>  <span class="fu">slice_max</span>(<span class="at">n =</span> <span class="dv">1</span>, <span class="at">order_by =</span> n) <span class="sc">%&gt;%</span></span>
-<span id="cb54-39"><a href="#cb54-39"></a>  <span class="fu">pull</span>(condition_type)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a><span class="co"># in total</span></span>
+<span id="cb55-2"><a href="#cb55-2"></a>follow_data <span class="sc">%&gt;%</span></span>
+<span id="cb55-3"><a href="#cb55-3"></a>  <span class="fu">group_by</span>(follow_up) <span class="sc">%&gt;%</span></span>
+<span id="cb55-4"><a href="#cb55-4"></a>  <span class="fu">count</span>()<span class="sc">%&gt;%</span></span>
+<span id="cb55-5"><a href="#cb55-5"></a>  <span class="fu">filter</span>(follow_up <span class="sc">==</span> <span class="st">"yes"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb55-6"><a href="#cb55-6"></a>  <span class="fu">pull</span>(n)</span>
+<span id="cb55-7"><a href="#cb55-7"></a></span>
+<span id="cb55-8"><a href="#cb55-8"></a><span class="co"># with a condition affecting the bones</span></span>
+<span id="cb55-9"><a href="#cb55-9"></a>follow_data <span class="sc">%&gt;%</span></span>
+<span id="cb55-10"><a href="#cb55-10"></a>  <span class="fu">group_by</span>(follow_up, condition_type) <span class="sc">%&gt;%</span></span>
+<span id="cb55-11"><a href="#cb55-11"></a>  <span class="fu">count</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb55-12"><a href="#cb55-12"></a>  <span class="fu">filter</span>(condition_type <span class="sc">==</span> <span class="st">"Bones"</span>,</span>
+<span id="cb55-13"><a href="#cb55-13"></a>         follow_up <span class="sc">==</span> <span class="st">"yes"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb55-14"><a href="#cb55-14"></a>  <span class="fu">pull</span>(n)</span>
+<span id="cb55-15"><a href="#cb55-15"></a></span>
+<span id="cb55-16"><a href="#cb55-16"></a><span class="co"># who were hospitalised in the last year</span></span>
+<span id="cb55-17"><a href="#cb55-17"></a>follow_data <span class="sc">%&gt;%</span></span>
+<span id="cb55-18"><a href="#cb55-18"></a>  <span class="fu">group_by</span>(follow_up, hospitalised) <span class="sc">%&gt;%</span></span>
+<span id="cb55-19"><a href="#cb55-19"></a>  <span class="fu">count</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb55-20"><a href="#cb55-20"></a>  <span class="fu">filter</span>(hospitalised <span class="sc">==</span> <span class="st">"hospitalised"</span>,</span>
+<span id="cb55-21"><a href="#cb55-21"></a>         follow_up <span class="sc">==</span> <span class="st">"yes"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb55-22"><a href="#cb55-22"></a>  <span class="fu">pull</span>(n)</span>
+<span id="cb55-23"><a href="#cb55-23"></a></span>
+<span id="cb55-24"><a href="#cb55-24"></a><span class="co"># who were not hospitalised in the last year</span></span>
+<span id="cb55-25"><a href="#cb55-25"></a>follow_data <span class="sc">%&gt;%</span></span>
+<span id="cb55-26"><a href="#cb55-26"></a>  <span class="fu">group_by</span>(follow_up, hospitalised) <span class="sc">%&gt;%</span></span>
+<span id="cb55-27"><a href="#cb55-27"></a>  <span class="fu">count</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb55-28"><a href="#cb55-28"></a>  <span class="fu">filter</span>(hospitalised <span class="sc">==</span> <span class="st">"not hospitalised"</span>,</span>
+<span id="cb55-29"><a href="#cb55-29"></a>         follow_up <span class="sc">==</span> <span class="st">"yes"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb55-30"><a href="#cb55-30"></a>  <span class="fu">pull</span>(n)</span>
+<span id="cb55-31"><a href="#cb55-31"></a></span>
+<span id="cb55-32"><a href="#cb55-32"></a><span class="co"># most follow-ups needed</span></span>
+<span id="cb55-33"><a href="#cb55-33"></a>follow_data <span class="sc">%&gt;%</span></span>
+<span id="cb55-34"><a href="#cb55-34"></a>  <span class="fu">group_by</span>(follow_up, condition_type) <span class="sc">%&gt;%</span></span>
+<span id="cb55-35"><a href="#cb55-35"></a>  <span class="fu">count</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb55-36"><a href="#cb55-36"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb55-37"><a href="#cb55-37"></a>  <span class="fu">filter</span>(follow_up <span class="sc">==</span> <span class="st">"yes"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb55-38"><a href="#cb55-38"></a>  <span class="fu">slice_max</span>(<span class="at">n =</span> <span class="dv">1</span>, <span class="at">order_by =</span> n) <span class="sc">%&gt;%</span></span>
+<span id="cb55-39"><a href="#cb55-39"></a>  <span class="fu">pull</span>(condition_type)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 17
 [1] 4
