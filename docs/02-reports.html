@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.475">
+<meta name="generator" content="quarto-1.4.555">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>Applied Data Skills - 2&nbsp; Reports with R Markdown</title>
 <style>
@@ -14,11 +14,12 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -43,48 +44,20 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+/* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
-.hanging div.csl-entry {
+.hanging-indent div.csl-entry {
   margin-left:2em;
   text-indent:-2em;
 }
@@ -98,8 +71,7 @@ div.csl-right-inline {
 }
 div.csl-indent {
   margin-left: 2em;
-}
-</style>
+}</style>
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
@@ -127,7 +99,13 @@ div.csl-indent {
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -136,8 +114,10 @@ div.csl-indent {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-6NP3MF25W3"></script><script type="text/javascript">
 
@@ -153,256 +133,290 @@ gtag('config', 'G-6NP3MF25W3', { 'anonymize_ip': true});
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Reports with R Markdown</span></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02-reports.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Reports with R Markdown</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Applied Data Skills</a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="https://github.com/healthteachr/ads-v2/" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
-    <a href="" title="Share" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-share"></i></a>
-    <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-0">
+    <a href="https://github.com/healthteachr/healthteachr.github.io" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
 <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=%7Curl%7C">
-            <i class="bi bi-bi-twitter pe-1"></i>
-          Twitter
-          </a>
-        </li>
-        <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=%7Curl%7C">
-            <i class="bi bi-bi-facebook pe-1"></i>
-          Facebook
-          </a>
-        </li>
-        <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=%7Curl%7C">
-            <i class="bi bi-bi-linkedin pe-1"></i>
-          LinkedIn
-          </a>
-        </li>
-    </ul>
-<a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=%7Curl%7C">
+              <i class="bi bi-bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=%7Curl%7C">
+              <i class="bi bi-bi-facebook pe-1"></i>
+            Facebook
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=%7Curl%7C">
+              <i class="bi bi-bi-linkedin pe-1"></i>
+            LinkedIn
+            </a>
+          </li>
+      </ul>
+</div>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">Overview</a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Intro to R and RStudio</span></a>
+  <a href="./01-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Intro to R and RStudio</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./02-reports.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Reports with R Markdown</span></a>
+  <a href="./02-reports.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Reports with R Markdown</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03-viz.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Visualisation</span></a>
+  <a href="./03-viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Visualisation</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04-data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Import</span></a>
+  <a href="./04-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Import</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05-summary.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data Summaries</span></a>
+  <a href="./05-summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data Summaries</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./06-formative.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Practice Report</span></a>
+  <a href="./06-formative.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Practice Report</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./07-joins.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Relations</span></a>
+  <a href="./07-joins.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Relations</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./08-tidy.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data Tidying</span></a>
+  <a href="./08-tidy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data Tidying</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./09-wrangle.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Data Wrangling</span></a>
+  <a href="./09-wrangle.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Data Wrangling</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./10-custom.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Customising Visualisations &amp; Reports</span></a>
+  <a href="./10-custom.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Customising Visualisations &amp; Reports</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./11-refs.html" class="sidebar-item-text sidebar-link">References</a>
+  <a href="./11-refs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./12-license.html" class="sidebar-item-text sidebar-link">License/Citation</a>
+  <a href="./12-license.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">License/Citation</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Appendices</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./app-installing-r.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Installing R</span></a>
+  <a href="./app-installing-r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Installing R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./app-updating-r.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Updating R, RStudio, and packages</span></a>
+  <a href="./app-updating-r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Updating R, RStudio, and packages</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./app-symbols.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Symbols</span></a>
+  <a href="./app-symbols.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Symbols</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./app-conventions.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Conventions</span></a>
+  <a href="./app-conventions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Conventions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./app-teams.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Using Teams</span></a>
+  <a href="./app-teams.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Using Teams</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./app-debugging.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Debugging</span></a>
+  <a href="./app-debugging.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Debugging</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./app-datatypes.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">G</span>&nbsp; <span class="chapter-title">Data Types</span></a>
+  <a href="./app-datatypes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">G</span>&nbsp; <span class="chapter-title">Data Types</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./app-dates.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">H</span>&nbsp; <span class="chapter-title">Dates and Times</span></a>
+  <a href="./app-dates.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">H</span>&nbsp; <span class="chapter-title">Dates and Times</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./app-styling.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">I</span>&nbsp; <span class="chapter-title">Styling Plots</span></a>
+  <a href="./app-styling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">I</span>&nbsp; <span class="chapter-title">Styling Plots</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./app-spotify.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">J</span>&nbsp; <span class="chapter-title">Spotify Data</span></a>
+  <a href="./app-spotify.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">J</span>&nbsp; <span class="chapter-title">Spotify Data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./app-webpage.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">K</span>&nbsp; <span class="chapter-title">Webpages</span></a>
+  <a href="./app-webpage.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">K</span>&nbsp; <span class="chapter-title">Webpages</span></span></a>
   </div>
 </li>
       </ul>
 </li>
     </ul>
 </div>
-</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
 <li><a href="#sec-ilo-reports" id="toc-sec-ilo-reports" class="nav-link active" data-scroll-target="#sec-ilo-reports">Intended Learning Outcomes</a></li>
   <li><a href="#sec-walkthrough-reports" id="toc-sec-walkthrough-reports" class="nav-link" data-scroll-target="#sec-walkthrough-reports">Walkthrough video</a></li>
-  <li><a href="#sec-setup-reports" id="toc-sec-setup-reports" class="nav-link" data-scroll-target="#sec-setup-reports"><span class="toc-section-number">2.1</span>  Setup</a></li>
+  <li><a href="#sec-setup-reports" id="toc-sec-setup-reports" class="nav-link" data-scroll-target="#sec-setup-reports"><span class="header-section-number">2.1</span> Setup</a></li>
   <li>
-<a href="#sec-projects" id="toc-sec-projects" class="nav-link" data-scroll-target="#sec-projects"><span class="toc-section-number">2.2</span>  Organising a project</a>
+<a href="#sec-projects" id="toc-sec-projects" class="nav-link" data-scroll-target="#sec-projects"><span class="header-section-number">2.2</span> Organising a project</a>
   <ul class="collapse">
-<li><a href="#default-working-directory" id="toc-default-working-directory" class="nav-link" data-scroll-target="#default-working-directory"><span class="toc-section-number">2.2.1</span>  Default working directory</a></li>
-  <li><a href="#sec-project-start" id="toc-sec-project-start" class="nav-link" data-scroll-target="#sec-project-start"><span class="toc-section-number">2.2.2</span>  Start a Project</a></li>
-  <li><a href="#sec-naming" id="toc-sec-naming" class="nav-link" data-scroll-target="#sec-naming"><span class="toc-section-number">2.2.3</span>  Naming Things</a></li>
+<li><a href="#default-working-directory" id="toc-default-working-directory" class="nav-link" data-scroll-target="#default-working-directory"><span class="header-section-number">2.2.1</span> Default working directory</a></li>
+  <li><a href="#sec-project-start" id="toc-sec-project-start" class="nav-link" data-scroll-target="#sec-project-start"><span class="header-section-number">2.2.2</span> Start a Project</a></li>
+  <li><a href="#sec-naming" id="toc-sec-naming" class="nav-link" data-scroll-target="#sec-naming"><span class="header-section-number">2.2.3</span> Naming Things</a></li>
   </ul>
 </li>
   <li>
-<a href="#sec-rmarkdown" id="toc-sec-rmarkdown" class="nav-link" data-scroll-target="#sec-rmarkdown"><span class="toc-section-number">2.3</span>  R Markdown</a>
+<a href="#sec-rmarkdown" id="toc-sec-rmarkdown" class="nav-link" data-scroll-target="#sec-rmarkdown"><span class="header-section-number">2.3</span> R Markdown</a>
   <ul class="collapse">
-<li><a href="#new-document" id="toc-new-document" class="nav-link" data-scroll-target="#new-document"><span class="toc-section-number">2.3.1</span>  New document</a></li>
-  <li><a href="#sec-code-chunks" id="toc-sec-code-chunks" class="nav-link" data-scroll-target="#sec-code-chunks"><span class="toc-section-number">2.3.2</span>  Code chunks</a></li>
-  <li><a href="#running-code" id="toc-running-code" class="nav-link" data-scroll-target="#running-code"><span class="toc-section-number">2.3.3</span>  Running code</a></li>
-  <li><a href="#sec-rmd-inline-r" id="toc-sec-rmd-inline-r" class="nav-link" data-scroll-target="#sec-rmd-inline-r"><span class="toc-section-number">2.3.4</span>  Inline code</a></li>
-  <li><a href="#sec-rmd-knit" id="toc-sec-rmd-knit" class="nav-link" data-scroll-target="#sec-rmd-knit"><span class="toc-section-number">2.3.5</span>  Knitting your file</a></li>
+<li><a href="#new-document" id="toc-new-document" class="nav-link" data-scroll-target="#new-document"><span class="header-section-number">2.3.1</span> New document</a></li>
+  <li><a href="#sec-code-chunks" id="toc-sec-code-chunks" class="nav-link" data-scroll-target="#sec-code-chunks"><span class="header-section-number">2.3.2</span> Code chunks</a></li>
+  <li><a href="#running-code" id="toc-running-code" class="nav-link" data-scroll-target="#running-code"><span class="header-section-number">2.3.3</span> Running code</a></li>
+  <li><a href="#sec-rmd-inline-r" id="toc-sec-rmd-inline-r" class="nav-link" data-scroll-target="#sec-rmd-inline-r"><span class="header-section-number">2.3.4</span> Inline code</a></li>
+  <li><a href="#sec-rmd-knit" id="toc-sec-rmd-knit" class="nav-link" data-scroll-target="#sec-rmd-knit"><span class="header-section-number">2.3.5</span> Knitting your file</a></li>
   </ul>
 </li>
   <li>
-<a href="#loading-data" id="toc-loading-data" class="nav-link" data-scroll-target="#loading-data"><span class="toc-section-number">2.4</span>  Loading data</a>
+<a href="#loading-data" id="toc-loading-data" class="nav-link" data-scroll-target="#loading-data"><span class="header-section-number">2.4</span> Loading data</a>
   <ul class="collapse">
-<li><a href="#sec-loading-online" id="toc-sec-loading-online" class="nav-link" data-scroll-target="#sec-loading-online"><span class="toc-section-number">2.4.1</span>  Online sources</a></li>
-  <li><a href="#local-data-files" id="toc-local-data-files" class="nav-link" data-scroll-target="#local-data-files"><span class="toc-section-number">2.4.2</span>  Local data files</a></li>
+<li><a href="#sec-loading-online" id="toc-sec-loading-online" class="nav-link" data-scroll-target="#sec-loading-online"><span class="header-section-number">2.4.1</span> Online sources</a></li>
+  <li><a href="#local-data-files" id="toc-local-data-files" class="nav-link" data-scroll-target="#local-data-files"><span class="header-section-number">2.4.2</span> Local data files</a></li>
   </ul>
 </li>
   <li>
-<a href="#writing-a-report" id="toc-writing-a-report" class="nav-link" data-scroll-target="#writing-a-report"><span class="toc-section-number">2.5</span>  Writing a report</a>
+<a href="#writing-a-report" id="toc-writing-a-report" class="nav-link" data-scroll-target="#writing-a-report"><span class="header-section-number">2.5</span> Writing a report</a>
   <ul class="collapse">
-<li><a href="#data-analysis" id="toc-data-analysis" class="nav-link" data-scroll-target="#data-analysis"><span class="toc-section-number">2.5.1</span>  Data analysis</a></li>
-  <li><a href="#sec-markdown" id="toc-sec-markdown" class="nav-link" data-scroll-target="#sec-markdown"><span class="toc-section-number">2.5.2</span>  Text formatting</a></li>
-  <li><a href="#sec-comments" id="toc-sec-comments" class="nav-link" data-scroll-target="#sec-comments"><span class="toc-section-number">2.5.3</span>  Code comments</a></li>
-  <li><a href="#sec-rmd-images" id="toc-sec-rmd-images" class="nav-link" data-scroll-target="#sec-rmd-images"><span class="toc-section-number">2.5.4</span>  Images</a></li>
-  <li><a href="#sec-rmd-tables" id="toc-sec-rmd-tables" class="nav-link" data-scroll-target="#sec-rmd-tables"><span class="toc-section-number">2.5.5</span>  Tables</a></li>
+<li><a href="#data-analysis" id="toc-data-analysis" class="nav-link" data-scroll-target="#data-analysis"><span class="header-section-number">2.5.1</span> Data analysis</a></li>
+  <li><a href="#sec-markdown" id="toc-sec-markdown" class="nav-link" data-scroll-target="#sec-markdown"><span class="header-section-number">2.5.2</span> Text formatting</a></li>
+  <li><a href="#sec-comments" id="toc-sec-comments" class="nav-link" data-scroll-target="#sec-comments"><span class="header-section-number">2.5.3</span> Code comments</a></li>
+  <li><a href="#sec-rmd-images" id="toc-sec-rmd-images" class="nav-link" data-scroll-target="#sec-rmd-images"><span class="header-section-number">2.5.4</span> Images</a></li>
+  <li><a href="#sec-rmd-tables" id="toc-sec-rmd-tables" class="nav-link" data-scroll-target="#sec-rmd-tables"><span class="header-section-number">2.5.5</span> Tables</a></li>
   </ul>
 </li>
   <li>
-<a href="#refining-your-report" id="toc-refining-your-report" class="nav-link" data-scroll-target="#refining-your-report"><span class="toc-section-number">2.6</span>  Refining your report</a>
+<a href="#refining-your-report" id="toc-refining-your-report" class="nav-link" data-scroll-target="#refining-your-report"><span class="header-section-number">2.6</span> Refining your report</a>
   <ul class="collapse">
-<li><a href="#sec-rmd-setup" id="toc-sec-rmd-setup" class="nav-link" data-scroll-target="#sec-rmd-setup"><span class="toc-section-number">2.6.1</span>  Chunk defaults</a></li>
-  <li><a href="#override-defaults" id="toc-override-defaults" class="nav-link" data-scroll-target="#override-defaults"><span class="toc-section-number">2.6.2</span>  Override defaults</a></li>
-  <li><a href="#loading-packages" id="toc-loading-packages" class="nav-link" data-scroll-target="#loading-packages"><span class="toc-section-number">2.6.3</span>  Loading packages</a></li>
-  <li><a href="#sec-yaml" id="toc-sec-yaml" class="nav-link" data-scroll-target="#sec-yaml"><span class="toc-section-number">2.6.4</span>  YAML header</a></li>
-  <li><a href="#sec-toc" id="toc-sec-toc" class="nav-link" data-scroll-target="#sec-toc"><span class="toc-section-number">2.6.5</span>  Table of Contents</a></li>
-  <li><a href="#formats" id="toc-formats" class="nav-link" data-scroll-target="#formats"><span class="toc-section-number">2.6.6</span>  Formats</a></li>
-  <li><a href="#sec-reports-summary" id="toc-sec-reports-summary" class="nav-link" data-scroll-target="#sec-reports-summary"><span class="toc-section-number">2.6.7</span>  Summary</a></li>
+<li><a href="#sec-rmd-setup" id="toc-sec-rmd-setup" class="nav-link" data-scroll-target="#sec-rmd-setup"><span class="header-section-number">2.6.1</span> Chunk defaults</a></li>
+  <li><a href="#override-defaults" id="toc-override-defaults" class="nav-link" data-scroll-target="#override-defaults"><span class="header-section-number">2.6.2</span> Override defaults</a></li>
+  <li><a href="#loading-packages" id="toc-loading-packages" class="nav-link" data-scroll-target="#loading-packages"><span class="header-section-number">2.6.3</span> Loading packages</a></li>
+  <li><a href="#sec-yaml" id="toc-sec-yaml" class="nav-link" data-scroll-target="#sec-yaml"><span class="header-section-number">2.6.4</span> YAML header</a></li>
+  <li><a href="#sec-toc" id="toc-sec-toc" class="nav-link" data-scroll-target="#sec-toc"><span class="header-section-number">2.6.5</span> Table of Contents</a></li>
+  <li><a href="#formats" id="toc-formats" class="nav-link" data-scroll-target="#formats"><span class="header-section-number">2.6.6</span> Formats</a></li>
+  <li><a href="#sec-reports-summary" id="toc-sec-reports-summary" class="nav-link" data-scroll-target="#sec-reports-summary"><span class="header-section-number">2.6.7</span> Summary</a></li>
   </ul>
 </li>
   <li>
-<a href="#sec-exercises-reports" id="toc-sec-exercises-reports" class="nav-link" data-scroll-target="#sec-exercises-reports"><span class="toc-section-number">2.7</span>  Exercises</a>
+<a href="#sec-exercises-reports" id="toc-sec-exercises-reports" class="nav-link" data-scroll-target="#sec-exercises-reports"><span class="header-section-number">2.7</span> Exercises</a>
   <ul class="collapse">
-<li><a href="#sec-exercises-reports-project" id="toc-sec-exercises-reports-project" class="nav-link" data-scroll-target="#sec-exercises-reports-project"><span class="toc-section-number">2.7.1</span>  New project</a></li>
-  <li><a href="#sec-exercises-reports-setup" id="toc-sec-exercises-reports-setup" class="nav-link" data-scroll-target="#sec-exercises-reports-setup"><span class="toc-section-number">2.7.2</span>  New script</a></li>
-  <li><a href="#sec-exercises-reports-rmarkdown" id="toc-sec-exercises-reports-rmarkdown" class="nav-link" data-scroll-target="#sec-exercises-reports-rmarkdown"><span class="toc-section-number">2.7.3</span>  R Markdown</a></li>
-  <li><a href="#sec-exercises-reports-tables" id="toc-sec-exercises-reports-tables" class="nav-link" data-scroll-target="#sec-exercises-reports-tables"><span class="toc-section-number">2.7.4</span>  Tables</a></li>
-  <li><a href="#sec-exercises-reports-images" id="toc-sec-exercises-reports-images" class="nav-link" data-scroll-target="#sec-exercises-reports-images"><span class="toc-section-number">2.7.5</span>  Images</a></li>
-  <li><a href="#sec-exercises-reports-inline" id="toc-sec-exercises-reports-inline" class="nav-link" data-scroll-target="#sec-exercises-reports-inline"><span class="toc-section-number">2.7.6</span>  Inline R</a></li>
-  <li><a href="#sec-exercises-reports-knit" id="toc-sec-exercises-reports-knit" class="nav-link" data-scroll-target="#sec-exercises-reports-knit"><span class="toc-section-number">2.7.7</span>  Knit</a></li>
+<li><a href="#sec-exercises-reports-project" id="toc-sec-exercises-reports-project" class="nav-link" data-scroll-target="#sec-exercises-reports-project"><span class="header-section-number">2.7.1</span> New project</a></li>
+  <li><a href="#sec-exercises-reports-setup" id="toc-sec-exercises-reports-setup" class="nav-link" data-scroll-target="#sec-exercises-reports-setup"><span class="header-section-number">2.7.2</span> New script</a></li>
+  <li><a href="#sec-exercises-reports-rmarkdown" id="toc-sec-exercises-reports-rmarkdown" class="nav-link" data-scroll-target="#sec-exercises-reports-rmarkdown"><span class="header-section-number">2.7.3</span> R Markdown</a></li>
+  <li><a href="#sec-exercises-reports-tables" id="toc-sec-exercises-reports-tables" class="nav-link" data-scroll-target="#sec-exercises-reports-tables"><span class="header-section-number">2.7.4</span> Tables</a></li>
+  <li><a href="#sec-exercises-reports-images" id="toc-sec-exercises-reports-images" class="nav-link" data-scroll-target="#sec-exercises-reports-images"><span class="header-section-number">2.7.5</span> Images</a></li>
+  <li><a href="#sec-exercises-reports-inline" id="toc-sec-exercises-reports-inline" class="nav-link" data-scroll-target="#sec-exercises-reports-inline"><span class="header-section-number">2.7.6</span> Inline R</a></li>
+  <li><a href="#sec-exercises-reports-knit" id="toc-sec-exercises-reports-knit" class="nav-link" data-scroll-target="#sec-exercises-reports-knit"><span class="header-section-number">2.7.7</span> Knit</a></li>
   </ul>
 </li>
-  <li><a href="#sec-glossary-reports" id="toc-sec-glossary-reports" class="nav-link" data-scroll-target="#sec-glossary-reports"><span class="toc-section-number">2.8</span>  Glossary</a></li>
-  <li><a href="#sec-resources-reports" id="toc-sec-resources-reports" class="nav-link" data-scroll-target="#sec-resources-reports"><span class="toc-section-number">2.9</span>  Further Resources</a></li>
-  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/healthteachr/ads-v2/edit/master/02-reports.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/healthteachr/ads-v2/issues/new" class="toc-action">Report an issue</a></p><p><a href="https://github.com/healthteachr/ads-v2/blob/master/02-reports.qmd" class="toc-action">View source</a></p></div></div></nav>
+  <li><a href="#sec-glossary-reports" id="toc-sec-glossary-reports" class="nav-link" data-scroll-target="#sec-glossary-reports"><span class="header-section-number">2.8</span> Glossary</a></li>
+  <li><a href="#sec-resources-reports" id="toc-sec-resources-reports" class="nav-link" data-scroll-target="#sec-resources-reports"><span class="header-section-number">2.9</span> Further Resources</a></li>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/healthteachr/healthteachr.github.io/edit/main/02-reports.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/healthteachr/healthteachr.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/healthteachr/healthteachr.github.io/blob/main/02-reports.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title"><span id="sec-reports" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Reports with R Markdown</span></span></h1>
+<h1 class="title"><span id="sec-reports" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Reports with R Markdown</span></span></h1>
 </div>
 
 
@@ -415,6 +429,7 @@ gtag('config', 'G-6NP3MF25W3', { 'anonymize_ip': true});
   </div>
   
 
+
 </header><section id="sec-ilo-reports" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="sec-ilo-reports">Intended Learning Outcomes</h2>
 <ul>
 <li>Be able to structure a project</li>
@@ -426,39 +441,31 @@ gtag('config', 'G-6NP3MF25W3', { 'anonymize_ip': true});
 <p>There is a walkthrough video of this chapter available via <a href="https://echo360.org.uk/media/6b6c1c8f-c24f-44c1-9e43-988fe577ce5b/public">Echo360.</a> Please note that there may have been minor edits to the book since the video was recorded. Where there are differences, the book should always take precedence.</p>
 </section><section id="sec-setup-reports" class="level2" data-number="2.1"><h2 data-number="2.1" class="anchored" data-anchor-id="sec-setup-reports">
 <span class="header-section-number">2.1</span> Setup</h2>
-<p>For reference, here are the packages we will use in this chapter. You may need to install them, as explained in <a href="01-intro.html#sec-install-package"><span>Section&nbsp;1.3.1</span></a>, if running the code below in the console pane gives you the error <code>Error in library(package_name) : there is no package called 'packagename'</code>.</p>
+<p>For reference, here are the packages we will use in this chapter. You may need to install them, as explained in <a href="01-intro.html#sec-install-package" class="quarto-xref"><span>Section 1.3.1</span></a>, if running the code below in the console pane gives you the error <code>Error in library(package_name) : there is no package called 'packagename'</code>.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Chapter packages</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)  <span class="co"># various data manipulation functions</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'tidyverse' was built under R version 4.3.3</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'ggplot2' was built under R version 4.3.3</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">library</span>(knitr)      <span class="co"># for rendering a report from a script</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="fu">library</span>(rmarkdown)  <span class="co"># for using R markdown</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="fu">library</span>(kableExtra) <span class="co"># for styling tables</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'kableExtra' was built under R version 4.3.3</code></pre>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(timechange)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(tidyverse)  <span class="co"># various data manipulation functions</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(knitr)      <span class="co"># for rendering a report from a script</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(rmarkdown)  <span class="co"># for using R markdown</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">library</span>(kableExtra) <span class="co"># for styling tables</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </section><section id="sec-projects" class="level2" data-number="2.2"><h2 data-number="2.2" class="anchored" data-anchor-id="sec-projects">
 <span class="header-section-number">2.2</span> Organising a project</h2>
-<p>Before we write any code, first, we need to get organised. <a class="glossary">Projects<span class="def"></span></a> in RStudio are a way to group all the files you need for one project. Most projects include <a class="glossary">scripts<span class="def"></span></a>, data files, and output files like the PDF report created by the script or images.</p>
+<p>Before we write any code, first, we need to get organised. <a href="https://psyteachr.github.io/glossary/p#project" target="_blank" class="glossary" title="A way to organise related files in RStudio">Projects</a> in RStudio are a way to group all the files you need for one project. Most projects include <a href="https://psyteachr.github.io/glossary/s#script" target="_blank" class="glossary" title="A plain-text file that contains commands in a coding language, such as R.">scripts</a>, data files, and output files like the PDF report created by the script or images.</p>
 <section id="default-working-directory" class="level3" data-number="2.2.1"><h3 data-number="2.2.1" class="anchored" data-anchor-id="default-working-directory">
 <span class="header-section-number">2.2.1</span> Default working directory</h3>
-<p>First, make a new <a class="glossary">directory<span class="def"></span></a> (i.e., folder) on your computer where you will keep all of your R projects. Name it something like “R-projects” (avoid spaces and other special characters). Make sure you know how to get to this directory using your computer’s Finder or Explorer.</p>
-<div class="callout-caution callout callout-style-default callout-captioned">
+<p>First, make a new <a href="https://psyteachr.github.io/glossary/d#directory" target="_blank" class="glossary" title="A collection or “folder” of files on a computer.">directory</a> (i.e., folder) on your computer where you will keep all of your R projects. Name it something like “R-projects” (avoid spaces and other special characters). Make sure you know how to get to this directory using your computer’s Finder or Explorer.</p>
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Avoid networked drives
 </div>
 </div>
@@ -466,13 +473,13 @@ Avoid networked drives
 <p>If possible, don’t use a network or cloud drive (e.g., OneDrive or Dropbox), as this can sometimes cause problems. If you’re working from a networked drive and you are having issues, a helpful test is to try moving your project folder to the desktop to see if that solves the problem.</p>
 </div>
 </div>
-<p>Next, open <if>Tools &gt; Global Options…</if>, navigate to the <if>General</if> pane, and set the “Default working directory (when not in a project)” to this directory. Now, if you’re not working in a project, any files or images you make will be saved in this <a class="glossary">working directory<span class="def"></span></a>.</p>
-<div class="callout-caution callout callout-style-default callout-captioned">
+<p>Next, open <if>Tools &gt; Global Options…</if>, navigate to the <if>General</if> pane, and set the “Default working directory (when not in a project)” to this directory. Now, if you’re not working in a project, any files or images you make will be saved in this <a href="https://psyteachr.github.io/glossary/w#working-directory" target="_blank" class="glossary" title="The filepath where R is currently reading and writing files.">working directory</a>.</p>
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Avoid long path names
 </div>
 </div>
@@ -493,7 +500,8 @@ Avoid long path names
 </ul>
 <p>RStudio will restart itself and open with this new project directory as the working directory.</p>
 <div id="fig-new-proj" class="quarto-layout-panel">
-<figure class="figure"><div class="quarto-layout-row quarto-layout-valign-top">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-new-proj-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
 <p><img src="images/reports/new_proj_1.png" class="img-fluid figure-img"></p>
 </div>
@@ -504,16 +512,18 @@ Avoid long path names
 <p><img src="images/reports/new_proj_3.png" class="img-fluid figure-img"></p>
 </div>
 </div>
-<p></p><figcaption class="figure-caption">Figure&nbsp;2.1: Starting a new project.</figcaption><p></p>
-</figure>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-new-proj-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.1: Starting a new project.
+</figcaption></figure>
 </div>
 <p>Click on the Files tab in the lower right pane to see the contents of the project directory. You will see a file called <code>02-reports.Rproj</code>, which is a file that contains all of the project information. When you’re in the Finder/Explorer, you can double-click on it to open up the project.</p>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Dot files
 </div>
 </div>
@@ -521,12 +531,12 @@ Dot files
 <p>Depending on your settings, you may also see a directory called <code>.Rproj.user</code>, which contains your specific user settings. You can ignore this and other “invisible” files that start with a full stop.</p>
 </div>
 </div>
-<div class="callout-caution callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Don’t nest projects
 </div>
 </div>
@@ -538,7 +548,7 @@ Don’t nest projects
 <span class="header-section-number">2.2.3</span> Naming Things</h3>
 <p>Before we start creating new files, it’s important to review how to name your files. This might seem a bit pedantic, but following clear naming rules so that both people and computers can easily find things will make your life much easier in the long run. Here are some important principles:</p>
 <ul>
-<li>file and directory names should only contain letters, numbers, dashes, and underscores, with a full stop (<code>.</code>) between the file name and <a class="glossary">extension<span class="def"></span></a> (that means no spaces!)</li>
+<li>file and directory names should only contain letters, numbers, dashes, and underscores, with a full stop (<code>.</code>) between the file name and <a href="https://psyteachr.github.io/glossary/e#extension" target="_blank" class="glossary" title="The end part of a file name that tells you what type of file it is (e.g., .R or .Rmd).">extension</a> (that means no spaces!)</li>
 <li>be consistent with capitalisation (set a rule to make it easy to remember, like always use lowercase)</li>
 <li>use underscores (<code>_</code>) to separate parts of the file name, like the title and date, and dashes (<code>-</code>) to separate words in each part (e.g., <code>physiology-report_2024-11.Rmd</code>)</li>
 <li>name files with a pattern that alphabetises in a sensible order and makes it easy for you to find the file you’re looking for</li>
@@ -568,12 +578,12 @@ Don’t nest projects
 <option value="answer">data_rugby_2021-11-15.xls</option>
 <option value="">data_2021-11-15_rugby.xls</option></select></li>
 </ul>
-<div class="callout-note try callout callout-style-default callout-captioned">
+<div class="try callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Naming practice
 </div>
 </div>
@@ -583,18 +593,21 @@ Naming practice
 </div>
 </section></section><section id="sec-rmarkdown" class="level2" data-number="2.3"><h2 data-number="2.3" class="anchored" data-anchor-id="sec-rmarkdown">
 <span class="header-section-number">2.3</span> R Markdown</h2>
-<p>Throughout this course we will use <a class="glossary">R Markdown<span class="def"></span></a> to create reproducible reports with a table of contents, text, tables, images, and code. The text can be written using <a class="glossary">markdown<span class="def"></span></a>, which is a way to specify formatting, such as headers, paragraphs, lists, bolding, and links.</p>
+<p>Throughout this course we will use <a href="https://psyteachr.github.io/glossary/r#r-markdown" target="_blank" class="glossary" title="The R-specific version of markdown: a way to specify formatting, such as headers, paragraphs, lists, bolding, and links, as well as code blocks and inline code.">R Markdown</a> to create reproducible reports with a table of contents, text, tables, images, and code. The text can be written using <a href="https://psyteachr.github.io/glossary/m#markdown" target="_blank" class="glossary" title="A way to specify formatting, such as headers, paragraphs, lists, bolding, and links.">markdown</a>, which is a way to specify formatting, such as headers, paragraphs, lists, bolding, and links.</p>
 <section id="new-document" class="level3" data-number="2.3.1"><h3 data-number="2.3.1" class="anchored" data-anchor-id="new-document">
 <span class="header-section-number">2.3.1</span> New document</h3>
 <p>To open a new R Markdown document, click <if>File &gt; New File &gt; R Markdown</if>. You will be prompted to give it a title; title it <code>Important Info</code>. You can also change the author name. Keep the output format as HTML.</p>
-<p>Once you’ve opened a new document be sure to save it by clicking <if>File &gt; Save As…</if>. You should name this file <code>important_info</code> (if you are on a Mac and can see the file <a class="glossary">extension<span class="def"></span></a>, name it <code>important_info.Rmd</code>). This file will automatically be saved in your project folder (i.e., your working directory) so you should now see this file appear in your file viewer pane.</p>
+<p>Once you’ve opened a new document be sure to save it by clicking <if>File &gt; Save As…</if>. You should name this file <code>important_info</code> (if you are on a Mac and can see the file <a href="https://psyteachr.github.io/glossary/e#extension" target="_blank" class="glossary" title="The end part of a file name that tells you what type of file it is (e.g., .R or .Rmd).">extension</a>, name it <code>important_info.Rmd</code>). This file will automatically be saved in your project folder (i.e., your working directory) so you should now see this file appear in your file viewer pane.</p>
 <p>When you first open a new R Markdown document you will see a bunch of welcome text that looks like this:</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-markdown-default" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="images/reports/markdown-default.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;2.2: New R Markdown text</figcaption><p></p>
-</figure>
+<div id="fig-markdown-default" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-markdown-default-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/reports/markdown-default.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-markdown-default-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.2: New R Markdown text
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -609,22 +622,25 @@ Naming practice
 <p>Your Markdown document should now look something like this:</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-new-chunk" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="images/reports/new-chunk.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;2.3: New R chunk</figcaption><p></p>
-</figure>
+<div id="fig-new-chunk" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-new-chunk-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/reports/new-chunk.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-new-chunk-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.3: New R chunk
+</figcaption></figure>
 </div>
 </div>
 </div>
 </section><section id="sec-code-chunks" class="level3" data-number="2.3.2"><h3 data-number="2.3.2" class="anchored" data-anchor-id="sec-code-chunks">
 <span class="header-section-number">2.3.2</span> Code chunks</h3>
 <p>What you have created is a subtitle and a <strong>code chunk</strong>. In R Markdown, anything written in a grey code chunk is assumed to be code, and anything written in the white space (between the code chunks) is regarded as normal text (the actual colours will depend on which theme you have applied, but we will refer to the default white and grey). This makes it easy to combine both text and code in one document.</p>
-<div class="callout-caution callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Code chunk errors
 </div>
 </div>
@@ -632,29 +648,29 @@ Code chunk errors
 <p>When you create a new code chunk you should notice that the grey box starts and ends with three back ticks ```. One common mistake is to accidentally delete these back ticks. Remember, code chunks and text entry are different colours - if the colour of certain parts of your Markdown doesn’t look right, check that you haven’t deleted the back ticks.</p>
 </div>
 </div>
-<p>In your code chunk, write the code you created in <a href="01-intro.html#sec-objects"><span>Section&nbsp;1.4</span></a>.</p>
+<p>In your code chunk, write the code you created in <a href="01-intro.html#sec-objects" class="quarto-xref"><span>Section 1.4</span></a>.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>important_info.Rmd</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>name <span class="ot">&lt;-</span> <span class="st">"Olivia"</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a>age <span class="ot">&lt;-</span> <span class="dv">24</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a>today <span class="ot">&lt;-</span> <span class="fu">Sys.Date</span>()</span>
-<span id="cb6-4"><a href="#cb6-4"></a>christmas <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="st">"2024-12-25"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>name <span class="ot">&lt;-</span> <span class="st">"Olivia"</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>age <span class="ot">&lt;-</span> <span class="dv">24</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>today <span class="ot">&lt;-</span> <span class="fu">Sys.Date</span>()</span>
+<span id="cb2-4"><a href="#cb2-4"></a>christmas <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="st">"2024-12-25"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Console vs Scripts
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>In <a href="01-intro.html"><span>Chapter&nbsp;1</span></a>, we asked you to type code into the console. Now, we want you to put code into code chunks in R Markdown files to make the code reproducible. This way, you can re-run your code any time the data changes to update the report, and you or others can inspect the code to identify and fix any errors.</p>
+<p>In <a href="01-intro.html" class="quarto-xref"><span>Chapter 1</span></a>, we asked you to type code into the console. Now, we want you to put code into code chunks in R Markdown files to make the code reproducible. This way, you can re-run your code any time the data changes to update the report, and you or others can inspect the code to identify and fix any errors.</p>
 <p>However, there will still be times that you need to put code in the console instead of in a script, such as when you install a new package. In this book, code chunks will be labelled with whether you should run them in the console or add the code to a script.</p>
 </div>
 </div>
@@ -665,20 +681,26 @@ Console vs Scripts
 <p>Alternatively, you can press the green “play” button at the top-right of the code chunk and this will run <strong>all</strong> lines of code in that chunk.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-run-all" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="images/reports/run-all.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;2.4: Click the green arrow to run all the code in the chunk.</figcaption><p></p>
-</figure>
+<div id="fig-run-all" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-run-all-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/reports/run-all.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-run-all-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.4: Click the green arrow to run all the code in the chunk.
+</figcaption></figure>
 </div>
 </div>
 </div>
 <p>Even better is to learn some of the keyboard short cuts for R Studio. To run a single line of code, make sure that the cursor is in the line of code you want to run (it can be anywhere) and press <pc>Ctrl+Enter</pc> or <mac>Cmd+Enter</mac>. If you want to run all of the code in the code chunk, press <pc>Ctrl+Shift+Enter</pc> or <mac>Cmd+Shift+Enter</mac>. Learn these short cuts; they will make your life easier!</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-run3" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="images/reports/run3.gif" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;2.5: Use the keyboard shortcut to run only highlighted code, or run one line at a time by placing the cursor on a line without highlighting anything.</figcaption><p></p>
-</figure>
+<div id="fig-run3" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-run3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/reports/run3.gif" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-run3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.5: Use the keyboard shortcut to run only highlighted code, or run one line at a time by placing the cursor on a line without highlighting anything.
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -688,15 +710,15 @@ Console vs Scripts
 <p>We keep talking about using R Markdown for reproducible reports, but it’s easier to show you than tell you why this is so powerful and to give you an insight into how this course will (hopefully!) change the way you work with data forever!</p>
 <p>One important feature of R Markdown is that you can combine text and code to insert values into your writing using <strong>inline coding</strong>. If you’ve ever had to copy and paste a value or text from one file to another, you’ll know how easy it can be to make mistakes. Inline code avoids this. Again it’s easier to show you what inline code does rather than to explain it so let’s have a go.</p>
 <p>First, copy and paste this text to the <strong>white space underneath</strong> your code chunk. If you used a different variable name than <code>christmas</code>, you should update this with the name of the object you created, but otherwise don’t change anything else.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1"></a>My name is <span class="in">`r name`</span> and I am <span class="in">`r age`</span> years old. </span>
-<span id="cb7-2"><a href="#cb7-2"></a>It is <span class="in">`r christmas - today`</span> days until Christmas, </span>
-<span id="cb7-3"><a href="#cb7-3"></a>which is my favourite holiday.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="callout-caution callout callout-style-default callout-captioned">
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1"></a>My name is <span class="in">`r name`</span> and I am <span class="in">`r age`</span> years old. </span>
+<span id="cb3-2"><a href="#cb3-2"></a>It is <span class="in">`r christmas - today`</span> days until Christmas, </span>
+<span id="cb3-3"><a href="#cb3-3"></a>which is my favourite holiday.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Displaying Plots
 </div>
 </div>
@@ -706,18 +728,18 @@ Displaying Plots
 </div>
 </section><section id="sec-rmd-knit" class="level3" data-number="2.3.5"><h3 data-number="2.3.5" class="anchored" data-anchor-id="sec-rmd-knit">
 <span class="header-section-number">2.3.5</span> Knitting your file</h3>
-<p>Now we are going to <a class="glossary">knit<span class="def"></span></a>, or compile, the file into a document type of our choosing. In this case we’ll create a default html file, but you will learn how to create other files like Word and PDF throughout this course. To knit your file, click <if>Knit &gt; Knit to HMTL</if>.</p>
+<p>Now we are going to <a href="https://psyteachr.github.io/glossary/k#knit" target="_blank" class="glossary" title="To create an HTML, PDF, or Word document from an R Markdown (Rmd) document">knit</a>, or compile, the file into a document type of our choosing. In this case we’ll create a default html file, but you will learn how to create other files like Word and PDF throughout this course. To knit your file, click <if>Knit &gt; Knit to HMTL</if>.</p>
 <p>R Markdown will create and display a new HTML document, but it will also automatically save this file in your working directory.</p>
 <p>As if by magic, that slightly odd bit of text you copied and pasted now appears as a normal sentence with the values pulled in from the objects you created.</p>
 <blockquote class="blockquote">
-<p>My name is Olivia and I am 24 years old. It is 100 days until Christmas, which is my favourite holiday.</p>
+<p>My name is Olivia and I am 24 years old. It is 87 days until Christmas, which is my favourite holiday.</p>
 </blockquote>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Knitting with Code
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -730,10 +752,10 @@ Knitting with Code
 <div class="code-with-filename-file">
 <pre><strong>Run in the console</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>rmarkdown<span class="sc">::</span><span class="fu">render</span>(<span class="st">"important_info.Rmd"</span>)</span>
-<span id="cb8-2"><a href="#cb8-2"></a></span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="co"># alternatively, you can use this, but may get a warning</span></span>
-<span id="cb8-4"><a href="#cb8-4"></a>knitr<span class="sc">::</span><span class="fu">knit2html</span>(<span class="st">"important_info.Rmd"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>rmarkdown<span class="sc">::</span><span class="fu">render</span>(<span class="st">"important_info.Rmd"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2"></a></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="co"># alternatively, you can use this, but may get a warning</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>knitr<span class="sc">::</span><span class="fu">knit2html</span>(<span class="st">"important_info.Rmd"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -746,8 +768,8 @@ Knitting with Code
 <div class="cell" data-layout-align="center" data-verbatim="r setup, include=FALSE">
 <div class="verbatim">
 <pre class="sourceCode r code-with-copy"><code class="sourceCode R">```{r setup, include=FALSE}</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">echo =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb9-2"><a href="#cb9-2"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">echo =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre class="sourceCode r code-with-copy"><code class="sourceCode R">```</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 </div>
@@ -763,15 +785,15 @@ Knitting with Code
 <div class="code-with-filename-file">
 <pre><strong>hockey_data.Rmd</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>hockey_online <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://healthteachr.github.io/data/nhldraft.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>hockey_online <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://healthteachr.github.io/data/nhldraft.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Could not find function
 </div>
 </div>
@@ -793,24 +815,24 @@ could not find function “read_csv”</p>
 <li>Run <code>View(hockey_online)</code> in the console</li>
 </ul></section><section id="local-data-files" class="level3" data-number="2.4.2"><h3 data-number="2.4.2" class="anchored" data-anchor-id="local-data-files">
 <span class="header-section-number">2.4.2</span> Local data files</h3>
-<p>More commonly, you will be working from data files that are stored locally on your computer. But where should you put all of your files? You usually want to have all your scripts and data files for a single project inside one folder on your computer, that project’s <a class="glossary">working directory<span class="def"></span></a>, and we have already set up the main directory <code class="path">02-reports</code>for this chapter.</p>
+<p>More commonly, you will be working from data files that are stored locally on your computer. But where should you put all of your files? You usually want to have all your scripts and data files for a single project inside one folder on your computer, that project’s <a href="https://psyteachr.github.io/glossary/w#working-directory" target="_blank" class="glossary" title="The filepath where R is currently reading and writing files.">working directory</a>, and we have already set up the main directory <code class="path">02-reports</code>for this chapter.</p>
 <p>You can organise files in subdirectories inside this main project directory, such as putting all raw data files in a subdirectory called <code class="path">data</code> and saving any image files to a subdirectory called <code class="path">images</code>. Using subdirectories helps avoid one single folder becoming too cluttered, which is important if you’re working on big projects.</p>
 <p>In your <code class="path">02-reports</code> directory, create a new folder named <code class="path">data</code>, <a href="https://healthteachr.github.io/data/nhldraft.csv" download="">download a copy of the hockey data file</a>, and save it in this new subdirectory.</p>
 <p>To load in data from a local file, again we can use the <code>read_csv()</code> function, but this time rather than specifying a url, give it the subdirectory and file name.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
-<pre><strong>baseball_data.Rmd</strong></pre>
+<pre><strong>hockey_data.Rmd</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>hockey_local <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/nhldraft.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>hockey_local <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/nhldraft.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tab-autocomplete file names
 </div>
 </div>
@@ -825,12 +847,12 @@ Tab-autocomplete file names
 </li>
 <li>Precision is important, if you have a typo in the file name it won’t be able to find your file; remember that R is case sensitive - <code>Hockey_Data.csv</code> is a completely different file to <code>hockey_data.csv</code> as far as R is concerned.</li>
 </ul>
-<div class="callout-note try callout callout-style-default callout-captioned">
+<div class="try callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 View hockey_local
 </div>
 </div>
@@ -840,34 +862,34 @@ View hockey_local
 </div>
 </section></section><section id="writing-a-report" class="level2" data-number="2.5"><h2 data-number="2.5" class="anchored" data-anchor-id="writing-a-report">
 <span class="header-section-number">2.5</span> Writing a report</h2>
-<p>We’re going to write a basic report for this baseball dataset using R Markdown to show you some of the features. We’ll be expanding on almost every bit of what we’re about to show you throughout this course; the most important outcome is that you start to get comfortable with how R Markdown works and what you can use it to do.</p>
+<p>We’re going to write a basic report for this hockey dataset using R Markdown to show you some of the features. We’ll be expanding on almost every bit of what we’re about to show you throughout this course; the most important outcome is that you start to get comfortable with how R Markdown works and what you can use it to do.</p>
 <section id="data-analysis" class="level3" data-number="2.5.1"><h3 data-number="2.5.1" class="anchored" data-anchor-id="data-analysis">
 <span class="header-section-number">2.5.1</span> Data analysis</h3>
-<p>For this report we’re just going to present some simple NHL Draft stats for three player positions: Left Wing (LW), Centre (C), and Defenseman (D). We’ll come back to how to write this kind of code yourself in <a href="05-summary.html"><span>Chapter&nbsp;5</span></a>. For now, see if you can follow the logic of what the code is doing via the code comments.</p>
+<p>For this report we’re just going to present some simple NHL Draft stats for three player positions: Left Wing (LW), Centre (C), and Defenseman (D). We’ll come back to how to write this kind of code yourself in <a href="05-summary.html" class="quarto-xref"><span>Chapter 5</span></a>. For now, see if you can follow the logic of what the code is doing via the code comments.</p>
 <p>Create a new code chunk, then copy, paste and run the following code and then view <code>hockey_counts</code> by clicking on the object in the environment pane. Note that it doesn’t really matter whether you use <code>hockey_local</code> or <code>hockey_online</code> in the first line as they’re identical.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>hockey_data.Rmd</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># keep only the data from the first overall picks where Left Wings, Centres, or Defensemen were drafted</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a>hockey_pos <span class="ot">&lt;-</span> <span class="fu">filter</span>(hockey_online, overall_pick<span class="sc">==</span><span class="dv">1</span> <span class="sc">&amp;</span></span>
-<span id="cb12-3"><a href="#cb12-3"></a>         position <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"LW"</span>, <span class="st">"C"</span>, <span class="st">"D"</span>))</span>
-<span id="cb12-4"><a href="#cb12-4"></a></span>
-<span id="cb12-5"><a href="#cb12-5"></a><span class="co"># replace the abbreviated player position values with the full player position values</span></span>
-<span id="cb12-6"><a href="#cb12-6"></a>hockey_pos<span class="sc">$</span>position[hockey_pos<span class="sc">$</span>position <span class="sc">==</span> <span class="st">'LW'</span>] <span class="ot">&lt;-</span> <span class="st">'Left Wing'</span></span>
-<span id="cb12-7"><a href="#cb12-7"></a>hockey_pos<span class="sc">$</span>position[hockey_pos<span class="sc">$</span>position <span class="sc">==</span> <span class="st">'C'</span>] <span class="ot">&lt;-</span> <span class="st">'Centre'</span></span>
-<span id="cb12-8"><a href="#cb12-8"></a>hockey_pos<span class="sc">$</span>position[hockey_pos<span class="sc">$</span>position <span class="sc">==</span> <span class="st">'D'</span>] <span class="ot">&lt;-</span> <span class="st">'Defenseman'</span></span>
-<span id="cb12-9"><a href="#cb12-9"></a></span>
-<span id="cb12-10"><a href="#cb12-10"></a><span class="co"># count the number of overall first picks for each position</span></span>
-<span id="cb12-11"><a href="#cb12-11"></a>hockey_counts <span class="ot">&lt;-</span><span class="fu">count</span>(hockey_pos, position)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># keep only the data from the first overall picks where Left Wings, Centres, or Defensemen were drafted</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>hockey_pos <span class="ot">&lt;-</span> <span class="fu">filter</span>(hockey_online, overall_pick<span class="sc">==</span><span class="dv">1</span> <span class="sc">&amp;</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a>         position <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"LW"</span>, <span class="st">"C"</span>, <span class="st">"D"</span>))</span>
+<span id="cb8-4"><a href="#cb8-4"></a></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="co"># replace the abbreviated player position values with the full player position values</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a>hockey_pos<span class="sc">$</span>position[hockey_pos<span class="sc">$</span>position <span class="sc">==</span> <span class="st">'LW'</span>] <span class="ot">&lt;-</span> <span class="st">'Left Wing'</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a>hockey_pos<span class="sc">$</span>position[hockey_pos<span class="sc">$</span>position <span class="sc">==</span> <span class="st">'C'</span>] <span class="ot">&lt;-</span> <span class="st">'Centre'</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a>hockey_pos<span class="sc">$</span>position[hockey_pos<span class="sc">$</span>position <span class="sc">==</span> <span class="st">'D'</span>] <span class="ot">&lt;-</span> <span class="st">'Defenseman'</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a></span>
+<span id="cb8-10"><a href="#cb8-10"></a><span class="co"># count the number of overall first picks for each position</span></span>
+<span id="cb8-11"><a href="#cb8-11"></a>hockey_counts <span class="ot">&lt;-</span><span class="fu">count</span>(hockey_pos, position)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <p>Because each row of the dataset is a player, this code gives us a nice and easy way of seeing how many players were drafted first (between 1963 and 2022) for each type of position; it just counts the number of rows in each group.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="kable-table">
-<table class="table table-sm table-striped">
+<table class="caption-top table table-sm table-striped small">
 <thead><tr class="header">
 <th style="text-align: left;">position</th>
 <th style="text-align: right;">n</th>
@@ -890,28 +912,31 @@ View hockey_local
 </div>
 </div>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Just putting an object by itself on a line “prints” it. <a href="#sec-rmd-tables"><span>Section&nbsp;2.5.5</span></a> will show you how to print the table in different formats for your report.</p>
+<p>Just putting an object by itself on a line “prints” it. <a href="#sec-rmd-tables" class="quarto-xref"><span>Section 2.5.5</span></a> will show you how to print the table in different formats for your report.</p>
 </div>
 </div>
 </section><section id="sec-markdown" class="level3" data-number="2.5.2"><h3 data-number="2.5.2" class="anchored" data-anchor-id="sec-markdown">
 <span class="header-section-number">2.5.2</span> Text formatting</h3>
-<p>You can use the visual <a class="glossary">markdown<span class="def"></span></a> editor if you have RStudio version 1.4 or higher. This will be a button at the top of the source pane and the menu options should be very familiar to anyone who has worked with software like Microsoft Word.</p>
+<p>You can use the visual <a href="https://psyteachr.github.io/glossary/m#markdown" target="_blank" class="glossary" title="A way to specify formatting, such as headers, paragraphs, lists, bolding, and links.">markdown</a> editor if you have RStudio version 1.4 or higher. This will be a button at the top of the source pane and the menu options should be very familiar to anyone who has worked with software like Microsoft Word.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-visual-editor" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="images/reports/visual-editor.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;2.6: The visual editor.</figcaption><p></p>
-</figure>
+<div id="fig-visual-editor" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-visual-editor-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/reports/visual-editor.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-visual-editor-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.6: The visual editor.
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -925,21 +950,21 @@ Note
 <li>Download the <a href="https://www.rstudio.org/links/r_markdown_cheat_sheet">R Markdown Cheat Sheet</a> to learn more.</li>
 </ul>
 <p>Copy and paste the below text into the white space below the code chunk that loads in the data. Save the file and then click knit to view the results. It will look a bit messy for now as it contains the code and messages from loading the data but don’t worry, we’ll get rid of that soon.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">## Hockey report</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a></span>
-<span id="cb13-3"><a href="#cb13-3"></a>This report summarises the first overall pick data for different types of player position between 1963 and 2022. This data is from <span class="co">[</span><span class="ot">Kaggle</span><span class="co">](https://www.kaggle.com/datasets/mattop/nhl-draft-hockey-player-data-1963-2022)</span>.</span>
-<span id="cb13-4"><a href="#cb13-4"></a></span>
-<span id="cb13-5"><a href="#cb13-5"></a><span class="fu">### First overall picks by position</span></span>
-<span id="cb13-6"><a href="#cb13-6"></a></span>
-<span id="cb13-7"><a href="#cb13-7"></a>The *total* number of **Left Wings** drafted first was <span class="in">`r hockey_counts$n[3]`</span></span>
-<span id="cb13-8"><a href="#cb13-8"></a></span>
-<span id="cb13-9"><a href="#cb13-9"></a>The *total* number of **Centres** drafted first was <span class="in">`r hockey_counts$n[1]`</span>.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">## Hockey report</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a></span>
+<span id="cb9-3"><a href="#cb9-3"></a>This report summarises the first overall pick data for different types of player position between 1963 and 2022. This data is from <span class="co">[</span><span class="ot">Kaggle</span><span class="co">](https://www.kaggle.com/datasets/mattop/nhl-draft-hockey-player-data-1963-2022)</span>.</span>
+<span id="cb9-4"><a href="#cb9-4"></a></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="fu">### First overall picks by position</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a></span>
+<span id="cb9-7"><a href="#cb9-7"></a>The *total* number of **Left Wings** drafted first was <span class="in">`r hockey_counts$n[3]`</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a></span>
+<span id="cb9-9"><a href="#cb9-9"></a>The *total* number of **Centres** drafted first was <span class="in">`r hockey_counts$n[1]`</span>.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Warning
 </div>
 </div>
@@ -949,15 +974,14 @@ Warning
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="images/reports/visual-editor-example.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">The example code above shown in the visual editor.</figcaption><p></p>
-</figure>
+<figcaption>The example code above shown in the visual editor.</figcaption></figure>
 </div>
 </div>
 </div>
 <p>If you try to add the hashes, asterisks and backticks to the visual editor, you will get frustrated as they disappear. If you succeed, your code in the regular editor will look mangled like this:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb14-1"><a href="#cb14-1"></a><span class="sc">\#\#\#</span> First overall picks by position</span>
-<span id="cb14-2"><a href="#cb14-2"></a></span>
-<span id="cb14-3"><a href="#cb14-3"></a>The <span class="sc">\*</span>total<span class="sc">\*</span> number of <span class="sc">\*\*</span>Left Wings<span class="sc">\*\*</span> drafted first was <span class="sc">\`</span>r hockey_counts\$n<span class="sc">\[</span>3]<span class="sc">\`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1"></a><span class="sc">\#\#\#</span> First overall picks by position</span>
+<span id="cb10-2"><a href="#cb10-2"></a></span>
+<span id="cb10-3"><a href="#cb10-3"></a>The <span class="sc">\*</span>total<span class="sc">\*</span> number of <span class="sc">\*\*</span>Left Wings<span class="sc">\*\*</span> drafted first was <span class="sc">\`</span>r hockey_counts\$n<span class="sc">\[</span>3]<span class="sc">\`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <p>Try and match up the inline code with what is in the <code>hockey_counts</code> table. Of note:</p>
@@ -966,12 +990,12 @@ Warning
 <li>Square brackets with a number e.g., <code>[3]</code> indicate a particular observation</li>
 <li>So <code>hockey_counts$n[3]</code> asks the inline code to display the third observation of the variable <code>n</code> in the dataset <code>hockey_online</code>.</li>
 </ul>
-<div class="callout-note try callout callout-style-default callout-captioned">
+<div class="try callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Further Practice
 </div>
 </div>
@@ -981,7 +1005,7 @@ Further Practice
 <button>
 Solution
 </button>
-<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb15-1"><a href="#cb15-1"></a>The *total* number of **Defensemen** drafted first was <span class="in">`r hockey_counts$n[2]`</span>.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href="#cb11-1"></a>The *total* number of **Defensemen** drafted first was <span class="in">`r hockey_counts$n[2]`</span>.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -989,37 +1013,37 @@ Solution
 <span class="header-section-number">2.5.3</span> Code comments</h3>
 <p>In the above code we’ve used code <strong>comments</strong> and it’s important to highlight how useful these are. You can add comments inside R chunks with the hash symbol (<code>#</code>). R will ignore characters from the hash to the end of the line.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># important numbers</span></span>
-<span id="cb16-2"><a href="#cb16-2"></a></span>
-<span id="cb16-3"><a href="#cb16-3"></a>n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(hockey_online) <span class="co"># the total number of players (number of rows)</span></span>
-<span id="cb16-4"><a href="#cb16-4"></a>first <span class="ot">&lt;-</span> <span class="fu">min</span>(hockey_online<span class="sc">$</span>year) <span class="co"># the first (minimum) year</span></span>
-<span id="cb16-5"><a href="#cb16-5"></a>last <span class="ot">&lt;-</span> <span class="fu">max</span>(hockey_online<span class="sc">$</span>year) <span class="co"># the last (maximum) year</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># important numbers</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a></span>
+<span id="cb12-3"><a href="#cb12-3"></a>n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(hockey_online) <span class="co"># the total number of players (number of rows)</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a>first <span class="ot">&lt;-</span> <span class="fu">min</span>(hockey_online<span class="sc">$</span>year) <span class="co"># the first (minimum) year</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a>last <span class="ot">&lt;-</span> <span class="fu">max</span>(hockey_online<span class="sc">$</span>year) <span class="co"># the last (maximum) year</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>It’s usually good practice to start a code chunk with a comment that explains what you’re doing there, especially if the code is not explained in the text of the report.</p>
 <p>If you name your objects clearly, you often don’t need to add clarifying comments. For example, if I’d named the three objects above <code>total_number_of_players</code>, <code>first_year</code> and <code>last_year</code>, I would omit the comments. It’s a bit of an art to comment your code well, but try to add comments as you’re working through this book - it will help consolidate your learning and when future you comes to review your code, you’ll thank past you for being so clear.</p>
 </section><section id="sec-rmd-images" class="level3" data-number="2.5.4"><h3 data-number="2.5.4" class="anchored" data-anchor-id="sec-rmd-images">
 <span class="header-section-number">2.5.4</span> Images</h3>
 <p>As the saying goes, a picture paints a thousand words and sometimes you will want to communicate your data using visualisations.</p>
-<p>Create a code chunk to display a graph of the data in your document after the text we’ve written so far. We’ll use some code that you’ll learn more about in <a href="03-viz.html"><span>Chapter&nbsp;3</span></a> to make a simple bar chart that represents the hockey data – focus on trying to follow how bits of the code map on to the plot that is created.</p>
+<p>Create a code chunk to display a graph of the data in your document after the text we’ve written so far. We’ll use some code that you’ll learn more about in <a href="03-viz.html" class="quarto-xref"><span>Chapter 3</span></a> to make a simple bar chart that represents the hockey data – focus on trying to follow how bits of the code map on to the plot that is created.</p>
 <p>Copy and paste the below code. Run the code in your Markdown to see the plot it creates and then knit the file to see how it is displayed in your document.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>hockey_data.Rmd</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> hockey_counts, </span>
-<span id="cb17-2"><a href="#cb17-2"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> position, </span>
-<span id="cb17-3"><a href="#cb17-3"></a>                     <span class="at">y =</span> n, </span>
-<span id="cb17-4"><a href="#cb17-4"></a>                     <span class="at">fill =</span> position)) <span class="sc">+</span></span>
-<span id="cb17-5"><a href="#cb17-5"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb17-6"><a href="#cb17-6"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Player position"</span>,</span>
-<span id="cb17-7"><a href="#cb17-7"></a>       <span class="at">y =</span> <span class="st">"Number of overall first picks"</span>,</span>
-<span id="cb17-8"><a href="#cb17-8"></a>       <span class="at">title =</span> <span class="st">"Overall first picks in the NHL Draft by player position"</span>,</span>
-<span id="cb17-9"><a href="#cb17-9"></a>       <span class="at">subtitle =</span> <span class="st">"1963 - 2022"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> hockey_counts, </span>
+<span id="cb13-2"><a href="#cb13-2"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> position, </span>
+<span id="cb13-3"><a href="#cb13-3"></a>                     <span class="at">y =</span> n, </span>
+<span id="cb13-4"><a href="#cb13-4"></a>                     <span class="at">fill =</span> position)) <span class="sc">+</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Player position"</span>,</span>
+<span id="cb13-7"><a href="#cb13-7"></a>       <span class="at">y =</span> <span class="st">"Number of overall first picks"</span>,</span>
+<span id="cb13-8"><a href="#cb13-8"></a>       <span class="at">title =</span> <span class="st">"Overall first picks in the NHL Draft by player position"</span>,</span>
+<span id="cb13-9"><a href="#cb13-9"></a>       <span class="at">subtitle =</span> <span class="st">"1963 - 2022"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="02-reports_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="02-reports_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1031,15 +1055,15 @@ Solution
 <div class="code-with-filename-file">
 <pre><strong>hockey_data.Rmd</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Wayne_Gretzky_New_York_Rangers_%28252547547%29.jpg/440px-Wayne_Gretzky_New_York_Rangers_%28252547547%29.jpg"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Wayne_Gretzky_New_York_Rangers_%28252547547%29.jpg/440px-Wayne_Gretzky_New_York_Rangers_%28252547547%29.jpg"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Image Licenses
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -1050,7 +1074,7 @@ Image Licenses
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="images/reports/google-images.png" class="img-fluid figure-img" style="width:100.0%" alt="Screenshot of Google Images interface with Usage Rights selections open."></p>
+<figure class="figure"><p><img src="images/reports/google-images.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%" alt="Screenshot of Google Images interface with Usage Rights selections open."></p>
 </figure>
 </div>
 </div>
@@ -1072,7 +1096,7 @@ Image Licenses
 <div class="code-with-filename-file">
 <pre><strong>hockey_data.Rmd</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>hockey_counts</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>hockey_counts</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <pre><code>## # A tibble: 3 × 2
@@ -1090,12 +1114,12 @@ Image Licenses
 <div class="code-with-filename-file">
 <pre><strong>hockey_data.Rmd</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">library</span>(kableExtra) <span class="co"># for table display</span></span>
-<span id="cb21-2"><a href="#cb21-2"></a></span>
-<span id="cb21-3"><a href="#cb21-3"></a><span class="fu">kable</span>(hockey_counts) <span class="co"># apply the kable function</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">library</span>(kableExtra) <span class="co"># for table display</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a></span>
+<span id="cb17-3"><a href="#cb17-3"></a><span class="fu">kable</span>(hockey_counts) <span class="co"># apply the kable function</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output-display">
-<table class="table table-sm table-striped">
+<table class="caption-top table table-sm table-striped small">
 <thead><tr class="header">
 <th style="text-align: left;">position</th>
 <th style="text-align: right;">n</th>
@@ -1125,59 +1149,58 @@ Image Licenses
 <div class="code-with-filename-file">
 <pre><strong>hockey_data.Rmd</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>k <span class="ot">&lt;-</span> <span class="fu">kable</span>(hockey_counts, </span>
-<span id="cb22-2"><a href="#cb22-2"></a>      <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Player position"</span>, <span class="st">"First overall picks"</span>),</span>
-<span id="cb22-3"><a href="#cb22-3"></a>      <span class="at">caption =</span> <span class="st">"Overall first picks in the NHL Draft by player position."</span>, </span>
-<span id="cb22-4"><a href="#cb22-4"></a>      <span class="at">align =</span> <span class="st">"c"</span>)</span>
-<span id="cb22-5"><a href="#cb22-5"></a>k_style <span class="ot">&lt;-</span> <span class="fu">kable_classic</span>(k, <span class="at">full_width =</span> <span class="cn">FALSE</span>) </span>
-<span id="cb22-6"><a href="#cb22-6"></a>k_highlighted <span class="ot">&lt;-</span> <span class="fu">row_spec</span>(k_style, <span class="at">row =</span> <span class="dv">0</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>, <span class="at">color =</span> <span class="st">"red"</span>) </span>
-<span id="cb22-7"><a href="#cb22-7"></a></span>
-<span id="cb22-8"><a href="#cb22-8"></a>k_highlighted</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>k <span class="ot">&lt;-</span> <span class="fu">kable</span>(hockey_counts, </span>
+<span id="cb18-2"><a href="#cb18-2"></a>      <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Player position"</span>, <span class="st">"First overall picks"</span>),</span>
+<span id="cb18-3"><a href="#cb18-3"></a>      <span class="at">caption =</span> <span class="st">"Overall first picks in the NHL Draft by player position."</span>, </span>
+<span id="cb18-4"><a href="#cb18-4"></a>      <span class="at">align =</span> <span class="st">"c"</span>)</span>
+<span id="cb18-5"><a href="#cb18-5"></a>k_style <span class="ot">&lt;-</span> <span class="fu">kable_classic</span>(k, <span class="at">full_width =</span> <span class="cn">FALSE</span>) </span>
+<span id="cb18-6"><a href="#cb18-6"></a>k_highlighted <span class="ot">&lt;-</span> <span class="fu">row_spec</span>(k_style, <span class="at">row =</span> <span class="dv">0</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>, <span class="at">color =</span> <span class="st">"red"</span>) </span>
+<span id="cb18-7"><a href="#cb18-7"></a></span>
+<span id="cb18-8"><a href="#cb18-8"></a>k_highlighted</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output-display">
-
-<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<table class="lightable-classic caption-top table table-sm table-striped small" data-quarto-postprocess="true">
 <caption>Overall first picks in the NHL Draft by player position.</caption>
- <thead><tr>
-<th style="text-align:center;font-weight: bold;color: red !important;"> Player position </th>
-   <th style="text-align:center;font-weight: bold;color: red !important;"> First overall picks </th>
-  </tr></thead>
+<thead><tr class="header">
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: bold; color: red !important;">Player position</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: bold; color: red !important;">First overall picks</th>
+</tr></thead>
 <tbody>
-<tr>
-<td style="text-align:center;"> Centre </td>
-   <td style="text-align:center;"> 24 </td>
-  </tr>
-<tr>
-<td style="text-align:center;"> Defenseman </td>
-   <td style="text-align:center;"> 15 </td>
-  </tr>
-<tr>
-<td style="text-align:center;"> Left Wing </td>
-   <td style="text-align:center;"> 8 </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: center;">Centre</td>
+<td style="text-align: center;">24</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Defenseman</td>
+<td style="text-align: center;">15</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Left Wing</td>
+<td style="text-align: center;">8</td>
+</tr>
 </tbody>
 </table>
 </div>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Caption placement
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The appearance and placement of the table caption depends on the type of document you are creating. Your captions may look different to those in this book because you are creating a single-page <code>html_document</code>, while this book uses the <code>html</code> style from <a href="https://quarto.org/">quarto</a>, which is a newer alternative to R Markdown. You’ll learn more about other document output types in <a href="10-custom.html#sec-custom-reports"><span>Section&nbsp;10.2</span></a>.</p>
+<p>The appearance and placement of the table caption depends on the type of document you are creating. Your captions may look different to those in this book because you are creating a single-page <code>html_document</code>, while this book uses the <code>html</code> style from <a href="https://quarto.org/">quarto</a>, which is a newer alternative to R Markdown. You’ll learn more about other document output types in <a href="10-custom.html#sec-custom-reports" class="quarto-xref"><span>Section 10.2</span></a>.</p>
 </div>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Advanced table customisation
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -1197,7 +1220,7 @@ Advanced table customisation
 <div class="cell" data-layout-align="center" data-verbatim="r setup, include=FALSE">
 <div class="verbatim">
 <pre class="sourceCode r code-with-copy"><code class="sourceCode R">```{r setup, include=FALSE}</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">echo =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">echo =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre class="sourceCode r code-with-copy"><code class="sourceCode R">```</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 </div>
@@ -1207,31 +1230,31 @@ Advanced table customisation
 <div class="code-with-filename-file">
 <pre><strong>Run in the console</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="co"># list option default values</span></span>
-<span id="cb24-2"><a href="#cb24-2"></a><span class="fu">str</span>(knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">get</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="co"># list option default values</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="fu">str</span>(knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">get</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <p>Replace the code in your setup chunk with the below code and then try changing each option from <code>FALSE</code> to <code>TRUE</code> and changing the numeric values then knit the file again to see the difference it makes.</p>
 <div class="cell" data-layout-align="center" data-verbatim="r setup, include=FALSE" data-filename="hockey_data.Rmd">
 <div class="verbatim">
 <pre class="sourceCode r code-with-copy"><code class="sourceCode R">```{r setup, include=FALSE}</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(</span>
-<span id="cb25-2"><a href="#cb25-2"></a>  <span class="at">echo       =</span> <span class="cn">FALSE</span>, <span class="co"># whether to show code chunks</span></span>
-<span id="cb25-3"><a href="#cb25-3"></a>  <span class="at">message    =</span> <span class="cn">FALSE</span>, <span class="co"># whether to show messages from your code</span></span>
-<span id="cb25-4"><a href="#cb25-4"></a>  <span class="at">warning    =</span> <span class="cn">FALSE</span>, <span class="co"># whether to show warnings from your code</span></span>
-<span id="cb25-5"><a href="#cb25-5"></a>  <span class="at">fig.width  =</span> <span class="dv">8</span>,     <span class="co"># figure width in inches (at 96 dpi)</span></span>
-<span id="cb25-6"><a href="#cb25-6"></a>  <span class="at">fig.height =</span> <span class="dv">5</span>,     <span class="co"># figure height in inches (at 96 dpi)</span></span>
-<span id="cb25-7"><a href="#cb25-7"></a>  <span class="at">out.width =</span> <span class="st">"50%"</span>   <span class="co"># figures/images span 50% of the page width</span></span>
-<span id="cb25-8"><a href="#cb25-8"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(</span>
+<span id="cb21-2"><a href="#cb21-2"></a>  <span class="at">echo       =</span> <span class="cn">FALSE</span>, <span class="co"># whether to show code chunks</span></span>
+<span id="cb21-3"><a href="#cb21-3"></a>  <span class="at">message    =</span> <span class="cn">FALSE</span>, <span class="co"># whether to show messages from your code</span></span>
+<span id="cb21-4"><a href="#cb21-4"></a>  <span class="at">warning    =</span> <span class="cn">FALSE</span>, <span class="co"># whether to show warnings from your code</span></span>
+<span id="cb21-5"><a href="#cb21-5"></a>  <span class="at">fig.width  =</span> <span class="dv">8</span>,     <span class="co"># figure width in inches (at 96 dpi)</span></span>
+<span id="cb21-6"><a href="#cb21-6"></a>  <span class="at">fig.height =</span> <span class="dv">5</span>,     <span class="co"># figure height in inches (at 96 dpi)</span></span>
+<span id="cb21-7"><a href="#cb21-7"></a>  <span class="at">out.width =</span> <span class="st">"50%"</span>   <span class="co"># figures/images span 50% of the page width</span></span>
+<span id="cb21-8"><a href="#cb21-8"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre class="sourceCode r code-with-copy"><code class="sourceCode R">```</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 </div>
-<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Figure versus output dimensions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -1241,28 +1264,37 @@ Figure versus output dimensions
 <p>Note that <code>fig.width</code> and <code>fig.height</code> control the original size and aspect ratio of images generated by R, such as plots. This will affect the relative size of text and other elements in plots. It does not affect the size of existing images at all. However, <code>out.width</code> controls the <strong>display</strong> size of both existing images and figures generated by R. This is usually set as a percentage of the page width.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-full-100" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="02-reports_files/figure-html/fig-full-100-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;2.7: A plot with the default values of fig.width = 8, fig.height = 5, out.width = “100%”</figcaption><p></p>
-</figure>
+<div id="fig-full-100" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-full-100-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="02-reports_files/figure-html/fig-full-100-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-full-100-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.7: A plot with the default values of fig.width = 8, fig.height = 5, out.width = “100%”
+</figcaption></figure>
 </div>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-half-100" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="02-reports_files/figure-html/fig-half-100-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;2.8: The same plot with half the default width and height: fig.width = 4, fig.height = 2.5, out.width = “100%”</figcaption><p></p>
-</figure>
+<div id="fig-half-100" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-half-100-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="02-reports_files/figure-html/fig-half-100-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-half-100-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.8: The same plot with half the default width and height: fig.width = 4, fig.height = 2.5, out.width = “100%”
+</figcaption></figure>
 </div>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-half-50" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="02-reports_files/figure-html/fig-half-50-1.png" class="img-fluid figure-img" style="width:50.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;2.9: The same plot as above at half the output width: fig.width = 4, fig.height = 2.5, out.width = “50%”</figcaption><p></p>
-</figure>
+<div id="fig-half-50" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-half-50-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="02-reports_files/figure-html/fig-half-50-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-half-50-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.9: The same plot as above at half the output width: fig.width = 4, fig.height = 2.5, out.width = “50%”
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -1276,15 +1308,15 @@ Figure versus output dimensions
 <div class="cell" data-layout-align="center" data-verbatim="r, echo = TRUE" data-filename="hockey_data.Rmd">
 <div class="verbatim">
 <pre class="sourceCode r code-with-copy"><code class="sourceCode R">```{r, echo = TRUE}</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> hockey_counts, </span>
-<span id="cb26-2"><a href="#cb26-2"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> position, </span>
-<span id="cb26-3"><a href="#cb26-3"></a>                     <span class="at">y =</span> n, </span>
-<span id="cb26-4"><a href="#cb26-4"></a>                     <span class="at">fill =</span> position)) <span class="sc">+</span></span>
-<span id="cb26-5"><a href="#cb26-5"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb26-6"><a href="#cb26-6"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Player position"</span>,</span>
-<span id="cb26-7"><a href="#cb26-7"></a>       <span class="at">y =</span> <span class="st">"Number of overall first picks"</span>,</span>
-<span id="cb26-8"><a href="#cb26-8"></a>       <span class="at">title =</span> <span class="st">"Overall first picks in the NHL Draft by player position"</span>,</span>
-<span id="cb26-9"><a href="#cb26-9"></a>       <span class="at">subtitle =</span> <span class="st">"1963 - 2022"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> hockey_counts, </span>
+<span id="cb22-2"><a href="#cb22-2"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> position, </span>
+<span id="cb22-3"><a href="#cb22-3"></a>                     <span class="at">y =</span> n, </span>
+<span id="cb22-4"><a href="#cb22-4"></a>                     <span class="at">fill =</span> position)) <span class="sc">+</span></span>
+<span id="cb22-5"><a href="#cb22-5"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb22-6"><a href="#cb22-6"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Player position"</span>,</span>
+<span id="cb22-7"><a href="#cb22-7"></a>       <span class="at">y =</span> <span class="st">"Number of overall first picks"</span>,</span>
+<span id="cb22-8"><a href="#cb22-8"></a>       <span class="at">title =</span> <span class="st">"Overall first picks in the NHL Draft by player position"</span>,</span>
+<span id="cb22-9"><a href="#cb22-9"></a>       <span class="at">subtitle =</span> <span class="st">"1963 - 2022"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre class="sourceCode r code-with-copy"><code class="sourceCode R">```</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 </div>
@@ -1292,32 +1324,32 @@ Figure versus output dimensions
 <div class="cell" data-layout-align="center" data-verbatim="r, out.width='25%'">
 <div class="verbatim">
 <pre class="sourceCode r code-with-copy"><code class="sourceCode R">```{r, out.width='25%'}</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Wayne_Gretzky_New_York_Rangers_%28252547547%29.jpg/440px-Wayne_Gretzky_New_York_Rangers_%28252547547%29.jpg"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Wayne_Gretzky_New_York_Rangers_%28252547547%29.jpg/440px-Wayne_Gretzky_New_York_Rangers_%28252547547%29.jpg"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre class="sourceCode r code-with-copy"><code class="sourceCode R">```</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 </div>
 <div class="cell" data-layout-align="center" data-verbatim="r, fig.width = 10, fig.height = 20" data-filename="hockey_data.Rmd">
 <div class="verbatim">
 <pre class="sourceCode r code-with-copy"><code class="sourceCode R">```{r, fig.width = 10, fig.height = 20}</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> hockey_counts, </span>
-<span id="cb28-2"><a href="#cb28-2"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> position, <span class="at">y =</span> n, <span class="at">fill =</span> position)) <span class="sc">+</span></span>
-<span id="cb28-3"><a href="#cb28-3"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb28-4"><a href="#cb28-4"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Player position"</span>,</span>
-<span id="cb28-5"><a href="#cb28-5"></a>       <span class="at">y =</span> <span class="st">"Number of overall first picks"</span>,</span>
-<span id="cb28-6"><a href="#cb28-6"></a>       <span class="at">title =</span> <span class="st">"Overall first picks in the NHL Draft by player position"</span>,</span>
-<span id="cb28-7"><a href="#cb28-7"></a>       <span class="at">subtitle =</span> <span class="st">"1963 - 2022"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> hockey_counts, </span>
+<span id="cb24-2"><a href="#cb24-2"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> position, <span class="at">y =</span> n, <span class="at">fill =</span> position)) <span class="sc">+</span></span>
+<span id="cb24-3"><a href="#cb24-3"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb24-4"><a href="#cb24-4"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Player position"</span>,</span>
+<span id="cb24-5"><a href="#cb24-5"></a>       <span class="at">y =</span> <span class="st">"Number of overall first picks"</span>,</span>
+<span id="cb24-6"><a href="#cb24-6"></a>       <span class="at">title =</span> <span class="st">"Overall first picks in the NHL Draft by player position"</span>,</span>
+<span id="cb24-7"><a href="#cb24-7"></a>       <span class="at">subtitle =</span> <span class="st">"1963 - 2022"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre class="sourceCode r code-with-copy"><code class="sourceCode R">```</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 </div>
 </section><section id="loading-packages" class="level3" data-number="2.6.3"><h3 data-number="2.6.3" class="anchored" data-anchor-id="loading-packages">
 <span class="header-section-number">2.6.3</span> Loading packages</h3>
 <p>You should add the packages you need in your setup chunk using <code><a href="https://rdrr.io/r/base/library.html">library()</a></code>. Often when you are working on a script, you will realize that you need to load another add-on package. Don’t bury the call to <code><a href="https://rdrr.io/r/base/library.html">library(package_I_need)</a></code> way down in the script. Put it in the setup chunk so the user has an overview of what packages are needed.</p>
-<div class="callout-note try callout callout-style-default callout-captioned">
+<div class="try callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Move library calls to the setup chunk
 </div>
 </div>
@@ -1327,7 +1359,7 @@ Move library calls to the setup chunk
 </div>
 </section><section id="sec-yaml" class="level3" data-number="2.6.4"><h3 data-number="2.6.4" class="anchored" data-anchor-id="sec-yaml">
 <span class="header-section-number">2.6.4</span> YAML header</h3>
-<p>Finally, the <a class="glossary">YAML<span class="def"></span></a> header is the bit at the very top of your Markdown document. You can set several options here as well.</p>
+<p>Finally, the <a href="https://psyteachr.github.io/glossary/y#yaml" target="_blank" class="glossary" title="A structured format for information">YAML</a> header is the bit at the very top of your Markdown document. You can set several options here as well.</p>
 <pre><code>---
 title: "Hockey Data Report"
 author: "Your name"
@@ -1344,12 +1376,12 @@ output:
     toc_depth: 3
     number_sections: false
 ---</code></pre>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Try
 </div>
 </div>
@@ -1357,23 +1389,26 @@ Try
 <p>Try changing the values from <code>false</code> to <code>true</code> to see what the options do.</p>
 </div>
 </div>
-<p>The <code>df_print: paged</code> option prints data frames using <code><a href="https://pkgs.rstudio.com/rmarkdown/reference/paged_table.html">rmarkdown::paged_table()</a></code> automatically. You can use <code>df_print: kable</code> to default to the simple kable style, but you will need the code from <a href="#sec-rmd-tables"><span>Section&nbsp;2.5.5</span></a> for more complex tables with kableExtra.</p>
+<p>The <code>df_print: paged</code> option prints data frames using <code><a href="https://pkgs.rstudio.com/rmarkdown/reference/paged_table.html">rmarkdown::paged_table()</a></code> automatically. You can use <code>df_print: kable</code> to default to the simple kable style, but you will need the code from <a href="#sec-rmd-tables" class="quarto-xref"><span>Section 2.5.5</span></a> for more complex tables with kableExtra.</p>
 <p>The built-in bootswatch themes are: default, cerulean, cosmo, darkly, flatly, journal, lumen, paper, readable, sandstone, simplex, spacelab, united, and yeti. You can <a href="https://bootswatch.com/4/">view and download more themes</a>. Try changing the theme to see which one you like best.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-bootswatch" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="images/reports/bootswatch.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;2.10: Light themes in versions 3 and 4.</figcaption><p></p>
-</figure>
+<div id="fig-bootswatch" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-bootswatch-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/reports/bootswatch.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bootswatch-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.10: Light themes in versions 3 and 4.
+</figcaption></figure>
 </div>
 </div>
 </div>
-<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 YAML formatting
 </div>
 </div>
@@ -1398,12 +1433,12 @@ output:
     toc_depth: 3
 ---</code></pre>
 <p>This will use the markdown header structure to create the table of contents. <code>toc_depth: 3</code> means that the table of contents will only display headers up to level 3 (i.e., those that start with three hashes: <code>###</code>). Add <code>{-}</code> after the header title to remove it from the table of contents (e.g., <code>### Overview {-}</code>).</p>
-<div class="callout-caution callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Malformated ToC
 </div>
 </div>
@@ -1415,8 +1450,8 @@ Malformated ToC
 <span class="header-section-number">2.6.6</span> Formats</h3>
 <p>So far we’ve just knitted to html. To generate PDF reports, you need to install <pkg>tinytex</pkg><span class="citation" data-cites="R-tinytex">(<a href="11-refs.html#ref-R-tinytex" role="doc-biblioref">Xie, 2021</a>)</span> and run the following code in the console (do <strong>not</strong> add this to your Rmd file):</p>
 <div class="cell" data-layout-align="center" data-filname="Run in the console">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">install.packages</span>(<span class="st">"tinytex"</span>)</span>
-<span id="cb32-2"><a href="#cb32-2"></a>tinytex<span class="sc">::</span><span class="fu">install_tinytex</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">install.packages</span>(<span class="st">"tinytex"</span>)</span>
+<span id="cb28-2"><a href="#cb28-2"></a>tinytex<span class="sc">::</span><span class="fu">install_tinytex</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Once you’ve done this, update your YAML heading to add a <code>pdf_document</code> section and knit a PDF document. The options for PDFs are more limited than for HTML documents, so if you just replace <code>html_document</code> with <code>pdf_document</code>, you may need to remove some options, such as <code>toc_float</code> if you get an error that looks like “Functions that produce HTML output found in document targeting PDF output.”</p>
 <pre><code>---
@@ -1438,12 +1473,12 @@ output:
   word_document:
     toc: TRUE
 ---</code></pre>
-<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Knitting errors
 </div>
 </div>
@@ -1461,10 +1496,10 @@ Knitting errors
 <p>Below are some additional exercises that will let you apply what you have learned in this chapter. We would suggest taking a break before you do these - it might feel slightly more effortful, but spreading out your practice will help you learn more in the long run.</p>
 <section id="sec-exercises-reports-project" class="level3" data-number="2.7.1"><h3 data-number="2.7.1" class="anchored" data-anchor-id="sec-exercises-reports-project">
 <span class="header-section-number">2.7.1</span> New project</h3>
-<p>Create a new project called “demo_report” (<a href="#sec-projects"><span>Section&nbsp;2.2</span></a>).</p>
+<p>Create a new project called “demo_report” (<a href="#sec-projects" class="quarto-xref"><span>Section 2.2</span></a>).</p>
 </section><section id="sec-exercises-reports-setup" class="level3" data-number="2.7.2"><h3 data-number="2.7.2" class="anchored" data-anchor-id="sec-exercises-reports-setup">
 <span class="header-section-number">2.7.2</span> New script</h3>
-<p>In the “demo_report” project, create a new Rmarkdown document called “job.Rmd” (<a href="#sec-rmarkdown"><span>Section&nbsp;2.3</span></a>). Edit the YAML header to output tables using kable and set a custom theme (<a href="#sec-yaml"><span>Section&nbsp;2.6.4</span></a>).</p>
+<p>In the “demo_report” project, create a new Rmarkdown document called “job.Rmd” (<a href="#sec-rmarkdown" class="quarto-xref"><span>Section 2.3</span></a>). Edit the YAML header to output tables using kable and set a custom theme (<a href="#sec-yaml" class="quarto-xref"><span>Section 2.6.4</span></a>).</p>
 <div class="webex-solution">
 <button>
 Solution
@@ -1473,7 +1508,7 @@ Solution
 </div>
 </section><section id="sec-exercises-reports-rmarkdown" class="level3" data-number="2.7.3"><h3 data-number="2.7.3" class="anchored" data-anchor-id="sec-exercises-reports-rmarkdown">
 <span class="header-section-number">2.7.3</span> R Markdown</h3>
-<p>Write a short paragraph describing your job or a job you might like to have in the future (<a href="#sec-markdown"><span>Section&nbsp;2.5.2</span></a>). Include a bullet-point list of links to websites that are useful for that job (<a href="#sec-markdown"><span>Section&nbsp;2.5.2</span></a>).</p>
+<p>Write a short paragraph describing your job or a job you might like to have in the future (<a href="#sec-markdown" class="quarto-xref"><span>Section 2.5.2</span></a>). Include a bullet-point list of links to websites that are useful for that job (<a href="#sec-markdown" class="quarto-xref"><span>Section 2.5.2</span></a>).</p>
 <div class="webex-solution">
 <button>
 Solution
@@ -1486,83 +1521,82 @@ and teaching computational skills.
 </div>
 </section><section id="sec-exercises-reports-tables" class="level3" data-number="2.7.4"><h3 data-number="2.7.4" class="anchored" data-anchor-id="sec-exercises-reports-tables">
 <span class="header-section-number">2.7.4</span> Tables</h3>
-<p>Use the following code to load a small table of tasks (<a href="#sec-code-chunks"><span>Section&nbsp;2.3.2</span></a>). Edit it to be relevant to your job (you can change the categories entirely if you want).</p>
+<p>Use the following code to load a small table of tasks (<a href="#sec-code-chunks" class="quarto-xref"><span>Section 2.3.2</span></a>). Edit it to be relevant to your job (you can change the categories entirely if you want).</p>
 <div class="cell" data-layout-align="center">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>job.Rmd</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>tasks <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tribble</span>(</span>
-<span id="cb36-2"><a href="#cb36-2"></a>  <span class="sc">~</span>task,                         <span class="sc">~</span>category,   <span class="sc">~</span>frequency,</span>
-<span id="cb36-3"><a href="#cb36-3"></a>  <span class="st">"Debrief with players"</span>,        <span class="st">"coaching"</span>,  <span class="st">"daily"</span>,</span>
-<span id="cb36-4"><a href="#cb36-4"></a>  <span class="st">"Create a training schedule"</span>,  <span class="st">"coaching"</span>,  <span class="st">"weekly"</span>,</span>
-<span id="cb36-5"><a href="#cb36-5"></a>  <span class="st">"Make the performance report"</span>, <span class="st">"reporting"</span>, <span class="st">"monthly"</span></span>
-<span id="cb36-6"><a href="#cb36-6"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a>tasks <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tribble</span>(</span>
+<span id="cb32-2"><a href="#cb32-2"></a>  <span class="sc">~</span>task,                         <span class="sc">~</span>category,   <span class="sc">~</span>frequency,</span>
+<span id="cb32-3"><a href="#cb32-3"></a>  <span class="st">"Debrief with players"</span>,        <span class="st">"coaching"</span>,  <span class="st">"daily"</span>,</span>
+<span id="cb32-4"><a href="#cb32-4"></a>  <span class="st">"Create a training schedule"</span>,  <span class="st">"coaching"</span>,  <span class="st">"weekly"</span>,</span>
+<span id="cb32-5"><a href="#cb32-5"></a>  <span class="st">"Make the performance report"</span>, <span class="st">"reporting"</span>, <span class="st">"monthly"</span></span>
+<span id="cb32-6"><a href="#cb32-6"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-<p>Figure out how to make it so that code chunks don’t show in your knitted document (<a href="#sec-rmd-setup"><span>Section&nbsp;2.6.1</span></a>).</p>
+<p>Figure out how to make it so that code chunks don’t show in your knitted document (<a href="#sec-rmd-setup" class="quarto-xref"><span>Section 2.6.1</span></a>).</p>
 <div class="webex-solution">
 <button>
 Solution
 </button>
 <p>You can set the default to <code>echo = FALSE</code> in the setup chunk at the top of the script.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">echo =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">echo =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>To set visibility for a specific code chunk, put <code>echo = FALSE</code> inside the curly brackets.</p>
 <div class="cell" data-layout-align="center" data-verbatim="r, echo=FALSE">
 <div class="verbatim">
 <pre class="sourceCode r code-with-copy"><code class="sourceCode R">```{r, echo=FALSE}</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre>
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="co"># code to hide</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="co"># code to hide</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre class="sourceCode r code-with-copy"><code class="sourceCode R">```</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 </div>
 </div>
-<p>Display the table with purple italic column headers. Try different styles using <pkg>kableExtra</pkg> (<a href="#sec-rmd-tables"><span>Section&nbsp;2.5.5</span></a>).</p>
+<p>Display the table with purple italic column headers. Try different styles using <pkg>kableExtra</pkg> (<a href="#sec-rmd-tables" class="quarto-xref"><span>Section 2.5.5</span></a>).</p>
 <div class="cell" data-layout-align="center" data-webex.hide="true">
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Solution
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-25" class="callout-25-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a>k <span class="ot">&lt;-</span> kableExtra<span class="sc">::</span><span class="fu">kable</span>(tasks)</span>
-<span id="cb39-2"><a href="#cb39-2"></a>k_style <span class="ot">&lt;-</span> kableExtra<span class="sc">::</span><span class="fu">kable_minimal</span>(k)</span>
-<span id="cb39-3"><a href="#cb39-3"></a>k_highlight <span class="ot">&lt;-</span> kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(k_style,</span>
-<span id="cb39-4"><a href="#cb39-4"></a>                                    <span class="at">row =</span> <span class="dv">0</span>, </span>
-<span id="cb39-5"><a href="#cb39-5"></a>                                    <span class="at">italic =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb39-6"><a href="#cb39-6"></a>                                    <span class="at">color =</span> <span class="st">"purple"</span>)</span>
-<span id="cb39-7"><a href="#cb39-7"></a>k_highlight</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a>k <span class="ot">&lt;-</span> kableExtra<span class="sc">::</span><span class="fu">kable</span>(tasks)</span>
+<span id="cb35-2"><a href="#cb35-2"></a>k_style <span class="ot">&lt;-</span> kableExtra<span class="sc">::</span><span class="fu">kable_minimal</span>(k)</span>
+<span id="cb35-3"><a href="#cb35-3"></a>k_highlight <span class="ot">&lt;-</span> kableExtra<span class="sc">::</span><span class="fu">row_spec</span>(k_style,</span>
+<span id="cb35-4"><a href="#cb35-4"></a>                                    <span class="at">row =</span> <span class="dv">0</span>, </span>
+<span id="cb35-5"><a href="#cb35-5"></a>                                    <span class="at">italic =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb35-6"><a href="#cb35-6"></a>                                    <span class="at">color =</span> <span class="st">"purple"</span>)</span>
+<span id="cb35-7"><a href="#cb35-7"></a>k_highlight</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-
-<table class=" lightable-minimal" style="font-family: &quot;Trebuchet MS&quot;, verdana, sans-serif; margin-left: auto; margin-right: auto;">
-<thead><tr>
-<th style="text-align:left;font-style: italic;color: purple !important;"> task </th>
-   <th style="text-align:left;font-style: italic;color: purple !important;"> category </th>
-   <th style="text-align:left;font-style: italic;color: purple !important;"> frequency </th>
-  </tr></thead>
+<table class="lightable-minimal caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead><tr class="header">
+<th data-quarto-table-cell-role="th" style="text-align: left; font-style: italic; color: purple !important;">task</th>
+<th data-quarto-table-cell-role="th" style="text-align: left; font-style: italic; color: purple !important;">category</th>
+<th data-quarto-table-cell-role="th" style="text-align: left; font-style: italic; color: purple !important;">frequency</th>
+</tr></thead>
 <tbody>
-<tr>
-<td style="text-align:left;"> Debrief with players </td>
-   <td style="text-align:left;"> coaching </td>
-   <td style="text-align:left;"> daily </td>
-  </tr>
-<tr>
-<td style="text-align:left;"> Create a training schedule </td>
-   <td style="text-align:left;"> coaching </td>
-   <td style="text-align:left;"> weekly </td>
-  </tr>
-<tr>
-<td style="text-align:left;"> Make the performance report </td>
-   <td style="text-align:left;"> reporting </td>
-   <td style="text-align:left;"> monthly </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: left;">Debrief with players</td>
+<td style="text-align: left;">coaching</td>
+<td style="text-align: left;">daily</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Create a training schedule</td>
+<td style="text-align: left;">coaching</td>
+<td style="text-align: left;">weekly</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Make the performance report</td>
+<td style="text-align: left;">reporting</td>
+<td style="text-align: left;">monthly</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -1572,24 +1606,24 @@ Solution
 </div>
 </section><section id="sec-exercises-reports-images" class="level3" data-number="2.7.5"><h3 data-number="2.7.5" class="anchored" data-anchor-id="sec-exercises-reports-images">
 <span class="header-section-number">2.7.5</span> Images</h3>
-<p>Add an image of anything relevant (<a href="#sec-rmd-images"><span>Section&nbsp;2.5.4</span></a>).</p>
+<p>Add an image of anything relevant (<a href="#sec-rmd-images" class="quarto-xref"><span>Section 2.5.4</span></a>).</p>
 <div class="cell" data-layout-align="center" data-webex.hide="true">
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-26-contents" aria-controls="callout-26" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Solution
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-26" class="callout-26-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"https://healthteachr.github.io/images/logos/logo.png"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"https://healthteachr.github.io/images/logos/logo.png"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="https://healthteachr.github.io/images/logos/logo.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="https://healthteachr.github.io/images/logos/logo.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1608,29 +1642,76 @@ Alternative Solution
 </div>
 </section><section id="sec-exercises-reports-inline" class="level3" data-number="2.7.6"><h3 data-number="2.7.6" class="anchored" data-anchor-id="sec-exercises-reports-inline">
 <span class="header-section-number">2.7.6</span> Inline R</h3>
-<p>Use inline R to include the version of R you are using in the following sentence: “This report was created using R version 4.3.0 (2023-04-21 ucrt).” You can get the version using the object <code>R.version.string</code> (<a href="#sec-rmd-inline-r"><span>Section&nbsp;2.3.4</span></a>).</p>
+<p>Use inline R to include the version of R you are using in the following sentence: “This report was created using R version 4.4.1 (2024-06-14 ucrt).” You can get the version using the object <code>R.version.string</code> (<a href="#sec-rmd-inline-r" class="quarto-xref"><span>Section 2.3.4</span></a>).</p>
 <div class="webex-solution">
 <button>
 Solution
 </button>
-<p>This report was created using <code>R version 4.3.0 (2023-04-21 ucrt)</code>.</p>
+<p>This report was created using <code>R version 4.4.1 (2024-06-14 ucrt)</code>.</p>
 </div>
 </section><section id="sec-exercises-reports-knit" class="level3" data-number="2.7.7"><h3 data-number="2.7.7" class="anchored" data-anchor-id="sec-exercises-reports-knit">
 <span class="header-section-number">2.7.7</span> Knit</h3>
-<p>Knit this document to html (<a href="#sec-rmd-knit"><span>Section&nbsp;2.3.5</span></a>).</p>
+<p>Knit this document to html (<a href="#sec-rmd-knit" class="quarto-xref"><span>Section 2.3.5</span></a>).</p>
 <div class="webex-solution">
 <button>
 Solution
 </button>
 <p>Click on the knit button or run the following code in the console. (Do not put it the Rmd script!)</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a>rmarkdown<span class="sc">::</span><span class="fu">render</span>(<span class="st">"job.Rmd"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a>rmarkdown<span class="sc">::</span><span class="fu">render</span>(<span class="st">"job.Rmd"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </section></section><section id="sec-glossary-reports" class="level2" data-number="2.8"><h2 data-number="2.8" class="anchored" data-anchor-id="sec-glossary-reports">
 <span class="header-section-number">2.8</span> Glossary</h2>
 <div class="cell" data-layout-align="center">
-<p>|term |definition | |:—————–|:———-| |directory | | |extension | | |knit | | |markdown | | |project | | |R Markdown | | |script | | |working directory | | |YAML | |</p>
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 89%">
+</colgroup>
+<thead><tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: left;">definition</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">directory</td>
+<td style="text-align: left;">A collection or “folder” of files on a computer.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">extension</td>
+<td style="text-align: left;">The end part of a file name that tells you what type of file it is (e.g., .R or .Rmd).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">knit</td>
+<td style="text-align: left;">To create an HTML, PDF, or Word document from an R Markdown (Rmd) document</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">markdown</td>
+<td style="text-align: left;">A way to specify formatting, such as headers, paragraphs, lists, bolding, and links.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">project</td>
+<td style="text-align: left;">A way to organise related files in RStudio</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">R Markdown</td>
+<td style="text-align: left;">The R-specific version of markdown: a way to specify formatting, such as headers, paragraphs, lists, bolding, and links, as well as code blocks and inline code.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">script</td>
+<td style="text-align: left;">A plain-text file that contains commands in a coding language, such as R.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">working directory</td>
+<td style="text-align: left;">The filepath where R is currently reading and writing files.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">YAML</td>
+<td style="text-align: left;">A structured format for information</td>
+</tr>
+</tbody>
+</table>
 </div>
 </section><section id="sec-resources-reports" class="level2" data-number="2.9"><h2 data-number="2.9" class="anchored" data-anchor-id="sec-resources-reports">
 <span class="header-section-number">2.9</span> Further Resources</h2>
@@ -1655,8 +1736,8 @@ Solution
 </ul>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography" style="display: none">
-<div id="ref-R-tinytex" class="csl-entry" role="doc-biblioentry">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-R-tinytex" class="csl-entry" role="listitem">
 Xie, Y. (2021). <em>Tinytex: Helper functions to install and maintain TeX live, and compile LaTeX documents</em>. <a href="https://github.com/yihui/tinytex">https://github.com/yihui/tinytex</a>
 </div>
 </div>
@@ -1897,6 +1978,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
   }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
   const toggleColorMode = (alternate) => {
     // Switch the stylesheets
     const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
@@ -1963,13 +2071,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'default';
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -1996,9 +2106,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -2034,10 +2158,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -2047,8 +2188,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -2060,9 +2210,245 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -2102,29 +2488,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./01-intro.html" class="pagination-link">
+      <a href="./01-intro.html" class="pagination-link" aria-label="Intro to R and RStudio">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Intro to R and RStudio</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./03-viz.html" class="pagination-link">
+      <a href="./03-viz.html" class="pagination-link" aria-label="Data Visualisation">
         <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Visualisation</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
-    <div class="nav-footer-left">CC-BY 2022, healthTeachR</div>   
+    <div class="nav-footer-left">
+<p>CC-BY 2022, healthTeachR</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/healthteachr/healthteachr.github.io/edit/main/02-reports.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/healthteachr/healthteachr.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/healthteachr/healthteachr.github.io/blob/main/02-reports.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div>
     <div class="nav-footer-right">
-      <ul class="footer-items list-unstyled">
-<li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/healthteachr/ads-v2">
-      <i class="bi bi-github" role="img">
-</i> 
-    </a>
-  </li>  
-</ul>
-</div>
+      &nbsp;
+    </div>
   </div>
 </footer>
 
