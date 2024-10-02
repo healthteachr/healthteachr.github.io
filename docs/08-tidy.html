@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.475">
+<meta name="generator" content="quarto-1.4.555">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>Applied Data Skills - 8&nbsp; Data Tidying</title>
 <style>
@@ -14,11 +14,12 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -43,43 +44,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -108,7 +79,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -117,8 +94,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-6NP3MF25W3"></script><script type="text/javascript">
 
@@ -133,232 +112,266 @@ gtag('config', 'G-6NP3MF25W3', { 'anonymize_ip': true});
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data Tidying</span></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./08-tidy.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data Tidying</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Applied Data Skills</a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="https://github.com/healthteachr/ads-v2/" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
-    <a href="" title="Share" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-share"></i></a>
-    <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-0">
+    <a href="https://github.com/healthteachr/healthteachr.github.io" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
 <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=%7Curl%7C">
-            <i class="bi bi-bi-twitter pe-1"></i>
-          Twitter
-          </a>
-        </li>
-        <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=%7Curl%7C">
-            <i class="bi bi-bi-facebook pe-1"></i>
-          Facebook
-          </a>
-        </li>
-        <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=%7Curl%7C">
-            <i class="bi bi-bi-linkedin pe-1"></i>
-          LinkedIn
-          </a>
-        </li>
-    </ul>
-<a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=%7Curl%7C">
+              <i class="bi bi-bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=%7Curl%7C">
+              <i class="bi bi-bi-facebook pe-1"></i>
+            Facebook
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=%7Curl%7C">
+              <i class="bi bi-bi-linkedin pe-1"></i>
+            LinkedIn
+            </a>
+          </li>
+      </ul>
+</div>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">Overview</a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Intro to R and RStudio</span></a>
+  <a href="./01-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Intro to R and RStudio</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./02-reports.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Reports with R Markdown</span></a>
+  <a href="./02-reports.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Reports with R Markdown</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03-viz.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Visualisation</span></a>
+  <a href="./03-viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Visualisation</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04-data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Import</span></a>
+  <a href="./04-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Import</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05-summary.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data Summaries</span></a>
+  <a href="./05-summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data Summaries</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./06-formative.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Practice Report</span></a>
+  <a href="./06-formative.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Practice Report</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./07-joins.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Relations</span></a>
+  <a href="./07-joins.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Relations</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./08-tidy.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data Tidying</span></a>
+  <a href="./08-tidy.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data Tidying</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./09-wrangle.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Data Wrangling</span></a>
+  <a href="./09-wrangle.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Data Wrangling</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./10-custom.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Customising Visualisations &amp; Reports</span></a>
+  <a href="./10-custom.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Customising Visualisations &amp; Reports</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./11-refs.html" class="sidebar-item-text sidebar-link">References</a>
+  <a href="./11-refs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./12-license.html" class="sidebar-item-text sidebar-link">License/Citation</a>
+  <a href="./12-license.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">License/Citation</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Appendices</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./app-installing-r.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Installing R</span></a>
+  <a href="./app-installing-r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Installing R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./app-updating-r.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Updating R, RStudio, and packages</span></a>
+  <a href="./app-updating-r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Updating R, RStudio, and packages</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./app-symbols.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Symbols</span></a>
+  <a href="./app-symbols.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Symbols</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./app-conventions.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Conventions</span></a>
+  <a href="./app-conventions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Conventions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./app-teams.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Using Teams</span></a>
+  <a href="./app-teams.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Using Teams</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./app-debugging.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Debugging</span></a>
+  <a href="./app-debugging.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Debugging</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./app-datatypes.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">G</span>&nbsp; <span class="chapter-title">Data Types</span></a>
+  <a href="./app-datatypes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">G</span>&nbsp; <span class="chapter-title">Data Types</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./app-dates.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">H</span>&nbsp; <span class="chapter-title">Dates and Times</span></a>
+  <a href="./app-dates.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">H</span>&nbsp; <span class="chapter-title">Dates and Times</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./app-styling.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">I</span>&nbsp; <span class="chapter-title">Styling Plots</span></a>
+  <a href="./app-styling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">I</span>&nbsp; <span class="chapter-title">Styling Plots</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./app-spotify.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">J</span>&nbsp; <span class="chapter-title">Spotify Data</span></a>
+  <a href="./app-spotify.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">J</span>&nbsp; <span class="chapter-title">Spotify Data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./app-webpage.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">K</span>&nbsp; <span class="chapter-title">Webpages</span></a>
+  <a href="./app-webpage.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">K</span>&nbsp; <span class="chapter-title">Webpages</span></span></a>
   </div>
 </li>
       </ul>
 </li>
     </ul>
 </div>
-</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
 <li><a href="#sec-ilo-tidy" id="toc-sec-ilo-tidy" class="nav-link active" data-scroll-target="#sec-ilo-tidy">Intended Learning Outcomes</a></li>
   <li><a href="#sec-walkthrough-tidy" id="toc-sec-walkthrough-tidy" class="nav-link" data-scroll-target="#sec-walkthrough-tidy">Walkthrough video</a></li>
-  <li><a href="#sec-setup-tidy" id="toc-sec-setup-tidy" class="nav-link" data-scroll-target="#sec-setup-tidy"><span class="toc-section-number">8.1</span>  Set-up</a></li>
+  <li><a href="#sec-setup-tidy" id="toc-sec-setup-tidy" class="nav-link" data-scroll-target="#sec-setup-tidy"><span class="header-section-number">8.1</span> Set-up</a></li>
   <li>
-<a href="#data-structures" id="toc-data-structures" class="nav-link" data-scroll-target="#data-structures"><span class="toc-section-number">8.2</span>  Data Structures</a>
+<a href="#data-structures" id="toc-data-structures" class="nav-link" data-scroll-target="#data-structures"><span class="header-section-number">8.2</span> Data Structures</a>
   <ul class="collapse">
-<li><a href="#untidy-data" id="toc-untidy-data" class="nav-link" data-scroll-target="#untidy-data"><span class="toc-section-number">8.2.1</span>  Untidy data</a></li>
-  <li><a href="#tidy-data" id="toc-tidy-data" class="nav-link" data-scroll-target="#tidy-data"><span class="toc-section-number">8.2.2</span>  Tidy data</a></li>
+<li><a href="#untidy-data" id="toc-untidy-data" class="nav-link" data-scroll-target="#untidy-data"><span class="header-section-number">8.2.1</span> Untidy data</a></li>
+  <li><a href="#tidy-data" id="toc-tidy-data" class="nav-link" data-scroll-target="#tidy-data"><span class="header-section-number">8.2.2</span> Tidy data</a></li>
   </ul>
 </li>
   <li>
-<a href="#reshaping-data" id="toc-reshaping-data" class="nav-link" data-scroll-target="#reshaping-data"><span class="toc-section-number">8.3</span>  Reshaping Data</a>
+<a href="#reshaping-data" id="toc-reshaping-data" class="nav-link" data-scroll-target="#reshaping-data"><span class="header-section-number">8.3</span> Reshaping Data</a>
   <ul class="collapse">
-<li><a href="#wide-to-long" id="toc-wide-to-long" class="nav-link" data-scroll-target="#wide-to-long"><span class="toc-section-number">8.3.1</span>  Wide to long</a></li>
-  <li><a href="#long-to-wide" id="toc-long-to-wide" class="nav-link" data-scroll-target="#long-to-wide"><span class="toc-section-number">8.3.2</span>  Long to wide</a></li>
+<li><a href="#wide-to-long" id="toc-wide-to-long" class="nav-link" data-scroll-target="#wide-to-long"><span class="header-section-number">8.3.1</span> Wide to long</a></li>
+  <li><a href="#long-to-wide" id="toc-long-to-wide" class="nav-link" data-scroll-target="#long-to-wide"><span class="header-section-number">8.3.2</span> Long to wide</a></li>
   </ul>
 </li>
   <li>
-<a href="#sec-multistep" id="toc-sec-multistep" class="nav-link" data-scroll-target="#sec-multistep"><span class="toc-section-number">8.4</span>  Multi-step tidying</a>
+<a href="#sec-multistep" id="toc-sec-multistep" class="nav-link" data-scroll-target="#sec-multistep"><span class="header-section-number">8.4</span> Multi-step tidying</a>
   <ul class="collapse">
-<li><a href="#one-observation-per-row" id="toc-one-observation-per-row" class="nav-link" data-scroll-target="#one-observation-per-row"><span class="toc-section-number">8.4.1</span>  One observation per row</a></li>
-  <li><a href="#one-variable-per-column" id="toc-one-variable-per-column" class="nav-link" data-scroll-target="#one-variable-per-column"><span class="toc-section-number">8.4.2</span>  One variable per column</a></li>
-  <li><a href="#one-value-per-cell" id="toc-one-value-per-cell" class="nav-link" data-scroll-target="#one-value-per-cell"><span class="toc-section-number">8.4.3</span>  One value per cell</a></li>
-  <li><a href="#altering-data" id="toc-altering-data" class="nav-link" data-scroll-target="#altering-data"><span class="toc-section-number">8.4.4</span>  Altering data</a></li>
-  <li><a href="#fixing-data-types" id="toc-fixing-data-types" class="nav-link" data-scroll-target="#fixing-data-types"><span class="toc-section-number">8.4.5</span>  Fixing data types</a></li>
+<li><a href="#one-observation-per-row" id="toc-one-observation-per-row" class="nav-link" data-scroll-target="#one-observation-per-row"><span class="header-section-number">8.4.1</span> One observation per row</a></li>
+  <li><a href="#one-variable-per-column" id="toc-one-variable-per-column" class="nav-link" data-scroll-target="#one-variable-per-column"><span class="header-section-number">8.4.2</span> One variable per column</a></li>
+  <li><a href="#one-value-per-cell" id="toc-one-value-per-cell" class="nav-link" data-scroll-target="#one-value-per-cell"><span class="header-section-number">8.4.3</span> One value per cell</a></li>
+  <li><a href="#altering-data" id="toc-altering-data" class="nav-link" data-scroll-target="#altering-data"><span class="header-section-number">8.4.4</span> Altering data</a></li>
+  <li><a href="#fixing-data-types" id="toc-fixing-data-types" class="nav-link" data-scroll-target="#fixing-data-types"><span class="header-section-number">8.4.5</span> Fixing data types</a></li>
   </ul>
 </li>
-  <li><a href="#sec-pipes" id="toc-sec-pipes" class="nav-link" data-scroll-target="#sec-pipes"><span class="toc-section-number">8.5</span>  Pipes</a></li>
+  <li><a href="#sec-pipes" id="toc-sec-pipes" class="nav-link" data-scroll-target="#sec-pipes"><span class="header-section-number">8.5</span> Pipes</a></li>
   <li>
-<a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="toc-section-number">8.6</span>  Exercises</a>
+<a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">8.6</span> Exercises</a>
   <ul class="collapse">
-<li><a href="#survey-1" id="toc-survey-1" class="nav-link" data-scroll-target="#survey-1"><span class="toc-section-number">8.6.1</span>  Survey 1</a></li>
-  <li><a href="#tidy-1" id="toc-tidy-1" class="nav-link" data-scroll-target="#tidy-1"><span class="toc-section-number">8.6.2</span>  Tidy 1</a></li>
-  <li><a href="#survey-2" id="toc-survey-2" class="nav-link" data-scroll-target="#survey-2"><span class="toc-section-number">8.6.3</span>  Survey 2</a></li>
-  <li><a href="#analysis-and-visualisation" id="toc-analysis-and-visualisation" class="nav-link" data-scroll-target="#analysis-and-visualisation"><span class="toc-section-number">8.6.4</span>  Analysis and visualisation</a></li>
-  <li><a href="#your-data" id="toc-your-data" class="nav-link" data-scroll-target="#your-data"><span class="toc-section-number">8.6.5</span>  Your data</a></li>
+<li><a href="#survey-1" id="toc-survey-1" class="nav-link" data-scroll-target="#survey-1"><span class="header-section-number">8.6.1</span> Survey 1</a></li>
+  <li><a href="#tidy-1" id="toc-tidy-1" class="nav-link" data-scroll-target="#tidy-1"><span class="header-section-number">8.6.2</span> Tidy 1</a></li>
+  <li><a href="#survey-2" id="toc-survey-2" class="nav-link" data-scroll-target="#survey-2"><span class="header-section-number">8.6.3</span> Survey 2</a></li>
+  <li><a href="#analysis-and-visualisation" id="toc-analysis-and-visualisation" class="nav-link" data-scroll-target="#analysis-and-visualisation"><span class="header-section-number">8.6.4</span> Analysis and visualisation</a></li>
+  <li><a href="#your-data" id="toc-your-data" class="nav-link" data-scroll-target="#your-data"><span class="header-section-number">8.6.5</span> Your data</a></li>
   </ul>
 </li>
-  <li><a href="#sec-glossary-tidy" id="toc-sec-glossary-tidy" class="nav-link" data-scroll-target="#sec-glossary-tidy"><span class="toc-section-number">8.7</span>  Glossary</a></li>
-  <li><a href="#sec-resources-tidy" id="toc-sec-resources-tidy" class="nav-link" data-scroll-target="#sec-resources-tidy"><span class="toc-section-number">8.8</span>  Further resources</a></li>
-  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/healthteachr/ads-v2/edit/master/08-tidy.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/healthteachr/ads-v2/issues/new" class="toc-action">Report an issue</a></p><p><a href="https://github.com/healthteachr/ads-v2/blob/master/08-tidy.qmd" class="toc-action">View source</a></p></div></div></nav>
+  <li><a href="#sec-glossary-tidy" id="toc-sec-glossary-tidy" class="nav-link" data-scroll-target="#sec-glossary-tidy"><span class="header-section-number">8.7</span> Glossary</a></li>
+  <li><a href="#sec-resources-tidy" id="toc-sec-resources-tidy" class="nav-link" data-scroll-target="#sec-resources-tidy"><span class="header-section-number">8.8</span> Further resources</a></li>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/healthteachr/healthteachr.github.io/edit/main/08-tidy.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/healthteachr/healthteachr.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/healthteachr/healthteachr.github.io/blob/main/08-tidy.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title"><span id="sec-tidy" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data Tidying</span></span></h1>
+<h1 class="title"><span id="sec-tidy" class="quarto-section-identifier"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data Tidying</span></span></h1>
 </div>
 
 
@@ -370,6 +383,7 @@ gtag('config', 'G-6NP3MF25W3', { 'anonymize_ip': true});
     
   </div>
   
+
 
 </header><section id="sec-ilo-tidy" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="sec-ilo-tidy">Intended Learning Outcomes</h2>
 <ul>
@@ -385,12 +399,6 @@ gtag('config', 'G-6NP3MF25W3', { 'anonymize_ip': true});
 <div class="verbatim">
 <pre class="sourceCode r code-with-copy"><code class="sourceCode R">```{r setup, include=FALSE}</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># for data wrangling</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'tidyverse' was built under R version 4.3.3</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'ggplot2' was built under R version 4.3.3</code></pre>
-</div>
 <pre class="sourceCode r code-with-copy"><code class="sourceCode R">```</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 </div>
@@ -402,15 +410,15 @@ gtag('config', 'G-6NP3MF25W3', { 'anonymize_ip': true});
 <p>Data cleaning and tidying will likely be the most time consuming and difficult task you perform. Whilst you can create code recipes for analyses and visualisations, as Hadley Whickham puts it, <a href="https://vita.had.co.nz/papers/tidy-data.pdf">“every messy dataset is messy in its own way”</a>, which means that you will often have to solve new problems that are specific to the dataset. Additionally, moving between data structures that are intuitive to read by humans and those that are useful for a computer requires a conceptual shift that only comes with practice.</p>
 <p>This is all a verbose way of saying that what lies ahead in this chapter is unlikely to sink in on the first attempt and you will need to practice with different examples (preferably with data you know well) before you truly feel comfortable with it.</p>
 <p>First, some terminology.</p>
-<p>An <a class="glossary">observation<span class="def"></span></a> is all the information about a single “thing” in a single condition, such as at one point in time. These things can be participants, scores, injuries, feedback questionnaires, social media posts, or really anything. Observations should have a way to identify them, such as a unique ID or a unique combination of values like country and year.</p>
-<p>A <a class="glossary">variable<span class="def"></span></a> is one type of information about the observation. For example, if the observation is a lacrosse goal, the variables you might have about the goal are the goal ID, the goal scorer’s ID, the time of the goal, the location on the pitch where the play was made, and the goal scorer’s player position.</p>
-<p>A <a class="glossary">value<span class="def"></span></a> is the data for one variable for one observation. For example, the value of the time variable from the observation of a goal might be <code>19:38:54</code>.</p>
-<div class="callout-note try callout callout-style-default callout-captioned">
+<p>An <a href="https://psyteachr.github.io/glossary/o#observation" target="_blank" class="glossary" title="All of the data about a single trial or question.">observation</a> is all the information about a single “thing” in a single condition, such as at one point in time. These things can be participants, scores, injuries, feedback questionnaires, social media posts, or really anything. Observations should have a way to identify them, such as a unique ID or a unique combination of values like country and year.</p>
+<p>A <a href="https://psyteachr.github.io/glossary/v#variable" target="_blank" class="glossary" title="(coding): A word that identifies and stores the value of some data for later use; (stats): An attribute or characteristic of an observation that you can measure, count, or describe">variable</a> is one type of information about the observation. For example, if the observation is a lacrosse goal, the variables you might have about the goal are the goal ID, the goal scorer’s ID, the time of the goal, the location on the pitch where the play was made, and the goal scorer’s player position.</p>
+<p>A <a href="https://psyteachr.github.io/glossary/v#value" target="_blank" class="glossary" title="A single number or piece of data.">value</a> is the data for one variable for one observation. For example, the value of the time variable from the observation of a goal might be <code>19:38:54</code>.</p>
+<div class="try callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -419,7 +427,7 @@ Note
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="kable-table">
-<table class="table table-sm table-striped">
+<table class="caption-top table table-sm table-striped small">
 <thead><tr class="header">
 <th style="text-align: right;">coach_id</th>
 <th style="text-align: right;">year</th>
@@ -492,14 +500,16 @@ Explain these answers
 <span class="header-section-number">8.2.1</span> Untidy data</h3>
 <p>First, let’s have a look at an example of a messy, or untidy, dataset. Each row has all of the data relating to one coach.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>untidy_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/untidy_data.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>untidy_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/untidy_data.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-layout-align="center">
+<div id="tbl-untidy-data" class="cell quarto-float anchored" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-untidy-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;8.1: Untidy table
+</figcaption><div aria-describedby="tbl-untidy-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
 <div class="kable-table">
-<div id="tbl-untidy-data" class="anchored">
-<table class="table table-sm table-striped">
-<caption>Table&nbsp;8.1: Untidy table</caption>
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 8%">
 <col style="width: 15%">
@@ -569,13 +579,15 @@ Explain these answers
 </div>
 </div>
 </div>
+</figure>
+</div>
 </div>
 <ul>
 <li>The <code>itemsprice_{year}</code> columns contain two values (number of items and price per item)</li>
 <li>The <code>totalprice_{year}</code> columns contain the total amount spent by that coach that year, i.e., items * price.</li>
 <li>There is data for three different years in the dataset.</li>
 </ul>
-<p>Let’s say you wanted to calculate the total price per coach over the three years and the total number of items bought per coach. You can’t perform mathematical operations on the <code>itemsprice_{year}</code> columns because they are <a class="glossary">character<span class="def"></span></a> <a class="glossary">data types<span class="def"></span></a>.</p>
+<p>Let’s say you wanted to calculate the total price per coach over the three years and the total number of items bought per coach. You can’t perform mathematical operations on the <code>itemsprice_{year}</code> columns because they are <a href="https://psyteachr.github.io/glossary/c#character" target="_blank" class="glossary" title="A data type representing strings of text.">character</a> <a href="https://psyteachr.github.io/glossary/d#data-type" target="_blank" class="glossary" title="The kind of data represented by an object.">data types</a>.</p>
 <p>You would probably normally use Excel to</p>
 <ol type="1">
 <li>split <code>itemsprice_2018</code> column into <code>item_2018</code> and <code>price_2018</code> columns</li>
@@ -584,12 +596,12 @@ Explain these answers
 <li>add <code>item_2018 + item_2019 + item_2020</code> to get the total number of items bought per coach</li>
 <li>add <code>totalprice_2018 + totalprice_2019 + totalprice_2020</code> to get the total price per coach</li>
 </ol>
-<div class="callout-note try callout callout-style-default callout-captioned">
+<div class="try callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -599,7 +611,7 @@ Note
 </div>
 </section><section id="tidy-data" class="level3" data-number="8.2.2"><h3 data-number="8.2.2" class="anchored" data-anchor-id="tidy-data">
 <span class="header-section-number">8.2.2</span> Tidy data</h3>
-<p>There are three rules for “<a class="glossary">tidy data<span class="def"></span></a>, which is data in a format that makes it easier to combine data from different tables, create summary tables, and visualise your data.</p>
+<p>There are three rules for “<a href="https://psyteachr.github.io/glossary/t#tidy-data" target="_blank" class="glossary" title="A format for data that maps the meaning onto the structure.">tidy data</a>, which is data in a format that makes it easier to combine data from different tables, create summary tables, and visualise your data.</p>
 <ul>
 <li>Each observation must have its own row</li>
 <li>Each variable must have its own column</li>
@@ -607,14 +619,16 @@ Note
 </ul>
 <p>This is the tidy version:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>tidy_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/tidy_data.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>tidy_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/tidy_data.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-layout-align="center">
+<div id="tbl-tidy-data" class="cell quarto-float anchored" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-tidy-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;8.2: Tidy table
+</figcaption><div aria-describedby="tbl-tidy-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
 <div class="kable-table">
-<div id="tbl-tidy-data" class="anchored">
-<table class="table table-sm table-striped">
-<caption>Table&nbsp;8.2: Tidy table</caption>
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
 <thead><tr class="header">
 <th style="text-align: right;">coach_id</th>
 <th style="text-align: right;">year</th>
@@ -733,6 +747,8 @@ Note
 </div>
 </div>
 </div>
+</figure>
+</div>
 </div>
 <ul>
 <li>There are now five variables (columns) because there are five different types of information we have for each observation: the coach id, the year, number of items bought, price per item, and total price.</li>
@@ -746,15 +762,15 @@ Note
 <li>sum the <code>totalprice</code> column to get the total price per coach</li>
 </ol>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>tidy_data <span class="sc">%&gt;%</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">group_by</span>(coach_id) <span class="sc">%&gt;%</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb6-4"><a href="#cb6-4"></a>    <span class="at">total_items =</span> <span class="fu">sum</span>(items),</span>
-<span id="cb6-5"><a href="#cb6-5"></a>    <span class="at">total_price =</span> <span class="fu">sum</span>(totalprice)</span>
-<span id="cb6-6"><a href="#cb6-6"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>tidy_data <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">group_by</span>(coach_id) <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb4-4"><a href="#cb4-4"></a>    <span class="at">total_items =</span> <span class="fu">sum</span>(items),</span>
+<span id="cb4-5"><a href="#cb4-5"></a>    <span class="at">total_price =</span> <span class="fu">sum</span>(totalprice)</span>
+<span id="cb4-6"><a href="#cb4-6"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
-<table class="table table-sm table-striped">
+<table class="caption-top table table-sm table-striped small">
 <thead><tr class="header">
 <th style="text-align: right;">coach_id</th>
 <th style="text-align: right;">total_items</th>
@@ -791,12 +807,12 @@ Note
 </div>
 </div>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -807,24 +823,23 @@ Note
 <p>If you have control over how the data are recorded, it will make your life easier to record it in a tidy format from the start. However, we don’t always have control, so this class will also teach you how to convert untidy tables into tidy tables.</p>
 </section></section><section id="reshaping-data" class="level2" data-number="8.3"><h2 data-number="8.3" class="anchored" data-anchor-id="reshaping-data">
 <span class="header-section-number">8.3</span> Reshaping Data</h2>
-<p>Data tables can be in <a class="glossary">wide<span class="def"></span></a> format or <a class="glossary">long<span class="def"></span></a> format (or a mix of the two). Wide data are where all of the observations about one thing are in the same row, while long data are where each observation is on a separate row. You often need to convert between these formats to do different types of summaries or visualisation. You may have done something similar using pivot tables in Excel.</p>
+<p>Data tables can be in <a href="https://psyteachr.github.io/glossary/w#wide" target="_blank" class="glossary" title="A data format where all of the observations about one subject are in the same row">wide</a> format or <a href="https://psyteachr.github.io/glossary/l#long" target="_blank" class="glossary" title="A data format where each observation is on a separate row">long</a> format (or a mix of the two). Wide data are where all of the observations about one thing are in the same row, while long data are where each observation is on a separate row. You often need to convert between these formats to do different types of summaries or visualisation. You may have done something similar using pivot tables in Excel.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="images/tidy/excel_pivot_table.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Converting between wide and long formats using pivot tables in Excel.</figcaption><p></p>
-</figure>
+<figcaption>Converting between wide and long formats using pivot tables in Excel.</figcaption></figure>
 </div>
 </div>
 </div>
 <p>It can be easier to just consider one type of measurement at a time. <code>untidy_data</code> has two types of measurements, total price and price per item. Let’s look at just the <code>totalprice</code> data first.</p>
 <p>We can select just the columns we want using the <code><a href="https://dplyr.tidyverse.org/reference/select.html">dplyr::select()</a></code> function. This function’s first argument is the data table you want to select from, then each argument after that is either the name of a column in that table, or <code>new_name = old_name</code>. This is a useful function for changing the column names and order of columns, as well as selecting a subset of columns.</p>
-<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Warning
 </div>
 </div>
@@ -836,21 +851,23 @@ Warning
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># select just the coach ID and 3 total price columns</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a>wide_totalprice <span class="ot">&lt;-</span> <span class="fu">select</span>(</span>
-<span id="cb8-3"><a href="#cb8-3"></a>  <span class="at">.data =</span> untidy_data,</span>
-<span id="cb8-4"><a href="#cb8-4"></a>  coach_id, </span>
-<span id="cb8-5"><a href="#cb8-5"></a>  <span class="st">`</span><span class="at">2018</span><span class="st">`</span> <span class="ot">=</span> totalprice_2018,</span>
-<span id="cb8-6"><a href="#cb8-6"></a>  <span class="st">`</span><span class="at">2019</span><span class="st">`</span> <span class="ot">=</span> totalprice_2019,</span>
-<span id="cb8-7"><a href="#cb8-7"></a>  <span class="st">`</span><span class="at">2020</span><span class="st">`</span> <span class="ot">=</span> totalprice_2020</span>
-<span id="cb8-8"><a href="#cb8-8"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># select just the coach ID and 3 total price columns</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>wide_totalprice <span class="ot">&lt;-</span> <span class="fu">select</span>(</span>
+<span id="cb6-3"><a href="#cb6-3"></a>  <span class="at">.data =</span> untidy_data,</span>
+<span id="cb6-4"><a href="#cb6-4"></a>  coach_id, </span>
+<span id="cb6-5"><a href="#cb6-5"></a>  <span class="st">`</span><span class="at">2018</span><span class="st">`</span> <span class="ot">=</span> totalprice_2018,</span>
+<span id="cb6-6"><a href="#cb6-6"></a>  <span class="st">`</span><span class="at">2019</span><span class="st">`</span> <span class="ot">=</span> totalprice_2019,</span>
+<span id="cb6-7"><a href="#cb6-7"></a>  <span class="st">`</span><span class="at">2020</span><span class="st">`</span> <span class="ot">=</span> totalprice_2020</span>
+<span id="cb6-8"><a href="#cb6-8"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-layout-align="center">
+<div id="tbl-wide-data" class="cell quarto-float anchored" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-wide-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;8.3: Wide table
+</figcaption><div aria-describedby="tbl-wide-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
 <div class="kable-table">
-<div id="tbl-wide-data" class="anchored">
-<table class="table table-sm table-striped">
-<caption>Table&nbsp;8.3: Wide table</caption>
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
 <thead><tr class="header">
 <th style="text-align: right;">coach_id</th>
 <th style="text-align: right;">2018</th>
@@ -893,22 +910,26 @@ Warning
 </div>
 </div>
 </div>
+</figure>
+</div>
 </div>
 <p>This is in wide format, where each row is a coach, and represents the data from several years. This is a really intuitive way for humans to read a table, but it’s not as easy to process with code.</p>
 <p>The same data can be represented in a long format by creating a new column that specifies what <code>year</code> the observation is from and a new column that specifies the <code>totalprice</code> of that observation. This is easier to use to make summaries and plots.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>long_totalprice <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(</span>
-<span id="cb9-2"><a href="#cb9-2"></a>  <span class="at">data =</span> wide_totalprice,</span>
-<span id="cb9-3"><a href="#cb9-3"></a>  <span class="at">cols =</span> <span class="st">`</span><span class="at">2018</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2020</span><span class="st">`</span>,</span>
-<span id="cb9-4"><a href="#cb9-4"></a>  <span class="at">names_to =</span> <span class="st">"year"</span>,</span>
-<span id="cb9-5"><a href="#cb9-5"></a>  <span class="at">values_to =</span> <span class="st">"totalprice"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>long_totalprice <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(</span>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="at">data =</span> wide_totalprice,</span>
+<span id="cb7-3"><a href="#cb7-3"></a>  <span class="at">cols =</span> <span class="st">`</span><span class="at">2018</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2020</span><span class="st">`</span>,</span>
+<span id="cb7-4"><a href="#cb7-4"></a>  <span class="at">names_to =</span> <span class="st">"year"</span>,</span>
+<span id="cb7-5"><a href="#cb7-5"></a>  <span class="at">values_to =</span> <span class="st">"totalprice"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-layout-align="center">
+<div id="tbl-long-data" class="cell quarto-float anchored" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-long-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;8.4: Long table
+</figcaption><div aria-describedby="tbl-long-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
 <div class="kable-table">
-<div id="tbl-long-data" class="anchored">
-<table class="table table-sm table-striped">
-<caption>Table&nbsp;8.4: Long table</caption>
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
 <thead><tr class="header">
 <th style="text-align: right;">coach_id</th>
 <th style="text-align: left;">year</th>
@@ -995,31 +1016,32 @@ Warning
 </div>
 </div>
 </div>
-</div>
-<p>It also makes it very easy to use with <code>ggplot()</code>. Run the following plot, and consider how you’d make it with the wide version (it is likely impossible).</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">ggplot</span>(long_totalprice, <span class="fu">aes</span>(<span class="at">x =</span> totalprice, <span class="at">fill =</span> year)) <span class="sc">+</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">10</span>, <span class="at">color =</span> <span class="st">"black"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="08-tidy_files/figure-html/long-ggplot-demo-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Most plots are easier to make with data in a long format.</figcaption><p></p>
 </figure>
 </div>
 </div>
+<p>It also makes it very easy to use with <code>ggplot()</code>. Run the following plot, and consider how you’d make it with the wide version (it is likely impossible).</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">ggplot</span>(long_totalprice, <span class="fu">aes</span>(<span class="at">x =</span> totalprice, <span class="at">fill =</span> year)) <span class="sc">+</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">10</span>, <span class="at">color =</span> <span class="st">"black"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="08-tidy_files/figure-html/long-ggplot-demo-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption>Most plots are easier to make with data in a long format.</figcaption></figure>
 </div>
-<div class="callout-note try callout callout-style-default callout-captioned">
+</div>
+</div>
+<div class="try callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>Create a long version of the following table of how many million followers each athlete has on different social media platforms. You don’t need to use code, just sketch it in a notebook or make a table in a spreadsheet.</p>
-<table class="table">
+<table class="caption-top table">
 <thead><tr class="header">
 <th style="text-align: left;">athlete</th>
 <th style="text-align: left;">X</th>
@@ -1048,7 +1070,7 @@ Note
 Answer
 </button>
 <p>Your answer doesn’t need to have the same column headers or be in the same order.</p>
-<table class="table">
+<table class="caption-top table">
 <thead><tr class="header">
 <th style="text-align: left;">account</th>
 <th style="text-align: left;">social_media</th>
@@ -1090,12 +1112,12 @@ Answer
 </div>
 </div>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -1120,12 +1142,12 @@ Note
 </ul>
 <p>With the pivot functions, it can be easier to show than tell - run the below code and then compare <code>wide_totalprice</code> with <code>long_totalprice</code> and the pivot code and try to map each argument to what has changed.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>long_totalprice <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(</span>
-<span id="cb11-2"><a href="#cb11-2"></a>  <span class="at">data =</span> wide_totalprice, </span>
-<span id="cb11-3"><a href="#cb11-3"></a>  <span class="at">cols =</span> <span class="st">`</span><span class="at">2018</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2020</span><span class="st">`</span>, <span class="co"># columns to make long </span></span>
-<span id="cb11-4"><a href="#cb11-4"></a>  <span class="at">names_to =</span> <span class="st">"year"</span>, <span class="co"># new column name for headers</span></span>
-<span id="cb11-5"><a href="#cb11-5"></a>  <span class="at">values_to =</span> <span class="st">"totalprice"</span> <span class="co"># new column name for values</span></span>
-<span id="cb11-6"><a href="#cb11-6"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>long_totalprice <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(</span>
+<span id="cb9-2"><a href="#cb9-2"></a>  <span class="at">data =</span> wide_totalprice, </span>
+<span id="cb9-3"><a href="#cb9-3"></a>  <span class="at">cols =</span> <span class="st">`</span><span class="at">2018</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2020</span><span class="st">`</span>, <span class="co"># columns to make long </span></span>
+<span id="cb9-4"><a href="#cb9-4"></a>  <span class="at">names_to =</span> <span class="st">"year"</span>, <span class="co"># new column name for headers</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a>  <span class="at">values_to =</span> <span class="st">"totalprice"</span> <span class="co"># new column name for values</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="long-to-wide" class="level3" data-number="8.3.2"><h3 data-number="8.3.2" class="anchored" data-anchor-id="long-to-wide">
 <span class="header-section-number">8.3.2</span> Long to wide</h3>
@@ -1141,20 +1163,22 @@ Note
 <code>values_from</code>: the column that contains the values for the new columns</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>wide_by_coach <span class="ot">&lt;-</span> <span class="fu">pivot_wider</span>(</span>
-<span id="cb12-2"><a href="#cb12-2"></a>  <span class="at">data =</span> long_totalprice,</span>
-<span id="cb12-3"><a href="#cb12-3"></a>  <span class="at">id_cols =</span> year, <span class="co"># identifying column(s)</span></span>
-<span id="cb12-4"><a href="#cb12-4"></a>  <span class="at">names_from =</span> coach_id, <span class="co"># the new column names</span></span>
-<span id="cb12-5"><a href="#cb12-5"></a>  <span class="at">names_prefix =</span> <span class="st">"C_"</span>, <span class="co"># prefix for new column names</span></span>
-<span id="cb12-6"><a href="#cb12-6"></a>  <span class="at">values_from =</span> totalprice <span class="co"># the new column values</span></span>
-<span id="cb12-7"><a href="#cb12-7"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>wide_by_coach <span class="ot">&lt;-</span> <span class="fu">pivot_wider</span>(</span>
+<span id="cb10-2"><a href="#cb10-2"></a>  <span class="at">data =</span> long_totalprice,</span>
+<span id="cb10-3"><a href="#cb10-3"></a>  <span class="at">id_cols =</span> year, <span class="co"># identifying column(s)</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a>  <span class="at">names_from =</span> coach_id, <span class="co"># the new column names</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a>  <span class="at">names_prefix =</span> <span class="st">"C_"</span>, <span class="co"># prefix for new column names</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a>  <span class="at">values_from =</span> totalprice <span class="co"># the new column values</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-layout-align="center">
+<div id="tbl-wide-pivot" class="cell quarto-float anchored" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-wide-pivot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;8.5: Data made wider with pivot_wider()
+</figcaption><div aria-describedby="tbl-wide-pivot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
 <div class="kable-table">
-<div id="tbl-wide-pivot" class="anchored">
-<table class="table table-sm table-striped">
-<caption>Table&nbsp;8.5: Data made wider with pivot_wider()</caption>
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
 <thead><tr class="header">
 <th style="text-align: left;">year</th>
 <th style="text-align: right;">C_1</th>
@@ -1193,6 +1217,8 @@ Note
 </div>
 </div>
 </div>
+</figure>
+</div>
 </div>
 </section></section><section id="sec-multistep" class="level2" data-number="8.4"><h2 data-number="8.4" class="anchored" data-anchor-id="sec-multistep">
 <span class="header-section-number">8.4</span> Multi-step tidying</h2>
@@ -1201,7 +1227,7 @@ Note
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="kable-table">
-<table class="table table-sm table-striped">
+<table class="caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 8%">
 <col style="width: 15%">
@@ -1275,7 +1301,7 @@ Note
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="kable-table">
-<table class="table table-sm table-striped">
+<table class="caption-top table table-sm table-striped small">
 <thead><tr class="header">
 <th style="text-align: right;">coach_id</th>
 <th style="text-align: right;">year</th>
@@ -1400,25 +1426,27 @@ Note
 <p>Because we’ll be combining columns with numeric (<code>totalprice</code>) and character (<code>itemsprice</code>) data, we need to make the new <code>value</code> column a character data type using <code>values_transform</code>, since numbers can be represented as characters (like <code>"3.5"</code>), but character strings can’t be represented as numbers.</p>
 <p>The argument <code>names_sep</code> is set to the character string used to join names if <code>names_from</code> is more than one column. Alternatively, you can use the argument <code>names_pattern</code>, which can be more powerful but also a little harder to understand how to set up.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>longer_data <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(</span>
-<span id="cb13-2"><a href="#cb13-2"></a>  <span class="at">data =</span> untidy_data, </span>
-<span id="cb13-3"><a href="#cb13-3"></a>  <span class="at">cols =</span> itemsprice_2018<span class="sc">:</span>totalprice_2020, <span class="co"># columns to make long </span></span>
-<span id="cb13-4"><a href="#cb13-4"></a>  <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">"category"</span>, <span class="st">"year"</span>), <span class="co"># new column names for cols</span></span>
-<span id="cb13-5"><a href="#cb13-5"></a>  <span class="at">names_sep =</span> <span class="st">"_"</span>, <span class="co"># how to split cols into new columns</span></span>
-<span id="cb13-6"><a href="#cb13-6"></a>  <span class="co"># names_pattern = "(.*)_(.*)", # alternative to names_sep</span></span>
-<span id="cb13-7"><a href="#cb13-7"></a>  <span class="at">values_to =</span> <span class="st">"value"</span>, <span class="co"># new column name for values</span></span>
-<span id="cb13-8"><a href="#cb13-8"></a>  </span>
-<span id="cb13-9"><a href="#cb13-9"></a>  <span class="co"># make sure new columns are the right data type</span></span>
-<span id="cb13-10"><a href="#cb13-10"></a>  <span class="at">names_transform =</span> <span class="fu">list</span>(<span class="at">year =</span> as.integer),</span>
-<span id="cb13-11"><a href="#cb13-11"></a>  <span class="at">values_transform =</span> <span class="fu">list</span>(<span class="at">value =</span> as.character) </span>
-<span id="cb13-12"><a href="#cb13-12"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>longer_data <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(</span>
+<span id="cb11-2"><a href="#cb11-2"></a>  <span class="at">data =</span> untidy_data, </span>
+<span id="cb11-3"><a href="#cb11-3"></a>  <span class="at">cols =</span> itemsprice_2018<span class="sc">:</span>totalprice_2020, <span class="co"># columns to make long </span></span>
+<span id="cb11-4"><a href="#cb11-4"></a>  <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">"category"</span>, <span class="st">"year"</span>), <span class="co"># new column names for cols</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a>  <span class="at">names_sep =</span> <span class="st">"_"</span>, <span class="co"># how to split cols into new columns</span></span>
+<span id="cb11-6"><a href="#cb11-6"></a>  <span class="co"># names_pattern = "(.*)_(.*)", # alternative to names_sep</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a>  <span class="at">values_to =</span> <span class="st">"value"</span>, <span class="co"># new column name for values</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a>  </span>
+<span id="cb11-9"><a href="#cb11-9"></a>  <span class="co"># make sure new columns are the right data type</span></span>
+<span id="cb11-10"><a href="#cb11-10"></a>  <span class="at">names_transform =</span> <span class="fu">list</span>(<span class="at">year =</span> as.integer),</span>
+<span id="cb11-11"><a href="#cb11-11"></a>  <span class="at">values_transform =</span> <span class="fu">list</span>(<span class="at">value =</span> as.character) </span>
+<span id="cb11-12"><a href="#cb11-12"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-layout-align="center">
+<div id="tbl-wide-to-long" class="cell quarto-float anchored" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-wide-to-long-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;8.6: Untidy data converted from wide to long.
+</figcaption><div aria-describedby="tbl-wide-to-long-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
 <div class="kable-table">
-<div id="tbl-wide-to-long" class="anchored">
-<table class="table table-sm table-striped">
-<caption>Table&nbsp;8.6: Untidy data converted from wide to long.</caption>
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
 <thead><tr class="header">
 <th style="text-align: right;">coach_id</th>
 <th style="text-align: left;">category</th>
@@ -1611,24 +1639,28 @@ Note
 </div>
 </div>
 </div>
+</figure>
+</div>
 </div>
 </section><section id="one-variable-per-column" class="level3" data-number="8.4.2"><h3 data-number="8.4.2" class="anchored" data-anchor-id="one-variable-per-column">
 <span class="header-section-number">8.4.2</span> One variable per column</h3>
 <p>Now this table is long, but not tidy. The <code>value</code> column contains data from two different variables. We need to make the table wider, but not as wide as before. We want to keep the <code>year</code> column and make new columns called <code>itemsprice</code> and <code>totalprice</code> with the relevant coach’s <code>value</code> for that variable and year.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>wider_data <span class="ot">&lt;-</span> <span class="fu">pivot_wider</span>(</span>
-<span id="cb14-2"><a href="#cb14-2"></a>  <span class="at">data =</span> longer_data,</span>
-<span id="cb14-3"><a href="#cb14-3"></a>  <span class="at">id_cols =</span> <span class="fu">c</span>(coach_id, year),</span>
-<span id="cb14-4"><a href="#cb14-4"></a>  <span class="at">names_from =</span> category,</span>
-<span id="cb14-5"><a href="#cb14-5"></a>  <span class="at">values_from =</span> value</span>
-<span id="cb14-6"><a href="#cb14-6"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>wider_data <span class="ot">&lt;-</span> <span class="fu">pivot_wider</span>(</span>
+<span id="cb12-2"><a href="#cb12-2"></a>  <span class="at">data =</span> longer_data,</span>
+<span id="cb12-3"><a href="#cb12-3"></a>  <span class="at">id_cols =</span> <span class="fu">c</span>(coach_id, year),</span>
+<span id="cb12-4"><a href="#cb12-4"></a>  <span class="at">names_from =</span> category,</span>
+<span id="cb12-5"><a href="#cb12-5"></a>  <span class="at">values_from =</span> value</span>
+<span id="cb12-6"><a href="#cb12-6"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-layout-align="center">
+<div id="tbl-intermediate" class="cell quarto-float anchored" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-intermediate-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;8.7: Data converted from long to an intermediate shape.
+</figcaption><div aria-describedby="tbl-intermediate-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
 <div class="kable-table">
-<div id="tbl-intermediate" class="anchored">
-<table class="table table-sm table-striped">
-<caption>Table&nbsp;8.7: Data converted from long to an intermediate shape.</caption>
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
 <thead><tr class="header">
 <th style="text-align: right;">coach_id</th>
 <th style="text-align: right;">year</th>
@@ -1731,13 +1763,15 @@ Note
 </div>
 </div>
 </div>
+</figure>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -1749,21 +1783,23 @@ Note
 <span class="header-section-number">8.4.3</span> One value per cell</h3>
 <p>The cells in the <code>itemsprice</code> column actually contain two different values. We need to split it into two columns for the variables <code>items</code>, and <code>price_per_item</code>. You can split a column into parts with the function <code><a href="https://tidyr.tidyverse.org/reference/separate.html">tidyr::separate()</a></code>. There is a space between the number of items and the brackets, so we can split it along this space – if you are in charge of how data is stored, ensuring data is entered consistently makes this much easier.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>split_data <span class="ot">&lt;-</span> <span class="fu">separate</span>(</span>
-<span id="cb15-2"><a href="#cb15-2"></a>  <span class="at">data =</span> wider_data, </span>
-<span id="cb15-3"><a href="#cb15-3"></a>  <span class="at">col =</span> itemsprice, <span class="co"># the column to split</span></span>
-<span id="cb15-4"><a href="#cb15-4"></a>  <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"items"</span>, <span class="st">"price_per_item"</span>), <span class="co"># the new columns to create</span></span>
-<span id="cb15-5"><a href="#cb15-5"></a>  <span class="at">sep =</span> <span class="st">" "</span>, <span class="co"># split col by space</span></span>
-<span id="cb15-6"><a href="#cb15-6"></a>  <span class="at">remove =</span> <span class="cn">TRUE</span>, <span class="co"># whether to remove the old col</span></span>
-<span id="cb15-7"><a href="#cb15-7"></a>  <span class="at">convert =</span> <span class="cn">TRUE</span> <span class="co"># whether to fix the data type of the new columns</span></span>
-<span id="cb15-8"><a href="#cb15-8"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>split_data <span class="ot">&lt;-</span> <span class="fu">separate</span>(</span>
+<span id="cb13-2"><a href="#cb13-2"></a>  <span class="at">data =</span> wider_data, </span>
+<span id="cb13-3"><a href="#cb13-3"></a>  <span class="at">col =</span> itemsprice, <span class="co"># the column to split</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a>  <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"items"</span>, <span class="st">"price_per_item"</span>), <span class="co"># the new columns to create</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a>  <span class="at">sep =</span> <span class="st">" "</span>, <span class="co"># split col by space</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a>  <span class="at">remove =</span> <span class="cn">TRUE</span>, <span class="co"># whether to remove the old col</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a>  <span class="at">convert =</span> <span class="cn">TRUE</span> <span class="co"># whether to fix the data type of the new columns</span></span>
+<span id="cb13-8"><a href="#cb13-8"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-layout-align="center">
+<div id="tbl-split" class="cell quarto-float anchored" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-split-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;8.8: The itemsprice column split into items and price_per_item using separate().
+</figcaption><div aria-describedby="tbl-split-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
 <div class="kable-table">
-<div id="tbl-split" class="anchored">
-<table class="table table-sm table-striped">
-<caption>Table&nbsp;8.8: The itemsprice column split into items and price_per_item using separate().</caption>
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
 <thead><tr class="header">
 <th style="text-align: right;">coach_id</th>
 <th style="text-align: right;">year</th>
@@ -1882,18 +1918,20 @@ Note
 </div>
 </div>
 </div>
+</figure>
 </div>
-<div class="callout-warning callout callout-style-default callout-captioned">
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Warning
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>If the new columns should have a different <a class="glossary">data type<span class="def"></span></a> from the old column, set <code>convert = TRUE</code> to automatically fix them. This is common when you have columns that contain multiple numbers, separated by commas or semicolons. These are character types before they are separated, but should be numeric types after so that you can do mathematical operations like sum them.</p>
+<p>If the new columns should have a different <a href="https://psyteachr.github.io/glossary/d#data-type" target="_blank" class="glossary" title="The kind of data represented by an object.">data type</a> from the old column, set <code>convert = TRUE</code> to automatically fix them. This is common when you have columns that contain multiple numbers, separated by commas or semicolons. These are character types before they are separated, but should be numeric types after so that you can do mathematical operations like sum them.</p>
 </div>
 </div>
 </section><section id="altering-data" class="level3" data-number="8.4.4"><h3 data-number="8.4.4" class="anchored" data-anchor-id="altering-data">
@@ -1901,21 +1939,23 @@ Warning
 <p>The column <code>price_per_item</code> is still a character column because it has parentheses. There are a few ways to fix this. You can use the <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">dplyr::mutate()</a></code> function to change a column or add a new one.</p>
 <p>Here, we’ll use <code><a href="https://stringr.tidyverse.org/reference/str_replace.html">stringr::str_replace_all()</a></code> to replace all of the “(” and “)” with ““.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>mutated_data <span class="ot">&lt;-</span> <span class="fu">mutate</span>(</span>
-<span id="cb16-2"><a href="#cb16-2"></a>  <span class="at">.data =</span> split_data,</span>
-<span id="cb16-3"><a href="#cb16-3"></a>  <span class="at">price_per_item =</span> stringr<span class="sc">::</span><span class="fu">str_replace_all</span>(</span>
-<span id="cb16-4"><a href="#cb16-4"></a>    <span class="at">string =</span> price_per_item, </span>
-<span id="cb16-5"><a href="#cb16-5"></a>    <span class="at">pattern =</span> <span class="st">"[()]"</span>, </span>
-<span id="cb16-6"><a href="#cb16-6"></a>    <span class="at">replacement =</span> <span class="st">""</span></span>
-<span id="cb16-7"><a href="#cb16-7"></a>  )</span>
-<span id="cb16-8"><a href="#cb16-8"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>mutated_data <span class="ot">&lt;-</span> <span class="fu">mutate</span>(</span>
+<span id="cb14-2"><a href="#cb14-2"></a>  <span class="at">.data =</span> split_data,</span>
+<span id="cb14-3"><a href="#cb14-3"></a>  <span class="at">price_per_item =</span> stringr<span class="sc">::</span><span class="fu">str_replace_all</span>(</span>
+<span id="cb14-4"><a href="#cb14-4"></a>    <span class="at">string =</span> price_per_item, </span>
+<span id="cb14-5"><a href="#cb14-5"></a>    <span class="at">pattern =</span> <span class="st">"[()]"</span>, </span>
+<span id="cb14-6"><a href="#cb14-6"></a>    <span class="at">replacement =</span> <span class="st">""</span></span>
+<span id="cb14-7"><a href="#cb14-7"></a>  )</span>
+<span id="cb14-8"><a href="#cb14-8"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-layout-align="center">
+<div id="tbl-mutate" class="cell quarto-float anchored" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-mutate-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;8.9: Mutating data to remove the parentheses from price_per_item.
+</figcaption><div aria-describedby="tbl-mutate-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
 <div class="kable-table">
-<div id="tbl-mutate" class="anchored">
-<table class="table table-sm table-striped">
-<caption>Table&nbsp;8.9: Mutating data to remove the parentheses from price_per_item.</caption>
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
 <thead><tr class="header">
 <th style="text-align: right;">coach_id</th>
 <th style="text-align: right;">year</th>
@@ -2034,13 +2074,15 @@ Warning
 </div>
 </div>
 </div>
+</figure>
+</div>
 </div>
 </section><section id="fixing-data-types" class="level3" data-number="8.4.5"><h3 data-number="8.4.5" class="anchored" data-anchor-id="fixing-data-types">
 <span class="header-section-number">8.4.5</span> Fixing data types</h3>
 <p>The <code>price_per_item</code> and <code>totalprice</code> columns are still characters, so you can’t do things like calculate the sum of <code>totalprice</code>.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># check the data types</span></span>
-<span id="cb17-2"><a href="#cb17-2"></a><span class="fu">glimpse</span>(mutated_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># check the data types</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="fu">glimpse</span>(mutated_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 15
 Columns: 5
@@ -2051,15 +2093,15 @@ $ price_per_item &lt;chr&gt; "3.91", "4.72", "5.59", "3.91", "4.72", "5.59", "3.
 $ totalprice     &lt;chr&gt; "7.82", "37.76", "55.9", "3.91", "28.32", "5.59", "15.6…</code></pre>
 </div>
 </div>
-<p>Once the data are clean and tidy, you can fix all of your column data types in one step using <code><a href="https://readr.tidyverse.org/reference/type_convert.html">readr::type_convert()</a></code>. This is good practice when you’ve finished cleaning a data set. If the automatic type detection doesn’t work as expected, this usually means that you still have non-numeric characters in a column where there were only supposed to be numbers. You can also manually set the column types in the same way as for <code><a href="https://readr.tidyverse.org/reference/read_delim.html">readr::read_csv()</a></code> (see <a href="04-data.html"><span>Chapter&nbsp;4</span></a>)).</p>
+<p>Once the data are clean and tidy, you can fix all of your column data types in one step using <code><a href="https://readr.tidyverse.org/reference/type_convert.html">readr::type_convert()</a></code>. This is good practice when you’ve finished cleaning a data set. If the automatic type detection doesn’t work as expected, this usually means that you still have non-numeric characters in a column where there were only supposed to be numbers. You can also manually set the column types in the same way as for <code><a href="https://readr.tidyverse.org/reference/read_delim.html">readr::read_csv()</a></code> (see <a href="04-data.html" class="quarto-xref"><span>Chapter 4</span></a>)).</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>tidy_data <span class="ot">&lt;-</span> <span class="fu">type_convert</span>(</span>
-<span id="cb19-2"><a href="#cb19-2"></a>  <span class="at">df =</span> mutated_data,</span>
-<span id="cb19-3"><a href="#cb19-3"></a>  <span class="at">trim_ws =</span> <span class="cn">TRUE</span> <span class="co"># removes spaces before and after values</span></span>
-<span id="cb19-4"><a href="#cb19-4"></a>)</span>
-<span id="cb19-5"><a href="#cb19-5"></a></span>
-<span id="cb19-6"><a href="#cb19-6"></a><span class="co"># check the data types</span></span>
-<span id="cb19-7"><a href="#cb19-7"></a><span class="fu">glimpse</span>(tidy_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>tidy_data <span class="ot">&lt;-</span> <span class="fu">type_convert</span>(</span>
+<span id="cb17-2"><a href="#cb17-2"></a>  <span class="at">df =</span> mutated_data,</span>
+<span id="cb17-3"><a href="#cb17-3"></a>  <span class="at">trim_ws =</span> <span class="cn">TRUE</span> <span class="co"># removes spaces before and after values</span></span>
+<span id="cb17-4"><a href="#cb17-4"></a>)</span>
+<span id="cb17-5"><a href="#cb17-5"></a></span>
+<span id="cb17-6"><a href="#cb17-6"></a><span class="co"># check the data types</span></span>
+<span id="cb17-7"><a href="#cb17-7"></a><span class="fu">glimpse</span>(tidy_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 15
 Columns: 5
@@ -2075,58 +2117,58 @@ $ totalprice     &lt;dbl&gt; 7.82, 37.76, 55.90, 3.91, 28.32, 5.59, 15.64, 23.60
 <div style="width: 200px; float: right;">
 <p><img src="images/tidy/pipe_sticker.png" style="width: 100%"></p>
 </div>
-<p>We’ve already introduced pipes in <a href="05-summary.html#sec-pipes-first"><span>Section&nbsp;5.3.2</span></a> but this type of data processing is where they really start to shine, as they can significantly reduce the amount of code you write.</p>
+<p>We’ve already introduced pipes in <a href="05-summary.html#sec-pipes-first" class="quarto-xref"><span>Section 5.3.2</span></a> but this type of data processing is where they really start to shine, as they can significantly reduce the amount of code you write.</p>
 <p>As a recap, a pipe takes the result of the previous function and sends it to the next function as its first argument, which means that you do not need to create intermediate objects. Below is all the code we’ve used in this chapter, and in the process we created five objects. This can get very confusing in longer scripts.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>untidy_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/untidy_data.csv"</span>, </span>
-<span id="cb21-2"><a href="#cb21-2"></a>                        <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb21-3"><a href="#cb21-3"></a></span>
-<span id="cb21-4"><a href="#cb21-4"></a>longer_data <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(</span>
-<span id="cb21-5"><a href="#cb21-5"></a>  <span class="at">data =</span> untidy_data,</span>
-<span id="cb21-6"><a href="#cb21-6"></a>  <span class="at">cols =</span> itemsprice_2018<span class="sc">:</span>totalprice_2020,</span>
-<span id="cb21-7"><a href="#cb21-7"></a>  <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">"category"</span>, <span class="st">"year"</span>),</span>
-<span id="cb21-8"><a href="#cb21-8"></a>  <span class="at">names_sep =</span> <span class="st">"_"</span>, </span>
-<span id="cb21-9"><a href="#cb21-9"></a>  <span class="at">values_to =</span> <span class="st">"value"</span>, </span>
-<span id="cb21-10"><a href="#cb21-10"></a>  <span class="at">names_transform =</span> <span class="fu">list</span>(<span class="at">year =</span> as.integer),</span>
-<span id="cb21-11"><a href="#cb21-11"></a>  <span class="at">values_transform =</span> <span class="fu">list</span>(<span class="at">value =</span> as.character) </span>
-<span id="cb21-12"><a href="#cb21-12"></a>) </span>
-<span id="cb21-13"><a href="#cb21-13"></a></span>
-<span id="cb21-14"><a href="#cb21-14"></a>wider_data <span class="ot">&lt;-</span> <span class="fu">pivot_wider</span>(</span>
-<span id="cb21-15"><a href="#cb21-15"></a>  <span class="at">data =</span> longer_data,</span>
-<span id="cb21-16"><a href="#cb21-16"></a>  <span class="at">id_cols =</span> <span class="fu">c</span>(coach_id, year),</span>
-<span id="cb21-17"><a href="#cb21-17"></a>  <span class="at">names_from =</span> category,</span>
-<span id="cb21-18"><a href="#cb21-18"></a>  <span class="at">values_from =</span> value</span>
-<span id="cb21-19"><a href="#cb21-19"></a>)</span>
-<span id="cb21-20"><a href="#cb21-20"></a></span>
-<span id="cb21-21"><a href="#cb21-21"></a>split_data <span class="ot">&lt;-</span> <span class="fu">separate</span>(</span>
-<span id="cb21-22"><a href="#cb21-22"></a>  <span class="at">data =</span> wider_data,</span>
-<span id="cb21-23"><a href="#cb21-23"></a>  <span class="at">col =</span> itemsprice,</span>
-<span id="cb21-24"><a href="#cb21-24"></a>  <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"items"</span>, <span class="st">"price_per_item"</span>),</span>
-<span id="cb21-25"><a href="#cb21-25"></a>  <span class="at">sep =</span> <span class="st">" "</span>, </span>
-<span id="cb21-26"><a href="#cb21-26"></a>  <span class="at">remove =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb21-27"><a href="#cb21-27"></a>  <span class="at">convert =</span> <span class="cn">TRUE</span></span>
-<span id="cb21-28"><a href="#cb21-28"></a>) </span>
-<span id="cb21-29"><a href="#cb21-29"></a></span>
-<span id="cb21-30"><a href="#cb21-30"></a>mutated_data <span class="ot">&lt;-</span> <span class="fu">mutate</span>(</span>
-<span id="cb21-31"><a href="#cb21-31"></a>  <span class="at">.data =</span> split_data,</span>
-<span id="cb21-32"><a href="#cb21-32"></a>  <span class="at">price_per_item =</span> stringr<span class="sc">::</span><span class="fu">str_replace_all</span>(</span>
-<span id="cb21-33"><a href="#cb21-33"></a>    <span class="at">string =</span> price_per_item, </span>
-<span id="cb21-34"><a href="#cb21-34"></a>    <span class="at">pattern =</span> <span class="st">"[()]"</span>, </span>
-<span id="cb21-35"><a href="#cb21-35"></a>    <span class="at">replacement =</span> <span class="st">""</span></span>
-<span id="cb21-36"><a href="#cb21-36"></a>  )</span>
-<span id="cb21-37"><a href="#cb21-37"></a>) </span>
-<span id="cb21-38"><a href="#cb21-38"></a></span>
-<span id="cb21-39"><a href="#cb21-39"></a>tidy_data <span class="ot">&lt;-</span> <span class="fu">type_convert</span>(</span>
-<span id="cb21-40"><a href="#cb21-40"></a>  <span class="at">df =</span> mutated_data,</span>
-<span id="cb21-41"><a href="#cb21-41"></a>  <span class="at">trim_ws =</span> <span class="cn">TRUE</span></span>
-<span id="cb21-42"><a href="#cb21-42"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>untidy_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/untidy_data.csv"</span>, </span>
+<span id="cb19-2"><a href="#cb19-2"></a>                        <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb19-3"><a href="#cb19-3"></a></span>
+<span id="cb19-4"><a href="#cb19-4"></a>longer_data <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(</span>
+<span id="cb19-5"><a href="#cb19-5"></a>  <span class="at">data =</span> untidy_data,</span>
+<span id="cb19-6"><a href="#cb19-6"></a>  <span class="at">cols =</span> itemsprice_2018<span class="sc">:</span>totalprice_2020,</span>
+<span id="cb19-7"><a href="#cb19-7"></a>  <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">"category"</span>, <span class="st">"year"</span>),</span>
+<span id="cb19-8"><a href="#cb19-8"></a>  <span class="at">names_sep =</span> <span class="st">"_"</span>, </span>
+<span id="cb19-9"><a href="#cb19-9"></a>  <span class="at">values_to =</span> <span class="st">"value"</span>, </span>
+<span id="cb19-10"><a href="#cb19-10"></a>  <span class="at">names_transform =</span> <span class="fu">list</span>(<span class="at">year =</span> as.integer),</span>
+<span id="cb19-11"><a href="#cb19-11"></a>  <span class="at">values_transform =</span> <span class="fu">list</span>(<span class="at">value =</span> as.character) </span>
+<span id="cb19-12"><a href="#cb19-12"></a>) </span>
+<span id="cb19-13"><a href="#cb19-13"></a></span>
+<span id="cb19-14"><a href="#cb19-14"></a>wider_data <span class="ot">&lt;-</span> <span class="fu">pivot_wider</span>(</span>
+<span id="cb19-15"><a href="#cb19-15"></a>  <span class="at">data =</span> longer_data,</span>
+<span id="cb19-16"><a href="#cb19-16"></a>  <span class="at">id_cols =</span> <span class="fu">c</span>(coach_id, year),</span>
+<span id="cb19-17"><a href="#cb19-17"></a>  <span class="at">names_from =</span> category,</span>
+<span id="cb19-18"><a href="#cb19-18"></a>  <span class="at">values_from =</span> value</span>
+<span id="cb19-19"><a href="#cb19-19"></a>)</span>
+<span id="cb19-20"><a href="#cb19-20"></a></span>
+<span id="cb19-21"><a href="#cb19-21"></a>split_data <span class="ot">&lt;-</span> <span class="fu">separate</span>(</span>
+<span id="cb19-22"><a href="#cb19-22"></a>  <span class="at">data =</span> wider_data,</span>
+<span id="cb19-23"><a href="#cb19-23"></a>  <span class="at">col =</span> itemsprice,</span>
+<span id="cb19-24"><a href="#cb19-24"></a>  <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"items"</span>, <span class="st">"price_per_item"</span>),</span>
+<span id="cb19-25"><a href="#cb19-25"></a>  <span class="at">sep =</span> <span class="st">" "</span>, </span>
+<span id="cb19-26"><a href="#cb19-26"></a>  <span class="at">remove =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb19-27"><a href="#cb19-27"></a>  <span class="at">convert =</span> <span class="cn">TRUE</span></span>
+<span id="cb19-28"><a href="#cb19-28"></a>) </span>
+<span id="cb19-29"><a href="#cb19-29"></a></span>
+<span id="cb19-30"><a href="#cb19-30"></a>mutated_data <span class="ot">&lt;-</span> <span class="fu">mutate</span>(</span>
+<span id="cb19-31"><a href="#cb19-31"></a>  <span class="at">.data =</span> split_data,</span>
+<span id="cb19-32"><a href="#cb19-32"></a>  <span class="at">price_per_item =</span> stringr<span class="sc">::</span><span class="fu">str_replace_all</span>(</span>
+<span id="cb19-33"><a href="#cb19-33"></a>    <span class="at">string =</span> price_per_item, </span>
+<span id="cb19-34"><a href="#cb19-34"></a>    <span class="at">pattern =</span> <span class="st">"[()]"</span>, </span>
+<span id="cb19-35"><a href="#cb19-35"></a>    <span class="at">replacement =</span> <span class="st">""</span></span>
+<span id="cb19-36"><a href="#cb19-36"></a>  )</span>
+<span id="cb19-37"><a href="#cb19-37"></a>) </span>
+<span id="cb19-38"><a href="#cb19-38"></a></span>
+<span id="cb19-39"><a href="#cb19-39"></a>tidy_data <span class="ot">&lt;-</span> <span class="fu">type_convert</span>(</span>
+<span id="cb19-40"><a href="#cb19-40"></a>  <span class="at">df =</span> mutated_data,</span>
+<span id="cb19-41"><a href="#cb19-41"></a>  <span class="at">trim_ws =</span> <span class="cn">TRUE</span></span>
+<span id="cb19-42"><a href="#cb19-42"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Warning
 </div>
 </div>
@@ -2136,38 +2178,38 @@ Warning
 </div>
 <p>For longer series of steps like the one above, using pipes can eliminate many intermediate objects. This also makes it easier to add an intermediate step to your process without having to think of a new table name and edit the table input to the next step (which is really easy to accidentally miss).</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>tidy_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="at">file =</span> <span class="st">"data/untidy_data.csv"</span>,</span>
-<span id="cb22-2"><a href="#cb22-2"></a>                      <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb22-3"><a href="#cb22-3"></a>  <span class="fu">pivot_longer</span>(</span>
-<span id="cb22-4"><a href="#cb22-4"></a>    <span class="at">cols =</span> itemsprice_2018<span class="sc">:</span>totalprice_2020,</span>
-<span id="cb22-5"><a href="#cb22-5"></a>    <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">"category"</span>, <span class="st">"year"</span>),</span>
-<span id="cb22-6"><a href="#cb22-6"></a>    <span class="at">names_sep =</span> <span class="st">"_"</span>, </span>
-<span id="cb22-7"><a href="#cb22-7"></a>    <span class="at">values_to =</span> <span class="st">"value"</span>, </span>
-<span id="cb22-8"><a href="#cb22-8"></a>    <span class="at">names_transform =</span> <span class="fu">list</span>(<span class="at">year =</span> as.integer),</span>
-<span id="cb22-9"><a href="#cb22-9"></a>    <span class="at">values_transform =</span> <span class="fu">list</span>(<span class="at">value =</span> as.character) </span>
-<span id="cb22-10"><a href="#cb22-10"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb22-11"><a href="#cb22-11"></a>  <span class="fu">pivot_wider</span>(</span>
-<span id="cb22-12"><a href="#cb22-12"></a>    <span class="at">id_cols =</span> <span class="fu">c</span>(coach_id, year),</span>
-<span id="cb22-13"><a href="#cb22-13"></a>    <span class="at">names_from =</span> category,</span>
-<span id="cb22-14"><a href="#cb22-14"></a>    <span class="at">values_from =</span> value</span>
-<span id="cb22-15"><a href="#cb22-15"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb22-16"><a href="#cb22-16"></a>  <span class="fu">separate</span>(</span>
-<span id="cb22-17"><a href="#cb22-17"></a>    <span class="at">col =</span> itemsprice,</span>
-<span id="cb22-18"><a href="#cb22-18"></a>    <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"items"</span>, <span class="st">"price_per_item"</span>),</span>
-<span id="cb22-19"><a href="#cb22-19"></a>    <span class="at">sep =</span> <span class="st">" "</span>, </span>
-<span id="cb22-20"><a href="#cb22-20"></a>    <span class="at">remove =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb22-21"><a href="#cb22-21"></a>    <span class="at">convert =</span> <span class="cn">TRUE</span></span>
-<span id="cb22-22"><a href="#cb22-22"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb22-23"><a href="#cb22-23"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb22-24"><a href="#cb22-24"></a>    <span class="at">price_per_item =</span> stringr<span class="sc">::</span><span class="fu">str_replace_all</span>(</span>
-<span id="cb22-25"><a href="#cb22-25"></a>      <span class="at">string =</span> price_per_item, </span>
-<span id="cb22-26"><a href="#cb22-26"></a>      <span class="at">pattern =</span> <span class="st">"[()]"</span>, </span>
-<span id="cb22-27"><a href="#cb22-27"></a>      <span class="at">replacement =</span> <span class="st">""</span></span>
-<span id="cb22-28"><a href="#cb22-28"></a>    )</span>
-<span id="cb22-29"><a href="#cb22-29"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb22-30"><a href="#cb22-30"></a>  <span class="fu">type_convert</span>(</span>
-<span id="cb22-31"><a href="#cb22-31"></a>    <span class="at">trim_ws =</span> <span class="cn">TRUE</span></span>
-<span id="cb22-32"><a href="#cb22-32"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>tidy_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="at">file =</span> <span class="st">"data/untidy_data.csv"</span>,</span>
+<span id="cb20-2"><a href="#cb20-2"></a>                      <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb20-4"><a href="#cb20-4"></a>    <span class="at">cols =</span> itemsprice_2018<span class="sc">:</span>totalprice_2020,</span>
+<span id="cb20-5"><a href="#cb20-5"></a>    <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">"category"</span>, <span class="st">"year"</span>),</span>
+<span id="cb20-6"><a href="#cb20-6"></a>    <span class="at">names_sep =</span> <span class="st">"_"</span>, </span>
+<span id="cb20-7"><a href="#cb20-7"></a>    <span class="at">values_to =</span> <span class="st">"value"</span>, </span>
+<span id="cb20-8"><a href="#cb20-8"></a>    <span class="at">names_transform =</span> <span class="fu">list</span>(<span class="at">year =</span> as.integer),</span>
+<span id="cb20-9"><a href="#cb20-9"></a>    <span class="at">values_transform =</span> <span class="fu">list</span>(<span class="at">value =</span> as.character) </span>
+<span id="cb20-10"><a href="#cb20-10"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb20-11"><a href="#cb20-11"></a>  <span class="fu">pivot_wider</span>(</span>
+<span id="cb20-12"><a href="#cb20-12"></a>    <span class="at">id_cols =</span> <span class="fu">c</span>(coach_id, year),</span>
+<span id="cb20-13"><a href="#cb20-13"></a>    <span class="at">names_from =</span> category,</span>
+<span id="cb20-14"><a href="#cb20-14"></a>    <span class="at">values_from =</span> value</span>
+<span id="cb20-15"><a href="#cb20-15"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb20-16"><a href="#cb20-16"></a>  <span class="fu">separate</span>(</span>
+<span id="cb20-17"><a href="#cb20-17"></a>    <span class="at">col =</span> itemsprice,</span>
+<span id="cb20-18"><a href="#cb20-18"></a>    <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"items"</span>, <span class="st">"price_per_item"</span>),</span>
+<span id="cb20-19"><a href="#cb20-19"></a>    <span class="at">sep =</span> <span class="st">" "</span>, </span>
+<span id="cb20-20"><a href="#cb20-20"></a>    <span class="at">remove =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb20-21"><a href="#cb20-21"></a>    <span class="at">convert =</span> <span class="cn">TRUE</span></span>
+<span id="cb20-22"><a href="#cb20-22"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb20-23"><a href="#cb20-23"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb20-24"><a href="#cb20-24"></a>    <span class="at">price_per_item =</span> stringr<span class="sc">::</span><span class="fu">str_replace_all</span>(</span>
+<span id="cb20-25"><a href="#cb20-25"></a>      <span class="at">string =</span> price_per_item, </span>
+<span id="cb20-26"><a href="#cb20-26"></a>      <span class="at">pattern =</span> <span class="st">"[()]"</span>, </span>
+<span id="cb20-27"><a href="#cb20-27"></a>      <span class="at">replacement =</span> <span class="st">""</span></span>
+<span id="cb20-28"><a href="#cb20-28"></a>    )</span>
+<span id="cb20-29"><a href="#cb20-29"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb20-30"><a href="#cb20-30"></a>  <span class="fu">type_convert</span>(</span>
+<span id="cb20-31"><a href="#cb20-31"></a>    <span class="at">trim_ws =</span> <span class="cn">TRUE</span></span>
+<span id="cb20-32"><a href="#cb20-32"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You can read the code above like this:</p>
 <ol type="1">
@@ -2252,12 +2294,12 @@ Warning
 </li>
 </ol>
 <p>Don’t feel like you always need to get all of your data wrangling code into a single pipeline. You should make intermediate objects whenever you need to break up your code because it’s getting too complicated or if you need to debug something.</p>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -2275,21 +2317,21 @@ Note
 </li>
 </ul>
 <div class="cell" data-layout-align="center" data-webex.hide="true">
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Solution
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-11" class="callout-11-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb23-2"><a href="#cb23-2"></a>wide1 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/wide_exercise-1.csv"</span>)</span>
-<span id="cb23-3"><a href="#cb23-3"></a>wide2 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/wide_exercise-2.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb21-2"><a href="#cb21-2"></a>wide1 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/wide_exercise-1.csv"</span>)</span>
+<span id="cb21-3"><a href="#cb21-3"></a>wide2 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/wide_exercise-2.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -2321,22 +2363,22 @@ Explain these answers
 <span class="header-section-number">8.6.2</span> Tidy 1</h3>
 <p>Transform <code>wide1</code> to long-form using <code>pivot_longer()</code> and store it in an object named <code>tidy1</code></p>
 <div class="cell" data-layout-align="center" data-webex.hide="true">
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Solution
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-12" class="callout-12-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>tidy1 <span class="ot">&lt;-</span> wide1 <span class="sc">%&gt;%</span></span>
-<span id="cb24-2"><a href="#cb24-2"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> q1<span class="sc">:</span>q5,</span>
-<span id="cb24-3"><a href="#cb24-3"></a>               <span class="at">names_to =</span> <span class="st">"question"</span>, </span>
-<span id="cb24-4"><a href="#cb24-4"></a>               <span class="at">values_to =</span> <span class="st">"response"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>tidy1 <span class="ot">&lt;-</span> wide1 <span class="sc">%&gt;%</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> q1<span class="sc">:</span>q5,</span>
+<span id="cb22-3"><a href="#cb22-3"></a>               <span class="at">names_to =</span> <span class="st">"question"</span>, </span>
+<span id="cb22-4"><a href="#cb22-4"></a>               <span class="at">values_to =</span> <span class="st">"response"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -2375,47 +2417,47 @@ Hint 2
 <p><code>into  = c("col1", "col2")</code></p>
 </div>
 <div class="cell" data-layout-align="center" data-webex.hide="true">
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Solution
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-13" class="callout-13-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>tidy2a <span class="ot">&lt;-</span> wide2 <span class="sc">%&gt;%</span></span>
-<span id="cb25-2"><a href="#cb25-2"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> q1_sat<span class="sc">:</span>q5_rec,</span>
-<span id="cb25-3"><a href="#cb25-3"></a>               <span class="at">names_to =</span> <span class="st">"question"</span>, </span>
-<span id="cb25-4"><a href="#cb25-4"></a>               <span class="at">values_to =</span> <span class="st">"response"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb25-5"><a href="#cb25-5"></a>  <span class="fu">separate</span>(<span class="at">col =</span> <span class="st">"question"</span>, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"question"</span>, <span class="st">"category"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>tidy2a <span class="ot">&lt;-</span> wide2 <span class="sc">%&gt;%</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> q1_sat<span class="sc">:</span>q5_rec,</span>
+<span id="cb23-3"><a href="#cb23-3"></a>               <span class="at">names_to =</span> <span class="st">"question"</span>, </span>
+<span id="cb23-4"><a href="#cb23-4"></a>               <span class="at">values_to =</span> <span class="st">"response"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb23-5"><a href="#cb23-5"></a>  <span class="fu">separate</span>(<span class="at">col =</span> <span class="st">"question"</span>, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"question"</span>, <span class="st">"category"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
 </div>
 <div class="cell" data-layout-align="center" data-webex.hide="Alternative solution">
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Alternative solution
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-14" class="callout-14-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="co"># combine pivot_longer and separate by setting two values for names_to</span></span>
-<span id="cb26-2"><a href="#cb26-2"></a><span class="co"># must include names_sep to determine how to separate the column names</span></span>
-<span id="cb26-3"><a href="#cb26-3"></a>tidy2a <span class="ot">&lt;-</span> wide2 <span class="sc">%&gt;%</span></span>
-<span id="cb26-4"><a href="#cb26-4"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> q1_sat<span class="sc">:</span>q5_rec,</span>
-<span id="cb26-5"><a href="#cb26-5"></a>               <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">"question"</span>, <span class="st">"category"</span>), </span>
-<span id="cb26-6"><a href="#cb26-6"></a>               <span class="at">names_sep =</span> <span class="st">"_"</span>,</span>
-<span id="cb26-7"><a href="#cb26-7"></a>               <span class="at">values_to =</span> <span class="st">"response"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="co"># combine pivot_longer and separate by setting two values for names_to</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a><span class="co"># must include names_sep to determine how to separate the column names</span></span>
+<span id="cb24-3"><a href="#cb24-3"></a>tidy2a <span class="ot">&lt;-</span> wide2 <span class="sc">%&gt;%</span></span>
+<span id="cb24-4"><a href="#cb24-4"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> q1_sat<span class="sc">:</span>q5_rec,</span>
+<span id="cb24-5"><a href="#cb24-5"></a>               <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">"question"</span>, <span class="st">"category"</span>), </span>
+<span id="cb24-6"><a href="#cb24-6"></a>               <span class="at">names_sep =</span> <span class="st">"_"</span>,</span>
+<span id="cb24-7"><a href="#cb24-7"></a>               <span class="at">values_to =</span> <span class="st">"response"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -2447,24 +2489,24 @@ Hint 2
 <p><code>data %&gt;% pivot_longer() %&gt;% separate() %&gt;% pivot_wider()</code></p>
 </div>
 <div class="cell" data-layout-align="center" data-webex.hide="true">
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Solution
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-15" class="callout-15-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>tidy2b <span class="ot">&lt;-</span> wide2 <span class="sc">%&gt;%</span></span>
-<span id="cb27-2"><a href="#cb27-2"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> q1_sat<span class="sc">:</span>q5_rec,</span>
-<span id="cb27-3"><a href="#cb27-3"></a>               <span class="at">names_to =</span> <span class="st">"question"</span>, </span>
-<span id="cb27-4"><a href="#cb27-4"></a>               <span class="at">values_to =</span> <span class="st">"response"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb27-5"><a href="#cb27-5"></a>  <span class="fu">separate</span>(<span class="at">col =</span> <span class="st">"question"</span>, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"question"</span>, <span class="st">"category"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb27-6"><a href="#cb27-6"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="st">"category"</span>, <span class="at">values_from =</span> <span class="st">"response"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>tidy2b <span class="ot">&lt;-</span> wide2 <span class="sc">%&gt;%</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> q1_sat<span class="sc">:</span>q5_rec,</span>
+<span id="cb25-3"><a href="#cb25-3"></a>               <span class="at">names_to =</span> <span class="st">"question"</span>, </span>
+<span id="cb25-4"><a href="#cb25-4"></a>               <span class="at">values_to =</span> <span class="st">"response"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb25-5"><a href="#cb25-5"></a>  <span class="fu">separate</span>(<span class="at">col =</span> <span class="st">"question"</span>, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"question"</span>, <span class="st">"category"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb25-6"><a href="#cb25-6"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="st">"category"</span>, <span class="at">values_from =</span> <span class="st">"response"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -2473,27 +2515,27 @@ Solution
 <span class="header-section-number">8.6.4</span> Analysis and visualisation</h3>
 <p>Using <code>group_by()</code> and <code>summarise()</code>, calculate the mean score for each participant for both satisfaction and recommendation. Do this for both versions of the dataset so that you can see how the structure of the dataset changes the approach you need to take.</p>
 <div class="cell" data-layout-align="center" data-webex.hide="true">
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Solution
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-16" class="callout-16-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>tidy2a <span class="sc">%&gt;%</span></span>
-<span id="cb28-2"><a href="#cb28-2"></a>  <span class="fu">group_by</span>(id, category) <span class="sc">%&gt;%</span></span>
-<span id="cb28-3"><a href="#cb28-3"></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(response),</span>
-<span id="cb28-4"><a href="#cb28-4"></a>            <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
-<span id="cb28-5"><a href="#cb28-5"></a></span>
-<span id="cb28-6"><a href="#cb28-6"></a>tidy2b <span class="sc">%&gt;%</span></span>
-<span id="cb28-7"><a href="#cb28-7"></a>  <span class="fu">group_by</span>(id) <span class="sc">%&gt;%</span></span>
-<span id="cb28-8"><a href="#cb28-8"></a>  <span class="fu">summarise</span>(<span class="at">mean_satisfaction =</span> <span class="fu">mean</span>(sat),</span>
-<span id="cb28-9"><a href="#cb28-9"></a>            <span class="at">mean_rec =</span> <span class="fu">mean</span>(rec))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>tidy2a <span class="sc">%&gt;%</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a>  <span class="fu">group_by</span>(id, category) <span class="sc">%&gt;%</span></span>
+<span id="cb26-3"><a href="#cb26-3"></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(response),</span>
+<span id="cb26-4"><a href="#cb26-4"></a>            <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb26-5"><a href="#cb26-5"></a></span>
+<span id="cb26-6"><a href="#cb26-6"></a>tidy2b <span class="sc">%&gt;%</span></span>
+<span id="cb26-7"><a href="#cb26-7"></a>  <span class="fu">group_by</span>(id) <span class="sc">%&gt;%</span></span>
+<span id="cb26-8"><a href="#cb26-8"></a>  <span class="fu">summarise</span>(<span class="at">mean_satisfaction =</span> <span class="fu">mean</span>(sat),</span>
+<span id="cb26-9"><a href="#cb26-9"></a>            <span class="at">mean_rec =</span> <span class="fu">mean</span>(rec))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -2510,29 +2552,29 @@ Hint
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="08-tidy_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="08-tidy_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
 </div>
 <div class="cell" data-layout-align="center" data-webex.hide="true">
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Solution
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-17" class="callout-17-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="fu">ggplot</span>(tidy2b, <span class="fu">aes</span>(<span class="at">x =</span> sat, <span class="at">y =</span> rec, <span class="at">colour =</span> repeat_patient)) <span class="sc">+</span></span>
-<span id="cb29-2"><a href="#cb29-2"></a>  <span class="fu">geom_jitter</span>() <span class="sc">+</span></span>
-<span id="cb29-3"><a href="#cb29-3"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
-<span id="cb29-4"><a href="#cb29-4"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Satisfaction score"</span>, <span class="at">y =</span> <span class="st">"Recommendation score"</span>, <span class="at">title =</span> <span class="st">"Satisfaction and recommendation scores"</span>) <span class="sc">+</span></span>
-<span id="cb29-5"><a href="#cb29-5"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">ggplot</span>(tidy2b, <span class="fu">aes</span>(<span class="at">x =</span> sat, <span class="at">y =</span> rec, <span class="at">colour =</span> repeat_patient)) <span class="sc">+</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a>  <span class="fu">geom_jitter</span>() <span class="sc">+</span></span>
+<span id="cb27-3"><a href="#cb27-3"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
+<span id="cb27-4"><a href="#cb27-4"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Satisfaction score"</span>, <span class="at">y =</span> <span class="st">"Recommendation score"</span>, <span class="at">title =</span> <span class="st">"Satisfaction and recommendation scores"</span>) <span class="sc">+</span></span>
+<span id="cb27-5"><a href="#cb27-5"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -2542,29 +2584,29 @@ Solution
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="08-tidy_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="08-tidy_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
 </div>
 <div class="cell" data-layout-align="center" data-webex.hide="true">
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Solution
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-18" class="callout-18-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">ggplot</span>(tidy2a, <span class="fu">aes</span>(<span class="at">x =</span> repeat_patient, <span class="at">y =</span> response, <span class="at">fill =</span> repeat_patient)) <span class="sc">+</span></span>
-<span id="cb30-2"><a href="#cb30-2"></a>  <span class="fu">geom_boxplot</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb30-3"><a href="#cb30-3"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>category)<span class="sc">+</span></span>
-<span id="cb30-4"><a href="#cb30-4"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb30-5"><a href="#cb30-5"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">ggplot</span>(tidy2a, <span class="fu">aes</span>(<span class="at">x =</span> repeat_patient, <span class="at">y =</span> response, <span class="at">fill =</span> repeat_patient)) <span class="sc">+</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a>  <span class="fu">geom_boxplot</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb28-3"><a href="#cb28-3"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>category)<span class="sc">+</span></span>
+<span id="cb28-4"><a href="#cb28-4"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb28-5"><a href="#cb28-5"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -2574,28 +2616,28 @@ Solution
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="08-tidy_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="08-tidy_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
 </div>
 <div class="cell" data-layout-align="center" data-webex.hide="true">
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Solution
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-19" class="callout-19-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="fu">ggplot</span>(tidy2a, <span class="fu">aes</span>(<span class="at">x =</span> response)) <span class="sc">+</span></span>
-<span id="cb31-2"><a href="#cb31-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">colour =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"Grey"</span>) <span class="sc">+</span></span>
-<span id="cb31-3"><a href="#cb31-3"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Responses across all questions and categories"</span>) <span class="sc">+</span></span>
-<span id="cb31-4"><a href="#cb31-4"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="fu">ggplot</span>(tidy2a, <span class="fu">aes</span>(<span class="at">x =</span> response)) <span class="sc">+</span></span>
+<span id="cb29-2"><a href="#cb29-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">colour =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"Grey"</span>) <span class="sc">+</span></span>
+<span id="cb29-3"><a href="#cb29-3"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Responses across all questions and categories"</span>) <span class="sc">+</span></span>
+<span id="cb29-4"><a href="#cb29-4"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -2607,7 +2649,50 @@ Solution
 </section></section><section id="sec-glossary-tidy" class="level2" data-number="8.7"><h2 data-number="8.7" class="anchored" data-anchor-id="sec-glossary-tidy">
 <span class="header-section-number">8.7</span> Glossary</h2>
 <div class="cell" data-layout-align="center">
-<p>|term |definition | |:———–|:———-| |character | | |data type | | |long | | |observation | | |tidy data | | |value | | |variable | | |wide | |</p>
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 93%">
+</colgroup>
+<thead><tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: left;">definition</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">character</td>
+<td style="text-align: left;">A data type representing strings of text.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">data type</td>
+<td style="text-align: left;">The kind of data represented by an object.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">long</td>
+<td style="text-align: left;">A data format where each observation is on a separate row</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">observation</td>
+<td style="text-align: left;">All of the data about a single trial or question.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">tidy data</td>
+<td style="text-align: left;">A format for data that maps the meaning onto the structure.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">value</td>
+<td style="text-align: left;">A single number or piece of data.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">variable</td>
+<td style="text-align: left;">(coding): A word that identifies and stores the value of some data for later use; (stats): An attribute or characteristic of an observation that you can measure, count, or describe</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">wide</td>
+<td style="text-align: left;">A data format where all of the observations about one subject are in the same row</td>
+</tr>
+</tbody>
+</table>
 </div>
 </section><section id="sec-resources-tidy" class="level2" data-number="8.8"><h2 data-number="8.8" class="anchored" data-anchor-id="sec-resources-tidy">
 <span class="header-section-number">8.8</span> Further resources</h2>
@@ -2860,6 +2945,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
   }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
   const toggleColorMode = (alternate) => {
     // Switch the stylesheets
     const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
@@ -2926,13 +3038,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'default';
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -2959,9 +3073,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -2997,10 +3125,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -3010,8 +3155,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -3023,9 +3177,245 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -3065,29 +3455,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./07-joins.html" class="pagination-link">
+      <a href="./07-joins.html" class="pagination-link" aria-label="Data Relations">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Relations</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./09-wrangle.html" class="pagination-link">
+      <a href="./09-wrangle.html" class="pagination-link" aria-label="Data Wrangling">
         <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Data Wrangling</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
-    <div class="nav-footer-left">CC-BY 2022, healthTeachR</div>   
+    <div class="nav-footer-left">
+<p>CC-BY 2022, healthTeachR</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/healthteachr/healthteachr.github.io/edit/main/08-tidy.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/healthteachr/healthteachr.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/healthteachr/healthteachr.github.io/blob/main/08-tidy.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div>
     <div class="nav-footer-right">
-      <ul class="footer-items list-unstyled">
-<li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/healthteachr/ads-v2">
-      <i class="bi bi-github" role="img">
-</i> 
-    </a>
-  </li>  
-</ul>
-</div>
+      &nbsp;
+    </div>
   </div>
 </footer>
 
