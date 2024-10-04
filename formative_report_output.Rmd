@@ -40,18 +40,20 @@ ggplot(football_data) +
 ```
 
 ### High speed running over the season by playing position
-Then, create a figure that shows how the mean amount of High Speed Running (high_speed_distance_5_5_7m_s) covered by each playing position changed over the phases of the season (phase_of_season). Does it look as though any of the playing positions were getting more fatigued as the season went on? Hint: use the facet_wrap() function to produce a separate plot for each level of the "position" variable.
+Then, create a boxplot that shows how the amount of High Speed Running (high_speed_distance_5_5_7m_s) covered by each playing position changed over the phases of the season (phase_of_season). Does it look as though any of the playing positions were getting more fatigued as the season went on? Hint: use the facet_wrap() function to produce a separate plot for each level of the "position" variable.
 
 ```{r running-over-season-by-position, echo=FALSE, message=FALSE, warning=FALSE}
 ggplot(football_data) +
  aes(x = phase_of_season, y = high_speed_distance_5_5_7m_s, fill = position) +
- geom_bar(stat="summary", fun="mean") +
+ geom_boxplot() +
  scale_fill_hue(direction = 1) +
  theme_minimal() +
  facet_wrap(vars(position)) +
- ylab("Mean high speed running distance (m)") +
  xlab("Phase of season") +
- theme(panel.spacing.y = unit(1, "lines"))
+ theme(panel.spacing.y = unit(1, "lines")) +
+ scale_y_continuous(name = "High speed running distance (m)",
+                     breaks = seq(from = 0, to = 2500, by = 500)) +
+ coord_cartesian(ylim = c(0, 2500))
 ```
 
 ### Match outcomes for home and away games
