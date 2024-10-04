@@ -1,0 +1,70 @@
+---
+title: "Football report"
+output: html_document
+name: Your name here
+---
+
+```{r setup, include=FALSE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Report overview
+This report summarises player data for football matches contested in 2014 and 2015. In total there are 368 observations in the dataset.
+
+### Sprint distance by playing position
+First, clean up the data by changing any text variables (e.g., home/away) into factor/categorical ones. The "phase_of_season" variable is coded as a number (1-4). Change this to a factor too.
+
+Then, create a boxplot depicting the sprint distance (sprint_distance) covered during matches by each playing position (position). Which playing position tends to cover the highest amount of sprint distance during matches? Hint: set the fill to "position" to produce different coloured boxplots for each playing position.
+
+```{r distance-by-position, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(janitor)
+library(ggplot2)
+
+football_data <- read_csv(file = "H:/ads-v2/data/formative_data.csv")
+
+football_data <- football_data %>% 
+  # clean up the variable names to make them easier to work with
+  clean_names() %>% 
+  mutate_if(is.character, as.factor) %>% 
+  mutate(phase_of_season = as.factor(phase_of_season))
+
+ggplot(football_data) +
+  aes(x = position, y = sprint_distance_m, fill = position) +
+  geom_boxplot() +
+  scale_fill_hue(direction = 1) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  ylab("Sprint distance (m)") +
+  xlab("Playing position")
+```
+
+### High speed running over the season by playing position
+Then, create a figure that shows how the mean amount of High Speed Running (high_speed_distance_5_5_7m_s) covered by each playing position changed over the phases of the season (phase_of_season). Does it look as though any of the playing positions were getting more fatigued as the season went on? Hint: use the facet_wrap() function to produce a separate plot for each level of the "position" variable.
+
+```{r running-over-season-by-position, echo=FALSE, message=FALSE, warning=FALSE}
+ggplot(football_data) +
+ aes(x = phase_of_season, y = high_speed_distance_5_5_7m_s, fill = position) +
+ geom_bar(stat="summary", fun="mean") +
+ scale_fill_hue(direction = 1) +
+ theme_minimal() +
+ facet_wrap(vars(position)) +
+ ylab("Mean high speed running distance (m)") +
+ xlab("Phase of season") +
+ theme(panel.spacing.y = unit(1, "lines"))
+```
+
+### Match outcomes for home and away games
+Generate a two-way frequency table (or cross tabulation) of match outcomes (i.e., draw, loss, win) by match location (i.e., home or away). Edit your table using the <pkg>kableExtra</pkg> package. Is the total number of losses greater at home or away games?
+
+```{r outcomes-by-location, echo=FALSE, message=FALSE, warning=FALSE}
+library(kableExtra)
+wins_location <- table(football_data$match_outcome, football_data$match_location)
+kable <- kable(wins_location)
+k <- kable(wins_location, 
+      caption = "Table 1. Match outcomes for home and away games.", 
+      align = "c")
+k_style <- kable_classic(k, full_width = TRUE) 
+k_highlighted <- row_spec(k_style, row = 0, bold = TRUE, color = "white",background="#FF5733", underline=TRUE) 
+k_highlighted
+```
