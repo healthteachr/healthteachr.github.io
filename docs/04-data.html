@@ -392,7 +392,7 @@ gtag('config', 'G-6NP3MF25W3', { 'anonymize_ip': true});
 <p>There is a walkthrough video of this chapter available via <a href="https://echo360.org.uk/media/52d2249e-a737-42b4-bf55-267e39fc05c5/public">Echo360.</a> Please note that there may have been minor edits to the book since the video was recorded. Where there are differences, the book should always take precedence.</p>
 </section><section id="sec-setup-data" class="level2" data-number="4.1"><h2 data-number="4.1" class="anchored" data-anchor-id="sec-setup-data">
 <span class="header-section-number">4.1</span> Set-up</h2>
-<p>Create a new project for the work we’ll do in this chapter named <code class="path">04-data</code>. Then, create and save a new R Markdown document named <code>data.Rmd</code>, get rid of the default template text, and load the packages in the set-up code chunk. You should have all of these packages installed already, but if you get the message <code>Error in library(x) : there is no package called 'x'</code>, please refer to <a href="#sec-install-package" class="quarto-xref"><span class="quarto-unresolved-ref">sec-install-package</span></a>.</p>
+<p>Create a new project for the work we’ll do in this chapter named <code class="path">04-data</code>. Then, create and save a new R Markdown document named <code>data.Rmd</code>, get rid of the default template text, and load the packages in the set-up code chunk. You should have all of these packages installed already, but if you get the message <code>Error in library(x) : there is no package called 'x'</code>, please refer to <a href="01-intro.html#sec-install-package" class="quarto-xref"><span>Section 1.3.1</span></a>.</p>
 <div class="cell" data-layout-align="center" data-verbatim="r setup, include=FALSE">
 <div class="verbatim">
 <pre class="sourceCode r code-with-copy"><code class="sourceCode R">```{r setup, include=FALSE}</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre>
@@ -584,7 +584,7 @@ $ factor    &lt;chr&gt; "high", "low", "med", "high", "low", "med"
 $ integer   &lt;dbl&gt; 1, 2, 3, 4, 5, 6
 $ double    &lt;dbl&gt; 1.5, 2.5, 3.5, 4.5, 5.5, 6.5
 $ logical   &lt;lgl&gt; TRUE, TRUE, FALSE, FALSE, NA, TRUE
-$ date      &lt;date&gt; 2024-09-29, 2024-09-28, 2024-09-27, 2024-09-26, 2024-09-25, …</code></pre>
+$ date      &lt;date&gt; 2024-10-04, 2024-10-03, 2024-10-02, 2024-10-01, 2024-09-30, …</code></pre>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
@@ -597,7 +597,7 @@ $ factor    &lt;chr&gt; "high", "low", "med", "high", "low", "med"
 $ integer   &lt;dbl&gt; 1, 2, 3, 4, 5, 6
 $ double    &lt;dbl&gt; 1.5, 2.5, 3.5, 4.5, 5.5, 6.5
 $ logical   &lt;lgl&gt; TRUE, TRUE, FALSE, FALSE, NA, TRUE
-$ date      &lt;dttm&gt; 2024-09-29, 2024-09-28, 2024-09-27, 2024-09-26, 2024-09-25, …</code></pre>
+$ date      &lt;dttm&gt; 2024-10-04, 2024-10-03, 2024-10-02, 2024-10-01, 2024-09-30, …</code></pre>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
@@ -610,7 +610,7 @@ $ factor    &lt;dbl+lbl&gt; 3, 1, 2, 3, 1, 2
 $ integer   &lt;dbl&gt; 1, 2, 3, 4, 5, 6
 $ double    &lt;dbl&gt; 1.5, 2.5, 3.5, 4.5, 5.5, 6.5
 $ logical   &lt;dbl&gt; 1, 1, 0, 0, NA, 1
-$ date      &lt;date&gt; 2024-09-29, 2024-09-28, 2024-09-27, 2024-09-26, 2024-09-25, …</code></pre>
+$ date      &lt;date&gt; 2024-10-04, 2024-10-03, 2024-10-02, 2024-10-01, 2024-09-30, …</code></pre>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
@@ -642,7 +642,7 @@ date (1): date
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
 </div>
-<p>The “Column specification” tells you which <a href="https://psyteachr.github.io/glossary/d#data-type" target="_blank" class="glossary" title="The kind of data represented by an object.">data type</a> each column is. You can review data types in <a href="#sec-data-types" class="quarto-xref"><span class="quarto-unresolved-ref">sec-data-types</span></a>. Options are:</p>
+<p>The “Column specification” tells you which <a href="https://psyteachr.github.io/glossary/d#data-type" target="_blank" class="glossary" title="The kind of data represented by an object.">data type</a> each column is. You can review data types in <a href="app-datatypes.html" class="quarto-xref"><span>Appendix G</span></a>. Options are:</p>
 <ul>
 <li>
 <code>chr</code>: <a href="https://psyteachr.github.io/glossary/c#character" target="_blank" class="glossary" title="A data type representing strings of text.">character</a>
@@ -703,7 +703,7 @@ Note
 <p>For dates, you might need to set the format your dates are in. See <code><a href="https://rdrr.io/r/base/strptime.html">?strptime</a></code> for a list of the codes used to represent different date formats. For example, <code>"%d-%b-%y"</code> means that the dates are formatted like <code>31-Jan-21</code>.</p>
 </div>
 </div>
-<p>The functions from <pkg>readxl</pkg> for loading <code>.xlsx</code> sheets have a different, more limited way to specify the column types. You will have to convert factor columns and dates using <code>mutate()</code>, which you’ll learn about in <a href="#sec-wrangle" class="quarto-xref"><span class="quarto-unresolved-ref">sec-wrangle</span></a>, so most people let <code>read_excel()</code> guess data types and don’t set the <code>col_types</code> argument.</p>
+<p>The functions from <pkg>readxl</pkg> for loading <code>.xlsx</code> sheets have a different, more limited way to specify the column types. You will have to convert factor columns and dates using <code>mutate()</code>, which you’ll learn about in <a href="09-wrangle.html" class="quarto-xref"><span>Chapter 9</span></a>, so most people let <code>read_excel()</code> guess data types and don’t set the <code>col_types</code> argument.</p>
 <p>For SPSS data, whilst <code><a href="http://gesistsa.github.io/rio/reference/import.html">rio::import()</a></code> will just read the numeric values of factors and not their labels, the function <code>read_sav()</code> from <pkg>haven</pkg> reads both. However, you have to convert factors from a haven-specific “labelled double” to a factor (we have no idea why haven doesn’t do this for you).</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>demo_sav<span class="sc">$</span>factor <span class="ot">&lt;-</span> haven<span class="sc">::</span><span class="fu">as_factor</span>(demo_sav<span class="sc">$</span>factor)</span>
@@ -717,7 +717,7 @@ $ factor    &lt;fct&gt; high, low, med, high, low, med
 $ integer   &lt;dbl&gt; 1, 2, 3, 4, 5, 6
 $ double    &lt;dbl&gt; 1.5, 2.5, 3.5, 4.5, 5.5, 6.5
 $ logical   &lt;dbl&gt; 1, 1, 0, 0, NA, 1
-$ date      &lt;date&gt; 2024-09-29, 2024-09-28, 2024-09-27, 2024-09-26, 2024-09-25, …</code></pre>
+$ date      &lt;date&gt; 2024-10-04, 2024-10-03, 2024-10-02, 2024-10-01, 2024-09-30, …</code></pre>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -900,7 +900,7 @@ Solution
 </div>
 </div>
 </div>
-<p>We’ll be working with <a href="https://psyteachr.github.io/glossary/t#tabular-data" target="_blank" class="glossary" title="Data in a rectangular table format, where each row has an entry for each column.">tabular data</a> a lot in this class, but tabular data is made up of <a href="https://psyteachr.github.io/glossary/v#vector" target="_blank" class="glossary" title="A type of data structure that collects values with the same data type, like T/F values, numbers, or strings.">vectors</a>, which groups together data with the same basic <a href="https://psyteachr.github.io/glossary/d#data-type" target="_blank" class="glossary" title="The kind of data represented by an object.">data type</a>. <a href="#sec-data-types" class="quarto-xref"><span class="quarto-unresolved-ref">sec-data-types</span></a> explains some of this terminology to help you understand the functions we’ll be learning to process and analyse data.</p>
+<p>We’ll be working with <a href="https://psyteachr.github.io/glossary/t#tabular-data" target="_blank" class="glossary" title="Data in a rectangular table format, where each row has an entry for each column.">tabular data</a> a lot in this class, but tabular data is made up of <a href="https://psyteachr.github.io/glossary/v#vector" target="_blank" class="glossary" title="A type of data structure that collects values with the same data type, like T/F values, numbers, or strings.">vectors</a>, which groups together data with the same basic <a href="https://psyteachr.github.io/glossary/d#data-type" target="_blank" class="glossary" title="The kind of data represented by an object.">data type</a>. <a href="app-datatypes.html" class="quarto-xref"><span>Appendix G</span></a> explains some of this terminology to help you understand the functions we’ll be learning to process and analyse data.</p>
 </section><section id="troubleshooting" class="level2" data-number="4.7"><h2 data-number="4.7" class="anchored" data-anchor-id="troubleshooting">
 <span class="header-section-number">4.7</span> Troubleshooting</h2>
 <p>What if you import some data and it guesses the wrong column type? The most common reason is that a numeric column has some non-numbers in it somewhere. Maybe someone wrote a note in an otherwise numeric column. Columns have to be all one data type, so if there are any characters, the whole column is converted to character strings, and numbers like <code>1.2</code> get represented as <code>"1.2"</code>, which will cause very weird errors like <code>"100" &lt; "9" == TRUE</code>. You can catch this by using <code>glimpse()</code> to check your data.</p>
@@ -1006,7 +1006,7 @@ $ date    &lt;chr&gt; "2020-01-1", "2020-01-2", "2020-01-3", "2020-01-4", "2020-
 <li>
 <code>date</code> should be a date column</li>
 </ul>
-<p>We’ll learn how to deal with this mess in <a href="#sec-tidy" class="quarto-xref"><span class="quarto-unresolved-ref">sec-tidy</span></a> and <a href="#sec-wrangle" class="quarto-xref"><span class="quarto-unresolved-ref">sec-wrangle</span></a>, but we can fix a few things by setting the <code>col_types</code> argument in <code>read_csv()</code> to specify the column types for our two columns that were guessed wrong and skip the “junk” column. The argument <code>col_types</code> takes a list where the name of each item in the list is a column name and the value is from the table below. You can use the function, like <code>col_double()</code> or the abbreviation, like <code>"d"</code>; for consistency with earlier in this chapter we will use the function names. Omitted column names are guessed.</p>
+<p>We’ll learn how to deal with this mess in <a href="08-tidy.html" class="quarto-xref"><span>Chapter 8</span></a> and <a href="09-wrangle.html" class="quarto-xref"><span>Chapter 9</span></a>, but we can fix a few things by setting the <code>col_types</code> argument in <code>read_csv()</code> to specify the column types for our two columns that were guessed wrong and skip the “junk” column. The argument <code>col_types</code> takes a list where the name of each item in the list is a column name and the value is from the table below. You can use the function, like <code>col_double()</code> or the abbreviation, like <code>"d"</code>; for consistency with earlier in this chapter we will use the function names. Omitted column names are guessed.</p>
 <table class="caption-top table">
 <thead><tr class="header">
 <th style="text-align: left;">function</th>
@@ -1237,7 +1237,7 @@ time (1): time
 <span class="header-section-number">4.9.3</span> Convert column types</h3>
 <ul>
 <li>Check the column specification of <code>lakers</code>.</li>
-<li>Create a new column specification that lists the following columns as factors: <code>game_type</code>, <code>period</code>, <code>etype</code>, <code>result</code>, <code>points</code>, and <code>type</code> and skips the following columns: <code>films</code>, <code>vehicles</code>, and <code>starships</code> (this is because these columns contain multiple values and are stored as lists, which we haven’t covered how to work with). You do not have to set the factor orders (although you can if you wish).</li>
+<li>Create a new column specification that lists the following columns as factors: <code>game_type</code>, <code>etype</code>, and <code>result</code>. You do not have to set the factor orders (although you can if you wish). Specify the following columns as integers: <code>period</code>, and <code>points</code>. Specify the following column as a date: <code>date</code>.</li>
 <li>Re-import the dataset, this time with the corrected column types.</li>
 </ul>
 <div class="webex-solution">

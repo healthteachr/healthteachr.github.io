@@ -550,14 +550,14 @@ Do not factor numbers
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># the current date</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a>lubridate<span class="sc">::</span><span class="fu">today</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "2024-09-29"</code></pre>
+<pre><code>[1] "2024-10-04"</code></pre>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># the current date and time in the GMT timezone</span></span>
 <span id="cb8-2"><a href="#cb8-2"></a>lubridate<span class="sc">::</span><span class="fu">now</span>(<span class="at">tzone =</span> <span class="st">"GMT"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "2024-09-28 23:06:29 GMT"</code></pre>
+<pre><code>[1] "2024-10-04 15:11:01 GMT"</code></pre>
 </div>
 </div>
 <div class="try callout callout-style-default callout-note callout-titled">
@@ -1183,7 +1183,7 @@ Figure&nbsp;3.12: Customising the theme to remove the x-axis line and background
 <span id="cb36-13"><a href="#cb36-13"></a>  <span class="fu">theme_gdocs</span>(<span class="at">base_size =</span> <span class="dv">11</span>) <span class="sc">+</span></span>
 <span id="cb36-14"><a href="#cb36-14"></a>  <span class="fu">theme</span>(<span class="at">axis.line.x =</span> <span class="fu">element_blank</span>(),</span>
 <span id="cb36-15"><a href="#cb36-15"></a>        <span class="at">plot.background =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
-<span id="cb36-16"><a href="#cb36-16"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"The relationship between gait speed and physical activity"</span>,</span>
+<span id="cb36-16"><a href="#cb36-16"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Associations of gait speed with physical activity"</span>,</span>
 <span id="cb36-17"><a href="#cb36-17"></a>       <span class="at">subtitle =</span> <span class="st">"2020 Healthy Ageing Data"</span>,</span>
 <span id="cb36-18"><a href="#cb36-18"></a>       <span class="at">caption =</span> <span class="st">"Figure 1. As gait speed increases, number of steps increases."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -1421,8 +1421,8 @@ Test your understanding
 <div class="cell" data-layout-align="center">
 <ul>
 <li>What mapping would you use?
-<div id="radio_SHTEOHYFBO" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_SHTEOHYFBO" value="answer"><span>aes(x = country, y = population)</span></label><label><input type="radio" autocomplete="off" name="radio_SHTEOHYFBO" value="x"><span>aes(x = population, y = country)</span></label><label><input type="radio" autocomplete="off" name="radio_SHTEOHYFBO" value="x"><span>aes(x = country)</span></label><label><input type="radio" autocomplete="off" name="radio_SHTEOHYFBO" value="x"><span>aes(x = island)</span></label><label><input type="radio" autocomplete="off" name="radio_SHTEOHYFBO" value="x"><span>aes(y = population)</span></label>
+<div id="radio_EPHIGYNLNV" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_EPHIGYNLNV" value="answer"><span>aes(x = country, y = population)</span></label><label><input type="radio" autocomplete="off" name="radio_EPHIGYNLNV" value="x"><span>aes(x = population, y = country)</span></label><label><input type="radio" autocomplete="off" name="radio_EPHIGYNLNV" value="x"><span>aes(x = country)</span></label><label><input type="radio" autocomplete="off" name="radio_EPHIGYNLNV" value="x"><span>aes(x = island)</span></label><label><input type="radio" autocomplete="off" name="radio_EPHIGYNLNV" value="x"><span>aes(y = population)</span></label>
 </div>
 </li>
 </ul>
@@ -1436,8 +1436,8 @@ Test your understanding
 <div class="cell" data-layout-align="center">
 <ul>
 <li>What mapping would you use?
-<div id="radio_JVKMXZTYRM" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_JVKMXZTYRM" value="x"><span>aes(x = country, y = population)</span></label><label><input type="radio" autocomplete="off" name="radio_JVKMXZTYRM" value="x"><span>aes(x = population, y = country)</span></label><label><input type="radio" autocomplete="off" name="radio_JVKMXZTYRM" value="x"><span>aes(x = country)</span></label><label><input type="radio" autocomplete="off" name="radio_JVKMXZTYRM" value="answer"><span>aes(x = island)</span></label><label><input type="radio" autocomplete="off" name="radio_JVKMXZTYRM" value="x"><span>aes(y = population)</span></label>
+<div id="radio_IAEOUYKDAV" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_IAEOUYKDAV" value="x"><span>aes(x = country, y = population)</span></label><label><input type="radio" autocomplete="off" name="radio_IAEOUYKDAV" value="x"><span>aes(x = population, y = country)</span></label><label><input type="radio" autocomplete="off" name="radio_IAEOUYKDAV" value="x"><span>aes(x = country)</span></label><label><input type="radio" autocomplete="off" name="radio_IAEOUYKDAV" value="answer"><span>aes(x = island)</span></label><label><input type="radio" autocomplete="off" name="radio_IAEOUYKDAV" value="x"><span>aes(y = population)</span></label>
 </div>
 </li>
 </ul>
@@ -1532,8 +1532,8 @@ Test your understanding
 <div class="cell" data-layout-align="center">
 <ul>
 <li>How would you set the mapping for this plot?
-<div id="radio_SQTPLJQFHS" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_SQTPLJQFHS" value="x"><span>aes(x = country, y = population)</span></label><label><input type="radio" autocomplete="off" name="radio_SQTPLJQFHS" value="x"><span>aes(x = population, y = country)</span></label><label><input type="radio" autocomplete="off" name="radio_SQTPLJQFHS" value="answer"><span>aes(x = population)</span></label><label><input type="radio" autocomplete="off" name="radio_SQTPLJQFHS" value="x"><span>aes(x = population, y = count)</span></label>
+<div id="radio_OVUYXVFTRL" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_OVUYXVFTRL" value="x"><span>aes(x = country, y = population)</span></label><label><input type="radio" autocomplete="off" name="radio_OVUYXVFTRL" value="x"><span>aes(x = population, y = country)</span></label><label><input type="radio" autocomplete="off" name="radio_OVUYXVFTRL" value="answer"><span>aes(x = population)</span></label><label><input type="radio" autocomplete="off" name="radio_OVUYXVFTRL" value="x"><span>aes(x = population, y = count)</span></label>
 </div>
 </li>
 </ul>
@@ -1856,23 +1856,23 @@ Test your understanding
 <option value="x">geom_violinplot()</option></select>
 </li>
 <li>What does the mapping look like for both plots?
-<div id="radio_MNCBWNPCXB" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_MNCBWNPCXB" value="x"><span>aes(x = musculoskeletal, y = gaitspeed, colour = musculoskeletal)</span></label><label><input type="radio" autocomplete="off" name="radio_MNCBWNPCXB" value="x"><span>aes(x = musculoskeletal, y = gaitspeed, fill = gaitspeed)</span></label><label><input type="radio" autocomplete="off" name="radio_MNCBWNPCXB" value="answer"><span>aes(x = musculoskeletal, y = gaitspeed, fill = musculoskeletal)</span></label><label><input type="radio" autocomplete="off" name="radio_MNCBWNPCXB" value="x"><span>aes(x = musculoskeletal, y = gaitspeed, colour = gaitspeed)</span></label>
+<div id="radio_YETQAFVVFN" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YETQAFVVFN" value="x"><span>aes(x = musculoskeletal, y = gaitspeed, fill = gaitspeed)</span></label><label><input type="radio" autocomplete="off" name="radio_YETQAFVVFN" value="x"><span>aes(x = musculoskeletal, y = gaitspeed, colour = musculoskeletal)</span></label><label><input type="radio" autocomplete="off" name="radio_YETQAFVVFN" value="answer"><span>aes(x = musculoskeletal, y = gaitspeed, fill = musculoskeletal)</span></label><label><input type="radio" autocomplete="off" name="radio_YETQAFVVFN" value="x"><span>aes(x = musculoskeletal, y = gaitspeed, colour = gaitspeed)</span></label>
 </div>
 </li>
 <li>Which category is characterised by the slowest median gait speed? <select class="webex-select"><option value="blank"></option>
-<option value="x">Sarcopenia</option>
-<option value="answer">Osteoporosis</option>
-<option value="x">Rheumatoid arthritis</option>
 <option value="x">None</option>
-<option value="x">Osteoarthritis</option></select>
+<option value="x">Osteoarthritis</option>
+<option value="x">Rheumatoid arthritis</option>
+<option value="x">Sarcopenia</option>
+<option value="answer">Osteoporosis</option></select>
 </li>
 <li>Which category is characterised by the quickest median gait speed? <select class="webex-select"><option value="blank"></option>
-<option value="answer">None</option>
-<option value="x">Osteoporosis</option>
 <option value="x">Rheumatoid arthritis</option>
-<option value="x">Osteoarthritis</option>
-<option value="x">Sarcopenia</option></select>
+<option value="answer">None</option>
+<option value="x">Sarcopenia</option>
+<option value="x">Osteoporosis</option>
+<option value="x">Osteoarthritis</option></select>
 </li>
 </ul>
 </div>
