@@ -441,7 +441,7 @@ gtag('config', 'G-6NP3MF25W3', { 'anonymize_ip': true});
 <p>There is a walkthrough video of this chapter available via <a href="https://echo360.org.uk/media/6b6c1c8f-c24f-44c1-9e43-988fe577ce5b/public">Echo360.</a> Please note that there may have been minor edits to the book since the video was recorded. Where there are differences, the book should always take precedence.</p>
 </section><section id="sec-setup-reports" class="level2" data-number="2.1"><h2 data-number="2.1" class="anchored" data-anchor-id="sec-setup-reports">
 <span class="header-section-number">2.1</span> Setup</h2>
-<p>For reference, here are the packages we will use in this chapter. You may need to install them, as explained in <a href="01-intro.html#sec-install-package" class="quarto-xref"><span>Section 1.3.1</span></a>, if running the code below in the console pane gives you the error <code>Error in library(package_name) : there is no package called 'packagename'</code>.</p>
+<p>For reference, here are the packages we will use in this chapter. You may need to install them, as explained in <a href="#sec-install-package" class="quarto-xref"><span class="quarto-unresolved-ref">sec-install-package</span></a>, if running the code below in the console pane gives you the error <code>Error in library(package_name) : there is no package called 'packagename'</code>.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -648,7 +648,7 @@ Code chunk errors
 <p>When you create a new code chunk you should notice that the grey box starts and ends with three back ticks ```. One common mistake is to accidentally delete these back ticks. Remember, code chunks and text entry are different colours - if the colour of certain parts of your Markdown doesn’t look right, check that you haven’t deleted the back ticks.</p>
 </div>
 </div>
-<p>In your code chunk, write the code you created in <a href="01-intro.html#sec-objects" class="quarto-xref"><span>Section 1.4</span></a>.</p>
+<p>In your code chunk, write the code you created in <a href="#sec-objects" class="quarto-xref"><span class="quarto-unresolved-ref">sec-objects</span></a>.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -670,7 +670,7 @@ Console vs Scripts
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>In <a href="01-intro.html" class="quarto-xref"><span>Chapter 1</span></a>, we asked you to type code into the console. Now, we want you to put code into code chunks in R Markdown files to make the code reproducible. This way, you can re-run your code any time the data changes to update the report, and you or others can inspect the code to identify and fix any errors.</p>
+<p>In <a href="#sec-intro" class="quarto-xref"><span class="quarto-unresolved-ref">sec-intro</span></a>, we asked you to type code into the console. Now, we want you to put code into code chunks in R Markdown files to make the code reproducible. This way, you can re-run your code any time the data changes to update the report, and you or others can inspect the code to identify and fix any errors.</p>
 <p>However, there will still be times that you need to put code in the console instead of in a script, such as when you install a new package. In this book, code chunks will be labelled with whether you should run them in the console or add the code to a script.</p>
 </div>
 </div>
@@ -732,7 +732,7 @@ Displaying Plots
 <p>R Markdown will create and display a new HTML document, but it will also automatically save this file in your working directory.</p>
 <p>As if by magic, that slightly odd bit of text you copied and pasted now appears as a normal sentence with the values pulled in from the objects you created.</p>
 <blockquote class="blockquote">
-<p>My name is Olivia and I am 24 years old. It is 87 days until Christmas, which is my favourite holiday.</p>
+<p>My name is Olivia and I am 24 years old. It is -61 days until Christmas, which is my favourite holiday.</p>
 </blockquote>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
@@ -865,7 +865,7 @@ View hockey_local
 <p>We’re going to write a basic report for this hockey dataset using R Markdown to show you some of the features. We’ll be expanding on almost every bit of what we’re about to show you throughout this course; the most important outcome is that you start to get comfortable with how R Markdown works and what you can use it to do.</p>
 <section id="data-analysis" class="level3" data-number="2.5.1"><h3 data-number="2.5.1" class="anchored" data-anchor-id="data-analysis">
 <span class="header-section-number">2.5.1</span> Data analysis</h3>
-<p>For this report we’re just going to present some simple NHL Draft stats for three player positions: Left Wing (LW), Centre (C), and Defenseman (D). We’ll come back to how to write this kind of code yourself in <a href="05-summary.html" class="quarto-xref"><span>Chapter 5</span></a>. For now, see if you can follow the logic of what the code is doing via the code comments.</p>
+<p>For this report we’re just going to present some simple NHL Draft stats for three player positions: Left Wing (LW), Centre (C), and Defenseman (D). We’ll come back to how to write this kind of code yourself in <a href="#sec-summary" class="quarto-xref"><span class="quarto-unresolved-ref">sec-summary</span></a>. For now, see if you can follow the logic of what the code is doing via the code comments.</p>
 <p>Create a new code chunk, then copy, paste and run the following code and then view <code>hockey_counts</code> by clicking on the object in the environment pane. Note that it doesn’t really matter whether you use <code>hockey_local</code> or <code>hockey_online</code> in the first line as they’re identical.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-with-filename">
@@ -922,7 +922,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Just putting an object by itself on a line “prints” it. <a href="#sec-rmd-tables" class="quarto-xref"><span>Section 2.5.5</span></a> will show you how to print the table in different formats for your report.</p>
+<p>Just putting an object by itself on a line “prints” it. <a href="#sec-rmd-tables" class="quarto-xref"><span class="quarto-unresolved-ref">sec-rmd-tables</span></a> will show you how to print the table in different formats for your report.</p>
 </div>
 </div>
 </section><section id="sec-markdown" class="level3" data-number="2.5.2"><h3 data-number="2.5.2" class="anchored" data-anchor-id="sec-markdown">
@@ -1024,7 +1024,7 @@ Solution
 </section><section id="sec-rmd-images" class="level3" data-number="2.5.4"><h3 data-number="2.5.4" class="anchored" data-anchor-id="sec-rmd-images">
 <span class="header-section-number">2.5.4</span> Images</h3>
 <p>As the saying goes, a picture paints a thousand words and sometimes you will want to communicate your data using visualisations.</p>
-<p>Create a code chunk to display a graph of the data in your document after the text we’ve written so far. We’ll use some code that you’ll learn more about in <a href="03-viz.html" class="quarto-xref"><span>Chapter 3</span></a> to make a simple bar chart that represents the hockey data – focus on trying to follow how bits of the code map on to the plot that is created.</p>
+<p>Create a code chunk to display a graph of the data in your document after the text we’ve written so far. We’ll use some code that you’ll learn more about in <a href="#sec-viz" class="quarto-xref"><span class="quarto-unresolved-ref">sec-viz</span></a> to make a simple bar chart that represents the hockey data – focus on trying to follow how bits of the code map on to the plot that is created.</p>
 <p>Copy and paste the below code. Run the code in your Markdown to see the plot it creates and then knit the file to see how it is displayed in your document.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-with-filename">
@@ -1192,7 +1192,7 @@ Caption placement
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The appearance and placement of the table caption depends on the type of document you are creating. Your captions may look different to those in this book because you are creating a single-page <code>html_document</code>, while this book uses the <code>html</code> style from <a href="https://quarto.org/">quarto</a>, which is a newer alternative to R Markdown. You’ll learn more about other document output types in <a href="10-custom.html#sec-custom-reports" class="quarto-xref"><span>Section 10.2</span></a>.</p>
+<p>The appearance and placement of the table caption depends on the type of document you are creating. Your captions may look different to those in this book because you are creating a single-page <code>html_document</code>, while this book uses the <code>html</code> style from <a href="https://quarto.org/">quarto</a>, which is a newer alternative to R Markdown. You’ll learn more about other document output types in <a href="#sec-custom-reports" class="quarto-xref"><span class="quarto-unresolved-ref">sec-custom-reports</span></a>.</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -1389,7 +1389,7 @@ Try
 <p>Try changing the values from <code>false</code> to <code>true</code> to see what the options do.</p>
 </div>
 </div>
-<p>The <code>df_print: paged</code> option prints data frames using <code><a href="https://pkgs.rstudio.com/rmarkdown/reference/paged_table.html">rmarkdown::paged_table()</a></code> automatically. You can use <code>df_print: kable</code> to default to the simple kable style, but you will need the code from <a href="#sec-rmd-tables" class="quarto-xref"><span>Section 2.5.5</span></a> for more complex tables with kableExtra.</p>
+<p>The <code>df_print: paged</code> option prints data frames using <code><a href="https://pkgs.rstudio.com/rmarkdown/reference/paged_table.html">rmarkdown::paged_table()</a></code> automatically. You can use <code>df_print: kable</code> to default to the simple kable style, but you will need the code from <a href="#sec-rmd-tables" class="quarto-xref"><span class="quarto-unresolved-ref">sec-rmd-tables</span></a> for more complex tables with kableExtra.</p>
 <p>The built-in bootswatch themes are: default, cerulean, cosmo, darkly, flatly, journal, lumen, paper, readable, sandstone, simplex, spacelab, united, and yeti. You can <a href="https://bootswatch.com/4/">view and download more themes</a>. Try changing the theme to see which one you like best.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -1448,7 +1448,7 @@ Malformated ToC
 </div>
 </section><section id="formats" class="level3" data-number="2.6.6"><h3 data-number="2.6.6" class="anchored" data-anchor-id="formats">
 <span class="header-section-number">2.6.6</span> Formats</h3>
-<p>So far we’ve just knitted to html. To generate PDF reports, you need to install <pkg>tinytex</pkg><span class="citation" data-cites="R-tinytex">(<a href="11-refs.html#ref-R-tinytex" role="doc-biblioref">Xie, 2021</a>)</span> and run the following code in the console (do <strong>not</strong> add this to your Rmd file):</p>
+<p>So far we’ve just knitted to html. To generate PDF reports, you need to install <pkg>tinytex</pkg><span class="citation" data-cites="R-tinytex">(<a href="#ref-R-tinytex" role="doc-biblioref">Xie, 2021</a>)</span> and run the following code in the console (do <strong>not</strong> add this to your Rmd file):</p>
 <div class="cell" data-layout-align="center" data-filname="Run in the console">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">install.packages</span>(<span class="st">"tinytex"</span>)</span>
 <span id="cb28-2"><a href="#cb28-2"></a>tinytex<span class="sc">::</span><span class="fu">install_tinytex</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1496,10 +1496,10 @@ Knitting errors
 <p>Below are some additional exercises that will let you apply what you have learned in this chapter. We would suggest taking a break before you do these - it might feel slightly more effortful, but spreading out your practice will help you learn more in the long run.</p>
 <section id="sec-exercises-reports-project" class="level3" data-number="2.7.1"><h3 data-number="2.7.1" class="anchored" data-anchor-id="sec-exercises-reports-project">
 <span class="header-section-number">2.7.1</span> New project</h3>
-<p>Create a new project called “demo_report” (<a href="#sec-projects" class="quarto-xref"><span>Section 2.2</span></a>).</p>
+<p>Create a new project called “demo_report” (<a href="#sec-projects" class="quarto-xref"><span class="quarto-unresolved-ref">sec-projects</span></a>).</p>
 </section><section id="sec-exercises-reports-setup" class="level3" data-number="2.7.2"><h3 data-number="2.7.2" class="anchored" data-anchor-id="sec-exercises-reports-setup">
 <span class="header-section-number">2.7.2</span> New script</h3>
-<p>In the “demo_report” project, create a new Rmarkdown document called “job.Rmd” (<a href="#sec-rmarkdown" class="quarto-xref"><span>Section 2.3</span></a>). Edit the YAML header to output tables using kable and set a custom theme (<a href="#sec-yaml" class="quarto-xref"><span>Section 2.6.4</span></a>).</p>
+<p>In the “demo_report” project, create a new Rmarkdown document called “job.Rmd” (<a href="#sec-rmarkdown" class="quarto-xref"><span class="quarto-unresolved-ref">sec-rmarkdown</span></a>). Edit the YAML header to output tables using kable and set a custom theme (<a href="#sec-yaml" class="quarto-xref"><span class="quarto-unresolved-ref">sec-yaml</span></a>).</p>
 <div class="webex-solution">
 <button>
 Solution
@@ -1508,7 +1508,7 @@ Solution
 </div>
 </section><section id="sec-exercises-reports-rmarkdown" class="level3" data-number="2.7.3"><h3 data-number="2.7.3" class="anchored" data-anchor-id="sec-exercises-reports-rmarkdown">
 <span class="header-section-number">2.7.3</span> R Markdown</h3>
-<p>Write a short paragraph describing your job or a job you might like to have in the future (<a href="#sec-markdown" class="quarto-xref"><span>Section 2.5.2</span></a>). Include a bullet-point list of links to websites that are useful for that job (<a href="#sec-markdown" class="quarto-xref"><span>Section 2.5.2</span></a>).</p>
+<p>Write a short paragraph describing your job or a job you might like to have in the future (<a href="#sec-markdown" class="quarto-xref"><span class="quarto-unresolved-ref">sec-markdown</span></a>). Include a bullet-point list of links to websites that are useful for that job (<a href="#sec-markdown" class="quarto-xref"><span class="quarto-unresolved-ref">sec-markdown</span></a>).</p>
 <div class="webex-solution">
 <button>
 Solution
@@ -1521,7 +1521,7 @@ and teaching computational skills.
 </div>
 </section><section id="sec-exercises-reports-tables" class="level3" data-number="2.7.4"><h3 data-number="2.7.4" class="anchored" data-anchor-id="sec-exercises-reports-tables">
 <span class="header-section-number">2.7.4</span> Tables</h3>
-<p>Use the following code to load a small table of tasks (<a href="#sec-code-chunks" class="quarto-xref"><span>Section 2.3.2</span></a>). Edit it to be relevant to your job (you can change the categories entirely if you want).</p>
+<p>Use the following code to load a small table of tasks (<a href="#sec-code-chunks" class="quarto-xref"><span class="quarto-unresolved-ref">sec-code-chunks</span></a>). Edit it to be relevant to your job (you can change the categories entirely if you want).</p>
 <div class="cell" data-layout-align="center">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -1535,7 +1535,7 @@ and teaching computational skills.
 <span id="cb32-6"><a href="#cb32-6"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-<p>Figure out how to make it so that code chunks don’t show in your knitted document (<a href="#sec-rmd-setup" class="quarto-xref"><span>Section 2.6.1</span></a>).</p>
+<p>Figure out how to make it so that code chunks don’t show in your knitted document (<a href="#sec-rmd-setup" class="quarto-xref"><span class="quarto-unresolved-ref">sec-rmd-setup</span></a>).</p>
 <div class="webex-solution">
 <button>
 Solution
@@ -1553,7 +1553,7 @@ Solution
 </div>
 </div>
 </div>
-<p>Display the table with purple italic column headers. Try different styles using <pkg>kableExtra</pkg> (<a href="#sec-rmd-tables" class="quarto-xref"><span>Section 2.5.5</span></a>).</p>
+<p>Display the table with purple italic column headers. Try different styles using <pkg>kableExtra</pkg> (<a href="#sec-rmd-tables" class="quarto-xref"><span class="quarto-unresolved-ref">sec-rmd-tables</span></a>).</p>
 <div class="cell" data-layout-align="center" data-webex.hide="true">
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="false" aria-label="Toggle callout">
@@ -1606,7 +1606,7 @@ Solution
 </div>
 </section><section id="sec-exercises-reports-images" class="level3" data-number="2.7.5"><h3 data-number="2.7.5" class="anchored" data-anchor-id="sec-exercises-reports-images">
 <span class="header-section-number">2.7.5</span> Images</h3>
-<p>Add an image of anything relevant (<a href="#sec-rmd-images" class="quarto-xref"><span>Section 2.5.4</span></a>).</p>
+<p>Add an image of anything relevant (<a href="#sec-rmd-images" class="quarto-xref"><span class="quarto-unresolved-ref">sec-rmd-images</span></a>).</p>
 <div class="cell" data-layout-align="center" data-webex.hide="true">
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-26-contents" aria-controls="callout-26" aria-expanded="false" aria-label="Toggle callout">
@@ -1642,7 +1642,7 @@ Alternative Solution
 </div>
 </section><section id="sec-exercises-reports-inline" class="level3" data-number="2.7.6"><h3 data-number="2.7.6" class="anchored" data-anchor-id="sec-exercises-reports-inline">
 <span class="header-section-number">2.7.6</span> Inline R</h3>
-<p>Use inline R to include the version of R you are using in the following sentence: “This report was created using R version 4.4.1 (2024-06-14 ucrt).” You can get the version using the object <code>R.version.string</code> (<a href="#sec-rmd-inline-r" class="quarto-xref"><span>Section 2.3.4</span></a>).</p>
+<p>Use inline R to include the version of R you are using in the following sentence: “This report was created using R version 4.4.1 (2024-06-14 ucrt).” You can get the version using the object <code>R.version.string</code> (<a href="#sec-rmd-inline-r" class="quarto-xref"><span class="quarto-unresolved-ref">sec-rmd-inline-r</span></a>).</p>
 <div class="webex-solution">
 <button>
 Solution
@@ -1651,7 +1651,7 @@ Solution
 </div>
 </section><section id="sec-exercises-reports-knit" class="level3" data-number="2.7.7"><h3 data-number="2.7.7" class="anchored" data-anchor-id="sec-exercises-reports-knit">
 <span class="header-section-number">2.7.7</span> Knit</h3>
-<p>Knit this document to html (<a href="#sec-rmd-knit" class="quarto-xref"><span>Section 2.3.5</span></a>).</p>
+<p>Knit this document to html (<a href="#sec-rmd-knit" class="quarto-xref"><span class="quarto-unresolved-ref">sec-rmd-knit</span></a>).</p>
 <div class="webex-solution">
 <button>
 Solution
@@ -1736,7 +1736,7 @@ Solution
 </ul>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
 <div id="ref-R-tinytex" class="csl-entry" role="listitem">
 Xie, Y. (2021). <em>Tinytex: Helper functions to install and maintain TeX live, and compile LaTeX documents</em>. <a href="https://github.com/yihui/tinytex">https://github.com/yihui/tinytex</a>
 </div>
