@@ -392,7 +392,7 @@ gtag('config', 'G-6NP3MF25W3', { 'anonymize_ip': true});
 </section><section id="sec-intro-installing-r" class="level2" data-number="1.1"><h2 data-number="1.1" class="anchored" data-anchor-id="sec-intro-installing-r">
 <span class="header-section-number">1.1</span> Installing R and RStudio</h2>
 <p>R is a programming language that you will write code in and RStudio is a program that makes working in R easier.</p>
-<p><a href="#sec-installing-r" class="quarto-xref"><span class="quarto-unresolved-ref">sec-installing-r</span></a> has technical details on installing R and RStudio on your computer. If you need any help installing R, please ask on Teams or attend office hours. Once you have installed R and RStudio, come back to this chapter. If you already had R and/or RStudio installed, we recommend updating to the latest version before you work through this course. <a href="#sec-updating-r" class="quarto-xref"><span class="quarto-unresolved-ref">sec-updating-r</span></a> has more details on how to do that. Here, we’ll concentrate on introducing you to RStudio’s interface and getting it configured.</p>
+<p><a href="app-installing-r.html" class="quarto-xref"><span>Appendix A</span></a> has technical details on installing R and RStudio on your computer. If you need any help installing R, please ask on Teams or attend office hours. Once you have installed R and RStudio, come back to this chapter. If you already had R and/or RStudio installed, we recommend updating to the latest version before you work through this course. <a href="app-updating-r.html" class="quarto-xref"><span>Appendix B</span></a> has more details on how to do that. Here, we’ll concentrate on introducing you to RStudio’s interface and getting it configured.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -425,9 +425,9 @@ Figure&nbsp;1.1: The RStudio IDE
 </div>
 </div>
 <p>By default, the upper left pane is the <strong>source pane</strong>, where you view, write, and edit code from files and view data tables in a spreadsheet format. When you first open RStudio, this pane won’t display until we open a document or load in some data – don’t worry, we’ll get to that soon.</p>
-<p>The lower left pane is the <strong>console pane</strong>, where you can type in commands and view output messages. You can write code in the console to test it out. The code will run and can create objects in the environment, but the code itself won’t be saved. You need to write your code into a script in the source pane to save it, which we’ll cover in <a href="#sec-reports" class="quarto-xref"><span class="quarto-unresolved-ref">sec-reports</span></a>.</p>
-<p>The right panes have several different tabs that show you information about your code. The most used tabs in the upper right pane are the <strong>Environment</strong> tab and the <strong>Help</strong> tab. The Environment tab lists some information about the <a href="https://psyteachr.github.io/glossary/o#object" target="_blank" class="glossary" title="A word that identifies and stores the value of some data for later use.">objects</a> that you have defined in your code. We’ll learn more about the Help tab in <a href="#sec-function-help" class="quarto-xref"><span class="quarto-unresolved-ref">sec-function-help</span></a>.</p>
-<p>In the lower right pane, the most used tabs are the <strong>Files</strong> tab for directory structure, the <strong>Plots</strong> tab for plots made in a script, the <strong>Packages</strong> tab for managing add-on packages (see <a href="#sec-packages" class="quarto-xref"><span class="quarto-unresolved-ref">sec-packages</span></a>), and the <strong>Viewer</strong> tab to display reports created by your scripts. You can change the location of panes and what tabs are shown under <if>Tools &gt; Global Options… &gt; Pane Layout</if>.</p>
+<p>The lower left pane is the <strong>console pane</strong>, where you can type in commands and view output messages. You can write code in the console to test it out. The code will run and can create objects in the environment, but the code itself won’t be saved. You need to write your code into a script in the source pane to save it, which we’ll cover in <a href="02-reports.html" class="quarto-xref"><span>Chapter 2</span></a>.</p>
+<p>The right panes have several different tabs that show you information about your code. The most used tabs in the upper right pane are the <strong>Environment</strong> tab and the <strong>Help</strong> tab. The Environment tab lists some information about the <a href="https://psyteachr.github.io/glossary/o#object" target="_blank" class="glossary" title="A word that identifies and stores the value of some data for later use.">objects</a> that you have defined in your code. We’ll learn more about the Help tab in <a href="#sec-function-help" class="quarto-xref"><span>Section 1.3.5</span></a>.</p>
+<p>In the lower right pane, the most used tabs are the <strong>Files</strong> tab for directory structure, the <strong>Plots</strong> tab for plots made in a script, the <strong>Packages</strong> tab for managing add-on packages (see <a href="#sec-packages" class="quarto-xref"><span>Section 1.3</span></a>), and the <strong>Viewer</strong> tab to display reports created by your scripts. You can change the location of panes and what tabs are shown under <if>Tools &gt; Global Options… &gt; Pane Layout</if>.</p>
 </section><section id="sec-intro-reproducibility" class="level3" data-number="1.1.2"><h3 data-number="1.1.2" class="anchored" data-anchor-id="sec-intro-reproducibility">
 <span class="header-section-number">1.1.2</span> Reproducibility</h3>
 <p>In this class, you will be learning how to make reproducible reports. This involves writing scripts that transform data, create summaries and visualisations, and embed them in a report in a way that always gives you the same results.</p>
@@ -442,7 +442,7 @@ Settings for Reproducibility
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><a href="#sec-rstudio-settings" class="quarto-xref"><span class="quarto-unresolved-ref">sec-rstudio-settings</span></a> shows you how to change two important settings in the Global Options to increase reproducibility. Your settings should have:</p>
+<p><a href="app-installing-r.html#sec-rstudio-settings" class="quarto-xref"><span>Section A.4</span></a> shows you how to change two important settings in the Global Options to increase reproducibility. Your settings should have:</p>
 <ul>
 <li>Restore .RData into workspace at startup: <select class="webex-select"><option value="blank"></option>
 <option value="">Checked</option>
@@ -483,7 +483,7 @@ Settings for Reproducibility
 <div class="small_right"><img src="images/memes/pokemon.gif" /></div>
 -->
 <p>This is done using <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code>. This is like installing an app on your phone: you only have to do it once and the app will remain installed until you remove it. For instance, if you want to use PokemonGo on your phone, you install it once from the App Store or Play Store; you don’t have to re-install it each time you want to use it. Once you launch the app, it will run in the background until you close it or restart your phone. Likewise, when you install a package, the package will be available (but not <em>loaded</em>) every time you open up R.</p>
-<p>Install the <pkg>tidyverse</pkg> package on your system. This is the main package we will use throughout this book for data wrangling, summaries, and visualisation. It is actually a bundle of packages, which we’ll explain further in <a href="#sec-tidyverse" class="quarto-xref"><span class="quarto-unresolved-ref">sec-tidyverse</span></a>. When using the University computers, you may need to manually install the <pkg>tzdb</pkg> package, the <pkg>timechange</pkg> package, and/or the <pkg>vroom</pkg> package before being able to load the <pkg>tidyverse</pkg> package.</p>
+<p>Install the <pkg>tidyverse</pkg> package on your system. This is the main package we will use throughout this book for data wrangling, summaries, and visualisation. It is actually a bundle of packages, which we’ll explain further in <a href="#sec-tidyverse" class="quarto-xref"><span>Section 1.3.4</span></a>. When using the University computers, you may need to manually install the <pkg>tzdb</pkg> package, the <pkg>timechange</pkg> package, and/or the <pkg>vroom</pkg> package before being able to load the <pkg>tidyverse</pkg> package.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -492,7 +492,7 @@ Settings for Reproducibility
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-<p>If you get a message that says something like <code>package ‘tidyverse’ successfully unpacked and MD5 sums checked</code>, the installation was successful. If you get an error and the package wasn’t installed, check the troubleshooting section of <a href="#sec-package-install-troubleshooting" class="quarto-xref"><span class="quarto-unresolved-ref">sec-package-install-troubleshooting</span></a>.</p>
+<p>If you get a message that says something like <code>package ‘tidyverse’ successfully unpacked and MD5 sums checked</code>, the installation was successful. If you get an error and the package wasn’t installed, check the troubleshooting section of <a href="app-updating-r.html#sec-package-install-troubleshooting" class="quarto-xref"><span>Section B.4</span></a>.</p>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -573,21 +573,21 @@ Note
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">beep</span>(<span class="at">sound =</span> <span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-<p>If you type a function into the console pane, it will run as soon as you hit enter. If you put the function in a <a href="https://psyteachr.github.io/glossary/s#script" target="_blank" class="glossary" title="A plain-text file that contains commands in a coding language, such as R.">script</a> or <a href="https://psyteachr.github.io/glossary/r#r-markdown" target="_blank" class="glossary" title="The R-specific version of markdown: a way to specify formatting, such as headers, paragraphs, lists, bolding, and links, as well as code blocks and inline code.">R Markdown</a> document in the <a href="https://psyteachr.github.io/glossary/p#panes" target="_blank" class="glossary" title="RStudio is arranged with four window “panes”.">source pane</a>, it won’t run until you run the script, <a href="https://psyteachr.github.io/glossary/k#knit" target="_blank" class="glossary" title="To create an HTML, PDF, or Word document from an R Markdown (Rmd) document">knit</a> the R Markdown file, or run a code <a href="https://psyteachr.github.io/glossary/c#chunk" target="_blank" class="glossary" title="A section of code in an R Markdown file">chunk</a>. You’ll learn more about this in <a href="#sec-reports" class="quarto-xref"><span class="quarto-unresolved-ref">sec-reports</span></a>.</p>
+<p>If you type a function into the console pane, it will run as soon as you hit enter. If you put the function in a <a href="https://psyteachr.github.io/glossary/s#script" target="_blank" class="glossary" title="A plain-text file that contains commands in a coding language, such as R.">script</a> or <a href="https://psyteachr.github.io/glossary/r#r-markdown" target="_blank" class="glossary" title="The R-specific version of markdown: a way to specify formatting, such as headers, paragraphs, lists, bolding, and links, as well as code blocks and inline code.">R Markdown</a> document in the <a href="https://psyteachr.github.io/glossary/p#panes" target="_blank" class="glossary" title="RStudio is arranged with four window “panes”.">source pane</a>, it won’t run until you run the script, <a href="https://psyteachr.github.io/glossary/k#knit" target="_blank" class="glossary" title="To create an HTML, PDF, or Word document from an R Markdown (Rmd) document">knit</a> the R Markdown file, or run a code <a href="https://psyteachr.github.io/glossary/c#chunk" target="_blank" class="glossary" title="A section of code in an R Markdown file">chunk</a>. You’ll learn more about this in <a href="02-reports.html" class="quarto-xref"><span>Chapter 2</span></a>.</p>
 </section><section id="sec-tidyverse" class="level3" data-number="1.3.4"><h3 data-number="1.3.4" class="anchored" data-anchor-id="sec-tidyverse">
 <span class="header-section-number">1.3.4</span> Tidyverse</h3>
 <p><pkg>tidyverse</pkg> is a meta-package that loads several packages we’ll be using in almost every chapter in this book:</p>
 <ul>
 <li>
-<pkg>ggplot2</pkg>, for data visualisation (<a href="#sec-viz" class="quarto-xref"><span class="quarto-unresolved-ref">sec-viz</span></a>)</li>
+<pkg>ggplot2</pkg>, for data visualisation (<a href="03-viz.html" class="quarto-xref"><span>Chapter 3</span></a>)</li>
 <li>
-<pkg>readr</pkg>, for data import (<a href="#sec-data" class="quarto-xref"><span class="quarto-unresolved-ref">sec-data</span></a>)</li>
+<pkg>readr</pkg>, for data import (<a href="04-data.html" class="quarto-xref"><span>Chapter 4</span></a>)</li>
 <li>
-<pkg>tibble</pkg>, for tables (<a href="#sec-data" class="quarto-xref"><span class="quarto-unresolved-ref">sec-data</span></a>)</li>
+<pkg>tibble</pkg>, for tables (<a href="04-data.html" class="quarto-xref"><span>Chapter 4</span></a>)</li>
 <li>
-<pkg>tidyr</pkg>, for data tidying (<a href="#sec-tidy" class="quarto-xref"><span class="quarto-unresolved-ref">sec-tidy</span></a>)</li>
+<pkg>tidyr</pkg>, for data tidying (<a href="08-tidy.html" class="quarto-xref"><span>Chapter 8</span></a>)</li>
 <li>
-<pkg>dplyr</pkg>, for data manipulation (<a href="#sec-wrangle" class="quarto-xref"><span class="quarto-unresolved-ref">sec-wrangle</span></a>)</li>
+<pkg>dplyr</pkg>, for data manipulation (<a href="09-wrangle.html" class="quarto-xref"><span>Chapter 9</span></a>)</li>
 <li>
 <pkg>stringr</pkg>, for <a href="https://psyteachr.github.io/glossary/s#string" target="_blank" class="glossary" title="A piece of text inside of quotes.">strings</a>
 </li>
