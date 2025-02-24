@@ -518,7 +518,7 @@ gtag('config', 'G-6NP3MF25W3', { 'anonymize_ip': true});
 </tbody>
 </table></section><section id="mutating-joins" class="level2" data-number="7.3"><h2 data-number="7.3" class="anchored" data-anchor-id="mutating-joins">
 <span class="header-section-number">7.3</span> Mutating Joins</h2>
-<p><a href="https://psyteachr.github.io/glossary/m#mutating-joins" target="_blank" class="glossary" title="Joins that act like the dplyr::mutate() function in that they add new columns to one table based on values in another table.">Mutating joins</a> act like the <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">dplyr::mutate()</a></code> function in that they add new columns to one table based on values in another table. We’ll learn more about the <code>mutate()</code> function in <a href="08-tidy.html" class="quarto-xref"><span>Chapter 8</span></a>.</p>
+<p><a href="https://psyteachr.github.io/glossary/m#mutating-joins" target="_blank" class="glossary" title="Joins that act like the dplyr::mutate() function in that they add new columns to one table based on values in another table.">Mutating joins</a> act like the <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">dplyr::mutate()</a></code> function in that they add new columns to one table based on values in another table. We’ll learn more about the <code>mutate()</code> function in <a href="#sec-tidy" class="quarto-xref"><span class="quarto-unresolved-ref">sec-tidy</span></a>.</p>
 <p>All the mutating joins have this basic syntax:</p>
 <p><code>****_join(x, y, by = NULL, suffix = c(".x", ".y"))</code></p>
 <ul>
@@ -923,7 +923,7 @@ Note
 </div>
 </section></section><section id="filtering-joins" class="level2" data-number="7.4"><h2 data-number="7.4" class="anchored" data-anchor-id="filtering-joins">
 <span class="header-section-number">7.4</span> Filtering Joins</h2>
-<p><a href="https://psyteachr.github.io/glossary/f#filtering-joins" target="_blank" class="glossary" title="Joins that act like the dplyr::filter() function in that they remove rows from the data in one table based on the values in another table.">Filtering joins</a> act like the <code><a href="https://dplyr.tidyverse.org/reference/filter.html">dplyr::filter()</a></code> function in that they keep and remove rows from the data in one table based on the values in another table. The result of a filtering join will only contain rows from the left table and have the same number or fewer rows than the left table. We’ll learn more about the <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code> function in <a href="09-wrangle.html" class="quarto-xref"><span>Chapter 9</span></a>.</p>
+<p><a href="https://psyteachr.github.io/glossary/f#filtering-joins" target="_blank" class="glossary" title="Joins that act like the dplyr::filter() function in that they remove rows from the data in one table based on the values in another table.">Filtering joins</a> act like the <code><a href="https://dplyr.tidyverse.org/reference/filter.html">dplyr::filter()</a></code> function in that they keep and remove rows from the data in one table based on the values in another table. The result of a filtering join will only contain rows from the left table and have the same number or fewer rows than the left table. We’ll learn more about the <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code> function in <a href="#sec-wrangle" class="quarto-xref"><span class="quarto-unresolved-ref">sec-wrangle</span></a>.</p>
 <section id="sec-semi_join" class="level3" data-number="7.4.1"><h3 data-number="7.4.1" class="anchored" data-anchor-id="sec-semi_join">
 <span class="header-section-number">7.4.1</span> semi_join()</h3>
 <div class="join">
@@ -1195,7 +1195,7 @@ Warning
 </div>
 </div>
 <p>The columns just have to have the same names, they don’t have to be in the same order. Any columns that differ between the two tables will just have <code>NA</code> values for entries from the other table.</p>
-<p>If a row is duplicated between the two tables (like id 5 below), the row will also be duplicated in the resulting table. If your tables have the exact same columns, you can use <code><a href="https://rdrr.io/r/base/sets.html">union()</a></code> (see <a href="#sec-union" class="quarto-xref"><span>Section 7.7.2</span></a>) to avoid duplicates.</p>
+<p>If a row is duplicated between the two tables (like id 5 below), the row will also be duplicated in the resulting table. If your tables have the exact same columns, you can use <code><a href="https://rdrr.io/r/base/sets.html">union()</a></code> (see <a href="#sec-union" class="quarto-xref"><span class="quarto-unresolved-ref">sec-union</span></a>) to avoid duplicates.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>new_participants <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb16-2"><a href="#cb16-2"></a>  <span class="at">id =</span> <span class="dv">5</span><span class="sc">:</span><span class="dv">9</span>,</span>
@@ -1641,7 +1641,7 @@ $postcode
 </div>
 </section></section><section id="conflicting-variable-types" class="level2" data-number="7.8"><h2 data-number="7.8" class="anchored" data-anchor-id="conflicting-variable-types">
 <span class="header-section-number">7.8</span> Conflicting variable types</h2>
-<p>As we covered in <a href="04-data.html" class="quarto-xref"><span>Chapter 4</span></a>, when you import or create data, R will do its best to set each column to an appropriate data type. However, sometimes it gets it wrong or sometimes there’s something in the way the data has been encoded in the original spreadsheet that causes the data type to be different than expected. When joining datasets by common columns, it’s important that not only are the variable names identical, but the data type of those variables is identical.</p>
+<p>As we covered in <a href="#sec-data" class="quarto-xref"><span class="quarto-unresolved-ref">sec-data</span></a>, when you import or create data, R will do its best to set each column to an appropriate data type. However, sometimes it gets it wrong or sometimes there’s something in the way the data has been encoded in the original spreadsheet that causes the data type to be different than expected. When joining datasets by common columns, it’s important that not only are the variable names identical, but the data type of those variables is identical.</p>
 <p>Let’s recreate our <code>new_participants</code> dataset but this time, we’ll specify that <code>id</code> is a <a href="https://psyteachr.github.io/glossary/c#character" target="_blank" class="glossary" title="A data type representing strings of text.">character</a> variable.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a>new_participants2 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
@@ -1678,7 +1678,7 @@ $postcode
 ! Can't combine `..1$id` &lt;integer&gt; and `..2$id` &lt;character&gt;.</code></pre>
 </div>
 </div>
-<p>An alternative method to change variable types from what we showed you in <a href="04-data.html" class="quarto-xref"><span>Chapter 4</span></a> is to use the <code>as.***</code> functions. If you type <code>as.</code> into a code chunk, you will see that there are a huge number of these functions for transforming variables and datasets to different types. Exactly which one you need will depend on the data you have, but a few commonly used ones are:</p>
+<p>An alternative method to change variable types from what we showed you in <a href="#sec-data" class="quarto-xref"><span class="quarto-unresolved-ref">sec-data</span></a> is to use the <code>as.***</code> functions. If you type <code>as.</code> into a code chunk, you will see that there are a huge number of these functions for transforming variables and datasets to different types. Exactly which one you need will depend on the data you have, but a few commonly used ones are:</p>
 <ul>
 <li>
 <code><a href="https://rdrr.io/r/base/numeric.html">as.numeric()</a></code> - convert a variable to <a href="https://psyteachr.github.io/glossary/n#numeric" target="_blank" class="glossary" title="A data type representing a real decimal number or integer.">numeric</a>. Useful for when you have a variable of real numbers that have been encoded as character. Any values that can’t be turned into numbers (e.g., if you have the word “missing” in cells that you have no data for), will be returned as <code>NA</code>.</li>
