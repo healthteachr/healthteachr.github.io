@@ -1,3 +1,8 @@
+```{r echo = FALSE}
+glossary_path("psyteachr")
+glossary_popup("hover")
+```
+
 # Data Visualisation {#sec-viz}
 
 ## Intended Learning Outcomes {#sec-ilo-viz .unnumbered}
@@ -20,7 +25,7 @@ Create a new project for the work we'll do in this chapter:
 
 Then, create and save a new `r glossary("R Markdown")` document named `plots.Rmd`, get rid of the default template text, and load the packages in the set-up code `r glossary("chunk")`. You should have all of these packages installed already, but if you get the message `Error in library(x) : there is no package called ‘x’`, please refer to @sec-install-package.
 
-```{r setup-viz, message=FALSE, verbatim="r setup, include=FALSE"}
+```{r setup-viz, message=FALSE}
 library(tidyverse) # includes ggplot2
 library(patchwork) # for multi-part plots
 library(ggthemes)  # for plot themes
@@ -200,7 +205,7 @@ Let's build up the plot above, layer by layer. First we need to get the data. We
 When you load the data, `read_csv()` will produce a message that gives you information about the data it has imported and what assumptions it has made. The "column specification" tells you what each column is named and what type of data R has categorised each variable as. The abbreviation "chr" is for `r glossary("character")` columns, "dbl" is for `r glossary("double")` columns, and "dttm" is a date/time column.
 
 ```{r}
-function_data <- read_csv("https://healthteachr.github.io/ads-v2/data/Function_and_PA_data.csv")
+function_data <- read_csv("https://healthteachr.github.io/data/Function_and_PA_data.csv")
 ```
 
 This data is simulated data for a health and wellbeing study in older adults. The first thing you should do when you need to plot data is to get familiar with what all of the rows (observations) and columns (variables) mean. Sometimes this is obvious, and sometimes it requires help from the data provider. Here, each row represents one participant.
@@ -245,7 +250,7 @@ function_col_types <- cols(
 )
 
 # re-import data with correct column  types
-function_data <- read_csv("https://healthteachr.github.io/ads-v2/data/Function_and_PA_data.csv",
+function_data <- read_csv("https://healthteachr.github.io/data/Function_and_PA_data.csv",
                         col_types = function_col_types)
 ```
 
@@ -536,7 +541,7 @@ ggplot(function_data, aes(x = gaitspeed, y = steps)) +
   theme_gdocs(base_size = 11) +
   theme(axis.line.x = element_blank(),
         plot.background = element_blank()) +
-  labs(title = "The relationship between gait speed and physical activity",
+  labs(title = "Association of gait speed with physical activity",
        subtitle = "2020 Healthy Ageing Data",
        caption = "Figure 1. As gait speed increases, number of steps increases.")
 ```
@@ -1001,8 +1006,8 @@ ans2 <- sample(c(
 * How would you create plot A? `r mcq(violin)`
 * How would you create plot B? `r mcq(box)`
 * What does the mapping look like for both plots? `r longmcq(aes)`
-* Which musculoskeletal disease is characterised by the slowest median gait speed? `r mcq(ans1)`
-* Which musculoskeletal disease is characterised by the quickest median gait speed? `r mcq(ans2)`
+* Which category is characterised by the slowest median gait speed? `r mcq(ans1)`
+* Which category is characterised by the quickest median gait speed? `r mcq(ans2)`
 :::
 
 
@@ -1156,7 +1161,7 @@ library(lubridate)
 library(knitr)
 library(kableExtra)
 
-function_data <- read_csv("https://healthteachr.github.io/ads-v2/data/Function_and_PA_data.csv")
+function_data <- read_csv("https://healthteachr.github.io/data/Function_and_PA_data.csv")
 ```
 
 ### Summary {#sec-exercises-summary}
@@ -1195,8 +1200,7 @@ Once you've completed this activity, post it in the Week 3 channel on Teams so t
 
 ```{r, echo = FALSE, results='asis'}
 glossary_table(as_kable = FALSE) |> 
-  kableExtra::kable(row.names = FALSE, escape = FALSE) |>
-  unclass() |> cat()
+  kableExtra::kable(row.names = FALSE, escape = FALSE)
 ```
 
 

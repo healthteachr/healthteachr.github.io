@@ -3,6 +3,10 @@ editor:
   markdown: 
     wrap: 72
 ---
+```{r echo = FALSE}
+glossary_path("psyteachr")
+glossary_popup("hover")
+```
 
 # Reports with R Markdown {#sec-reports}
 
@@ -32,6 +36,7 @@ running the code below in the console pane gives you the error
 `Error in library(package_name) : there is no package called 'packagename'`.
 
 ```{r setup-reports, message=FALSE, filename="Chapter packages"}
+library(timechange)
 library(tidyverse)  # various data manipulation functions
 library(knitr)      # for rendering a report from a script
 library(rmarkdown)  # for using R markdown
@@ -409,7 +414,7 @@ loads some National Hockey League (NHL) draft data.
     won't work without this.
 
 ```{r, message=FALSE, filename="hockey_data.Rmd"}
-hockey_online <- read_csv("https://healthteachr.github.io/ads-v2/data/nhldraft.csv")
+hockey_online <- read_csv("https://healthteachr.github.io/data/nhldraft.csv")
 ```
 
 ::: callout-warning
@@ -418,7 +423,7 @@ hockey_online <- read_csv("https://healthteachr.github.io/ads-v2/data/nhldraft.c
 If you get an error message that looks like:
 
 > Error in
-> read_csv("https://healthteachr.github.io/ads-v2/data/nhldraft.csv") :\
+> read_csv("https://healthteachr.github.io/data/nhldraft.csv") :\
 > could not find function "read_csv"
 
 This means that you have not loaded tidyverse. Check that
@@ -459,14 +464,14 @@ projects.
 
 In your `r path("02-reports")` directory, create a new folder named
 `r path("data")`, [download a copy of the hockey data
-file](https://healthteachr.github.io/ads-v2/data/nhldraft.csv){download=""},
+file](https://healthteachr.github.io/data/nhldraft.csv){download=""},
 and save it in this new subdirectory.
 
 To load in data from a local file, again we can use the `read_csv()`
 function, but this time rather than specifying a url, give it the
 subdirectory and file name.
 
-```{r read-csv, eval = FALSE, filename="baseball_data.Rmd"}
+```{r read-csv, eval = FALSE, filename="hockey_data.Rmd"}
 hockey_local <- read_csv("data/nhldraft.csv")
 ```
 
@@ -500,7 +505,7 @@ confirm that the data is the same as `hockey_online`.
 
 ## Writing a report
 
-We're going to write a basic report for this baseball dataset using R
+We're going to write a basic report for this hockey dataset using R
 Markdown to show you some of the features. We'll be expanding on almost
 every bit of what we're about to show you throughout this course; the
 most important outcome is that you start to get comfortable with how R
@@ -1206,7 +1211,7 @@ k_highlight
 Add an image of anything relevant ([@sec-rmd-images]).
 
 ```{r, webex.hide= TRUE}
-knitr::include_graphics("https://healthteachr.github.io/ads-v2/images/logos/logo.png")
+knitr::include_graphics("https://healthteachr.github.io/images/logos/logo.png")
 ```
 
 `r hide("Alternative Solution")`
@@ -1214,7 +1219,7 @@ knitr::include_graphics("https://healthteachr.github.io/ads-v2/images/logos/logo
 You can add an image from the web using its URL:
 
 ```         
-![Applied Data Skills](https://healthteachr.github.io/ads-v2/images/logos/logo.png)
+![Applied Data Skills](https://healthteachr.github.io/images/logos/logo.png)
 ```
 
 Or save an image into your project directory (e.g., in the images
@@ -1256,8 +1261,7 @@ rmarkdown::render("job.Rmd")
 
 ```{r, echo = FALSE, results='asis'}
 glossary_table(as_kable = FALSE) |> 
-  kableExtra::kable(row.names = FALSE, escape = FALSE) |>
-  unclass() |> cat()
+  kableExtra::kable(row.names = FALSE, escape = FALSE)
 ```
 
 ## Further Resources {#sec-resources-reports}

@@ -1,3 +1,14 @@
+---
+format: 
+  html:
+    self-contained: true
+---
+
+```{r echo = FALSE}
+glossary_path("psyteachr")
+glossary_popup("hover")
+```
+
 # Customising Visualisations & Reports {#sec-custom}
 
 ## Intended Learning Outcomes {#sec-ilo-custom .unnumbered}
@@ -39,7 +50,7 @@ theme_set(theme_light())
 ```
 
 You'll need to make a folder called "data" and download data files into it: 
-<a href="https://healthteachr.github.io/ads-v2/data/Function_and_PA_data.csv" download>Function_and_PA_data.csv</a> and <a href="https://healthteachr.github.io/ads-v2/data/scottish_population.csv" download>scottish_population.csv</a>.
+<a href="https://healthteachr.github.io/data/Function_and_PA_data.csv" download>Function_and_PA_data.csv</a> and <a href="https://healthteachr.github.io/data/scottish_population.csv" download>scottish_population.csv</a>.
 
 Download the [ggplot2 cheat sheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-visualization.pdf).
 
@@ -487,7 +498,7 @@ ggplot(data = rank_data,
 
 #### Word Clouds {#sec-word-clouds}
 
-Word clouds are a common way to summarise text data. First, download <a href="https://healthteachr.github.io/ads-v2/data/Health_Apps_Review.csv" download>Health_Apps_Review.csv</a> into your data folder and then load it into an object. This dataset contains  text reviews as well as the 1-5 rating from health app users.
+Word clouds are a common way to summarise text data. First, download <a href="https://healthteachr.github.io/data/Health_Apps_Review.csv" download>Health_Apps_Review.csv</a> into your data folder and then load it into an object. This dataset contains  text reviews as well as the 1-5 rating from health app users.
 
 ```{r}
 # https://www.kaggle.com/datasets/faysal1998/health-apps-review
@@ -622,7 +633,7 @@ ggplot() +
 ```
 
 
-You can join <a href="https://healthteachr.github.io/ads-v2/data/scottish_population.csv" download>Scottish population data</a> to the map table to visualise data on the map using colours or labels.
+You can join <a href="https://healthteachr.github.io/data/scottish_population.csv" download>Scottish population data</a> to the map table to visualise data on the map using colours or labels.
 
 ```{r}
 # load map data
@@ -798,7 +809,7 @@ library(DT)            # for interactive tables
 ```
 
 You'll need to make a folder called "data" and download data files into it: 
-<a href="https://healthteachr.github.io/ads-v2/data/Health_Apps_Review.csv" download>Health_Apps_Review.csv</a> and <a href="https://healthteachr.github.io/ads-v2/data/scottish_population.csv" download>scottish_population.csv</a>.
+<a href="https://healthteachr.github.io/data/Health_Apps_Review.csv" download>Health_Apps_Review.csv</a> and <a href="https://healthteachr.github.io/data/scottish_population.csv" download>scottish_population.csv</a>.
 
 ### Linked documents {#sec-linked-docs}
 

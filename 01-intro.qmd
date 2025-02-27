@@ -1,5 +1,7 @@
 ```{r echo = FALSE}
 set.seed(12042016)
+glossary_path("psyteachr")
+glossary_popup("hover")
 ```
 
 # Intro to R and RStudio {#sec-intro}
@@ -105,7 +107,7 @@ There is an important distinction between **installing** a package and **loading
 ```
 This is done using `install.packages()`. This is like installing an app on your phone: you only have to do it once and the app will remain installed until you remove it. For instance, if you want to use PokemonGo on your phone, you install it once from the App Store or Play Store; you don't have to re-install it each time you want to use it. Once you launch the app, it will run in the background until you close it or restart your phone. Likewise, when you install a package, the package will be available (but not *loaded*) every time you open up R.
 
-Install the <pkg>tidyverse</pkg> package on your system. This is the main package we will use throughout this book for data wrangling, summaries, and visualisation. It is actually a bundle of packages, which we'll explain further in @sec-tidyverse.
+Install the <pkg>tidyverse</pkg> package on your system. This is the main package we will use throughout this book for data wrangling, summaries, and visualisation. It is actually a bundle of packages, which we'll explain further in @sec-tidyverse. When using the University computers, you may need to manually install the <pkg>tzdb</pkg> package, the <pkg>timechange</pkg> package, and/or the <pkg>vroom</pkg> package before being able to load the <pkg>tidyverse</pkg> package.
 
 ```{r install-pckg, eval = FALSE, filename = "Run in the console"}
 install.packages("tidyverse")
@@ -356,12 +358,11 @@ vignette("ggplot2-specs", package = "ggplot2")
 
 ## Glossary {#sec-glossary-intro}
 
-The glossary at the end of each chapter defines common jargon you might encounter while learning R. This specialised vocabulary can help you to communicate more efficiently and to search for solutions to problems. The terms below link to our [HealthTeachR glossary](https://healthteachr.github.io/glossary/), which contains further information and examples.
+The glossary at the end of each chapter defines common jargon you might encounter while learning R. This specialised vocabulary can help you to communicate more efficiently and to search for solutions to problems. The terms below feature in our [HealthTeachR glossary](https://healthteachr.github.io/glossary/), which contains further information and examples.
 
 ```{r, echo = FALSE, results='asis'}
 glossary_table(as_kable = FALSE) |> 
-  kableExtra::kable(row.names = FALSE, escape = FALSE) |>
-  unclass() |> cat()
+  kableExtra::kable(row.names = FALSE, escape = FALSE)
 ```
 
 ## Further Resources {#sec-resources-intro}

@@ -10,3 +10,5 @@ Some material from this book was adapted from @reprores2 and @nordmann_2021.
 
 Nordmann, E. & DeBruine, L. (2023) Applied Data Skills. v2.0. Retrieved from https://psyteachr.github.io/ads-v2/ doi: [10.5281/zenodo.6365077](https://doi.org/10.5281/zenodo.6365077)
 
+The present (adapted) version of the Applied Data Skills book, HealthTeachR, can be cited as follows:
+Malkowski, O. S., Williams, S., & Fern, J. (2024) Applied Data Skills. HealthTeachR v1.0. Retrieved from https://healthteachr.github.io/

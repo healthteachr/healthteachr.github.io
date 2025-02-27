@@ -1,3 +1,8 @@
+```{r echo = FALSE}
+glossary_path("psyteachr")
+glossary_popup("hover")
+```
+
 # Data Wrangling {#sec-wrangle}
 
 ## Intended Learning Outcomes {#sec-ilo-wrangle .unnumbered}
@@ -19,7 +24,7 @@ library(tidyverse)   # data wrangling functions
 ```
 
 You'll need to make a folder called "data" and download a data file into it: 
-<a href="https://healthteachr.github.io/ads-v2/data/velocity.csv" download>velocity.csv</a>.
+<a href="https://healthteachr.github.io/data/velocity.csv" download>velocity.csv</a>.
 
 Download the [Data transformation cheat sheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-transformation.pdf).
 
@@ -686,12 +691,12 @@ Missing data can be quite difficult to deal with depending on how it is represen
 Let's try some exercises using a dataset you already encountered in @sec-viz so that you can see how much more you're able to do with the data now.
 
 * Save your current Markdown, close it, and open a new Rmd named "function_data_mad_skillz".
-* In the set-up code chunk, load the tidyverse, then load the dataset from https://healthteachr.github.io/ads-v2/data/Function_and_PA_data into an object named `function_data`.
+* In the set-up code chunk, load the tidyverse, then load the dataset from https://healthteachr.github.io/data/Function_and_PA_data into an object named `function_data`.
 * Use your method of choice to review the dataset and familiarise yourself with its structure.
 
 ```{r webex.hide = TRUE}
 library(tidyverse)
-function_data <- read_csv("https://healthteachr.github.io/ads-v2/data/Function_and_PA_data.csv")
+function_data <- read_csv("https://healthteachr.github.io/data/Function_and_PA_data.csv")
 
 ```
 
@@ -875,8 +880,7 @@ Compile all the above into a visually appealing reproducible report that could b
 
 ```{r, echo = FALSE, results='asis'}
 glossary_table(as_kable = FALSE) |> 
-  kableExtra::kable(row.names = FALSE, escape = FALSE) |>
-  unclass() |> cat()
+  kableExtra::kable(row.names = FALSE, escape = FALSE)
 ```
 
 ## Further resources {#sec-resources-wrangle}

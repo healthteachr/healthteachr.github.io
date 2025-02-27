@@ -1,3 +1,8 @@
+```{r echo = FALSE}
+glossary_path("psyteachr")
+glossary_popup("hover")
+```
+
 # Data Import {#sec-data}
 
 ## Intended Learning Outcomes {#sec-ilo-data .unnumbered}
@@ -509,7 +514,7 @@ lakers <- read_csv("data/lakers.csv")
 ### Convert column types
 
 * Check the column specification of `lakers`.
-* Create a new column specification that lists the following columns as factors: `game_type`, `period`, `etype`, `result`, `points`, and `type` and skips the following columns: `films`, `vehicles`, and `starships` (this is because these columns contain multiple values and are stored as lists, which we haven't covered how to work with). You do not have to set the factor orders (although you can if you wish).
+* Create a new column specification that lists the following columns as factors: `game_type`, `etype`, and `result`. You do not have to set the factor orders (although you can if you wish). Specify the following columns as integers: `period`, and `points`. Specify the following column as a date: `date`.
 * Re-import the dataset, this time with the corrected column types.
 
 `r hide()`
@@ -596,8 +601,7 @@ if (file.exists("data/lakers.csv"))
 
 ```{r, echo = FALSE, results='asis'}
 glossary_table(as_kable = FALSE) |> 
-  kableExtra::kable(row.names = FALSE, escape = FALSE) |>
-  unclass() |> cat()
+  kableExtra::kable(row.names = FALSE, escape = FALSE)
 ```
 
 ## Further resources {#sec-resources-data}

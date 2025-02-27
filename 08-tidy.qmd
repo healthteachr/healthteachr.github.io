@@ -1,3 +1,8 @@
+```{r echo = FALSE}
+glossary_path("psyteachr")
+glossary_popup("hover")
+```
+
 # Data Tidying {#sec-tidy}
 
 ```{r, include=FALSE, eval = FALSE}
@@ -48,8 +53,8 @@ library(tidyverse) # for data wrangling
 ```
 
 You'll need to make a folder called "data" and download two data files into it: 
-<a href="https://healthteachr.github.io/ads-v2/data/tidy_data.csv" download>tidy_data.csv</a> and
-<a href="https://healthteachr.github.io/ads-v2/data/untidy_data.csv" download>untidy_data.csv</a>.
+<a href="https://healthteachr.github.io/data/tidy_data.csv" download>tidy_data.csv</a> and
+<a href="https://healthteachr.github.io/data/untidy_data.csv" download>untidy_data.csv</a>.
 
 Download the [Data tidying cheat sheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/tidyr.pdf).
 
@@ -606,7 +611,7 @@ You can debug a pipe by highlighting from the beginning to just before the pipe 
 Let's try a couple of examples. 
 
 * Save your current Markdown, close it, and open a new Rmd named "Patient_survey".
-* Download a copy of [wide_exercise-1.csv](https://healthteachr.github.io/ads-v2/data/wide_exercise-1.csv) and [wide_exercise-2.csv](https://healthteachr.github.io/ads-v2/data/wide_exercise-2.csv) into your data folder.
+* Download a copy of [wide_exercise-1.csv](https://healthteachr.github.io/data/wide_exercise-1.csv) and [wide_exercise-2.csv](https://healthteachr.github.io/data/wide_exercise-2.csv) into your data folder.
 * In the set-up code chunk, load the <pkg>tidyverse</pkg> then load the two data files in using `read_csv()` and name the objects `wide1` and `wide2`
 
 ```{r, message = FALSE,  webex.hide = TRUE}
@@ -834,8 +839,7 @@ If your head hurts a bit at this point, rest assured it's absolutely normal. As 
 
 ```{r, echo = FALSE, results='asis'}
 glossary_table(as_kable = FALSE) |> 
-  kableExtra::kable(row.names = FALSE, escape = FALSE) |>
-  unclass() |> cat()
+  kableExtra::kable(row.names = FALSE, escape = FALSE)
 ```
 
 ## Further resources {#sec-resources-tidy}
