@@ -11,7 +11,7 @@ execute:
 book:
   title: 'Applied Data Skills'
   subtitle: "Processing & Presenting Data"
-  author: "Emily Nordmann and Lisa DeBruine"
+  author: "Olivia Malkowski, Sean Williams, and James Fern"
   cover-image: images/logos/logo.png
   image: images/logos/logo.png
   favicon: images/logos/favicon.ico
@@ -23,8 +23,8 @@ book:
   #   hypothesis:
   #     theme: clean
   #     openSidebar: false
-  repo-url: https://github.com/healthteachr/ads-v2/
-  repo-branch: master
+  repo-url: https://github.com/healthteachr/healthteachr.github.io
+  repo-branch: main
   repo-actions: [edit, issue, source]
 #  downloads: [pdf, epub]
   sharing: [twitter, facebook, linkedin]
@@ -33,9 +33,6 @@ book:
   #   background: light
   page-footer:
     left: "CC-BY 2022, healthTeachR"
-    right:
-      - icon: github
-        href: https://github.com/healthteachr/ads-v2
   chapters:
   - index.qmd
   - 01-intro.qmd
