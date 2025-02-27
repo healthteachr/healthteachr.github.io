@@ -1,3 +1,8 @@
+```{r echo = FALSE}
+glossary_path("psyteachr")
+glossary_popup("hover")
+```
+
 # Debugging {#sec-debugging}
 
 ```{r, include=FALSE}
