@@ -9,6 +9,7 @@ The 2024 version of the course book for the Applied Data Skills microcredential 
 This repository contains the source files for the interactive textbook:
 
 Nordmann, E. & DeBruine, L. (2023). Applied Data Skills. Version 1.0. Retrieved from https://psyteachr.github.io/ads-v2/. doi: [10.5281/zenodo.6365077](https://doi.org/10.5281/zenodo.6365077)
+
 The present (adapted) version of the Applied Data Skills book, HealthTeachR, can be cited as follows: 
 Malkowski, O. S., Williams, S., & Fern, J. (2024) Applied Data Skills. HealthTeachR v1.0. Retrieved from https://healthteachr.github.io/ doi: [10.5281/zenodo.15002680](https://10.5281/zenodo.15002680)
 
